@@ -1,0 +1,18 @@
+{
+	"total":13,"rows":[
+		{"cname":"招聘年份","name":"recYear"},
+		{"cname":"招聘批次","name":"recBatch"},
+		{"cname":"准考证号","name":"perTicketNo"},
+		{"cname":"报名序号","name":"perIndex"},
+		{"cname":"姓名","name":"perName"},
+		{"cname":"身份证号","name":"perIDCard"},
+		{"cname":"手机号码","name":"perPhone"},
+		{"cname":"性别","name":"perGender"},
+		{"cname":"出生年月","name":"perBirth"},
+		{"cname":"应聘岗位性质","name":"perJob"},
+		{"cname":"所属组别","name":"perGroupSet"},
+		{"cname":"考试时间","name":"gstStartEnd"},
+		{"cname":"考试地点","name":"gstItvPlace"},
+		{"cname":"尾部时间","name":"gstItvStartTime"}
+	]
+}

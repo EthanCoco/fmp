@@ -1,0 +1,335 @@
+.bg-mobile {
+    background-color: #f4f4f4;
+}
+
+.mobile-content {
+    width: 100%;
+    margin: 0px auto;
+    position: relative;
+    height: 100%;
+}
+
+
+.mobile-titile {
+    background: #1975be;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    top: 0px;
+    line-height: 50px;
+    text-align: center;
+    color: #fff;
+}
+
+.mobile-titile span {
+    display: block;
+    text-align: center;
+}
+
+.mobile-titile span a {
+    color: #fff;
+    padding: 13px 15%;
+    font-family: "微软雅黑";
+    font-size: 14px;
+}
+
+.mobile-titile span a.current {
+    border-bottom: 3px solid #f68a36;
+    z-index: 999999;
+}
+
+a {
+    text-decoration: none;
+    color: #555;
+    outline: none;
+}
+
+.mobile-index1-title1{
+	background: #d2e1ee;
+    color: #fff;
+    padding: 0px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    border-right: 1px solid;
+}
+
+.mobile-index1-title2{
+	background: #d2e1ee;
+    color: #fff;
+    padding: 0px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    border-left: 1px solid;
+}
+
+.mobile-index1-title1 a,.mobile-index1-title2 a {
+    display: block;
+    color: #5b5a5a;
+    margin-top: 0px;
+    font-size: 13px;
+    font-weight: bold;
+}
+    
+.mobile-index1-content {
+    padding: 0;
+    position: relative;
+    margin-bottom: 60px;
+    background: none;
+}
+
+.mobile-index1-list {
+    background: none;
+    margin: 10px 20px;
+    border-radius: 2px;
+    background-color: #fff;
+    background-clip: padding-box;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, .3);
+    overflow: hidden;
+   
+}
+
+.mobile-index1-list p.list-title {
+    text-align: center;
+    font-weight: bold;
+    font-size: 15px;
+    margin: 20px 0px 0px 0px;
+    /*font-family: "宋体";*/
+   opacity: 0.6;
+}
+
+.mobile-index1-list p.list-subtitle {
+    text-align: center;
+    line-height: 24px;
+    margin-bottom: 10px;
+}
+
+.mobile-index1-list p.list-subtitle span {
+    margin: 0px 8px;
+}
+
+.mobile-index1-list .list-content {
+    line-height: 24px;
+    text-indent: 25px;
+    padding: 0px 10px;
+}
+
+.color-gg{
+	color: #207bc4!important;
+}
+
+.current-back{
+	box-shadow: none!important;
+	background-color:transparent!important;
+	border: none!important;
+}
+
+.mobile-table-list {
+    background: none;
+    margin: 10px 20px;
+    border-radius: 2px;
+    background-color: #fff;
+    background-clip: padding-box;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, .3);
+    overflow: hidden;
+}
+
+.mobile-table-list span.titles {
+    line-height: 20px;
+    min-height: 20px;
+    padding-left: 0px;
+}
+
+.mobile-table-list span {
+    display: block;
+}
+.titles {
+    line-height: 20px;
+    min-height: 20px;
+    padding-left: 0px;
+    display: inline-block;
+    text-indent: 20px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.mobile-footer {
+    padding: 6px 0px;
+    background: #1975be;
+    text-align: center;
+    color: #fff;
+    line-height: 20px;
+    font-size: 12px;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+#mobile-login,#mobile-reg {
+    margin: 0 5%;
+    font-size: 14px;
+    font-family: "微软雅黑";
+}
+
+.mobile-login-title {
+	width: 100%;
+    text-align: center;
+    padding: 15% 0px 5% 0px;
+}
+
+.mobile-login-title h2 {
+	display: inline-block;
+    padding-bottom: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    color: #207bc4;
+    font-size: 17px;
+    font-weight: bold;
+    font-family: "微软雅黑";
+}
+
+.mobile-input-label {
+    float: right;
+    display: block;
+    padding: 8px 0px;
+    width: 100%;
+    font-weight: 400;
+    text-align: right;
+    line-height: 20px;
+    position: relative;
+    background: #fff;
+    border: 1px solid #e6e6e6;
+    color: #666;
+    /*padding-right: 3px;*/
+}
+
+.mobile-input-label >span.star{
+    color: red;
+}
+
+.mobile-valcode{
+    height: 35px;
+    width: 80%;
+    border: solid 1px #6f9dd6;
+    position: absolute;
+    right: 8%;
+    margin-right: -5px;
+}
+
+.mobile-forget-pwd{
+	text-align: right;padding-top:20px ;color: #888888;
+}
+
+.mobile-enter-title {
+	width: 100%;
+    text-align: center;
+    padding: 5% 0px 5% 0px;
+}
+
+.mobile-enter-title h2 {
+	display: inline-block;
+    padding-bottom: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    color: #207bc4;
+    font-size: 17px;
+    font-weight: bold;
+    font-family: "微软雅黑";
+}
+
+.mobile-index2-content {
+    padding: 0;
+    position: relative;
+    margin-bottom: 60px;
+    background: none;
+}
+
+.mobile-index2-content-index1{
+	margin: 10px;
+    border-radius: 2px;
+    background-color: #fff;
+    background-clip: padding-box;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, .3);
+    overflow: hidden;
+}
+
+.mobile-input-label2{
+	float: left;
+    display: block;
+    padding: 8px 0px;
+    width: 100%;
+    font-weight: 400;
+    text-align: left;
+    line-height: 20px;
+    position: relative;
+    background: #fff;
+    border: 1px solid #e6e6e6;
+    color: #666;
+}
+.mobile-input-label2>span{
+	margin-left: 3px;
+}
+.mobile-input-label3{
+	float: left;
+    display: block;
+    padding: 8px 0px;
+    width: 99%;
+    font-weight: 400;
+    text-align: left;
+    line-height: 20px;
+    position: relative;
+    background: #fff;
+    border: 1px solid #e6e6e6;
+    color: #666;
+}
+
+.layui-upload-img {
+    width: 92px;
+    height: 92px;
+    margin: 10px;
+}
+
+.layui-upload-list{
+	background: #fff;
+    border: 1px solid #e6e6e6;
+    text-align: center;
+}
+
+.mobile-personal-header{
+	background: url(./../images/mobile/mobile_personal.jpg);
+    background-size: 100% 100%;
+}    
+.mobile-info-detail {
+    padding: 15px;
+    display: -webkit-box;
+    display: -moz-box;
+}
+.mobile-info-photo img {
+    display: block;
+    width: 55px;
+    height: 55px;
+    border-radius: 100%;
+    border: 1px solid #fff;
+    
+}
+.mobile-info-name {
+    -webkit-box-flex: 1;
+    -moz-box-flex: 1;
+    margin: 0 0 0 10px;
+}
+.mobile-info-name .mobile-nickname {
+    height: 30px;
+    line-height: 30px;
+    overflow: hidden;
+}
+.mobile-login-name {
+    line-height: 24px;
+    height: 24px;
+    overflow: hidden;
+}
+.mobile-login-name p {
+    color: #666;
+    font-size: 14px;
+}

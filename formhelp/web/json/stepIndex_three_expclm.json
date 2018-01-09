@@ -1,0 +1,38 @@
+{
+	"total":25,"rows":[
+		{"cname":"报名序号","name":"perIndex"},
+		{"cname":"应聘岗位性质","name":"perJob"},
+		{"cname":"姓名","name":"perName"},
+		{"cname":"身份证号","name":"perIDCard"},
+		{"cname":"手机号码","name":"perPhone"},
+		{"cname":"性别","name":"perGender"},
+		{"cname":"民族","name":"perNation"},
+		{"cname":"籍贯","name":"perOrigin"},
+		{"cname":"政治面貌","name":"perPolitica"},
+		{"cname":"现工作单位","name":"perWorkPlace"},
+		{"cname":"婚姻状况","name":"perMarried"},
+		{"cname":"出生年月","name":"perBirth"},
+		{"cname":"身高","name":"perHeight"},
+		{"cname":"体重","name":"perWeight"},
+		{"cname":"毕业院校","name":"perUniversity"},
+		{"cname":"学位","name":"perDegree"},
+		{"cname":"专业","name":"perMajor"},
+		{"cname":"学历","name":"perEducation"},
+		{"cname":"外语水平","name":"perForeignLang"},
+		{"cname":"计算机水平","name":"perComputerLevel"},
+		{"cname":"毕业生生源地","name":"perEduPlace"},
+		{"cname":"紧急人联系电话","name":"perEmePhone"},
+		{"cname":"电子邮箱","name":"perEmail"},
+		{"cname":"邮政编码","name":"perPostCode"},
+		{"cname":"联系地址","name":"perAddr"},
+		{"cname":"备注信息","name":"perMark"},
+		{"cname":"公示结果","name":"perPub"},
+		{"cname":"审核状态","name":"perStatus"},
+		{"cname":"审核时间","name":"perCheckTime"},
+		{"cname":"审核不通过原因","name":"perReason"},
+		{"cname":"资格审查反馈结果","name":"perReResult1"},
+		{"cname":"资格审查反馈原因","name":"perReGiveup1"},
+		{"cname":"资格审查反馈时间","name":"perReTime1"}
+		
+	]
+}
