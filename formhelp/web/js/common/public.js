@@ -285,3 +285,18 @@ function xy_filedcheckcode_js_checkSelfFloat2(val,len,msg)
 	}	
 	return true;
 }
+
+function caculatePrefix(val,prefix){
+	var num_string = '';
+	if(val < 10){
+		num_string = "000" + val.toString();
+	}else if(val >= 10 && val < 100){
+		num_string = "00" + val.toString();
+	}else if(val >= 100 && val < 1000){
+		num_string = "0" + val.toString();
+	}else if(val >= 1000){
+		num_string = val.toString();
+	}
+	
+	return prefix + num_string;
+}
