@@ -105,13 +105,15 @@ class FMPTABLEFIELD extends \yii\db\ActiveRecord
 					continue;
 				}elseif($obj->FIELD_TYPE == '4' && isset($obj->FIELD_CODE) && $obj->FIELD_CODE == ''){
 					continue;
+				}elseif(isset($obj->FIELD_CODE) && $obj->FIELD_CODE != '' && is_string($obj->FIELD_CODE)){
+					
 				}
 				
 				$insert_data[] = [
 					'FIELD_NAME' => $obj->FIELD_NAME,
 					'FIELD_DESC' => $obj->FIELD_DESC,
 					'FIELD_TYPE' => explode('=', $obj->FIELD_TYPE)[0],
-					'FIELD_CODE' => isset($obj->FIELD_CODE) ? $obj->FIELD_CODE : '',
+					'FIELD_CODE' => !empty(isset($obj->FIELD_CODE) ? $obj->FIELD_CODE : '') ? strtoupper($obj->FIELD_CODE) : '',
 					'FIELD_BELONG_NODE' => isset($obj->FIELD_BELONG_NODE) ? $obj->FIELD_BELONG_NODE : '',
 					'FIELD_GLOBE_REQUIRE' => !empty(isset($obj->FIELD_GLOBE_REQUIRE) ? $obj->FIELD_GLOBE_REQUIRE : '') ? (explode('=', $obj->FIELD_GLOBE_REQUIRE)[0]) : '',
 				];
