@@ -100,4 +100,5 @@ class FMPFLOWTABLE extends \yii\db\ActiveRecord
 	public static function updateByAKey($conditions,$data){
 		return Yii::$app->db->createCommand()->update(self::tableName(), $data, $conditions)->execute();
 	}
+	
 }

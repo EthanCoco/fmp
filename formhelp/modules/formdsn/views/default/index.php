@@ -70,6 +70,10 @@ var flow_table_id = "";
 var flow_table_title = "";
 var editIndex = undefined;
 var tempEditIndex = undefined;
+
+var field_num = '';
+var field_prefix = '';
+
 $(function(){
 	layui.use('form',function(){
 		var form = layui.form;
@@ -277,6 +281,9 @@ function load_table_field(){
 			iconCls: 'icon-add',
 			text:'添加',
 			handler: function(){
+				if(field_num == ''){
+					return;
+				}
 				append();
 			}
 		},'-','-','-',{
@@ -347,8 +354,8 @@ function load_table_field(){
 						            "id":"108",
 						            "text":"108=时分"
 						        },{
-						            "id":"109=109",
-						            "text":"分"
+						            "id":"109",
+						            "text":"109=分"
 						        },{
 						            "id":"110",
 						            "text":"110=秒"
@@ -415,20 +422,19 @@ function load_table_field(){
 					} 
 				}
             },
-            {field:'FIELD_VERIFY',title:'校验函数',width:'15%',align:'center',
-            	editor:{
-					type:'combobox',
-					options:{
-						valueField:'id',
-						textField:'text',
-						value:"",
-						data :[{}],
-						panelHeight:200,
-						editable: false,
-//						required:true
-					}
-				}
-            },
+//          {field:'FIELD_VERIFY',title:'校验函数',width:'15%',align:'center',
+//          	editor:{
+//					type:'combobox',
+//					options:{
+//						valueField:'id',
+//						textField:'text',
+//						value:"",
+//						data :[{}],
+//						panelHeight:200,
+//						editable: false,
+//					}
+//				}
+//          },
             {field:'FIELD_BELONG_NODE',title:'所属环节',width:'15%',align:'center',
             	editor:{
 					type:'combobox',
@@ -439,7 +445,6 @@ function load_table_field(){
 						data :[],
 						panelHeight:200,
 						editable: false,
-//						required:false
 					}
 				}
             },
@@ -466,10 +471,14 @@ function load_table_field(){
         	
 	    },
         onLoadSuccess: function(data){
-			
+        	if(data.result == "1"){
+        		field_num = data.fieldInfos.fieldNum;
+        		field_prefix = data.fieldInfos.fieldPrefix;
+        	}
 		}
     });
 }
+
 function endEditing() {
    	if (editIndex == undefined){
    		return true
@@ -482,7 +491,9 @@ function endEditing() {
 function onClickCell(index, field){
 	layui.use('layer',function(){
 		var layer = layui.layer;
-	
+		if(field_num == ''){
+			return;
+		}
 		if(editIndex !== undefined){
 			if(!$('#field_grid_table_list').datagrid('validateRow', editIndex)){
 				return layer.msg("存在必填项未填写");
@@ -511,8 +522,9 @@ function append(){
     	index = 0;
 	$('#field_grid_table_list').datagrid("insertRow", {
 		index: index+1,
-		row: {FIELD_NAME:'kkk'}
+		row: {FIELD_NAME:caculatePrefix(field_num,field_prefix)}
 	});
+	field_num++;
 }
 function removeit(){
    	if (editIndex == undefined)
@@ -565,10 +577,16 @@ function accept(){
 		    	}
 		    }
 		    
-    		layer.close(index);
+		    $.post("<?= yii\helpers\Url::to(['default/savefields']); ?>",
+		    	{
+		    		"tableName":flow_table_id,
+		    		"flowID":flow_node_id,
+		    		"infos":effectRow
+		    	},
+		    function(json){
+		    	
+		    },'json');
 		});
 	});
-    
-    
 }
 </script>

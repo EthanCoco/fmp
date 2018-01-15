@@ -162,24 +162,63 @@ class DefaultController extends BaseController
 		
 		if($flag !== false){
 			if(!$flag){
-				$result = ['result'=>0,'msg'=>'数据没有改动，不需要修改'];
+				$result = ['result'=>0,'msg'=>Yii::$app->controller->module->params['4001']];
 			}else{
-				$result = ['result'=>1,'msg'=>'修改成功'];
+				$result = ['result'=>1,'msg'=>Yii::$app->controller->module->params['4007']];
 			}
 		}else{
-			$result = ['result'=>0,'msg'=>'修改失败'];
+			$result = ['result'=>0,'msg'=>Yii::$app->controller->module->params['4007']];
 		}
 		
 		return $this->jsonReturn($result);
 	}
 	
+	/*根据流程业务表字段列表*/
 	public function actionFieldtablelist (){
 		$request = Yii::$app->request;
-		$flow_table_id = $request->get('flow_table_id','');
-		$flow_node_id = $request->get('flow_node_id','');
-		$infos = FMPTABLEFIELD::find()->where(['FLOW_ID'=>$flow_node_id,'TABLE_NAME'=>$flow_table_id])->asArray()->all();
-	
-		return $this->jsonReturn($infos); 
+		$tableName = $request->get('flow_table_id','');
+		$flowID = $request->get('flow_node_id','');
+		//请求参数校验
+		if(!$this->valNullParams($tableName,$flowID)){
+			return $this->jsonReturn(['result'=>0,'msg'=>Yii::$app->controller->module->params['4001']]);
+		}
+		
+		//获取字段列表信息
+		$infos = FMPTABLEFIELD::getListField(['FLOW_ID'=>$flowID,'TABLE_NAME'=>$tableName]);
+		//获取列表添加当前字段最大后缀及字段前缀
+		$field_infos = FMPTABLEFIELD::getEditFieldInfos($flowID,$tableName);
+		
+		return $this->jsonReturn(['result'=>1,'rows'=>$infos,'fieldInfos'=>$field_infos]); 
 	}
+	
+	/*保存字段信息*/
+	public function actionSavefields(){
+		$request = Yii::$app->request;
+		
+		$tableName = $request->post('tableName','');
+		$flowID = $request->post('flowID','');
+		$infos = $request->post('infos',[]);
+		
+		var_dump(json_decode($infos['inserted'])[0]->FIELD_NAME);
+		
+//		$inserted = isset($infos['inserted']) ? (empty($infos['inserted']) ? '' : $infos['inserted']): '';
+//		$updated = isset($infos['updated']) ? (empty($infos['updated']) ? '' : $infos['updated']): '';
+//		$deleted = isset($infos['deleted']) ? (empty($infos['deleted']) ? '' : $infos['deleted']): '';
+//		
+//		if(!$this->valNullParams($tableName,$flowID)){
+//			return json(['result'=>0,'msg'=>Config::get('code.4001')]);
+//		}
+//		
+//		if(empty($infos) || ($inserted == '' && $updated == '' && $deleted == '')){
+//			return json(['result'=>0,'msg'=>Config::get('code.4011')]);
+//		}
+//		
+//		//$infos数据校验
+//		TableField::validateField($inserted,$updated,$deleted);
+//		
+//		//保存数据
+//		TableField::saveField($tableName,$flowID,$infos);
+	}
+	
 	
 }
