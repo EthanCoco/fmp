@@ -40,19 +40,11 @@
 				    <div class="layui-inline" >
 				      	<label class="layui-form-label" style="width:40px">表名称</label>
 				      	<div class="layui-input-inline" style="width: 100px;">
-			    			<input name="tablename" id="tablename" placeholder="请输入正整数" disabled="disabled" class="layui-input" type="text">
-				    	</div>
-					</div>
-				</div>
-				<div class="layui-form-item">
-				    <div class="layui-inline" >
-				      	<label class="layui-form-label" style="width:40px">表描述</label>
-				      	<div class="layui-input-inline" style="width: 100px;">
 			    			<input name="tabledesc" id="tabledesc"  class="layui-input" type="text">
 				    	</div>
 					</div>
 				</div>
-				<p class="star" style="padding:0 10px;">注：主表默认为[BZ_ZGJOB_]前缀自动生成，副表默认前缀为[主表_SE_]</p>
+				<!--<p class="star" style="padding:0 10px;">注：主表默认为[BZ_ZGJOB_]前缀自动生成，副表默认前缀为[主表_SE_]</p>-->
 				
 				<hr class="layui-bg-gray">
 			  	<div class="layui-form-item layui-form-center">
@@ -75,6 +67,7 @@
 <script>
 var flow_node_id = "";
 var flow_table_id = "";
+var flow_table_title = "";
 var editIndex = undefined;
 var tempEditIndex = undefined;
 $(function(){
@@ -149,57 +142,67 @@ function load_flow_tree(){
 }
 
 function load_table_tree(){
-	$.getJSON("<?= yii\helpers\Url::to(['default/tabletree']); ?>",
-	{
-		"flow_node_id":flow_node_id,
-	}, function(json){
-		var treeData = json;
-		var setting = {
-		    		edit : {
-						enable : false,
-						showRemoveBtn: false,
-						showRenameBtn: false
-					},
-					data : {
-						simpleData : {
-							enable : true,
-							idKey : "id",
-							pIdKey : "pId"
-						}
-					},
-					check:{
-						enable:false
-					},
-					view : {
-						dblClickExpand : false,	
-						showLine : true,
-						selectedMulti : false
-					},
-					callback: {
-						beforeClick:function(treeId,treeNode,clickFlag){
-							if(treeNode.isChild == "0")
-						    	return false;
-						},
-						onClick:function(event, treeId, treeNode){
-							flow_table_id = treeNode.id;
-							load_table_field();
-						}
-					}
-				};
-    	
-    	var treeObj = $.fn.zTree.init($("#table_tree"), setting, treeData);// 生成树形结构
-    	var zTree = $.fn.zTree.getZTreeObj("table_tree");
-    	zTree.expandAll(true); 
-    	var node_obj = treeObj.getNodesByFilter(function(node){
-    		return node.isChild== 1;
-    	}, true); 
-    	
-    	if(node_obj == null){
-    		flow_table_id = "";
-    	}else{
-    		flow_table_id = node_obj.id;
-    		load_table_field();
-    	}
+	layui.use('layer',function(){
+		var layer = layui.layer;
+		$.getJSON("<?= yii\helpers\Url::to(['default/tabletree']); ?>",
+		{
+			"flow_node_id":flow_node_id,
+		}, function(json){
+			if(json.result){
+				var treeData = json.infos;
+				var setting = {
+				    		edit : {
+								enable : false,
+								showRemoveBtn: false,
+								showRenameBtn: false
+							},
+							data : {
+								simpleData : {
+									enable : true,
+									idKey : "id",
+									pIdKey : "pId"
+								}
+							},
+							check:{
+								enable:false
+							},
+							view : {
+								dblClickExpand : false,	
+								showLine : true,
+								selectedMulti : false
+							},
+							callback: {
+								beforeClick:function(treeId,treeNode,clickFlag){
+									if(treeNode.isChild == "0")
+								    	return false;
+								},
+								onClick:function(event, treeId, treeNode){
+									flow_table_id = treeNode.id;
+									flow_table_title = treeNode.title;
+									load_table_field();
+								}
+							}
+						};
+		    	
+		    	var treeObj = $.fn.zTree.init($("#table_tree"), setting, treeData);// 生成树形结构
+		    	var zTree = $.fn.zTree.getZTreeObj("table_tree");
+		    	zTree.expandAll(true); 
+		    	var node_obj = treeObj.getNodesByFilter(function(node){
+		    		return node.isChild== 1;
+		    	}, true); 
+		    	
+		    	if(node_obj == null){
+		    		flow_table_id = "";
+		    		flow_table_title = "";
+		    	}else{
+		    		flow_table_id = node_obj.id;
+		    		flow_table_title = node_obj.title;
+		    		load_table_field();
+		    	}
+			}else{
+				layer.alert(json.msg);
+			}
+		});
 	});
 }
 
@@ -210,25 +213,21 @@ function flow_add_table(){
 		}
 		
 		var table_type = $("#table_type").val();
-		var table_name = "";
-		if(table_type == "2"){
-			table_name = $("#tablename").val().trim();
-			if(!validatePosNum(table_name)){
-				return layer.alert("请输入正整数");
-			}
-		}
 		var table_desc = $("#tabledesc").val().trim();
+		if(table_desc == ""){
+			return layer.alert("表名称不能为空");
+		}
 		layer.confirm("确定添加该表么？", function(index){
 		  	$.getJSON("<?= yii\helpers\Url::to(['default/flowtableadd']); ?>",
 			{
 				"flow_node_id":flow_node_id,
 				"table_type":table_type,
-				"table_name":table_name,
 				"table_desc":table_desc
 			}, function(json){
 				if(json.result){
 					layer.msg(json.msg);
 					layer.close(index);
+					load_table_tree();
 				}else{
 					layer.alert(json.msg);
 				}
@@ -245,8 +244,8 @@ function table_modify_name(){
 		layer.open({
     		type:2,
     		title:'修改',
-    		area:["350px","230px"],
-    		content:"<?= yii\helpers\Url::to(['default/modtabledesc']); ?>"+"?flow_table_id="+flow_table_id,
+    		area:["350px","180px"],
+    		content:"<?= yii\helpers\Url::to(['default/modtabledesc']); ?>",
     		btn:['确定','取消'],
     		yes: function(){
     			$("iframe[id*='layui-layer-iframe'")[0].contentWindow.table_modify_name_desc_sure(); 

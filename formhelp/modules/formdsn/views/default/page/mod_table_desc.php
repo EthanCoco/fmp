@@ -29,15 +29,9 @@ $this->title = '';
 	<div class="layui-form">
 		
 		<div class="layui-form-item">
-		    <label class="layui-form-label">表名</label>
+		    <label class="layui-form-label">表名称</label>
 		    <div class="layui-input-block">
-			    <input name="tablename" id="tablename" value="<?= $table_info['FLOW_TABLE_NAME'] ?>" disabled="disabled" class="layui-input" type="text">
-		    </div>
-		</div>
-		<div class="layui-form-item">
-		    <label class="layui-form-label">表描述</label>
-		    <div class="layui-input-block">
-			    <input name="tabledesc" id="tabledesc" value="<?= $table_info['FLOW_TABLE_DESC'] ?>" class="layui-input" type="text">
+			    <input name="tabledesc" id="tabledesc" value="" class="layui-input" type="text">
 		    </div>
 		</div>
 	</div>
@@ -48,6 +42,7 @@ $this->title = '';
 $(function(){
 	layui.use('form', function(){
 		var form = layui.form;
+		$("#tabledesc").val(parent.flow_table_title);
 	});
 });
 
@@ -55,12 +50,14 @@ function table_modify_name_desc_sure(){
 	layui.use('layer',function(){
 		var layer = layui.layer;
 		var table_desc = $("#tabledesc").val().trim();
-		
+		if(table_desc == ""){
+			return layer.alert("表名称不能为空");
+		}
 		parent.layer.confirm("确定修改？",function(index){
 			$.getJSON("<?= yii\helpers\Url::to(['default/modtabledescdo']); ?>",
 			{
 				"table_desc":table_desc,
-				"table_id":"<?= $table_info['ID'] ?>"
+				"table_id":parent.flow_table_id
 			},function(json){
 				if(json.result){
 					parent.load_table_tree();
