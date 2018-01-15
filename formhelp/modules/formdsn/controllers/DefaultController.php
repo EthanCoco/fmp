@@ -199,22 +199,20 @@ class DefaultController extends BaseController
 		$flowID = $request->post('flowID','');
 		$infos = $request->post('infos',[]);
 		
-		var_dump(json_decode($infos['inserted'])[0]->FIELD_NAME);
+		$inserted = isset($infos['inserted']) ? (empty($infos['inserted']) ? '' : json_decode($infos['inserted'])) : '';
+		$updated = isset($infos['updated']) ? (empty($infos['updated']) ? '' : json_decode($infos['updated'])) : '';
+		$deleted = isset($infos['deleted']) ? (empty($infos['deleted']) ? '' : json_decode($infos['deleted'])) : '';
+		if(!$this->valNullParams($tableName,$flowID)){
+			
+		}
+		if(empty($infos) || ($inserted == '' && $updated == '' && $deleted == '')){
+			return $this->jsonReturn(['result'=>0,'msg'=>Yii::$app->controller->module->params['4006']]);
+		}
 		
-//		$inserted = isset($infos['inserted']) ? (empty($infos['inserted']) ? '' : $infos['inserted']): '';
-//		$updated = isset($infos['updated']) ? (empty($infos['updated']) ? '' : $infos['updated']): '';
-//		$deleted = isset($infos['deleted']) ? (empty($infos['deleted']) ? '' : $infos['deleted']): '';
-//		
-//		if(!$this->valNullParams($tableName,$flowID)){
-//			return json(['result'=>0,'msg'=>Config::get('code.4001')]);
-//		}
-//		
-//		if(empty($infos) || ($inserted == '' && $updated == '' && $deleted == '')){
-//			return json(['result'=>0,'msg'=>Config::get('code.4011')]);
-//		}
-//		
-//		//$infos数据校验
-//		TableField::validateField($inserted,$updated,$deleted);
+//		var_dump(json_decode($infos['inserted'])[0]->FIELD_NAME);
+
+		//$infos数据校验
+		FMPTABLEFIELD::fitterField($inserted,$updated,$deleted);
 //		
 //		//保存数据
 //		TableField::saveField($tableName,$flowID,$infos);
