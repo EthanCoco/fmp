@@ -3,7 +3,7 @@
 namespace app\modules\formdsn\models;
 
 use Yii;
-
+use app\modules\formdsn\models\FMPFLOW;
 /**
  * This is the model class for table "fmp_flow_node".
  *
@@ -61,5 +61,29 @@ class FMPFLOWNODE extends \yii\db\ActiveRecord
 		}
 		
 		return $jsonData;
+	}
+	
+	public static function getFlowNodeTree($flowID){
+		$flow_infos = FMPFLOW::findByID($flowID,['FLOW_NAME']);
+		
+		$node_datas = self::find()->where(['FLOW_ID'=>$flowID])->asArray()->orderby('NODE_ORDER')->all();
+		
+		$resultInfo = [];
+		
+		if(!empty($node_datas)){
+			foreach($node_datas as $info){
+				$resultInfo[] = [
+					'id' => $info['NODE_ID'],
+					'name' => $info['NODE_NAME'],
+					'pId' => 0,
+					'isChild' => 1,
+					'isParent' => 'false'
+				];
+			}		
+		}
+		
+        $resultInfo[] = ['id' => '0', 'name' => $flow_infos['FLOW_NAME'], 'pId' => '-1', 'isParent' => 'true', 'isChild'=>0];
+		
+		return $resultInfo;
 	}
 }

@@ -213,6 +213,7 @@ function load_flow_tree(){
     		flow_node_id = "";
     	}else{
     		flow_node_id = node_obj.id;
+    		zTree.selectNode(node_obj);
     		$(".left_block_right").css("display","");
     		load_table_tree();
     	}
@@ -275,6 +276,7 @@ function load_table_tree(){
 		    		flow_table_id = "";
 		    		flow_table_title = "";
 		    	}else{
+		    		zTree.selectNode(node_obj);
 		    		flow_table_id = node_obj.id;
 		    		flow_table_title = node_obj.title;
 		    		flow_table_type = node_obj.type;
@@ -374,6 +376,12 @@ function load_table_field(){
 			text:'取消',
 			handler: function(){
 				reject();
+			}
+		},'-','-','-',{
+			iconCls: 'icon-edit',
+			text:'设置环节排序',
+			handler: function(){
+				setNodeOrder();
 			}
 		}],
         columns:[[
@@ -527,6 +535,7 @@ function endEditing() {
 	tempEditIndex = editIndex;
 	return true;
 }
+
 function onClickCell(index, field){
 	layui.use('layer',function(){
 		var layer = layui.layer;
@@ -555,6 +564,7 @@ function onClickCell(index, field){
 	   	}
    	});
 }
+
 function append(){
    	var index = $('#field_grid_table_list').datagrid('getRowIndex', $('#field_grid_table_list').datagrid('getSelected'));
    	if(index == -1)
@@ -565,6 +575,7 @@ function append(){
 	});
 	field_num++;
 }
+
 function removeit(){
    	if (editIndex == undefined)
    		return;
@@ -573,10 +584,12 @@ function removeit(){
     $('#field_grid_table_list').datagrid('cancelEdit', editIndex).datagrid('deleteRow', editIndex);
    	editIndex = undefined;
 }
+
 function reject(){
    	$('#field_grid_table_list').datagrid('rejectChanges');
    	editIndex = undefined;
 }
+
 function onEndEdit(index, row){
    	var ed = $(this).datagrid('getEditor', {
     	index: index,
@@ -590,6 +603,7 @@ function onEndEdit(index, row){
    	});
    	row.FIELD_GLOBE_REQUIRE = $(ed.target).combobox('getText');
 }
+
 function accept(){
 	layui.use('layer',function(){
 		var layer = layui.layer;
@@ -633,4 +647,21 @@ function accept(){
 	});
 }
 
+function setNodeOrder(){
+	layui.use('layer',function(){
+		if(flow_table_id == ""){
+			return;
+		}
+		layer.open({
+    		type:2,
+    		title:'设置环节排序',
+    		area:["800px","600px"],
+    		content:"<?= yii\helpers\Url::to(['default/setnodeorder']); ?>",
+    		btn:['关闭'],
+    		yes: function(){
+    			layer.closeAll(); 
+	        }
+	    });
+	});	
+}
 </script>

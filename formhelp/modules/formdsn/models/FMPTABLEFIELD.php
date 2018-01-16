@@ -4,6 +4,7 @@ namespace app\modules\formdsn\models;
 
 use Yii;
 use app\modules\formdsn\models\Merror;
+use app\modules\formdsn\models\FMPFLOWTABLE;
 
 /**
  * This is the model class for table "FMP_TABLE_FIELD".
@@ -262,5 +263,37 @@ class FMPTABLEFIELD extends \yii\db\ActiveRecord
 			Merror::getInstance()->jsonReturn(['result'=>0,'msg'=>Yii::$app->controller->module->params['4011']]);
 		}
 	}
-
+	
+	/*获取环节排序字段信息*/
+	public static function getFieldNodeList($flowID,$nodeID){
+		$infos = FMPFLOWTABLE::findByAKey(['FLOW_ID'=>$flowID,'FLOW_TABLE_TYPE'=>1]);
+		$busTableMainName = $infos['FLOW_TABLE_NAME'];
+		
+		$jsondata = [];
+		
+		$tempData = self::getListField(['FLOW_ID'=>$flowID,'TABLE_NAME'=>$busTableMainName],['FIELD_ID','FIELD_NAME','FIELD_DESC','FIELD_BELONG_NODE']);
+		
+		if(!empty($tempData)){
+			foreach($tempData as $data){
+				if(empty($data['FIELD_BELONG_NODE'])){
+					continue;
+				}else{
+					$node_arr = explode(',', $data['FIELD_BELONG_NODE']);
+					if(!in_array($nodeID, $node_arr)){
+						continue;
+					}else{
+						$jsonData[] = [
+							'FIELD_ID' => $data['FIELD_ID'],
+							'FIELD_NAME' => $data['FIELD_NAME'],
+							'FIELD_DESC' => $data['FIELD_DESC']
+						];
+					}
+				}
+			}	
+		}
+		
+		return $jsonData;
+	}
+	
+	
 }

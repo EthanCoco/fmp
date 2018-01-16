@@ -216,5 +216,32 @@ class DefaultController extends BaseController
 		FMPTABLEFIELD::saveField($tableName,$flowID,$realData);
 	}
 	
+	/*指向设置环节排序设置界面*/
+	public function actionSetnodeorder(){
+		return $this->renderPartial('page/set_node_order');
+	}
+
+	/*获取流程中的环节树*/
+	public function actionFlownodetree(){
+		$flowID = Yii::$app->request->get('flowID','');
+		if(!$this->valNullParams($flowID)){
+			return $this->jsonReturn(['result'=>0,'msg'=>Yii::$app->controller->module->params['4001']]);
+		}
+		
+		$jsonData = FMPFLOWNODE::getFlowNodeTree($flowID);
+		
+		return $this->jsonReturn(['result'=>1,'infos'=>$jsonData]);
+	}
 	
+	/*获取环节中需要排序的字段*/
+	public function actionNodeorderlist(){
+		$request = Yii::$app->request;
+		$nodeID = $request->get('nodeID','');
+		$flowID = $request->get('flowID','');
+		
+		$jsonData = FMPTABLEFIELD::getFieldNodeList($flowID,$nodeID);
+		
+		return $this->jsonReturn(['rows'=>$jsonData]);
+		
+	}
 }

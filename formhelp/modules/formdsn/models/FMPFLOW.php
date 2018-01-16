@@ -49,4 +49,9 @@ class FMPFLOW extends \yii\db\ActiveRecord
             'FLOW_STATUS' => 'Flow  Status',
         ];
     }
+	
+	/*根据ID获取信息*/
+	public static function findByID($flowID,$fields='*'){
+		return self::find()->select($fields)->where(['FLOW_ID'=>$flowID])->one();
+	}
 }
