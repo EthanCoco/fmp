@@ -81,6 +81,32 @@ var data_TYPE = [{
 				    "isChild":0,
 				    "checked":"disabled",
 				    "children":[{
+				        "id":"2",
+				        "text":"数字",
+				        "children":[{
+				            "id":"201",
+				            "text":"201=整数"
+				        },{
+				            "id":"202",
+				            "text":"202=实数"
+				        }]
+				    },{
+				        "id":"3",
+				        "text":"文本",
+				        "children":[{
+				            "id":"301",
+				            "text":"301=文本框"
+				        },{
+				            "id":"302",
+				            "text":"302=文本域"
+				        }]
+				    },{
+				    	"id":"4",
+				        "text":"4=代码",
+				    },{
+				    	"id":"5",
+				        "text":"5=图像",
+				    },{
 				        "id":"1",
 				        "text":"日期",
 				        "isChild":0,
@@ -117,37 +143,8 @@ var data_TYPE = [{
 				            "id":"110",
 				            "text":"110=秒"
 				        }]
-				    },{
-				        "id":"2",
-				        "text":"数字",
-				        "children":[{
-				            "id":"201",
-				            "text":"201=整数"
-				        },{
-				            "id":"202",
-				            "text":"202=实数"
-				        }]
-				    },{
-				        "id":"3",
-				        "text":"文本",
-				        "children":[{
-				            "id":"301",
-				            "text":"301=文本框"
-				        },{
-				            "id":"302",
-				            "text":"302=文本域"
-				        }]
-				    },{
-				    	"id":"4",
-				        "text":"4=代码",
-				    },{
-				    	"id":"5",
-				        "text":"5=图像",
 				    }]
 				}];
-
-
-
 
 $(function(){
 	layui.use('form',function(){
@@ -592,7 +589,6 @@ function accept(){
 		   	if (endEditing()){
 		   		var $dg = $('#field_grid_table_list');
 		    	var rows = $dg.datagrid('getChanges');
-		    	console.log(rows);
 		    	if (rows.length) {
 			     	var inserted = $dg.datagrid('getChanges', "inserted");
 			     	var deleted = $dg.datagrid('getChanges', "deleted");
