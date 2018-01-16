@@ -113,3 +113,11 @@
 .icon-edittz{
 	background:url('icons/edittz.png') no-repeat center center;
 }
+
+.icon-up{
+	background:url('icons/up.png') no-repeat center center;
+}
+
+.icon-down{
+	background:url('icons/down.png') no-repeat center center;
+}
