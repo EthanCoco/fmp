@@ -12,7 +12,7 @@ use app\modules\formdsn\models\FMPFLOWDIR;
 use app\modules\formdsn\models\FMPFLOW;
 use app\modules\formdsn\models\FMPFLOWTABLE;
 use app\modules\formdsn\models\FMPTABLEFIELD;
-
+use app\modules\formdsn\models\FMPFLOWNODE;
 
 class DefaultController extends BaseController
 {
@@ -41,8 +41,8 @@ class DefaultController extends BaseController
 		}
 		
 		$jsonData = FMPFLOWTABLE::getTableTree($flowID);
-		
-		return $this->jsonReturn(['result'=>1,'infos'=>$jsonData]);
+		$nodeData = FMPFLOWNODE::getNodeInfo($flowID);
+		return $this->jsonReturn(['result'=>1,'infos'=>$jsonData,'nodeInfos'=>$nodeData]);
 	}
 	
 	/*添加业务表*/
@@ -162,12 +162,12 @@ class DefaultController extends BaseController
 		
 		if($flag !== false){
 			if(!$flag){
-				$result = ['result'=>0,'msg'=>Yii::$app->controller->module->params['4001']];
+				$result = ['result'=>0,'msg'=>Yii::$app->controller->module->params['4006']];
 			}else{
 				$result = ['result'=>1,'msg'=>Yii::$app->controller->module->params['4007']];
 			}
 		}else{
-			$result = ['result'=>0,'msg'=>Yii::$app->controller->module->params['4007']];
+			$result = ['result'=>0,'msg'=>Yii::$app->controller->module->params['4008']];
 		}
 		
 		return $this->jsonReturn($result);
@@ -202,8 +202,9 @@ class DefaultController extends BaseController
 		$inserted = isset($infos['inserted']) ? (empty($infos['inserted']) ? '' : json_decode($infos['inserted'])) : '';
 		$updated = isset($infos['updated']) ? (empty($infos['updated']) ? '' : json_decode($infos['updated'])) : '';
 		$deleted = isset($infos['deleted']) ? (empty($infos['deleted']) ? '' : json_decode($infos['deleted'])) : '';
+		
 		if(!$this->valNullParams($tableName,$flowID)){
-			
+			return $this->jsonReturn(['result'=>0,'msg'=>Yii::$app->controller->module->params['4001']]);
 		}
 		if(empty($infos) || ($inserted == '' && $updated == '' && $deleted == '')){
 			return $this->jsonReturn(['result'=>0,'msg'=>Yii::$app->controller->module->params['4006']]);

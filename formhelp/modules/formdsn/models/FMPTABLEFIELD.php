@@ -58,12 +58,13 @@ class FMPTABLEFIELD extends \yii\db\ActiveRecord
             'FIELD_GLOBE_REQUIRE' => 'Field  Globe  Require',
             'FLOW_ID' => 'Flow  ID',
             'TABLE_NAME' => 'Table  Name',
+            'FIELD_NODE_ORDER' => 'field Node Order'
         ];
     }
 	
 	/*根据条件获取所有满足条件的数据->可指定查询字段*/
 	public static function getListField($condition = [],$fields = '*'){
-		return self::find()->select($fields)->where($condition)->asArray()->all();
+		return self::find()->select($fields)->where($condition)->asArray()->orderby('FIELD_NAME')->all();
 	}
 	
 	/*获取添加字段时最大后缀及默认字段前缀*/

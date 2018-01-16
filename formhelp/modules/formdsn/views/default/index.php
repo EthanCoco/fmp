@@ -68,12 +68,14 @@
 var flow_node_id = "";
 var flow_table_id = "";
 var flow_table_title = "";
+var flow_table_type = "";
 var editIndex = undefined;
 var tempEditIndex = undefined;
 
 var field_num = '';
 var field_prefix = '';
 
+var data_belong_node ;
 var data_SF = [{'id':1,'text':'1=是'},{'id':2,'text':'2=否'}];
 var data_TYPE = [{
 				    "id":"0",
@@ -226,6 +228,7 @@ function load_table_tree(){
 		}, function(json){
 			if(json.result){
 				var treeData = json.infos;
+				data_belong_node = json.nodeInfos;
 				var setting = {
 				    		edit : {
 								enable : false,
@@ -255,6 +258,7 @@ function load_table_tree(){
 								onClick:function(event, treeId, treeNode){
 									flow_table_id = treeNode.id;
 									flow_table_title = treeNode.title;
+									flow_table_type = treeNode.type;
 									load_table_field();
 								}
 							}
@@ -273,6 +277,7 @@ function load_table_tree(){
 		    	}else{
 		    		flow_table_id = node_obj.id;
 		    		flow_table_title = node_obj.title;
+		    		flow_table_type = node_obj.type;
 		    		load_table_field();
 		    	}
 			}else{
@@ -388,12 +393,12 @@ function load_table_field(){
 						$.each(v.children,function(i,v){
 							if(typeof v.children != 'undefined'){
 								$.each(v.children,function(i,v){
-									if(v.id == value){
+									if(v.id == value || v.text == value){
 										$text = v.text;
 									}
 								})
 							}else{
-								if(v.id == value){
+								if(v.id == value || v.text == value){
 									$text = v.text;
 								}
 							}
@@ -464,9 +469,10 @@ function load_table_field(){
 						valueField:'id',
 						textField:'text',
 						value:"",
-						data :[],
+						data :data_belong_node,
 						panelHeight:200,
 						editable: false,
+						multiple:true, 
 					}
 				}
             },
@@ -476,7 +482,6 @@ function load_table_field(){
 					options:{
 						valueField:'id',
 						textField:'text',
-//						data :[{'id':1,'text':'1=是'},{'id':2,'text':'2=否'}],
 						data :data_SF,
 						panelHeight:'auto',
 						editable: false,
@@ -485,7 +490,7 @@ function load_table_field(){
 				},
 				formatter:function(value){
 					for(var i=0;i<data_SF.length;i++){
-						if(data_SF[i]['id'] == value){
+						if(data_SF[i]['id'] == value || data_SF[i]['text'] == value){
 							return data_SF[i]['text'];
 							break;
 						}
@@ -506,6 +511,9 @@ function load_table_field(){
         		field_num = data.fieldInfos.fieldNum;
         		field_prefix = data.fieldInfos.fieldPrefix;
         	}
+        	if(flow_table_type == "2"){
+				$("#field_grid_table_list").datagrid("hideColumn", 'FIELD_BELONG_NODE');
+			}
 		}
     });
 }
