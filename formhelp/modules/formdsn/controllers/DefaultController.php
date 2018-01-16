@@ -13,6 +13,7 @@ use app\modules\formdsn\models\FMPFLOW;
 use app\modules\formdsn\models\FMPFLOWTABLE;
 use app\modules\formdsn\models\FMPTABLEFIELD;
 use app\modules\formdsn\models\FMPFLOWNODE;
+use app\modules\formdsn\models\FMPFIELDNODEORDER;
 
 class DefaultController extends BaseController
 {
@@ -242,6 +243,28 @@ class DefaultController extends BaseController
 		$jsonData = FMPTABLEFIELD::getFieldNodeList($flowID,$nodeID);
 		
 		return $this->jsonReturn(['rows'=>$jsonData]);
-		
 	}
+	
+	/*保存字段排序信息*/
+	public function actionSavenodeorder(){
+		$request = Yii::$app->request;
+		$data = $request->post('order_data','');
+		$nodeID = $request->post('nodeID','');
+		$flowID = $request->post('flowID','');
+		$real_data = json_decode($data);
+		if(!$this->valNullParams($flowID,$nodeID)){
+			return $this->jsonReturn(['result'=>0,'msg'=>Yii::$app->controller->module->params['4001']]);
+		}
+		
+		$flag = FMPFIELDNODEORDER::saveNodeOrder($flowID,$nodeID,$real_data);
+		if($flag){
+			$result = ['result'=>1,'msg'=>Yii::$app->controller->module->params['4010']];
+		}else{
+			$result = ['result'=>0,'msg'=>Yii::$app->controller->module->params['4011']];
+		}
+		
+		return $this->jsonReturn($result);
+	}
+
+
 }

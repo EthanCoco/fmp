@@ -33,7 +33,7 @@ $this->title = '';
 	      	</div>
 	    </div>
 	</div>
-	<div class="layui-side-formdsn" style="width: 430px;border:#fff;border-bottom: 1px solid #93D1FF;margin-left: 350px;">
+	<div class="layui-side-formdsn" style="width: 430px;border:#fff;border-bottom: 1px solid #93D1FF;margin-left: 352px;">
 	    <div class="layui-side-scroll" style="height: 100%;width: 430px;">
 	      	<div id="datagrid_node">
 	      		
@@ -228,8 +228,24 @@ function isLastRow(dg, row) {
 
 /*保存信息*/
 function saveAllRows(){
-	alert(JSON.stringify($(dg).datagrid("getRows")));
-	
+	var string_data = JSON.stringify($(dg).datagrid("getRows"));
+	if(string_data == ""){
+		return layer.msg('没有信息，不需要保存');
+	}
+	$.post("<?= yii\helpers\Url::to(['default/savenodeorder']); ?>",
+		{
+			'order_data':string_data,
+			'flowID':parent.flow_node_id,
+			"nodeID":node_id	
+		},
+	function(json){
+		if(json.result){
+			layer.msg(json.msg);
+			$(dg).datagrid("reload");
+		}else{
+			layer.alert(json.msg);
+		}
+	},'json');
 }
 </script>	
 </body>
