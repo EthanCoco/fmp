@@ -74,6 +74,81 @@ var tempEditIndex = undefined;
 var field_num = '';
 var field_prefix = '';
 
+var data_SF = [{'id':1,'text':'1=是'},{'id':2,'text':'2=否'}];
+var data_TYPE = [{
+				    "id":"0",
+				    "text":"类型选择",
+				    "isChild":0,
+				    "checked":"disabled",
+				    "children":[{
+				        "id":"1",
+				        "text":"日期",
+				        "isChild":0,
+				        "checked":"disabled",
+				        "children":[{
+				        	"isChild":1,
+				            "id":"101",
+				            "text":"101=年"
+				        },{
+				            "id":".102",
+				            "text":"102=年月"
+				        },{
+				            "id":"103",
+				            "text":"103=年月日"
+				        },{
+				            "id":"104",
+				            "text":"104=年月日时分秒"
+				        },{
+				            "id":"105",
+				            "text":"105=年月日时分"
+				        },{
+				            "id":"106",
+				            "text":"106=年月日时"
+				        },{
+				            "id":"107",
+				            "text":"107=时分秒"
+				        },{
+				            "id":"108",
+				            "text":"108=时分"
+				        },{
+				            "id":"109",
+				            "text":"109=分"
+				        },{
+				            "id":"110",
+				            "text":"110=秒"
+				        }]
+				    },{
+				        "id":"2",
+				        "text":"数字",
+				        "children":[{
+				            "id":"201",
+				            "text":"201=整数"
+				        },{
+				            "id":"202",
+				            "text":"202=实数"
+				        }]
+				    },{
+				        "id":"3",
+				        "text":"文本",
+				        "children":[{
+				            "id":"301",
+				            "text":"301=文本框"
+				        },{
+				            "id":"302",
+				            "text":"302=文本域"
+				        }]
+				    },{
+				    	"id":"4",
+				        "text":"4=代码",
+				    },{
+				    	"id":"5",
+				        "text":"5=图像",
+				    }]
+				}];
+
+
+
+
 $(function(){
 	layui.use('form',function(){
 		var form = layui.form;
@@ -300,8 +375,8 @@ function load_table_field(){
 			}
 		}],
         columns:[[
-            {field:'FIELD_NAME',title:'字段名',width:'10%',align:'center'},
-            {field:'FIELD_DESC',title:'中文名',width:'10%',align:'center',
+            {field:'FIELD_NAME',title:'字段名',width:'10%',align:'center',hidden:true},
+            {field:'FIELD_DESC',title:'中文名',width:'13%',align:'center',
             	editor:{
 					type:'textbox',
 					options:{
@@ -309,7 +384,26 @@ function load_table_field(){
 					} 
 				}
             },
-            {field:'FIELD_TYPE',title:'类型',width:'15%',align:'center',
+            {field:'FIELD_TYPE',title:'类型',width:'20%',align:'center',
+            	formatter:function(value){
+            		var $text;
+					$.each(data_TYPE,function(i,v){
+						$.each(v.children,function(i,v){
+							if(typeof v.children != 'undefined'){
+								$.each(v.children,function(i,v){
+									if(v.id == value){
+										$text = v.text;
+									}
+								})
+							}else{
+								if(v.id == value){
+									$text = v.text;
+								}
+							}
+						})
+					});
+					return $text;
+				},
             	editor:{
 					type:'combotree',
 					options:{
@@ -318,76 +412,7 @@ function load_table_field(){
 						panelHeight:200,
 						editable: false,
 						required:true,
-						data :[{
-						    "id":"0",
-						    "text":"类型选择",
-						    "isChild":0,
-						    "checked":"disabled",
-						    "children":[{
-						        "id":"1",
-						        "text":"日期",
-						        "isChild":0,
-						        "checked":"disabled",
-						        "children":[{
-						        	"isChild":1,
-						            "id":"101",
-						            "text":"101=年"
-						        },{
-						            "id":".102",
-						            "text":"102=年月"
-						        },{
-						            "id":"103",
-						            "text":"103=年月日"
-						        },{
-						            "id":"104",
-						            "text":"104=年月日时分秒"
-						        },{
-						            "id":"105",
-						            "text":"105=年月日时分"
-						        },{
-						            "id":"106",
-						            "text":"106=年月日时"
-						        },{
-						            "id":"107",
-						            "text":"107=时分秒"
-						        },{
-						            "id":"108",
-						            "text":"108=时分"
-						        },{
-						            "id":"109",
-						            "text":"109=分"
-						        },{
-						            "id":"110",
-						            "text":"110=秒"
-						        }]
-						    },{
-						        "id":"2",
-						        "text":"数字",
-						        "children":[{
-						            "id":"201",
-						            "text":"201=整数"
-						        },{
-						            "id":"202",
-						            "text":"202=实数"
-						        }]
-						    },{
-						        "id":"3",
-						        "text":"文本",
-						        "children":[{
-						            "id":"301",
-						            "text":"301=文本框"
-						        },{
-						            "id":"302",
-						            "text":"302=文本域"
-						        }]
-						    },{
-						    	"id":"4",
-						        "text":"4=代码",
-						    },{
-						    	"id":"5",
-						        "text":"5=图像",
-						    }]
-						}],
+						data :data_TYPE,
 						onBeforeSelect: function (node) {
 			                var tree = $(this).tree;  
 							var isLeaf = tree('isLeaf', node.target);  
@@ -435,7 +460,7 @@ function load_table_field(){
 //					}
 //				}
 //          },
-            {field:'FIELD_BELONG_NODE',title:'所属环节',width:'15%',align:'center',
+            {field:'FIELD_BELONG_NODE',title:'所属环节',width:'35%',align:'center',
             	editor:{
 					type:'combobox',
 					options:{
@@ -454,10 +479,19 @@ function load_table_field(){
 					options:{
 						valueField:'id',
 						textField:'text',
-						data :[{'id':1,'text':'1=是'},{'id':2,'text':'2=否'}],
+//						data :[{'id':1,'text':'1=是'},{'id':2,'text':'2=否'}],
+						data :data_SF,
 						panelHeight:'auto',
 						editable: false,
 						required:false
+					}
+				},
+				formatter:function(value){
+					for(var i=0;i<data_SF.length;i++){
+						if(data_SF[i]['id'] == value){
+							return data_SF[i]['text'];
+							break;
+						}
 					}
 				}
             },
@@ -573,7 +607,7 @@ function accept(){
 			     	if (updated.length) {
 			      		effectRow["updated"] = JSON.stringify(updated);
 			     	}
-			     	console.log(effectRow);
+			     	//console.log(effectRow);
 		    	}
 		    }
 		    
@@ -584,9 +618,15 @@ function accept(){
 		    		"infos":effectRow
 		    	},
 		    function(json){
-		    	
+		    	if(json.result){
+		    		layer.msg(json.msg);
+		    		load_table_field();
+		    	}else{
+		    		layer.alert(json.msg);
+		    	}
 		    },'json');
 		});
 	});
 }
+
 </script>

@@ -209,13 +209,10 @@ class DefaultController extends BaseController
 			return $this->jsonReturn(['result'=>0,'msg'=>Yii::$app->controller->module->params['4006']]);
 		}
 		
-//		var_dump(json_decode($infos['inserted'])[0]->FIELD_NAME);
-
-		//$infos数据校验
-		FMPTABLEFIELD::fitterField($inserted,$updated,$deleted);
-//		
-//		//保存数据
-//		TableField::saveField($tableName,$flowID,$infos);
+		//$infos数据过滤
+		$realData = FMPTABLEFIELD::fitterField($inserted,$updated,$deleted);
+		//保存数据
+		FMPTABLEFIELD::saveField($tableName,$flowID,$realData);
 	}
 	
 	
