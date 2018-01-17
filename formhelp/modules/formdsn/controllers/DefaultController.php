@@ -13,6 +13,7 @@ use app\modules\formdsn\models\FMPFLOW;
 use app\modules\formdsn\models\FMPFLOWTABLE;
 use app\modules\formdsn\models\FMPTABLEFIELD;
 use app\modules\formdsn\models\FMPFLOWNODE;
+use app\modules\formdsn\models\FMPBUSNODETABLE;
 
 class DefaultController extends BaseController
 {
@@ -265,5 +266,49 @@ class DefaultController extends BaseController
 		return $this->jsonReturn($result);
 	}
 
-
+	/*指向业务表设置界面*/
+	public function actionSetbustable(){
+		return $this->renderPartial('page/set_bus_table');
+	}
+	
+	/*获取流程中的环节树带业务表节点*/
+	public function actionFlownodetreetable(){
+		$flowID = Yii::$app->request->get('flowID','');
+		if(!$this->valNullParams($flowID)){
+			return $this->jsonReturn(['result'=>0,'msg'=>Yii::$app->controller->module->params['4001']]);
+		}
+		
+		$jsonData = FMPFLOWNODE::getFlowNodeTreeTable($flowID);
+		
+		return $this->jsonReturn(['result'=>1,'infos'=>$jsonData]);
+	}
+	
+	/*指向新建业务表界面*/
+	public function actionOperatebustable(){
+		$nodeID = Yii::$app->request->get('nodeID');
+		return $this->renderPartial('page/operate_bus_table',['nodeID'=>$nodeID]);
+	}
+	
+	/*保存环节对应的业务表单表*/
+	public function actionOperatebustabledo(){
+		$request = Yii::$app->request;
+		$node_id = $request->get('node_id');
+		$bus_table_name = $request->get('bus_table_name');
+		
+		if(!$this->valNullParams($node_id,$bus_table_name)){
+			return $this->jsonReturn(['result'=>0,'msg'=>Yii::$app->controller->module->params['4001']]);
+		}
+		
+		$flag = FMPBUSNODETABLE::saveBusNodeTable($node_id,$bus_table_name);
+		
+		if($flag){
+			$result = ['result'=>1,'msg'=>Yii::$app->controller->module->params['4010']];
+		}else{
+			$result = ['result'=>0,'msg'=>Yii::$app->controller->module->params['4011']];
+		}
+		
+		return $this->jsonReturn($result);
+		
+	}
+	
 }

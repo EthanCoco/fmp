@@ -383,6 +383,18 @@ function load_table_field(){
 			handler: function(){
 				setNodeOrder();
 			}
+		},'-','-','-',{
+			iconCls: 'icon-edit',
+			text:'业务表设置',
+			handler: function(){
+				setBusTable();
+			}
+		},'-','-','-',{
+			iconCls: 'icon-edit',
+			text:'打印表设置',
+			handler: function(){
+				
+			}
 		}],
         columns:[[
             {field:'FIELD_NAME',title:'字段名',width:'10%',align:'center',hidden:true},
@@ -664,4 +676,23 @@ function setNodeOrder(){
 	    });
 	});	
 }
+
+function setBusTable(){
+	layui.use('layer',function(){
+		if(flow_table_id == ""){
+			return;
+		}
+		layer.open({
+    		type:2,
+    		title:'业务表设置',
+    		area:[$(window).width()/5*4+"px","800px"],
+    		content:"<?= yii\helpers\Url::to(['default/setbustable']); ?>",
+    		btn:['关闭'],
+    		yes: function(){
+    			layer.closeAll(); 
+	        }
+	    });
+	});	
+}
+
 </script>
