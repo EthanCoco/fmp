@@ -29,4 +29,26 @@ class BaseController extends Controller{
 		return $data;
 	}
 	
+	/*
+	 * 校验参数是否为空
+	 * null 和 '' 都默认为空值
+	 * 0 和 false 不为空
+	 */
+	public function valNullParams(){
+		$assert = 1;
+		$args = func_get_args();
+		if(!count($args))
+			return false;
+		foreach($args as $k=>$v){
+			if(is_null($v) || $v == ''){
+				$assert = 0;
+				break;
+			}
+		}
+		
+		if(!$assert)
+			return false;
+		
+		return true;
+	}
 }
