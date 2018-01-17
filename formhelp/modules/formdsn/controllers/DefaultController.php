@@ -13,7 +13,6 @@ use app\modules\formdsn\models\FMPFLOW;
 use app\modules\formdsn\models\FMPFLOWTABLE;
 use app\modules\formdsn\models\FMPTABLEFIELD;
 use app\modules\formdsn\models\FMPFLOWNODE;
-use app\modules\formdsn\models\FMPFIELDNODEORDER;
 
 class DefaultController extends BaseController
 {
@@ -256,7 +255,7 @@ class DefaultController extends BaseController
 			return $this->jsonReturn(['result'=>0,'msg'=>Yii::$app->controller->module->params['4001']]);
 		}
 		
-		$flag = FMPFIELDNODEORDER::saveNodeOrder($flowID,$nodeID,$real_data);
+		$flag = FMPTABLEFIELD::saveNodeOrder($flowID,$nodeID,$real_data);
 		if($flag){
 			$result = ['result'=>1,'msg'=>Yii::$app->controller->module->params['4010']];
 		}else{

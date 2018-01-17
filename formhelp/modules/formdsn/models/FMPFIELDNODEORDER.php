@@ -46,25 +46,4 @@ class FMPFIELDNODEORDER extends \yii\db\ActiveRecord
             'ORDER_VAL' => 'Order  Val',
         ];
     }
-	
-	/*保存环节排序信息*/
-	public static function saveNodeOrder($flowID,$nodeID,$real_data){
-		self::deleteAll(['FLOW_ID'=>$flowID,'NODE_ID'=>$nodeID]);
-		
-		$orderVal = '';
-		
-		if(!empty($real_data)){
-			foreach($real_data as $data){
-				$orderVal .= $data->FIELD_ID . ',';
-			}
-			
-			$orderVal = rtrim($orderVal,',');
-		}
-		
-		$self = new self();
-		$self->FLOW_ID = $flowID;
-		$self->NODE_ID = $nodeID;
-		$self->ORDER_VAL = $orderVal;
-		return $self->save();
-	}
 }

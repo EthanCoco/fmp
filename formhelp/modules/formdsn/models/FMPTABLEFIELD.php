@@ -80,6 +80,12 @@ class FMPTABLEFIELD extends \yii\db\ActiveRecord
 		return ['fieldNum'=>$field_num,'fieldPrefix'=>$field_prefix];
 	}
 	
+	/*根据可以确定唯一条件获取指定的信息*/
+	public static function getByAKey($condition = [],$fields = '*'){
+		return self::find()->select($fields)->where($condition)->asArray()->one();
+	}
+	
+	
 	public static function getField(){
 		 return [
             'FIELD_NAME',
@@ -271,9 +277,12 @@ class FMPTABLEFIELD extends \yii\db\ActiveRecord
 		
 		$jsondata = [];
 		
-		$tempData = self::getListField(['FLOW_ID'=>$flowID,'TABLE_NAME'=>$busTableMainName],['FIELD_ID','FIELD_NAME','FIELD_DESC','FIELD_BELONG_NODE']);
+		$tempData = self::getListField(['FLOW_ID'=>$flowID,'TABLE_NAME'=>$busTableMainName],['FIELD_ID','FIELD_NAME','FIELD_DESC','FIELD_BELONG_NODE','FIELD_NODE_ORDER']);
 		
 		if(!empty($tempData)){
+			//设置排序规则中小于数字放到最后
+			$index = 'AAAAAAAAAAAA';
+			
 			foreach($tempData as $data){
 				if(empty($data['FIELD_BELONG_NODE'])){
 					continue;
@@ -282,18 +291,90 @@ class FMPTABLEFIELD extends \yii\db\ActiveRecord
 					if(!in_array($nodeID, $node_arr)){
 						continue;
 					}else{
-						$jsonData[] = [
-							'FIELD_ID' => $data['FIELD_ID'],
-							'FIELD_NAME' => $data['FIELD_NAME'],
-							'FIELD_DESC' => $data['FIELD_DESC']
-						];
+						$node_order = $data['FIELD_NODE_ORDER'];
+						if(!empty($node_order)){
+							$array_A = explode('|', $node_order);
+							$flag = 0;
+							foreach($array_A as $a){
+								$array_B = explode(':', $a);
+								if($array_B[0] == $nodeID){
+									$flag++;
+									$jsonData[] = [
+										'NODE_ORDER_ID' => $array_B[2],
+										'FIELD_ID' => $data['FIELD_ID'],
+										'FIELD_NAME' => $data['FIELD_NAME'],
+										'FIELD_DESC' => $data['FIELD_DESC']
+									];
+								}
+							}
+							
+							if(!$flag){
+								$jsonData[] = [
+										'NODE_ORDER_ID' => $index,
+										'FIELD_ID' => $data['FIELD_ID'],
+										'FIELD_NAME' => $data['FIELD_NAME'],
+										'FIELD_DESC' => $data['FIELD_DESC']
+									];
+							}
+							
+							
+						}else{
+							$jsonData[] = [
+										'NODE_ORDER_ID' => $index,
+										'FIELD_ID' => $data['FIELD_ID'],
+										'FIELD_NAME' => $data['FIELD_NAME'],
+										'FIELD_DESC' => $data['FIELD_DESC']
+									];
+						}
 					}
 				}
 			}	
 		}
 		
+		if(!empty($jsonData)){
+			foreach ($jsonData as $key => $value) {
+			    $temp[$key] = $value['NODE_ORDER_ID'];
+			}
+			array_multisort($temp,SORT_ASC,$jsonData);
+		}
+		
 		return $jsonData;
 	}
 	
-	
+	/*保存环节排序信息*/
+	public static function saveNodeOrder($flowID,$nodeID,$real_data){
+		$index = 1;
+		foreach($real_data as $data){
+			$orderVal = '';
+			$node_order_infos = self::getByAKey(['FIELD_ID'=>$data->FIELD_ID],['FIELD_NODE_ORDER']);
+			$node_order = $node_order_infos['FIELD_NODE_ORDER'];
+			if(!empty($node_order)){
+				$array_A = explode('|', $node_order);
+				$flag = 0;
+				foreach($array_A as $a){
+					$array_B = explode(':', $a);
+					if($array_B[0] == $nodeID){
+						$flag++;
+						$orderVal .= $nodeID . ':' . $data->FIELD_ID . ':' . $index . '|';
+					}else{
+						$orderVal .= $array_B[0] . ':' . $array_B[1] . ':' . $array_B[2] . '|';
+					}
+				}
+				
+				if(!$flag){
+					$orderVal .= $nodeID . ':' . $data->FIELD_ID . ':' . $index . '|';
+				}
+				
+			}else{
+				$orderVal .= $nodeID . ':' . $data->FIELD_ID . ':' . $index . '|';
+			}
+			$orderVal = rtrim($orderVal,'|');
+			$self = self::findOne($data->FIELD_ID);
+			$self->FIELD_NODE_ORDER = $orderVal;
+			$self->save();
+			$index++;
+		}
+		
+		return true;
+	}
 }
