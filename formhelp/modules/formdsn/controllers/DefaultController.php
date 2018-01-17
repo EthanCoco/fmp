@@ -285,30 +285,72 @@ class DefaultController extends BaseController
 	
 	/*指向新建业务表界面*/
 	public function actionOperatebustable(){
-		$nodeID = Yii::$app->request->get('nodeID');
-		return $this->renderPartial('page/operate_bus_table',['nodeID'=>$nodeID]);
+		$request = Yii::$app->request;
+		$nodeID = $request->get('nodeID');
+		$busName = $request->get('busName','');
+		$bus_desc = '';
+		if($busName != ''){
+			$infos = FMPBUSNODETABLE::getByAKey(['NODE_ID'=>$nodeID,'BUS_NAME'=>$busName],['BUS_DESC']);
+			$bus_desc = $infos['BUS_DESC'];
+		}
+		
+		return $this->renderPartial('page/operate_bus_table',['nodeID'=>$nodeID,'busName'=>$busName,'busDesc'=>$bus_desc]);
 	}
 	
 	/*保存环节对应的业务表单表*/
 	public function actionOperatebustabledo(){
 		$request = Yii::$app->request;
 		$node_id = $request->get('node_id');
+		$bus_name = $request->get('bus_name','');
 		$bus_table_name = $request->get('bus_table_name');
 		
 		if(!$this->valNullParams($node_id,$bus_table_name)){
 			return $this->jsonReturn(['result'=>0,'msg'=>Yii::$app->controller->module->params['4001']]);
 		}
 		
-		$flag = FMPBUSNODETABLE::saveBusNodeTable($node_id,$bus_table_name);
+		if($bus_name == ''){
+			$flag = FMPBUSNODETABLE::saveBusNodeTable($node_id,$bus_table_name);
 		
-		if($flag){
-			$result = ['result'=>1,'msg'=>Yii::$app->controller->module->params['4010']];
+			if($flag){
+				$result = ['result'=>1,'msg'=>Yii::$app->controller->module->params['4010']];
+			}else{
+				$result = ['result'=>0,'msg'=>Yii::$app->controller->module->params['4011']];
+			}
 		}else{
-			$result = ['result'=>0,'msg'=>Yii::$app->controller->module->params['4011']];
+			$flag = FMPBUSNODETABLE::modBusNodeTable(['NODE_ID'=>$node_id,'BUS_NAME'=>$bus_name],['BUS_DESC'=>$bus_table_name]);
+		
+			if($flag !== false){
+				if($flag){
+					$result = ['result'=>1,'msg'=>Yii::$app->controller->module->params['4007']];
+				}else{
+					$result = ['result'=>0,'msg'=>Yii::$app->controller->module->params['4006']];
+				}
+				
+			}else{
+				$result = ['result'=>0,'msg'=>Yii::$app->controller->module->params['4008']];
+			}
 		}
 		
 		return $this->jsonReturn($result);
 		
 	}
 	
+	/*删除业务表单对应的环节*/
+	public function actionDelbustable(){
+		$bus_id = Yii::$app->request->get('bus_id','');
+	
+		if(!$this->valNullParams($bus_id)){
+			return $this->jsonReturn(['result'=>0,'msg'=>Yii::$app->controller->module->params['4001']]);
+		}
+		
+		$flag = FMPBUSNODETABLE::delBusNodeTable(['BUS_NAME'=>$bus_id]);
+			
+		if($flag){
+			$result = ['result'=>1,'msg'=>Yii::$app->controller->module->params['4012']];
+		}else{
+			$result = ['result'=>0,'msg'=>Yii::$app->controller->module->params['4013']];
+		}
+		
+		return $this->jsonReturn($result);
+	}
 }

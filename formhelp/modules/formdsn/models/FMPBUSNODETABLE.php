@@ -73,4 +73,19 @@ class FMPBUSNODETABLE extends \yii\db\ActiveRecord
 		
 		return $self->save();
 	}
+	
+	/*根据条件删除*/
+	public static function delBusNodeTable($condition){
+		return self::deleteAll($condition);
+	}
+	
+	/*根据添加更新数据*/
+	public static function modBusNodeTable($condition,$data){
+		return Yii::$app->db->createCommand()->update(self::tableName(), $data, $condition)->execute();
+	}
+	
+	/*获取指定的唯一一条数据*/
+	public static function getByAKey($condition,$fields = '*'){
+		return self::find()->where($condition)->select($fields)->one();
+	}
 }

@@ -176,10 +176,14 @@ function showRMenu(type, x, y) {
 }
 
 //隐藏右键菜单  
-//function hideRMenu() {  
-//  if (rMenu) rMenu.css({"visibility": "hidden"}); //设置右键菜单不可见  
-//  $("body").unbind("mousedown", onBodyMouseDown);  
-//}  
+function hideRMenu() {  
+    if (rMenu) rMenu.css({"visibility": "hidden"}); //设置右键菜单不可见  
+    $("body").unbind("mousedown", onBodyMouseDown);  
+    
+    if (rMenu_bus) rMenu_bus.css({"visibility": "hidden"}); //设置右键菜单不可见  
+    $("body").unbind("mousedown", onBodyMouseDown);  
+    
+}  
 
 //鼠标按下事件  
 function onBodyMouseDown(event){  
@@ -192,20 +196,43 @@ function onBodyMouseDown(event){
 } 
 
 //操作业务表
-function operate_bus_table(){
-	parent.layer.open({
-		type:2,
-		title:'新建业务表',
-		area:["300px","180px"],
-		content:"<?= yii\helpers\Url::to(['default/operatebustable']); ?>"+"?nodeID="+node_id,
-		btn:['确定','关闭'],
-		yes: function(index){
-			parent.$('#layui-layer-iframe'+index)[0].contentWindow.operate_bus_table_sure(); 
-       	},
-       	btn2:function(index){
-       		layer.close(index); 
-       	}
-	});
+function operate_bus_table(type){
+	if(bus_id == ""){
+		return parent.layer.msg("请选中节点");
+	}
+	var msg = ['新建','修改','删除'];
+	if(type != "2"){
+		parent.layer.open({
+			type:2,
+			title:msg[type]+'业务表',
+			area:["300px","180px"],
+			content:"<?= yii\helpers\Url::to(['default/operatebustable']); ?>"+"?nodeID="+node_id+"&busName="+bus_id,
+			btn:['确定','关闭'],
+			yes: function(index){
+				parent.$('#layui-layer-iframe'+index)[0].contentWindow.operate_bus_table_sure(); 
+	       	},
+	       	btn2:function(index){
+	       		layer.close(index); 
+	       	}
+		});
+	}else{
+		parent.layer.confirm("确定"+msg[type]+"么？",function(index){
+			$.getJSON("<?= yii\helpers\Url::to(['default/delbustable']); ?>",
+			{
+				"bus_id":bus_id
+			},function(json){
+				if(json.result){
+					layer.close(index);
+					parent.layer.msg(json.msg);
+					load_flow_node_tree(); 
+					hideRMenu();
+				}else{
+					parent.layer.alert(json.msg);
+				}
+			});
+			
+		});
+	}
 }
 </script>	
 </body>

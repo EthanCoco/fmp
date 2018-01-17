@@ -43,6 +43,7 @@ $(function(){
 	layui.use('form', function(){
 		var form = layui.form;
 	});
+	$("#busTableName").val("<?= $busDesc ?>");
 });
 
 function operate_bus_table_sure(){
@@ -56,11 +57,13 @@ function operate_bus_table_sure(){
 			$.getJSON("<?= yii\helpers\Url::to(['default/operatebustabledo']); ?>",
 			{
 				"bus_table_name":busTableName,
-				"node_id":"<?= $nodeID ?>"
+				"node_id":"<?= $nodeID ?>",
+				"bus_name":"<?= $busName ?>"
 			},function(json){
 				if(json.result){
 					parent.layer.close(index-1);
 					parent.layer.msg(json.msg);
+					parent.$('#layui-layer-iframe'+(index-2))[0].contentWindow.hideRMenu(); 
 					parent.$('#layui-layer-iframe'+(index-2))[0].contentWindow.load_flow_node_tree(); 
 				}else{
 					parent.layer.alert(json.msg);
