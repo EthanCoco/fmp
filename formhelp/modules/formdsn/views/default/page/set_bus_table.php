@@ -151,23 +151,32 @@ function load_flow_node_tree(){
 function OnRightClick(event, treeId, treeNode) { 
 	if(treeNode.isRmenu == "0")
 		return false;
+	var zTree = $.fn.zTree.getZTreeObj("flow_node_tree");
+	zTree.selectNode(treeNode);
+	if(treeNode.isRmenu == "1"){
+		node_id = treeNode.id;
+		bus_id = '';
+	}else if(treeNode.isRmenu == "2"){
+		node_id = treeNode.pId;
+		bus_id = treeNode.id;
+	}
 	
     if (!treeNode && event.target.tagName.toLowerCase() != "button" && $(event.target).parents("a").length == 0) {  
         showRMenu("root", event.clientX, event.clientY);  
     } else if (treeNode && !treeNode.noR) {  
-//      showRMenu("node", event.clientX, event.clientY);         
         showRMenu(treeNode.isRmenu, event.clientX, event.clientY); 
-        
     }  
 }  
 
 //显示右键菜单  
-function showRMenu(type, x, y) {  
+function showRMenu(type, x, y) { 
 	if(type == "1"){
 		$("#rMenu ul").show();  
 	    rMenu.css({"top":y+"px", "left":x+"px", "visibility":"visible"}); //设置右键菜单的位置、可见  
 	    $("body").bind("mousedown", onBodyMouseDown);  
 	}else{
+		if(bus_id == '')
+			return;
 		$("#rMenu_bus ul").show();  
 	    rMenu_bus.css({"top":y+"px", "left":x+"px", "visibility":"visible"}); //设置右键菜单的位置、可见  
 	    $("body").bind("mousedown", onBodyMouseDown);  
@@ -180,9 +189,11 @@ function hideRMenu() {
     if (rMenu) rMenu.css({"visibility": "hidden"}); //设置右键菜单不可见  
     $("body").unbind("mousedown", onBodyMouseDown);  
     
-    if (rMenu_bus) rMenu_bus.css({"visibility": "hidden"}); //设置右键菜单不可见  
-    $("body").unbind("mousedown", onBodyMouseDown);  
-    
+    if (rMenu_bus){
+    	rMenu_bus.css({"visibility": "hidden"}); 
+    	$("body").unbind("mousedown", onBodyMouseDown);  
+    	bus_id = '';
+    }
 }  
 
 //鼠标按下事件  
