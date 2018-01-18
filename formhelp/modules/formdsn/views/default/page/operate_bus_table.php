@@ -63,8 +63,8 @@ function operate_bus_table_sure(){
 				if(json.result){
 					parent.layer.close(index-1);
 					parent.layer.msg(json.msg);
-					parent.$('#layui-layer-iframe1')[0].contentWindow.hideRMenu(); 
-					parent.$('#layui-layer-iframe1')[0].contentWindow.load_flow_node_tree(); 
+					parent.$('#layui-layer-iframe'+parent.bus_index)[0].contentWindow.hideRMenu(); 
+					parent.$('#layui-layer-iframe'+parent.bus_index)[0].contentWindow.load_flow_node_tree(); 
 				}else{
 					parent.layer.alert(json.msg);
 				}

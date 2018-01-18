@@ -71,6 +71,7 @@ var flow_table_title = "";
 var flow_table_type = "";
 var editIndex = undefined;
 var tempEditIndex = undefined;
+var bus_index = "";
 
 var field_num = '';
 var field_prefix = '';
@@ -682,7 +683,7 @@ function setBusTable(){
 		if(flow_table_id == ""){
 			return;
 		}
-		layer.open({
+		bus_index = layer.open({
     		type:2,
     		title:'业务表设置',
     		area:[$(window).width()/5*4+"px","800px"],

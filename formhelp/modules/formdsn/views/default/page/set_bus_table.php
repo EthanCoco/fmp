@@ -208,9 +208,6 @@ function onBodyMouseDown(event){
 
 //操作业务表
 function operate_bus_table(type){
-	if(bus_id == ""){
-		return parent.layer.msg("请选中节点");
-	}
 	var msg = ['新建','修改','删除'];
 	if(type != "2"){
 		parent.layer.open({
