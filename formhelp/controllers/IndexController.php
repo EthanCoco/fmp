@@ -43,6 +43,40 @@ class IndexController extends BaseController{
 	    return @mkdir($dir, $mode);
 	} 
 	
+	public function actionExceltohtml(){
+		$filePath = '../web/mbfile/rczp_zgsc_flow3_print.xls';
+		$fileType = \PHPExcel_IOFactory::identify($filePath);
+		
+		$objReader = \PHPExcel_IOFactory::createReader($fileType);
+		$objPHPExcel = $objReader->load($filePath);
+		$savePath = '../web/mbfile/test.html'; //这里记得将文件名包含进去
+		$objWriter = new \PHPExcel_Writer_HTML($objPHPExcel); 
+		$objWriter->setSheetIndex(0); //可以将括号中的0换成需要操作的sheet索引
+		$objWriter->save($savePath); //保存为html文件
+//		$fileContent = file_get_contents($savePath);
+//		$fileContent = str_replace("<html>", '', $fileContent);
+//		$fileContent = str_replace("</html>", '', $fileContent);
+//		$fileContent = str_replace("<head>", '', $fileContent);
+//		$fileContent = str_replace("</head>", '', $fileContent);
+//		$fileContent = str_replace("<body>", '', $fileContent);
+//		$fileContent = str_replace("</body>", '', $fileContent);
+//		
+//		$fileContent = preg_replace("/<meta.+>/mi", "", $fileContent);
+//		$fileContent = preg_replace("/<!DOCTYPE.+>/mi", "", $fileContent);
+//		
+//		file_put_contents($savePath, $fileContent); 
+		
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 //	public function actionTest(){
 		/*添加数据*/
 //		$tableName = FlowJob::tableName(2);
