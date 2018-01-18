@@ -353,4 +353,20 @@ class DefaultController extends BaseController
 		
 		return $this->jsonReturn($result);
 	}
+	
+	/*根据流程业务表字段列表----业务表设置*/
+	public function actionFieldtablelistbus (){
+		$request = Yii::$app->request;
+		$tableName = $request->get('flow_table_id','');
+		$flowID = $request->get('flow_node_id','');
+		//请求参数校验
+		if(!$this->valNullParams($tableName,$flowID)){
+			return $this->jsonReturn(['result'=>0,'msg'=>Yii::$app->controller->module->params['4001']]);
+		}
+		
+		//获取字段列表信息
+		$infos = FMPTABLEFIELD::getListField(['FLOW_ID'=>$flowID,'TABLE_NAME'=>$tableName]);
+		return $this->jsonReturn(['result'=>1,'infos'=>$infos]); 
+	}
+	
 }

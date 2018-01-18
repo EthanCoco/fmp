@@ -35,6 +35,24 @@ $this->title = '';
         vertical-align:middle; 
         display:block; 
     }
+    
+    .field_list{
+		list-style:none;
+		padding-top:10px;
+		height:100%;
+	}
+    .item{
+    	padding:0 10px;
+    	width:180px;
+    	background: #F3F3F3;
+    	display: inline-block;
+    	height: 30px;
+    	line-height: 30px;
+    	border-bottom: 1px dashed #C9C9C9;
+    }
+    .item:hover{
+    	background: #E0E0E0;
+    }
 </style>
 </head>
 <body>
@@ -48,17 +66,30 @@ $this->title = '';
     <a href="javascript:;" onclick="operate_bus_table(2)">删除</a>
 </div>
 
-<div style="padding: 10px;">
+<div style="padding: 10px;position: relative;">
 	<div class="layui-side-formdsn" style="width: 200px;border:#fff;border-right: 1px solid #93D1FF;border-bottom: 1px solid #93D1FF;">
 	    <div class="layui-side-scroll" style="height: 100%;width: 200px;">
-	      	<div class="ztree" id="flow_node_tree">
+	      	<div class="ztree" id="flow_node_tree" style="border-bottom: 1px solid #93D1FF;height: 500px;">
+	      		
+	      	</div>
+	      	
+	      	<div class="ztree" id="flow_node_tree_table">
 	      		
 	      	</div>
 	    </div>
 	</div>
-	<div class="layui-side-formdsn" style="width: auto;border:#fff;border-right: 1px solid #93D1FF;border-bottom: 1px solid #93D1FF;margin-left: 200px;">
+	
+	<div class="layui-side-formdsn" style="overflow-x:visible;   width: 200px;border:#fff;border-right: 1px solid #93D1FF;border-bottom: 1px solid #93D1FF;margin-left: 200px;">
+	    <div class="layui-side-scroll" style="height: 100%;width: 200px;">
+	      	<div id="bus_table_field_div">
+	      		
+	      	</div>
+	    </div>
+	</div>
+	
+	<div class="layui-side-formdsn" style="width: auto;border:#fff;border-right: 1px solid #93D1FF;border-bottom: 1px solid #93D1FF;margin-left: 400px;">
 	    <div class="layui-side-scroll" style="height: 100%;width: auto;">
-	      	<div id="bus_designer_content">
+	      	<div id="bus_designer_content" style="z-index:1000;height: 697px;position: relative;">
 	      		
 	      	</div>
 	    </div>
@@ -70,18 +101,34 @@ $this->title = '';
 <script>
 var node_id = '';
 var bus_id = '';
+var bus_table_name = '';
 var dg = "#datagrid_node";
 var rMenu = $("#rMenu");
 var rMenu_bus = $("#rMenu_bus");
 var layer = undefined;
 $(function(){
-	$("#bus_designer_content").css("width",$(window).width()-200 + "px");
+	$("#bus_designer_content").css("width",$(window).width()-400 + "px");
 	layui.use('layer', function(){
 		layer = layui.layer;
 	});
 	load_flow_node_tree();
+	load_table_tree_bus();
+	
+	$('#bus_designer_content').droppable({
+		onDragEnter:function(e,source){
+			$(source).draggable('options').cursor='auto';
+		},
+		onDragLeave:function(e,source){
+			$(source).draggable('options').cursor='not-allowed';
+		},
+		onDrop:function(e,source){
+			alert(11);
+		}
+	});
+	
 });
 
+//流程业务表树
 function load_flow_node_tree(){
 	layui.use('layer',function(){
 		var layer = layui.layer;
@@ -242,7 +289,113 @@ function operate_bus_table(type){
 		});
 	}
 }
-</script>	
+
+//业务表树
+function load_table_tree_bus(){
+	layui.use('layer',function(){
+		var layer = layui.layer;
+		$.getJSON("<?= yii\helpers\Url::to(['default/tabletree']); ?>",
+		{
+			"flow_node_id":parent.flow_node_id,
+		}, function(json){
+			if(json.result){
+				var treeData = json.infos;
+				var setting = {
+				    		edit : {
+								enable : false,
+								showRemoveBtn: false,
+								showRenameBtn: false
+							},
+							data : {
+								simpleData : {
+									enable : true,
+									idKey : "id",
+									pIdKey : "pId"
+								}
+							},
+							check:{
+								enable:false
+							},
+							view : {
+								dblClickExpand : false,	
+								showLine : true,
+								selectedMulti : false
+							},
+							callback: {
+								beforeClick:function(treeId,treeNode,clickFlag){
+									if(treeNode.isChild == "0")
+								    	return false;
+								},
+								onClick:function(event, treeId, treeNode){
+									bus_table_name = treeNode.id;
+									load_table_field_bus();
+								}
+							}
+						};
+		    	
+		    	var treeObj = $.fn.zTree.init($("#flow_node_tree_table"), setting, treeData);// 生成树形结构
+		    	var zTree = $.fn.zTree.getZTreeObj("flow_node_tree_table");
+		    	zTree.expandAll(true); 
+		    	var node_obj = treeObj.getNodesByFilter(function(node){
+		    		return node.isChild== 1;
+		    	}, true); 
+		    	
+		    	if(node_obj == null){
+		    		bus_table_name = "";
+		    	}else{
+		    		zTree.selectNode(node_obj);
+		    		bus_table_name = node_obj.id;
+		    		load_table_field_bus();
+		    	}
+			}else{
+				layer.alert(json.msg);
+			}
+		});
+	});
+}
+
+//业务表字段
+function load_table_field_bus(){
+	$("#bus_table_field_div").empty();
+	$.getJSON("<?= yii\helpers\Url::to(['default/fieldtablelistbus']); ?>",
+	{
+		"flow_table_id":bus_table_name,"flow_node_id":parent.flow_node_id
+	},
+	function(json){
+		if(json.result){
+			var infos = json.infos;
+			if(infos == ""){
+				$("#bus_table_field_div").html("<p style='padding:5px;text-align:center;'>请先添加字段信息</p>");
+			}else{
+				var obj = $("#bus_table_field_div");
+				var _html = '<ul class="field-list">';
+				var len = infos.length;
+				for(var i=0;i<len;i++){
+					_html += '<li><a id="'+infos[i]['FIELD_ID']+'" href="#" name="'+infos[i]['FIELD_NAME']+'" class="item">'+infos[i]['FIELD_DESC']+'</a></li>';
+				}
+				_html += '</ul>';
+				obj.html(_html);
+			}
+			
+			$('.item').draggable({
+				revert:true,
+				proxy:'clone',
+				onStartDrag:function(){
+					$(this).draggable('options').cursor = 'not-allowed';
+					$(this).draggable('proxy').css('z-index',9999);
+				},
+				onStopDrag:function(){
+					$(this).draggable('options').cursor='move';
+				}
+			});
+			
+		}else{
+			layer.alert(json.msg);
+		}
+	});
+}
+
+</script>
 </body>
 </html>
 <?php $this->endPage() ?>
