@@ -122,7 +122,8 @@ $(function(){
 			$(source).draggable('options').cursor='not-allowed';
 		},
 		onDrop:function(e,source){
-			alert(11);
+			console.log($(source).attr('name'))
+			console.log(source)
 		}
 	});
 	
