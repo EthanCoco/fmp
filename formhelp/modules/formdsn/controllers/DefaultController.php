@@ -369,4 +369,39 @@ class DefaultController extends BaseController
 		return $this->jsonReturn(['result'=>1,'infos'=>$infos]); 
 	}
 	
+	/*创建目录*/
+	private function mkdirs($dir, $mode = 0777){
+	    if (is_dir($dir) || @mkdir($dir, $mode)) return TRUE;
+	    if (!self::mkdirs(dirname($dir), $mode)) return FALSE;
+	    return @mkdir($dir, $mode);
+	}
+	
+	/*上传文件*/
+	public function actionUploadexcel(){
+		$bus_id = Yii::$app->request->post('bus_id');
+		$flow_id = Yii::$app->request->post('flow_id');
+		
+		$file = $_FILES['file'];
+		$timeNow = date('Y-m-d H:i:s',time());
+		
+		$dir_flow = $flow_id;
+		
+		$fileName = $bus_id.'.xls';
+		
+		if($_FILES['file']['size'] > 2*1024*1024){
+			return ['code'=>'1','msg'=>'文件大小不能大于2M','data'=>['src'=>'']];
+		}
+		
+		$createDir = '../modules/'.$this->module->id.'/file/textfile/'.$dir_flow;
+		
+		$this->mkdirs($createDir);
+		
+		move_uploaded_file($_FILES['file']['tmp_name'], $createDir."/".$fileName);
+		
+		$resultFile = $createDir."/".$fileName;
+		
+		return $this->jsonReturn(['code'=>0,'msg'=>'','data'=>['src'=>$createDir."/".$fileName]]);
+	}
+	
+	
 }

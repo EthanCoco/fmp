@@ -90,7 +90,11 @@ $this->title = '';
 	<div class="layui-side-formdsn" style="width: auto;border:#fff;border-right: 1px solid #93D1FF;border-bottom: 1px solid #93D1FF;margin-left: 400px;">
 	    <div class="layui-side-scroll" style="height: 100%;width: auto;">
 	      	<div id="bus_designer_content" style="z-index:1000;height: 697px;position: relative;">
-	      		
+	      		<p style="padding: 10px;background: #EEEEEE;border-bottom: 1px solid #93D1FF;">
+		      		<input type="text" id="fileName"  style="display: none;"/>
+		      		<button type="button" class="layui-btn" id="file_btn"><i class="layui-icon"></i>选择文件</button>
+					<span id="import_tr_sh" style="color: red;font-size: 16px;margin-left: 20px;"></span>
+				</p>	 
 	      	</div>
 	    </div>
 	</div>
@@ -127,7 +131,35 @@ $(function(){
 		}
 	});
 	
+	init_upload_file();
+	
 });
+
+function init_upload_file(){
+	$("#fileName").val("");
+	$("#import_tr_sh").css('display','none');
+	layui.use(['upload','layer'], function(){
+	 	var upload = layui.upload,layer = layui.layer;
+	 	upload.render({
+		    elem: '#file_btn',
+		    url: "<?= yii\helpers\Url::to(['default/uploadexcel']); ?>",
+		    data:{'bus_id':'1_1','flow_id':parent.flow_node_id},
+		    accept: 'file',
+		    exts: 'xls',
+		    size: 1024*1024*2,
+		    done: function(res){
+		    	if(res.code != '0'){
+		        	return parent.layer.msg(res.msg);
+		      	}else{
+		      		$("#fileName").val(res.data.src);
+		      		alert(res.data.src);
+		      		$("#import_tr_sh").css('display','');
+		      	}
+		    }
+		});
+	});
+}
+
 
 //流程业务表树
 function load_flow_node_tree(){
