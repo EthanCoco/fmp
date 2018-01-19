@@ -154,7 +154,7 @@ function init_upload_file(){
 			if(!json.result){
 				return layer.alert(json.msg);
 			}
-			
+			$("#file_contents").empty();
 			$("#file_contents").load(json.file);
 			
 		 	upload.render({
@@ -170,6 +170,7 @@ function init_upload_file(){
 			      	}else{
 			      		$("#file_contents").empty();
 			      		$("#file_contents").load(res.data.src);
+			      		
 			      		$("#import_tr_sh").css('display','');
 			      	}
 			    }
