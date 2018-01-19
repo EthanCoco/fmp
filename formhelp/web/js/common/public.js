@@ -300,3 +300,78 @@ function caculatePrefix(val,prefix){
 	
 	return prefix + num_string;
 }
+
+function bindTreeSearchFun(treeId, inputObj, searchBtn, clearBtn){
+	var orgTreeObj = $.fn.zTree.getZTreeObj(treeId);
+	var oldInfo = "";
+	var nodeList = [];
+	var hightLightList = [];
+	if(searchBtn){
+		searchBtn.click(function(){ //添加“搜索”事件
+			var searchInfo = inputObj.val();
+			if(searchInfo!=oldInfo || hightLightList.length==0){
+				clearHightligth();
+				
+				nodeList = orgTreeObj.getNodesByParamFuzzy("name", $.trim(searchInfo));
+				if(searchInfo!=""){ // && keyc!=40 && keyc!=38 && keyc!=37 && keyc!=39 && keyc!=13
+					if(nodeList!=null && nodeList.length>0){
+						orgTreeObj.expandAll(false);
+						setTimeout(function(){
+							//orgTreeObj.expandNode(orgTreeObj.getNodes[0], true, false, true);
+							updateNodes(true);
+						}, 300);
+					}else{
+						layer.msg('未找到匹配的结果！');
+					}
+				}
+				oldInfo = searchInfo;
+			}
+			inputObj.focus();
+		});
+		//添加回车事件
+		inputObj.unbind().keyup(function(e){
+			var event = e || window.event; 
+    	    if(event.keyCode == 13){
+    	    	searchBtn.click();
+    	    }
+		});
+	}
+	if(clearBtn){
+		clearBtn.click(function(){ //添加“清空”事件
+			inputObj.val("");
+			clearHightligth();
+			inputObj.focus();
+		});
+	}
+	/**
+	 * 清空高亮显示
+	 */
+	function clearHightligth(){
+		if(hightLightList.length>0){
+			nodeList = hightLightList;
+			updateNodes(false);
+		}
+		//nodeList = orgTreeObj.getNodesByParamFuzzy("color", "#A60000");
+	}
+	/**
+	 * 更新节点显示及展开效果
+	 * @param highlight true：高亮显示，false：取消高亮显示
+	 */
+	function updateNodes(highlight) {
+		hightLightList = [];
+		for( var i=0; i<nodeList.length; i++) {
+			nodeList[i].highlight = highlight;
+			orgTreeObj.updateNode(nodeList[i]);
+			
+			if(highlight){
+				hightLightList.push(nodeList[i]);
+				var pNode = nodeList[i].getParentNode();
+				if(!pNode){
+					orgTreeObj.expandNode(nodeList[i], true, false, true);
+				}else if(!pNode.open){
+					orgTreeObj.expandNode(pNode, true, false, true);
+				}
+			}
+		}
+	}
+}
