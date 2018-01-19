@@ -25,6 +25,7 @@ class AppAsset extends AssetBundle
         'js/plugin/ztree/zTreeStyle.css',
         'css/index.css',
         'css/mobile.css',
+        'css/selectMenu.css',
         
     ];
     public $js = [
@@ -37,6 +38,7 @@ class AppAsset extends AssetBundle
 		'js/common/public.js',
 		'js/plugin/Highcharts-6.0.2/code/highcharts.js',
 		'js/plugin/ztree/jquery.ztree.all-3.5.min.js',
+		'js/common/xy.selectMenu.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',
