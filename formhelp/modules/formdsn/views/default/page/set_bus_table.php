@@ -87,18 +87,26 @@ $this->title = '';
 	    </div>
 	</div>
 	
-	<div class="layui-side-formdsn" style="width: auto;border:#fff;border-right: 1px solid #93D1FF;border-bottom: 1px solid #93D1FF;margin-left: 400px;">
+	<div id="table_excel_content" class="layui-side-formdsn" style="display: none; width: auto;border:#fff;border-right: 1px solid #93D1FF;border-bottom: 1px solid #93D1FF;margin-left: 400px;">
 	    <div class="layui-side-scroll" style="height: 100%;width: auto;">
 	      	<div id="bus_designer_content" style="z-index:1000;height: 697px;position: relative;">
-	      		<p style="padding: 10px;background: #EEEEEE;border-bottom: 1px solid #93D1FF;">
-		      		<input type="text" id="fileName"  style="display: none;"/>
+	      		<div style="padding: 10px;background: #EEEEEE;border-bottom: 1px solid #93D1FF;">
 		      		<button type="button" class="layui-btn" id="file_btn"><i class="layui-icon"></i>选择文件</button>
 					<span id="import_tr_sh" style="color: red;font-size: 16px;margin-left: 20px;"></span>
-				</p>	 
+				</div>
+				<div class="layui-btn-group" style="float: right;margin-right: 30px;margin-top: -48px;">
+				  	<button onclick="print_view(0)" class="layui-btn">查看预览</button>
+				  	<button onclick="print_view(1)" class="layui-btn">编辑预览</button>
+				  	<button onclick="print_view(2)" class="layui-btn">审核预览</button>
+				</div>
+				<div  style="text-align: center;">
+					<center>
+						<div id="file_contents"></div>
+					</center>
+				</div>	 
 	      	</div>
 	    </div>
 	</div>
-	
 </div>
 <?php $this->endBody() ?>
 	
@@ -131,31 +139,41 @@ $(function(){
 		}
 	});
 	
-	init_upload_file();
-	
 });
 
 function init_upload_file(){
-	$("#fileName").val("");
-	$("#import_tr_sh").css('display','none');
 	layui.use(['upload','layer'], function(){
-	 	var upload = layui.upload,layer = layui.layer;
-	 	upload.render({
-		    elem: '#file_btn',
-		    url: "<?= yii\helpers\Url::to(['default/uploadexcel']); ?>",
-		    data:{'bus_id':'1_1','flow_id':parent.flow_node_id},
-		    accept: 'file',
-		    exts: 'xls',
-		    size: 1024*1024*2,
-		    done: function(res){
-		    	if(res.code != '0'){
-		        	return parent.layer.msg(res.msg);
-		      	}else{
-		      		$("#fileName").val(res.data.src);
-		      		alert(res.data.src);
-		      		$("#import_tr_sh").css('display','');
-		      	}
-		    }
+		var upload = layui.upload;
+		$("#import_tr_sh").css('display','none');
+		$.getJSON("<?= yii\helpers\Url::to(['default/getexcelhtml']); ?>",
+		{
+			'bus_id':bus_id,
+			'flow_id':parent.flow_node_id
+		},
+		function(json){
+			if(!json.result){
+				return layer.alert(json.msg);
+			}
+			
+			$("#file_contents").load(json.file);
+			
+		 	upload.render({
+			    elem: '#file_btn',
+			    url: "<?= yii\helpers\Url::to(['default/uploadexcel']); ?>",
+			    data:{'bus_id':bus_id,'flow_id':parent.flow_node_id},
+			    accept: 'file',
+			    exts: 'xls',
+			    size: 1024*1024*2,
+			    done: function(res){
+			    	if(res.code != '0'){
+			        	return parent.layer.msg(res.msg);
+			      	}else{
+			      		$("#file_contents").empty();
+			      		$("#file_contents").load(res.data.src);
+			      		$("#import_tr_sh").css('display','');
+			      	}
+			    }
+			});
 		});
 	});
 }
@@ -199,9 +217,12 @@ function load_flow_node_tree(){
 									if(treeNode.isRmenu == "1"){
 										node_id = treeNode.id;
 										bus_id = '';
+										$("#table_excel_content").css("display","none");
 									}else if(treeNode.isRmenu == "2"){
 										node_id = treeNode.pId;
 										bus_id = treeNode.id;
+										$("#table_excel_content").css("display","");
+										init_upload_file();
 									}
 								}
 							}
@@ -252,12 +273,15 @@ function OnRightClick(event, treeId, treeNode) {
 function showRMenu(type, x, y) { 
 	if(type == "1"){
 		$("#rMenu ul").show();  
+		$("#table_excel_content").css("display","none");
 	    rMenu.css({"top":y+"px", "left":x+"px", "visibility":"visible"}); //设置右键菜单的位置、可见  
 	    $("body").bind("mousedown", onBodyMouseDown);  
 	}else{
 		if(bus_id == '')
 			return;
-		$("#rMenu_bus ul").show();  
+		$("#rMenu_bus ul").show(); 
+		$("#table_excel_content").css("display","");
+		init_upload_file(); 
 	    rMenu_bus.css({"top":y+"px", "left":x+"px", "visibility":"visible"}); //设置右键菜单的位置、可见  
 	    $("body").bind("mousedown", onBodyMouseDown);  
 	}
@@ -404,7 +428,7 @@ function load_table_field_bus(){
 				var _html = '<ul class="field-list">';
 				var len = infos.length;
 				for(var i=0;i<len;i++){
-					_html += '<li><a id="'+infos[i]['FIELD_ID']+'" href="#" name="'+infos[i]['FIELD_NAME']+'" class="item">'+infos[i]['FIELD_DESC']+'</a></li>';
+					_html += '<li><a id="'+infos[i]['FIELD_ID']+'" href="#" name="'+infos[i]['FIELD_NAME']+'" class="item">'+infos[i]['FIELD_ID']+'='+infos[i]['FIELD_DESC']+'</a></li>';
 				}
 				_html += '</ul>';
 				obj.html(_html);
@@ -428,6 +452,14 @@ function load_table_field_bus(){
 	});
 }
 
+/*预览*/
+function print_view(type){
+	parent.layer.open({
+		type:2,
+		area:["800px","800px"],
+		content:"<?= yii\helpers\Url::to(['default/printview']); ?>"+"?busName="+bus_id+"&flow_id="+parent.flow_node_id+"&bus_table_name="+bus_table_name+"&type="+type,
+	});
+}
 </script>
 </body>
 </html>

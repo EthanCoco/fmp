@@ -4,10 +4,12 @@ namespace app\modules\formdsn\controllers;
 
 use yii\web\Controller;
 use Yii;
+use yii\helpers\Html;
 use app\controllers\BaseController;
 
 use app\models\User;
 use app\models\Share;
+use app\models\Code;
 use app\modules\formdsn\models\FMPFLOWDIR;
 use app\modules\formdsn\models\FMPFLOW;
 use app\modules\formdsn\models\FMPFLOWTABLE;
@@ -392,7 +394,7 @@ class DefaultController extends BaseController
 			return ['code'=>'1','msg'=>'文件大小不能大于2M','data'=>['src'=>'']];
 		}
 		
-		$createDir = '../modules/'.$this->module->id.'/file/textfile/'.$dir_flow;
+		$createDir = '../web/uploadfile/file/textfile/'.$dir_flow;
 		
 		$this->mkdirs($createDir);
 		
@@ -400,8 +402,136 @@ class DefaultController extends BaseController
 		
 		$resultFile = $createDir."/".$fileName;
 		
-		return $this->jsonReturn(['code'=>0,'msg'=>'','data'=>['src'=>$createDir."/".$fileName]]);
+		$fileType = \PHPExcel_IOFactory::identify($resultFile);
+		
+		$objReader = \PHPExcel_IOFactory::createReader($fileType);
+		$objPHPExcel = $objReader->load($resultFile);
+		$savePath = $createDir.'/'.$bus_id.'.html'; 
+		$objWriter = new \PHPExcel_Writer_HTML($objPHPExcel); 
+		
+		$objWriter->setSheetIndex(0); //可以将括号中的0换成需要操作的sheet索引
+		$objWriter->save($savePath); //保存为html文件
+		
+		$fileContent = file_get_contents($savePath);
+		$fileContent = str_replace("<html>", '', $fileContent);
+		$fileContent = str_replace("</html>", '', $fileContent);
+		$fileContent = str_replace("<head>", '', $fileContent);
+		$fileContent = str_replace("</head>", '', $fileContent);
+		$fileContent = str_replace("<body>", '', $fileContent);
+		$fileContent = str_replace("</body>", '', $fileContent);
+		
+		$fileContent = preg_replace("/<meta.+>/mi", "", $fileContent);
+		$fileContent = preg_replace("/<!DOCTYPE.+>/mi", "", $fileContent);
+		
+		file_put_contents($savePath, $fileContent); 
+		
+		return $this->jsonReturn(['code'=>0,'msg'=>'','data'=>['src'=>'../../'.$savePath]]);
 	}
 	
+	private function getExcelHtml($flow_id,$bus_id){
+		$filePath = '../web/uploadfile/file/textfile/'.$flow_id.'/'.$bus_id.'.html';
+		$file = '';
+		if(file_exists($filePath)){
+			$file = '../../'.$filePath;
+		}
+		return $file;
+	}
+	
+	/*获取excel生成的html*/
+	public function actionGetexcelhtml(){
+		$request = Yii::$app->request;
+		$bus_id = $request->get('bus_id','');
+		$flow_id = $request->get('flow_id','');
+		//请求参数校验
+		if(!$this->valNullParams($bus_id,$flow_id)){
+			return $this->jsonReturn(['result'=>0,'msg'=>Yii::$app->controller->module->params['4001']]);
+		}
+		
+		$file = $this->getExcelHtml($flow_id,$bus_id);
+		
+		return $this->jsonReturn(['result'=>1,'msg'=>'','file'=>$file]);
+	}
+	
+	
+	/*指向预览页面*/
+	public function actionPrintview(){
+		$request = Yii::$app->request;
+		$type = $request->get('type',0);
+		$tableName = $request->get('busName','');
+		$bus_table_name = $request->get('bus_table_name','');
+		$flow_id = $request->get('flow_id','');
+		if(!$this->valNullParams($tableName,$flow_id,$bus_table_name)){
+			return $this->jsonReturn(['result'=>0,'msg'=>Yii::$app->controller->module->params['4001']]);
+		}
+		
+		$file = $this->getExcelHtml($flow_id,$tableName);
+		//获取字段列表信息
+		$infos = FMPTABLEFIELD::getListField(['FLOW_ID'=>$flow_id,'TABLE_NAME'=>$bus_table_name]);
+		
+		return $this->renderPartial('page/print_view',['type'=>$type,'file'=>$file,'infos'=>$infos]);
+	}
+	
+	
+	/*控件页面*/
+	public function actionControlpage(){
+		$viewtype = Html::encode(Yii::$app->request->get('view_type'));
+		$codeindex = Html::encode(Yii::$app->request->get('code_index'));
+		$singleOrMore = Html::encode(Yii::$app->request->get('singleOrMore'));
+		if($viewtype=='1'){
+			return $this->renderPartial('codepage/codeList',['codeindex'=>$codeindex]);
+		}else if($viewtype=='2'){
+			if($singleOrMore=="1"){
+				return $this->renderPartial('codepage/codeTree',['codeindex'=>$codeindex]);
+			}else{
+				return $this->renderPartial('codepage/codeTreeCheck',['codeindex'=>$codeindex]);
+			}
+		}
+	}
+	
+	/*列表型控件*/
+	public function actionList(){
+		$codeindex = Html::encode(Yii::$app->request->get('codeindex'));
+			
+		$codelist = Code::find()->where(['codeTypeID'=>$codeindex,'codeStatus'=>1])->orderby('codeOrder asc')->asArray()->all();
+		$listData = [];
+		foreach($codelist as $code){
+			$listData[] = ["id"=>$code['codeID'],"name"=>$code['codeName'],"pId"=>"-1","code"=>$code['codeID']];
+		}
+		\Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+		return $listData;
+	}
+	
+	/*树型控件*/
+	public function actionTree(){
+		$codeindex = Html::encode(Yii::$app->request->get('codeindex'));
+		
+		$codetree = Code::find()->where(['codeTypeID'=>$codeindex,'codeStatus'=>1])->orderby('codeOrder asc')->asArray()->all();
+		$treeData = [];
+		foreach($codetree as $code){
+			$treeData[] = ["id"=>$code['codeID'],"name"=>$code['codeName'],"pId"=>$code['codePid'],"code"=>$code['codeID'],"isleaf"=>$code['isLeaf']];
+		}
+		\Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+		return $treeData;
+	}
+	
+	/*上传图片*/
+	public function actionUploadimage(){
+		\Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+		date_default_timezone_set('PRC');
+		$file = $_FILES['file'];
+		$type = strtolower($_FILES['file']["type"]);
+		
+		$timeNow = date('Y-m-d H:i:s',time());
+		
+		$tmpfile = time();
+		$fileName = $tmpfile.'.'.explode("/", $type)[1];
+		if(!in_array($type, ['image/jpg','image/gif','image/png','image/jpeg'])){
+			return ['code'=>'1','msg'=>'图片格式不正确','data'=>['src'=>'']];
+		}
+		$createDir = '../web/uploadfile/image/';
+		move_uploaded_file($_FILES['file']['tmp_name'], $createDir."/".$fileName);
+		$resultFile = $createDir."/".$fileName;
+		return ['code'=>'0','msg'=>'图片大小不能大于2M','data'=>['src'=>'../../'.$createDir."/".$fileName]];
+	}
 	
 }

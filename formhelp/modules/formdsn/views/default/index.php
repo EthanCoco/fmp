@@ -107,6 +107,9 @@ var data_TYPE = [{
 				    	"id":"4",
 				        "text":"4=代码",
 				    },{
+				    	"id":"6",
+				        "text":"6=树码",
+				    },{
 				    	"id":"5",
 				        "text":"5=图像",
 				    },{
@@ -444,7 +447,7 @@ function load_table_field(){
 					        }  
 			            },
 						onSelect : function(node){
-							if(node.id == "4"){
+							if(node.id == "4" || node.id == "6"){
 								var ed = $('#field_grid_table_list').datagrid("getEditor",{
 									index:editIndex,
 									field:"FIELD_CODE"
