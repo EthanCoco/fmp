@@ -21,7 +21,7 @@ class Code extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'code';
+        return 'fmp_code';
     }
 
     /**
