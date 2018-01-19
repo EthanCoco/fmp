@@ -365,3 +365,10 @@ img {
     top: 60px;
     bottom: 0;
 }
+
+
+
+input.input2{ width:auto;height:23px;line-height:23px; border: 1px solid #95B8E7; font-size:12px;background: url(../images/inputbg.jpg) repeat-x; 
+padding-left:3px;border-radius: 3px;/*behavior: url(ie-css3.htc);*/}
+input.input1s{ width:187px;height:28px;line-height:28px; border:solid 1px #c6cbd0; border-right:0px;font-size:12px; background: url(../images/inputbg.jpg) repeat-x;padding-left:3px;border-radius: 3px;}
+textarea.input2{width:auto;height:100px; border:solid 1px #a2bac0;font-size:12px}

@@ -1,0 +1,29 @@
+/*下拉控件*/
+.level {/* padding:5px; */padding-top:8px;position:absolute;text-align:left;top:0px;left:30px;border-width:1px ;border-style:solid;z-index:999999;
+min-width:220px;max-width:220px;}
+/*.level ul.level_search {margin-top:22px;}*/
+.level ul.level_search li{white-space: nowrap; height:20px;line-height:20px;}
+.level ul.level_search li.first a input{vertical-align:middle;width:90px;/*height:14px;*/}
+.level ul.level_search li.first a{float:left;line-height:20px;margin-left:3px}
+.level ul.level_search li a.button{margin-right:5px;} 
+.levelcontent {min-height:50px;max-height:300px;overflow:auto;color:#313131;margin-top:8px;text-align:left;padding-right:20px;}
+/*.levelcontent  a{display:block;line-height:25px;padding-right:20px; white-space:nowrap;} */
+/* .levelcontent textarea {width:97%;height:65px;} */
+.level_more{text-align: center;width:100%;padding-top:2px;border-top-width:1px;border-top-style:solid;position: absolute;left:0px;bottom:0px;right:0px;}
+.level_treeparent{max-height:200px;margin-bottom:26px;min-height:30px;overflow:auto;padding-right:20px;margin-right:-20px;}
+
+.level {border-color:#4d8fcb;background:#eff8ff;}
+.levelcontent a:hover{/*background:#c5e3fe;*/}
+.level_more{border-top-color:#99bce8;}
+
+a.seach_erro{background:url(../images/searchclose.png) no-repeat;}
+a.rubber{background:url(../images/clear.gif) no-repeat;}
+
+a.seach_erro{display:block;width:13px;height:13px;position: absolute;top:2px;right:2px; text-decoration:none;background-position:0 -14px;}
+a.seach_erro:hover{background-position:0 0px;cursor: pointer; text-decoration:none;}
+
+a.rubber,a.seach_erro{display:block;width:13px;height:13px;position: absolute;top:2px;right:2px; text-decoration:none;}
+a.rubber{right:20px;}
+a.seach_erro{background-position:0 -14px;}
+
+a.rubber,a.seach_erro:hover,a.cui_cybar:hover{background-position:0 0px;cursor: pointer; text-decoration:none;}
