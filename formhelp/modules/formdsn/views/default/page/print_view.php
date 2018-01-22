@@ -73,7 +73,9 @@ function init_table_html(type,infos){
 								if(infos[i]['FIELD_TYPE'] == "5"){
 									pTitle = "照片";
 								}else{
-									pTitle = $(ps).html();
+									if(typeof ps !== "undefined"){
+										pTitle = $(ps).html();
+									}
 								}
 								var final_title = pTitle.replace(" ",'').replace("<br>","").replace("<br/>","").replace(" ",'');
 								$(this).html(final_title);
