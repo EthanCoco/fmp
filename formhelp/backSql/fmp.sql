@@ -1,51 +1,2801 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : 192.168.144.132
-Source Server Version : 50556
+Source Server         : localhostphpstudy
+Source Server Version : 50553
 Source Host           : localhost:3306
 Source Database       : fmp
 
 Target Server Type    : MYSQL
-Target Server Version : 50556
+Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2018-01-09 19:01:44
+Date: 2018-01-22 19:22:29
 */
 
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
--- Table structure for BZ_ZGJOB_1
+-- Table structure for bz_zgjob_1
 -- ----------------------------
-DROP TABLE IF EXISTS `BZ_ZGJOB_1`;
-CREATE TABLE `BZ_ZGJOB_1` (
+DROP TABLE IF EXISTS `bz_zgjob_1`;
+CREATE TABLE `bz_zgjob_1` (
   `BZJOBIDM` bigint(20) NOT NULL AUTO_INCREMENT,
+  `ZF_JOB_0001` varchar(100) DEFAULT NULL COMMENT '姓名',
+  `ZF_JOB_0003` varchar(100) DEFAULT NULL COMMENT '身份证',
+  `ZF_JOB_0004` varchar(100) DEFAULT NULL COMMENT '民族',
+  `ZF_JOB_0005` varchar(100) DEFAULT NULL COMMENT '性别',
+  `ZF_JOB_0006` varchar(100) DEFAULT NULL COMMENT '入党时间',
+  `ZF_JOB_0007` varchar(100) DEFAULT NULL COMMENT '政治面貌',
+  `ZF_JOB_0008` varchar(100) DEFAULT NULL COMMENT '最高学历',
+  `ZF_JOB_0009` varchar(100) DEFAULT NULL COMMENT '最高学位',
+  `ZF_JOB_0010` varchar(100) DEFAULT NULL COMMENT '毕业院校',
+  `ZF_JOB_0011` varchar(100) DEFAULT NULL COMMENT '所学专业',
+  `ZF_JOB_0012` varchar(100) DEFAULT NULL COMMENT '婚姻状况',
+  `ZF_JOB_0013` varchar(100) DEFAULT NULL COMMENT '现住地址',
+  `ZF_JOB_0014` varchar(100) DEFAULT NULL COMMENT '家庭住址',
+  `ZF_JOB_0015` varchar(100) DEFAULT NULL COMMENT '联系电话',
+  `ZF_JOB_0016` varchar(100) DEFAULT NULL COMMENT '其他联系方式',
+  `ZF_JOB_0017` varchar(100) DEFAULT NULL COMMENT '备注',
+  `ZF_JOB_0018` varchar(100) DEFAULT NULL COMMENT '【直接领导】审核不通过原因',
+  `ZF_JOB_0019` varchar(100) DEFAULT NULL COMMENT '【直接领导】审核时间',
+  `ZF_JOB_0020` varchar(100) DEFAULT NULL COMMENT '【直接领导】审核',
+  `ZF_JOB_0021` varchar(100) DEFAULT NULL COMMENT '【直接领导】操作人',
+  `ZF_JOB_0022` varchar(100) DEFAULT NULL COMMENT '【人事】操作人',
+  `ZF_JOB_0023` varchar(100) DEFAULT NULL COMMENT '【人事】审核不通过原因',
+  `ZF_JOB_0024` varchar(100) DEFAULT NULL COMMENT '【人事】审核时间',
+  `ZF_JOB_0025` varchar(100) DEFAULT NULL COMMENT '【人事】审核',
+  `ZF_JOB_0026` varchar(100) DEFAULT NULL COMMENT '出生年月',
+  `ZF_JOB_0027` varchar(100) DEFAULT NULL COMMENT '照片',
   PRIMARY KEY (`BZJOBIDM`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of BZ_ZGJOB_1
+-- Records of bz_zgjob_1
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for FMP_ASSIST
+-- Table structure for bz_zgjob_1_se_1
 -- ----------------------------
-DROP TABLE IF EXISTS `FMP_ASSIST`;
-CREATE TABLE `FMP_ASSIST` (
-  `ASSIST_ID` bigint(20) DEFAULT NULL
+DROP TABLE IF EXISTS `bz_zgjob_1_se_1`;
+CREATE TABLE `bz_zgjob_1_se_1` (
+  `BZJOBIDS` bigint(20) NOT NULL AUTO_INCREMENT,
+  `BZJOBIDM` bigint(20) NOT NULL,
+  PRIMARY KEY (`BZJOBIDS`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of FMP_ASSIST
+-- Records of bz_zgjob_1_se_1
 -- ----------------------------
-INSERT INTO `FMP_ASSIST` VALUES ('2');
 
 -- ----------------------------
--- Table structure for FMP_FLOW
+-- Table structure for bz_zgjob_1_se_2
 -- ----------------------------
-DROP TABLE IF EXISTS `FMP_FLOW`;
-CREATE TABLE `FMP_FLOW` (
+DROP TABLE IF EXISTS `bz_zgjob_1_se_2`;
+CREATE TABLE `bz_zgjob_1_se_2` (
+  `BZJOBIDS` bigint(20) NOT NULL AUTO_INCREMENT,
+  `BZJOBIDM` bigint(20) NOT NULL,
+  PRIMARY KEY (`BZJOBIDS`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of bz_zgjob_1_se_2
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for bz_zgjob_1_se_3
+-- ----------------------------
+DROP TABLE IF EXISTS `bz_zgjob_1_se_3`;
+CREATE TABLE `bz_zgjob_1_se_3` (
+  `BZJOBIDS` bigint(20) NOT NULL AUTO_INCREMENT,
+  `BZJOBIDM` bigint(20) NOT NULL,
+  PRIMARY KEY (`BZJOBIDS`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of bz_zgjob_1_se_3
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for fmp_birt
+-- ----------------------------
+DROP TABLE IF EXISTS `fmp_birt`;
+CREATE TABLE `fmp_birt` (
+  `birtID` bigint(20) NOT NULL AUTO_INCREMENT,
+  `nodeID` bigint(20) NOT NULL,
+  `birtName` varchar(100) NOT NULL,
+  `birtFilePath` varchar(100) NOT NULL,
+  `birtStatus` tinyint(1) NOT NULL DEFAULT '1',
+  `birtDorI` char(1) DEFAULT NULL,
+  `birtFormat` varchar(20) NOT NULL DEFAULT 'A4',
+  PRIMARY KEY (`birtID`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of fmp_birt
+-- ----------------------------
+INSERT INTO `fmp_birt` VALUES ('1', '79', '人员进出表', '79/person.html', '1', 'I', 'A4');
+
+-- ----------------------------
+-- Table structure for fmp_bus_node_table
+-- ----------------------------
+DROP TABLE IF EXISTS `fmp_bus_node_table`;
+CREATE TABLE `fmp_bus_node_table` (
+  `BUS_ID` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `NODE_ID` bigint(20) NOT NULL COMMENT '环节ID',
+  `BUS_NAME` varchar(100) NOT NULL COMMENT '业务表名称',
+  `BUS_DESC` varchar(100) DEFAULT NULL COMMENT '业务表描述',
+  `BUS_SUFFIX` int(8) DEFAULT NULL COMMENT '表后缀标识',
+  PRIMARY KEY (`BUS_ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='环节对应业务表';
+
+-- ----------------------------
+-- Records of fmp_bus_node_table
+-- ----------------------------
+INSERT INTO `fmp_bus_node_table` VALUES ('7', '1', '1_1', '基层填写业务表', '1');
+
+-- ----------------------------
+-- Table structure for fmp_code
+-- ----------------------------
+DROP TABLE IF EXISTS `fmp_code`;
+CREATE TABLE `fmp_code` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `codeID` varchar(64) NOT NULL COMMENT '代码ID',
+  `codeTypeID` varchar(64) DEFAULT NULL COMMENT '代码分类ID',
+  `codeName` varchar(64) DEFAULT NULL COMMENT '代码名称',
+  `codePid` varchar(64) DEFAULT NULL COMMENT '代码父ID',
+  `isLeaf` int(1) DEFAULT NULL COMMENT '是否叶子节点(1：是，2：不是)',
+  `codeOrder` int(11) DEFAULT NULL COMMENT '排序',
+  `codeStatus` int(11) DEFAULT '1' COMMENT '状态（1：有效，2：无效）',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=2623 DEFAULT CHARSET=utf8 COMMENT='代码';
+
+-- ----------------------------
+-- Records of fmp_code
+-- ----------------------------
+INSERT INTO `fmp_code` VALUES ('1', '03', 'XB', '男', '-1', '1', '1', '1');
+INSERT INTO `fmp_code` VALUES ('2', '04', 'XB', '女', '-1', '1', '2', '1');
+INSERT INTO `fmp_code` VALUES ('3', '01', 'AI', '汉族', '-1', '1', '3', '1');
+INSERT INTO `fmp_code` VALUES ('4', '02', 'AI', '少数民族', '-1', '1', '4', '1');
+INSERT INTO `fmp_code` VALUES ('5', '01', 'AG', '中共党员', '-1', '1', '5', '1');
+INSERT INTO `fmp_code` VALUES ('6', '02', 'AG', '中共预备党员', '-1', '1', '6', '1');
+INSERT INTO `fmp_code` VALUES ('7', '03', 'AG', '共青团员', '-1', '1', '7', '1');
+INSERT INTO `fmp_code` VALUES ('8', '04', 'AG', '民革会员', '-1', '1', '8', '1');
+INSERT INTO `fmp_code` VALUES ('9', '05', 'AG', '民盟盟员', '-1', '1', '9', '1');
+INSERT INTO `fmp_code` VALUES ('10', '06', 'AG', '民建会员', '-1', '1', '10', '1');
+INSERT INTO `fmp_code` VALUES ('11', '07', 'AG', '民进会员', '-1', '1', '11', '1');
+INSERT INTO `fmp_code` VALUES ('12', '08', 'AG', '农工党党员', '-1', '1', '12', '1');
+INSERT INTO `fmp_code` VALUES ('13', '09', 'AG', '致公党党员', '-1', '1', '13', '1');
+INSERT INTO `fmp_code` VALUES ('14', '10', 'AG', '九三学社社员', '-1', '1', '14', '1');
+INSERT INTO `fmp_code` VALUES ('15', '11', 'AG', '台盟盟员', '-1', '1', '15', '1');
+INSERT INTO `fmp_code` VALUES ('16', '12', 'AG', '无党派民主人士', '-1', '1', '16', '1');
+INSERT INTO `fmp_code` VALUES ('17', '13', 'AG', '群众', '-1', '1', '17', '1');
+INSERT INTO `fmp_code` VALUES ('18', '20', 'AG', '台、港、澳地区人员', '-1', '1', '18', '1');
+INSERT INTO `fmp_code` VALUES ('19', '30', 'AG', '外籍人员', '-1', '1', '19', '1');
+INSERT INTO `fmp_code` VALUES ('20', '10', 'CG', '未婚', '-1', '1', '20', '1');
+INSERT INTO `fmp_code` VALUES ('21', '20', 'CG', '已婚', '-1', '1', '21', '1');
+INSERT INTO `fmp_code` VALUES ('22', '21', 'CG', '初婚', '-1', '1', '22', '1');
+INSERT INTO `fmp_code` VALUES ('23', '22', 'CG', '再婚', '-1', '1', '23', '1');
+INSERT INTO `fmp_code` VALUES ('24', '23', 'CG', '复婚', '-1', '1', '24', '1');
+INSERT INTO `fmp_code` VALUES ('25', '30', 'CG', '丧偶', '-1', '1', '25', '1');
+INSERT INTO `fmp_code` VALUES ('26', '40', 'CG', '离婚', '-1', '1', '26', '1');
+INSERT INTO `fmp_code` VALUES ('27', '90', 'CG', '未说明的婚姻状况', '-1', '1', '27', '1');
+INSERT INTO `fmp_code` VALUES ('28', '0', 'BC', '所有学位', '-1', '0', '28', '1');
+INSERT INTO `fmp_code` VALUES ('29', '1', 'BC', '名誉博士', '0', '0', '29', '1');
+INSERT INTO `fmp_code` VALUES ('30', '101', 'BC', '名誉博士', '1', '1', '30', '1');
+INSERT INTO `fmp_code` VALUES ('31', '102', 'BC', '其他', '1', '1', '31', '1');
+INSERT INTO `fmp_code` VALUES ('32', '2', 'BC', '博士', '0', '0', '32', '1');
+INSERT INTO `fmp_code` VALUES ('33', '201', 'BC', '哲学博士', '2', '1', '33', '1');
+INSERT INTO `fmp_code` VALUES ('34', '202', 'BC', '经济学博士', '2', '1', '34', '1');
+INSERT INTO `fmp_code` VALUES ('35', '203', 'BC', '法学博士', '2', '1', '35', '1');
+INSERT INTO `fmp_code` VALUES ('36', '204', 'BC', '教育学博士', '2', '1', '36', '1');
+INSERT INTO `fmp_code` VALUES ('37', '205', 'BC', '文学博士', '2', '1', '37', '1');
+INSERT INTO `fmp_code` VALUES ('38', '206', 'BC', '历史学博士', '2', '1', '38', '1');
+INSERT INTO `fmp_code` VALUES ('39', '207', 'BC', '理学博士', '2', '1', '39', '1');
+INSERT INTO `fmp_code` VALUES ('40', '208', 'BC', '工学博士', '2', '1', '40', '1');
+INSERT INTO `fmp_code` VALUES ('41', '209', 'BC', '农学博士', '2', '1', '41', '1');
+INSERT INTO `fmp_code` VALUES ('42', '210', 'BC', '医学博士', '2', '1', '42', '1');
+INSERT INTO `fmp_code` VALUES ('43', '211', 'BC', '军事学博士', '2', '1', '43', '1');
+INSERT INTO `fmp_code` VALUES ('44', '212', 'BC', '管理学博士', '2', '1', '44', '1');
+INSERT INTO `fmp_code` VALUES ('45', '245', 'BC', '临床医学博士', '2', '1', '45', '1');
+INSERT INTO `fmp_code` VALUES ('46', '248', 'BC', '兽医博士', '2', '1', '46', '1');
+INSERT INTO `fmp_code` VALUES ('47', '250', 'BC', '口腔医学博士', '2', '1', '47', '1');
+INSERT INTO `fmp_code` VALUES ('48', '251', 'BC', '其他', '2', '1', '48', '1');
+INSERT INTO `fmp_code` VALUES ('49', '3', 'BC', '硕士', '0', '0', '49', '1');
+INSERT INTO `fmp_code` VALUES ('50', '301', 'BC', '哲学硕士', '3', '1', '50', '1');
+INSERT INTO `fmp_code` VALUES ('51', '302', 'BC', '经济学硕士', '3', '1', '51', '1');
+INSERT INTO `fmp_code` VALUES ('52', '303', 'BC', '法学硕士', '3', '1', '52', '1');
+INSERT INTO `fmp_code` VALUES ('53', '304', 'BC', '教育学硕士', '3', '1', '53', '1');
+INSERT INTO `fmp_code` VALUES ('54', '305', 'BC', '文学硕士', '3', '1', '54', '1');
+INSERT INTO `fmp_code` VALUES ('55', '306', 'BC', '历史学硕士', '3', '1', '55', '1');
+INSERT INTO `fmp_code` VALUES ('56', '307', 'BC', '理学硕士', '3', '1', '56', '1');
+INSERT INTO `fmp_code` VALUES ('57', '308', 'BC', '工学硕士', '3', '1', '57', '1');
+INSERT INTO `fmp_code` VALUES ('58', '309', 'BC', '农学硕士', '3', '1', '58', '1');
+INSERT INTO `fmp_code` VALUES ('59', '310', 'BC', '医学硕士', '3', '1', '59', '1');
+INSERT INTO `fmp_code` VALUES ('60', '311', 'BC', '军事学硕士', '3', '1', '60', '1');
+INSERT INTO `fmp_code` VALUES ('61', '312', 'BC', '管理学硕士', '3', '1', '61', '1');
+INSERT INTO `fmp_code` VALUES ('62', '341', 'BC', '法律硕士', '3', '1', '62', '1');
+INSERT INTO `fmp_code` VALUES ('63', '342', 'BC', '教育硕士', '3', '1', '63', '1');
+INSERT INTO `fmp_code` VALUES ('64', '343', 'BC', '工程硕士', '3', '1', '64', '1');
+INSERT INTO `fmp_code` VALUES ('65', '344', 'BC', '建筑学硕士', '3', '1', '65', '1');
+INSERT INTO `fmp_code` VALUES ('66', '345', 'BC', '临床学硕士', '3', '1', '66', '1');
+INSERT INTO `fmp_code` VALUES ('67', '346', 'BC', '工商管理硕士', '3', '1', '67', '1');
+INSERT INTO `fmp_code` VALUES ('68', '347', 'BC', '农业推广硕士', '3', '1', '68', '1');
+INSERT INTO `fmp_code` VALUES ('69', '348', 'BC', '兽医硕士', '3', '1', '69', '1');
+INSERT INTO `fmp_code` VALUES ('70', '349', 'BC', '公共管理硕士', '3', '1', '70', '1');
+INSERT INTO `fmp_code` VALUES ('71', '350', 'BC', '口腔医学硕士', '3', '1', '71', '1');
+INSERT INTO `fmp_code` VALUES ('72', '351', 'BC', '公共卫生硕士', '3', '1', '72', '1');
+INSERT INTO `fmp_code` VALUES ('73', '352', 'BC', '军事硕士', '3', '1', '73', '1');
+INSERT INTO `fmp_code` VALUES ('74', '391', 'BC', '高级工商管理硕士(EMBA)', '3', '1', '74', '1');
+INSERT INTO `fmp_code` VALUES ('75', '392', 'BC', '其他', '3', '1', '75', '1');
+INSERT INTO `fmp_code` VALUES ('76', '4', 'BC', '学士', '0', '0', '76', '1');
+INSERT INTO `fmp_code` VALUES ('77', '401', 'BC', '哲学学士', '4', '1', '77', '1');
+INSERT INTO `fmp_code` VALUES ('78', '402', 'BC', '经济学学士', '4', '1', '78', '1');
+INSERT INTO `fmp_code` VALUES ('79', '403', 'BC', '法学学士', '4', '1', '79', '1');
+INSERT INTO `fmp_code` VALUES ('80', '404', 'BC', '教育学学士', '4', '1', '80', '1');
+INSERT INTO `fmp_code` VALUES ('81', '405', 'BC', '文学学士', '4', '1', '81', '1');
+INSERT INTO `fmp_code` VALUES ('82', '406', 'BC', '历史学学士', '4', '1', '82', '1');
+INSERT INTO `fmp_code` VALUES ('83', '407', 'BC', '理学学士', '4', '1', '83', '1');
+INSERT INTO `fmp_code` VALUES ('84', '408', 'BC', '工学学士', '4', '1', '84', '1');
+INSERT INTO `fmp_code` VALUES ('85', '409', 'BC', '农学学士', '4', '1', '85', '1');
+INSERT INTO `fmp_code` VALUES ('86', '410', 'BC', '医学学士', '4', '1', '86', '1');
+INSERT INTO `fmp_code` VALUES ('87', '411', 'BC', '军事学学士', '4', '1', '87', '1');
+INSERT INTO `fmp_code` VALUES ('88', '412', 'BC', '管理学学士', '4', '1', '88', '1');
+INSERT INTO `fmp_code` VALUES ('89', '444', 'BC', '建筑学学士', '4', '1', '89', '1');
+INSERT INTO `fmp_code` VALUES ('90', '445', 'BC', '其他', '4', '1', '90', '1');
+INSERT INTO `fmp_code` VALUES ('91', '5', 'BC', '其他类', '0', '1', '91', '1');
+INSERT INTO `fmp_code` VALUES ('92', '0', 'MD', '计算机应用考试等级代码', '-1', '0', '92', '1');
+INSERT INTO `fmp_code` VALUES ('93', '1', 'MD', '办公自动化', '0', '1', '93', '1');
+INSERT INTO `fmp_code` VALUES ('94', '2', 'MD', '上海高校计算机等级', '0', '1', '94', '1');
+INSERT INTO `fmp_code` VALUES ('95', '201', 'MD', '上海高校计算机一级', '2', '1', '95', '1');
+INSERT INTO `fmp_code` VALUES ('96', '202', 'MD', '上海高校计算机二级', '2', '1', '96', '1');
+INSERT INTO `fmp_code` VALUES ('97', '203', 'MD', '上海高校计算机三级', '2', '1', '97', '1');
+INSERT INTO `fmp_code` VALUES ('98', '3', 'MD', '全国高校计算机等级', '0', '0', '98', '1');
+INSERT INTO `fmp_code` VALUES ('99', '301', 'MD', '全国高校计算机一级', '3', '1', '99', '1');
+INSERT INTO `fmp_code` VALUES ('100', '302', 'MD', '全国高校计算机二级', '3', '1', '100', '1');
+INSERT INTO `fmp_code` VALUES ('101', '303', 'MD', '全国高校计算机三级', '3', '1', '101', '1');
+INSERT INTO `fmp_code` VALUES ('102', '304', 'MD', '全国高校计算机四级', '3', '1', '102', '1');
+INSERT INTO `fmp_code` VALUES ('103', '4', 'MD', 'Ｄ级', '0', '1', '103', '1');
+INSERT INTO `fmp_code` VALUES ('104', '6', 'MD', '全国计算机技术与软件专业技术资格（水平）考试', '0', '0', '104', '1');
+INSERT INTO `fmp_code` VALUES ('105', '601', 'MD', '初级程序员级', '6', '1', '105', '1');
+INSERT INTO `fmp_code` VALUES ('106', '602', 'MD', '程序员级', '6', '1', '106', '1');
+INSERT INTO `fmp_code` VALUES ('107', '603', 'MD', '高级程序员级', '6', '1', '107', '1');
+INSERT INTO `fmp_code` VALUES ('108', '604', 'MD', '系统分析员', '6', '1', '108', '1');
+INSERT INTO `fmp_code` VALUES ('109', '7', 'MD', '全国计算机及信息高新技术培训考试', '0', '0', '109', '1');
+INSERT INTO `fmp_code` VALUES ('110', '701', 'MD', '初级', '7', '1', '110', '1');
+INSERT INTO `fmp_code` VALUES ('111', '702', 'MD', '中级', '7', '1', '111', '1');
+INSERT INTO `fmp_code` VALUES ('112', '703', 'MD', '高级', '7', '1', '112', '1');
+INSERT INTO `fmp_code` VALUES ('113', '8', 'MD', '职称计算机考试', '-1', '1', '113', '1');
+INSERT INTO `fmp_code` VALUES ('114', 'A', 'MC', '专技资格外语考试级别代码', '-1', '0', '114', '1');
+INSERT INTO `fmp_code` VALUES ('115', '1', 'MC', '大学外语专业考试', 'A', '0', '115', '1');
+INSERT INTO `fmp_code` VALUES ('116', '11', 'MC', '大学外语专业考试笔试', '1', '0', '116', '1');
+INSERT INTO `fmp_code` VALUES ('117', '111', 'MC', '大学外语专业笔试八级', '11', '1', '117', '1');
+INSERT INTO `fmp_code` VALUES ('118', '112', 'MC', '大学外语专业笔试四级', '11', '1', '118', '1');
+INSERT INTO `fmp_code` VALUES ('119', '12', 'MC', '大学外语专业考试口试', '1', '0', '119', '1');
+INSERT INTO `fmp_code` VALUES ('120', '121', 'MC', '大学外语专业口试八级', '12', '1', '120', '1');
+INSERT INTO `fmp_code` VALUES ('121', '122', 'MC', '大学外语专业口试四级', '12', '1', '121', '1');
+INSERT INTO `fmp_code` VALUES ('122', '2', 'MC', '大学非外语专业考试', 'A', '0', '122', '1');
+INSERT INTO `fmp_code` VALUES ('123', '21', 'MC', '大学非外语专业考试笔试', '2', '0', '123', '1');
+INSERT INTO `fmp_code` VALUES ('124', '212', 'MC', '大学四级', '21', '1', '124', '1');
+INSERT INTO `fmp_code` VALUES ('125', '213', 'MC', '大学六级', '21', '1', '125', '1');
+INSERT INTO `fmp_code` VALUES ('126', '22', 'MC', '大学非外语专业考试口试', '2', '0', '126', '1');
+INSERT INTO `fmp_code` VALUES ('127', '221', 'MC', '大学外语四、六级考试、口语考试A等', '22', '1', '127', '1');
+INSERT INTO `fmp_code` VALUES ('128', '222', 'MC', '大学外语四、六级考试、口语考试B等', '22', '1', '128', '1');
+INSERT INTO `fmp_code` VALUES ('129', '3', 'MC', '全国外语等级', 'A', '0', '129', '1');
+INSERT INTO `fmp_code` VALUES ('130', '301', 'MC', '全国外语等级考试五级', '3', '1', '130', '1');
+INSERT INTO `fmp_code` VALUES ('131', '302', 'MC', '全国外语等级考试四级', '3', '1', '131', '1');
+INSERT INTO `fmp_code` VALUES ('132', '303', 'MC', '全国外语等级考试三级', '3', '1', '132', '1');
+INSERT INTO `fmp_code` VALUES ('133', '304', 'MC', '全国外语等级考试二级', '3', '1', '133', '1');
+INSERT INTO `fmp_code` VALUES ('134', '305', 'MC', '全国外语等级考试一级', '3', '1', '134', '1');
+INSERT INTO `fmp_code` VALUES ('135', '306', 'MC', '全国外语等级考试一级(B)', '3', '1', '135', '1');
+INSERT INTO `fmp_code` VALUES ('136', '4', 'MC', '全国职称外语考试', 'A', '0', '136', '1');
+INSERT INTO `fmp_code` VALUES ('137', '401', 'MC', '全国职称外语考试A级', '4', '1', '137', '1');
+INSERT INTO `fmp_code` VALUES ('138', '402', 'MC', '全国职称外语考试B级', '4', '1', '138', '1');
+INSERT INTO `fmp_code` VALUES ('139', '403', 'MC', '全国职称外语考试C级', '4', '1', '139', '1');
+INSERT INTO `fmp_code` VALUES ('140', '1', 'Q1', '是', '-1', '1', '140', '1');
+INSERT INTO `fmp_code` VALUES ('141', '0', 'Q1', '否', '-1', '1', '141', '1');
+INSERT INTO `fmp_code` VALUES ('142', '2', 'Q1', '不确定', '-1', '1', '142', '1');
+INSERT INTO `fmp_code` VALUES ('143', '0', 'YX', '所有院校列表', '-1', '0', '143', '1');
+INSERT INTO `fmp_code` VALUES ('144', '1', 'YX', '国内', '0', '0', '144', '1');
+INSERT INTO `fmp_code` VALUES ('145', '10', 'YX', '985', '1', '0', '145', '1');
+INSERT INTO `fmp_code` VALUES ('146', '101', 'YX', '北京片区', '10', '0', '146', '1');
+INSERT INTO `fmp_code` VALUES ('147', '101002', 'YX', '清华大学', '101', '1', '147', '1');
+INSERT INTO `fmp_code` VALUES ('148', '101003', 'YX', '北京大学', '101', '1', '148', '1');
+INSERT INTO `fmp_code` VALUES ('149', '101004', 'YX', '中国人民大学', '101', '1', '149', '1');
+INSERT INTO `fmp_code` VALUES ('150', '101005', 'YX', '北京航空航天大学', '101', '1', '150', '1');
+INSERT INTO `fmp_code` VALUES ('151', '101006', 'YX', '北京理工大学', '101', '1', '151', '1');
+INSERT INTO `fmp_code` VALUES ('152', '101007', 'YX', '北京师范大学', '101', '1', '152', '1');
+INSERT INTO `fmp_code` VALUES ('153', '101008', 'YX', '中国农业大学', '101', '1', '153', '1');
+INSERT INTO `fmp_code` VALUES ('154', '101009', 'YX', '中央民族大学', '101', '1', '154', '1');
+INSERT INTO `fmp_code` VALUES ('155', '101010', 'YX', '其他', '101', '1', '155', '1');
+INSERT INTO `fmp_code` VALUES ('156', '102', 'YX', '东北片区', '10', '0', '156', '1');
+INSERT INTO `fmp_code` VALUES ('157', '102001', 'YX', '吉林大学', '102', '1', '157', '1');
+INSERT INTO `fmp_code` VALUES ('158', '102002', 'YX', '东北大学', '102', '1', '158', '1');
+INSERT INTO `fmp_code` VALUES ('159', '102003', 'YX', '哈尔滨工业大学', '102', '1', '159', '1');
+INSERT INTO `fmp_code` VALUES ('160', '102004', 'YX', '大连理工大学', '102', '1', '160', '1');
+INSERT INTO `fmp_code` VALUES ('161', '102005', 'YX', '其他', '102', '1', '161', '1');
+INSERT INTO `fmp_code` VALUES ('162', '103', 'YX', '上海片区', '10', '0', '162', '1');
+INSERT INTO `fmp_code` VALUES ('163', '103001', 'YX', '复旦大学', '103', '1', '163', '1');
+INSERT INTO `fmp_code` VALUES ('164', '103002', 'YX', '上海交通大学', '103', '1', '164', '1');
+INSERT INTO `fmp_code` VALUES ('165', '103003', 'YX', '同济大学', '103', '1', '165', '1');
+INSERT INTO `fmp_code` VALUES ('166', '103004', 'YX', '华东师范大学', '103', '1', '166', '1');
+INSERT INTO `fmp_code` VALUES ('167', '103005', 'YX', '其他', '103', '1', '167', '1');
+INSERT INTO `fmp_code` VALUES ('168', '104', 'YX', '其他地区', '10', '0', '168', '1');
+INSERT INTO `fmp_code` VALUES ('169', '104001', 'YX', '厦门大学', '104', '1', '169', '1');
+INSERT INTO `fmp_code` VALUES ('170', '104002', 'YX', '浙江大学', '104', '1', '170', '1');
+INSERT INTO `fmp_code` VALUES ('171', '104003', 'YX', '东南大学', '104', '1', '171', '1');
+INSERT INTO `fmp_code` VALUES ('172', '104004', 'YX', '湖南大学', '104', '1', '172', '1');
+INSERT INTO `fmp_code` VALUES ('173', '104005', 'YX', '四川大学', '104', '1', '173', '1');
+INSERT INTO `fmp_code` VALUES ('174', '104006', 'YX', '兰州大学', '104', '1', '174', '1');
+INSERT INTO `fmp_code` VALUES ('175', '104007', 'YX', '中国海洋大学', '104', '1', '175', '1');
+INSERT INTO `fmp_code` VALUES ('176', '104008', 'YX', '国防科学技术大学', '104', '1', '176', '1');
+INSERT INTO `fmp_code` VALUES ('177', '104009', 'YX', '南京大学', '104', '1', '177', '1');
+INSERT INTO `fmp_code` VALUES ('178', '104010', 'YX', '南开大学', '104', '1', '178', '1');
+INSERT INTO `fmp_code` VALUES ('179', '104011', 'YX', '武汉大学', '104', '1', '179', '1');
+INSERT INTO `fmp_code` VALUES ('180', '104012', 'YX', '重庆大学', '104', '1', '180', '1');
+INSERT INTO `fmp_code` VALUES ('181', '104013', 'YX', '中山大学', '104', '1', '181', '1');
+INSERT INTO `fmp_code` VALUES ('182', '104014', 'YX', '西北工业大学', '104', '1', '182', '1');
+INSERT INTO `fmp_code` VALUES ('183', '104015', 'YX', '中南大学', '104', '1', '183', '1');
+INSERT INTO `fmp_code` VALUES ('184', '104016', 'YX', '西北农林科技大学', '104', '1', '184', '1');
+INSERT INTO `fmp_code` VALUES ('185', '104017', 'YX', '天津大学', '104', '1', '185', '1');
+INSERT INTO `fmp_code` VALUES ('186', '104018', 'YX', '西安交通大学', '104', '1', '186', '1');
+INSERT INTO `fmp_code` VALUES ('187', '104019', 'YX', '山东大学', '104', '1', '187', '1');
+INSERT INTO `fmp_code` VALUES ('188', '104020', 'YX', '电子科技大学', '104', '1', '188', '1');
+INSERT INTO `fmp_code` VALUES ('189', '104021', 'YX', '华南理工大学', '104', '1', '189', '1');
+INSERT INTO `fmp_code` VALUES ('190', '104022', 'YX', '华中科技大学', '104', '1', '190', '1');
+INSERT INTO `fmp_code` VALUES ('191', '104023', 'YX', '中国科学技术大学', '104', '1', '191', '1');
+INSERT INTO `fmp_code` VALUES ('192', '104024', 'YX', '其他', '104', '1', '192', '1');
+INSERT INTO `fmp_code` VALUES ('193', '20', 'YX', '211', '1', '0', '193', '1');
+INSERT INTO `fmp_code` VALUES ('194', '201', 'YX', '北京片区', '20', '0', '194', '1');
+INSERT INTO `fmp_code` VALUES ('195', '201001', 'YX', '清华大学', '201', '1', '195', '1');
+INSERT INTO `fmp_code` VALUES ('196', '201002', 'YX', '北京工业大学', '201', '1', '196', '1');
+INSERT INTO `fmp_code` VALUES ('197', '201003', 'YX', '北京化工大学', '201', '1', '197', '1');
+INSERT INTO `fmp_code` VALUES ('198', '201004', 'YX', '中国传媒大学', '201', '1', '198', '1');
+INSERT INTO `fmp_code` VALUES ('199', '201005', 'YX', '中央财经大学', '201', '1', '199', '1');
+INSERT INTO `fmp_code` VALUES ('200', '201006', 'YX', '中央音乐学院', '201', '1', '200', '1');
+INSERT INTO `fmp_code` VALUES ('201', '201007', 'YX', '北京交通大学', '201', '1', '201', '1');
+INSERT INTO `fmp_code` VALUES ('202', '201008', 'YX', '中国农业大学', '201', '1', '202', '1');
+INSERT INTO `fmp_code` VALUES ('203', '201009', 'YX', '北京师范大学', '201', '1', '203', '1');
+INSERT INTO `fmp_code` VALUES ('204', '201010', 'YX', '北京大学', '201', '1', '204', '1');
+INSERT INTO `fmp_code` VALUES ('205', '201011', 'YX', '北京理工大学', '201', '1', '205', '1');
+INSERT INTO `fmp_code` VALUES ('206', '201012', 'YX', '北京邮电大学', '201', '1', '206', '1');
+INSERT INTO `fmp_code` VALUES ('207', '201013', 'YX', '中央民族大学', '201', '1', '207', '1');
+INSERT INTO `fmp_code` VALUES ('208', '201014', 'YX', '中国政法大学', '201', '1', '208', '1');
+INSERT INTO `fmp_code` VALUES ('209', '201015', 'YX', '北京体育大学', '201', '1', '209', '1');
+INSERT INTO `fmp_code` VALUES ('210', '201016', 'YX', '北京科技大学', '201', '1', '210', '1');
+INSERT INTO `fmp_code` VALUES ('211', '201017', 'YX', '北京中医药大学', '201', '1', '211', '1');
+INSERT INTO `fmp_code` VALUES ('212', '201018', 'YX', '中国地质大学(北京)', '201', '1', '212', '1');
+INSERT INTO `fmp_code` VALUES ('213', '201019', 'YX', '中国人民大学', '201', '1', '213', '1');
+INSERT INTO `fmp_code` VALUES ('214', '201020', 'YX', '北京航空航天大学', '201', '1', '214', '1');
+INSERT INTO `fmp_code` VALUES ('215', '201021', 'YX', '对外经济贸易大学', '201', '1', '215', '1');
+INSERT INTO `fmp_code` VALUES ('216', '201022', 'YX', '中国矿业大学(北京)', '201', '1', '216', '1');
+INSERT INTO `fmp_code` VALUES ('217', '201023', 'YX', '中国石油大学(北京)', '201', '1', '217', '1');
+INSERT INTO `fmp_code` VALUES ('218', '201024', 'YX', '北京外国语大学', '201', '1', '218', '1');
+INSERT INTO `fmp_code` VALUES ('219', '201025', 'YX', '北京林业大学', '201', '1', '219', '1');
+INSERT INTO `fmp_code` VALUES ('220', '201026', 'YX', '华北电力大学(北京)', '201', '1', '220', '1');
+INSERT INTO `fmp_code` VALUES ('221', '201027', 'YX', '其他', '201', '1', '221', '1');
+INSERT INTO `fmp_code` VALUES ('222', '202', 'YX', '上海片区', '20', '0', '222', '1');
+INSERT INTO `fmp_code` VALUES ('223', '202001', 'YX', '复旦大学', '202', '1', '223', '1');
+INSERT INTO `fmp_code` VALUES ('224', '202002', 'YX', '上海大学', '202', '1', '224', '1');
+INSERT INTO `fmp_code` VALUES ('225', '202003', 'YX', '东华大学', '202', '1', '225', '1');
+INSERT INTO `fmp_code` VALUES ('226', '202004', 'YX', '华东师范大学', '202', '1', '226', '1');
+INSERT INTO `fmp_code` VALUES ('227', '202005', 'YX', '同济大学', '202', '1', '227', '1');
+INSERT INTO `fmp_code` VALUES ('228', '202006', 'YX', '上海财经大学', '202', '1', '228', '1');
+INSERT INTO `fmp_code` VALUES ('229', '202007', 'YX', '上海外国语大学', '202', '1', '229', '1');
+INSERT INTO `fmp_code` VALUES ('230', '202008', 'YX', '华东理工大学', '202', '1', '230', '1');
+INSERT INTO `fmp_code` VALUES ('231', '202009', 'YX', '上海交通大学', '202', '1', '231', '1');
+INSERT INTO `fmp_code` VALUES ('232', '202010', 'YX', '其他', '202', '1', '232', '1');
+INSERT INTO `fmp_code` VALUES ('233', '203', 'YX', '天津片区', '20', '0', '233', '1');
+INSERT INTO `fmp_code` VALUES ('234', '203001', 'YX', '南开大学', '203', '1', '234', '1');
+INSERT INTO `fmp_code` VALUES ('235', '203002', 'YX', '天津大学', '203', '1', '235', '1');
+INSERT INTO `fmp_code` VALUES ('236', '203003', 'YX', '天津医科大学 ', '203', '1', '236', '1');
+INSERT INTO `fmp_code` VALUES ('237', '203004', 'YX', '其他', '203', '1', '237', '1');
+INSERT INTO `fmp_code` VALUES ('238', '204', 'YX', '重庆片区', '20', '0', '238', '1');
+INSERT INTO `fmp_code` VALUES ('239', '204001', 'YX', '重庆大学', '204', '1', '239', '1');
+INSERT INTO `fmp_code` VALUES ('240', '204002', 'YX', '西南大学', '204', '1', '240', '1');
+INSERT INTO `fmp_code` VALUES ('241', '204003', 'YX', '其他', '204', '1', '241', '1');
+INSERT INTO `fmp_code` VALUES ('242', '205', 'YX', '河北片区', '20', '0', '242', '1');
+INSERT INTO `fmp_code` VALUES ('243', '205001', 'YX', '华北电力大学(保定)', '205', '1', '243', '1');
+INSERT INTO `fmp_code` VALUES ('244', '205002', 'YX', '河北工业大学', '205', '1', '244', '1');
+INSERT INTO `fmp_code` VALUES ('245', '205003', 'YX', '其他', '205', '1', '245', '1');
+INSERT INTO `fmp_code` VALUES ('246', '206', 'YX', '山西片区', '20', '0', '246', '1');
+INSERT INTO `fmp_code` VALUES ('247', '206001', 'YX', '太原理工大学', '206', '1', '247', '1');
+INSERT INTO `fmp_code` VALUES ('248', '206002', 'YX', '其他', '206', '1', '248', '1');
+INSERT INTO `fmp_code` VALUES ('249', '207', 'YX', '内蒙古片区', '20', '0', '249', '1');
+INSERT INTO `fmp_code` VALUES ('250', '207001', 'YX', '内蒙古大学', '207', '1', '250', '1');
+INSERT INTO `fmp_code` VALUES ('251', '207002', 'YX', '其他', '207', '1', '251', '1');
+INSERT INTO `fmp_code` VALUES ('252', '208', 'YX', '辽宁片区', '20', '0', '252', '1');
+INSERT INTO `fmp_code` VALUES ('253', '208001', 'YX', '大连理工大学', '208', '1', '253', '1');
+INSERT INTO `fmp_code` VALUES ('254', '208002', 'YX', '大连海事大学', '208', '1', '254', '1');
+INSERT INTO `fmp_code` VALUES ('255', '208003', 'YX', '东北大学', '208', '1', '255', '1');
+INSERT INTO `fmp_code` VALUES ('256', '208004', 'YX', '辽宁大学', '208', '1', '256', '1');
+INSERT INTO `fmp_code` VALUES ('257', '208005', 'YX', '其他', '208', '1', '257', '1');
+INSERT INTO `fmp_code` VALUES ('258', '209', 'YX', '吉林片区', '20', '0', '258', '1');
+INSERT INTO `fmp_code` VALUES ('259', '209001', 'YX', '吉林大学', '209', '1', '259', '1');
+INSERT INTO `fmp_code` VALUES ('260', '209002', 'YX', '东北师范大学', '209', '1', '260', '1');
+INSERT INTO `fmp_code` VALUES ('261', '209003', 'YX', '延边大学', '209', '1', '261', '1');
+INSERT INTO `fmp_code` VALUES ('262', '209004', 'YX', '其他', '209', '1', '262', '1');
+INSERT INTO `fmp_code` VALUES ('263', '210', 'YX', '黑龙江片区', '20', '0', '263', '1');
+INSERT INTO `fmp_code` VALUES ('264', '210001', 'YX', '东北农业大学', '210', '1', '264', '1');
+INSERT INTO `fmp_code` VALUES ('265', '210002', 'YX', '哈尔滨工程大学', '210', '1', '265', '1');
+INSERT INTO `fmp_code` VALUES ('266', '210003', 'YX', '东北林业大学', '210', '1', '266', '1');
+INSERT INTO `fmp_code` VALUES ('267', '210004', 'YX', '哈尔滨工业大学', '210', '1', '267', '1');
+INSERT INTO `fmp_code` VALUES ('268', '210005', 'YX', '其他', '210', '1', '268', '1');
+INSERT INTO `fmp_code` VALUES ('269', '211', 'YX', '江苏片区', '20', '0', '269', '1');
+INSERT INTO `fmp_code` VALUES ('270', '211001', 'YX', '南京大学', '211', '1', '270', '1');
+INSERT INTO `fmp_code` VALUES ('271', '211002', 'YX', '河海大学', '211', '1', '271', '1');
+INSERT INTO `fmp_code` VALUES ('272', '211003', 'YX', '南京师范大学', '211', '1', '272', '1');
+INSERT INTO `fmp_code` VALUES ('273', '211004', 'YX', '江南大学', '211', '1', '273', '1');
+INSERT INTO `fmp_code` VALUES ('274', '211005', 'YX', '东南大学', '211', '1', '274', '1');
+INSERT INTO `fmp_code` VALUES ('275', '211006', 'YX', '中国药科大学', '211', '1', '275', '1');
+INSERT INTO `fmp_code` VALUES ('276', '211007', 'YX', '南京理工大学', '211', '1', '276', '1');
+INSERT INTO `fmp_code` VALUES ('277', '211008', 'YX', '南京农业大学', '211', '1', '277', '1');
+INSERT INTO `fmp_code` VALUES ('278', '211009', 'YX', '苏州大学', '211', '1', '278', '1');
+INSERT INTO `fmp_code` VALUES ('279', '211010', 'YX', '中国矿业大学(徐州)', '211', '1', '279', '1');
+INSERT INTO `fmp_code` VALUES ('280', '211011', 'YX', '南京航空航天大学', '211', '1', '280', '1');
+INSERT INTO `fmp_code` VALUES ('281', '211015', 'YX', '其他', '211', '1', '281', '1');
+INSERT INTO `fmp_code` VALUES ('282', '212', 'YX', '浙江片区', '20', '0', '282', '1');
+INSERT INTO `fmp_code` VALUES ('283', '212001', 'YX', '浙江大学', '212', '1', '283', '1');
+INSERT INTO `fmp_code` VALUES ('284', '212002', 'YX', '其他', '212', '1', '284', '1');
+INSERT INTO `fmp_code` VALUES ('285', '213', 'YX', '安徽片区', '20', '0', '285', '1');
+INSERT INTO `fmp_code` VALUES ('286', '213001', 'YX', '安徽大学', '213', '1', '286', '1');
+INSERT INTO `fmp_code` VALUES ('287', '213002', 'YX', '合肥工业大学', '213', '1', '287', '1');
+INSERT INTO `fmp_code` VALUES ('288', '213003', 'YX', '中国科学技术大学', '213', '1', '288', '1');
+INSERT INTO `fmp_code` VALUES ('289', '213004', 'YX', '其他', '213', '1', '289', '1');
+INSERT INTO `fmp_code` VALUES ('290', '214', 'YX', '福建片区', '20', '0', '290', '1');
+INSERT INTO `fmp_code` VALUES ('291', '214001', 'YX', '厦门大学', '214', '1', '291', '1');
+INSERT INTO `fmp_code` VALUES ('292', '214002', 'YX', '福州大学', '214', '1', '292', '1');
+INSERT INTO `fmp_code` VALUES ('293', '214003', 'YX', '其他', '214', '1', '293', '1');
+INSERT INTO `fmp_code` VALUES ('294', '215', 'YX', '江西片区', '20', '0', '294', '1');
+INSERT INTO `fmp_code` VALUES ('295', '215001', 'YX', '南昌大学', '215', '1', '295', '1');
+INSERT INTO `fmp_code` VALUES ('296', '215002', 'YX', '其他', '215', '1', '296', '1');
+INSERT INTO `fmp_code` VALUES ('297', '216', 'YX', '山东片区', '20', '0', '297', '1');
+INSERT INTO `fmp_code` VALUES ('298', '216001', 'YX', '山东大学', '216', '1', '298', '1');
+INSERT INTO `fmp_code` VALUES ('299', '216002', 'YX', '中国海洋大学', '216', '1', '299', '1');
+INSERT INTO `fmp_code` VALUES ('300', '216003', 'YX', '中国石油大学(华东)', '216', '1', '300', '1');
+INSERT INTO `fmp_code` VALUES ('301', '216004', 'YX', '其他', '216', '1', '301', '1');
+INSERT INTO `fmp_code` VALUES ('302', '217', 'YX', '河南片区', '20', '0', '302', '1');
+INSERT INTO `fmp_code` VALUES ('303', '217001', 'YX', '郑州大学', '217', '1', '303', '1');
+INSERT INTO `fmp_code` VALUES ('304', '217002', 'YX', '其他', '217', '1', '304', '1');
+INSERT INTO `fmp_code` VALUES ('305', '218', 'YX', '湖北片区', '20', '0', '305', '1');
+INSERT INTO `fmp_code` VALUES ('306', '218001', 'YX', '武汉大学', '218', '1', '306', '1');
+INSERT INTO `fmp_code` VALUES ('307', '218002', 'YX', '华中师范大学', '218', '1', '307', '1');
+INSERT INTO `fmp_code` VALUES ('308', '218003', 'YX', '武汉理工大学', '218', '1', '308', '1');
+INSERT INTO `fmp_code` VALUES ('309', '218004', 'YX', '华中科技大学', '218', '1', '309', '1');
+INSERT INTO `fmp_code` VALUES ('310', '218005', 'YX', '华中农业大学', '218', '1', '310', '1');
+INSERT INTO `fmp_code` VALUES ('311', '218006', 'YX', '中国地质大学(武汉)', '218', '1', '311', '1');
+INSERT INTO `fmp_code` VALUES ('312', '218007', 'YX', '中南财经政法大学', '218', '1', '312', '1');
+INSERT INTO `fmp_code` VALUES ('313', '218008', 'YX', '其他', '218', '1', '313', '1');
+INSERT INTO `fmp_code` VALUES ('314', '219', 'YX', '湖南片区', '20', '0', '314', '1');
+INSERT INTO `fmp_code` VALUES ('315', '219001', 'YX', '湖南大学', '219', '1', '315', '1');
+INSERT INTO `fmp_code` VALUES ('316', '219002', 'YX', '中南大学', '219', '1', '316', '1');
+INSERT INTO `fmp_code` VALUES ('317', '219003', 'YX', '湖南师范大学', '219', '1', '317', '1');
+INSERT INTO `fmp_code` VALUES ('318', '219004', 'YX', '其他', '219', '1', '318', '1');
+INSERT INTO `fmp_code` VALUES ('319', '220', 'YX', '广东片区', '20', '0', '319', '1');
+INSERT INTO `fmp_code` VALUES ('320', '220001', 'YX', '中山大学', '220', '1', '320', '1');
+INSERT INTO `fmp_code` VALUES ('321', '220002', 'YX', '华南师范大学', '220', '1', '321', '1');
+INSERT INTO `fmp_code` VALUES ('322', '220003', 'YX', '暨南大学', '220', '1', '322', '1');
+INSERT INTO `fmp_code` VALUES ('323', '220004', 'YX', '华南理工大学', '220', '1', '323', '1');
+INSERT INTO `fmp_code` VALUES ('324', '220005', 'YX', '其他', '220', '1', '324', '1');
+INSERT INTO `fmp_code` VALUES ('325', '221', 'YX', '广西片区', '20', '0', '325', '1');
+INSERT INTO `fmp_code` VALUES ('326', '221001', 'YX', '广西大学', '221', '1', '326', '1');
+INSERT INTO `fmp_code` VALUES ('327', '221002', 'YX', '其他', '221', '1', '327', '1');
+INSERT INTO `fmp_code` VALUES ('328', '222', 'YX', '四川片区', '20', '0', '328', '1');
+INSERT INTO `fmp_code` VALUES ('329', '222001', 'YX', '四川大学', '222', '1', '329', '1');
+INSERT INTO `fmp_code` VALUES ('330', '222002', 'YX', '西南财经大学', '222', '1', '330', '1');
+INSERT INTO `fmp_code` VALUES ('331', '222003', 'YX', '西南交通大学', '222', '1', '331', '1');
+INSERT INTO `fmp_code` VALUES ('332', '222004', 'YX', '四川农业大学', '222', '1', '332', '1');
+INSERT INTO `fmp_code` VALUES ('333', '222005', 'YX', '电子科技大学', '222', '1', '333', '1');
+INSERT INTO `fmp_code` VALUES ('334', '222006', 'YX', '其他', '222', '1', '334', '1');
+INSERT INTO `fmp_code` VALUES ('335', '223', 'YX', '云南片区', '20', '0', '335', '1');
+INSERT INTO `fmp_code` VALUES ('336', '223001', 'YX', '云南大学', '223', '1', '336', '1');
+INSERT INTO `fmp_code` VALUES ('337', '223002', 'YX', '其他', '223', '1', '337', '1');
+INSERT INTO `fmp_code` VALUES ('338', '224', 'YX', '贵州片区', '20', '0', '338', '1');
+INSERT INTO `fmp_code` VALUES ('339', '224001', 'YX', '贵州大学', '224', '1', '339', '1');
+INSERT INTO `fmp_code` VALUES ('340', '224002', 'YX', '其他', '224', '1', '340', '1');
+INSERT INTO `fmp_code` VALUES ('341', '225', 'YX', '陕西片区', '20', '0', '341', '1');
+INSERT INTO `fmp_code` VALUES ('342', '225001', 'YX', '西北大学', '225', '1', '342', '1');
+INSERT INTO `fmp_code` VALUES ('343', '225002', 'YX', '陕西师范大学', '225', '1', '343', '1');
+INSERT INTO `fmp_code` VALUES ('344', '225003', 'YX', '长安大学', '225', '1', '344', '1');
+INSERT INTO `fmp_code` VALUES ('345', '225004', 'YX', '西安交通大学', '225', '1', '345', '1');
+INSERT INTO `fmp_code` VALUES ('346', '225005', 'YX', '西北农林科大', '225', '1', '346', '1');
+INSERT INTO `fmp_code` VALUES ('347', '225006', 'YX', '西北工业大学', '225', '1', '347', '1');
+INSERT INTO `fmp_code` VALUES ('348', '225007', 'YX', '西安电子科技大学', '225', '1', '348', '1');
+INSERT INTO `fmp_code` VALUES ('349', '225008', 'YX', '其他', '225', '1', '349', '1');
+INSERT INTO `fmp_code` VALUES ('350', '226', 'YX', '甘肃片区', '20', '0', '350', '1');
+INSERT INTO `fmp_code` VALUES ('351', '226001', 'YX', '兰州大学', '226', '1', '351', '1');
+INSERT INTO `fmp_code` VALUES ('352', '226002', 'YX', '其他', '226', '1', '352', '1');
+INSERT INTO `fmp_code` VALUES ('353', '227', 'YX', '新疆片区', '20', '0', '353', '1');
+INSERT INTO `fmp_code` VALUES ('354', '227001', 'YX', '新疆大学', '227', '1', '354', '1');
+INSERT INTO `fmp_code` VALUES ('355', '227002', 'YX', '石河子大学', '227', '1', '355', '1');
+INSERT INTO `fmp_code` VALUES ('356', '227003', 'YX', '其他', '227', '1', '356', '1');
+INSERT INTO `fmp_code` VALUES ('357', '228', 'YX', '海南片区', '20', '0', '357', '1');
+INSERT INTO `fmp_code` VALUES ('358', '228001', 'YX', '海南大学', '228', '1', '358', '1');
+INSERT INTO `fmp_code` VALUES ('359', '228002', 'YX', '其他', '228', '1', '359', '1');
+INSERT INTO `fmp_code` VALUES ('360', '229', 'YX', '宁夏片区', '20', '0', '360', '1');
+INSERT INTO `fmp_code` VALUES ('361', '229001', 'YX', '宁夏大学', '229', '1', '361', '1');
+INSERT INTO `fmp_code` VALUES ('362', '229002', 'YX', '其他', '229', '1', '362', '1');
+INSERT INTO `fmp_code` VALUES ('363', '230', 'YX', '青海片区', '20', '0', '363', '1');
+INSERT INTO `fmp_code` VALUES ('364', '230001', 'YX', '青海大学', '230', '1', '364', '1');
+INSERT INTO `fmp_code` VALUES ('365', '230002', 'YX', '其他', '230', '1', '365', '1');
+INSERT INTO `fmp_code` VALUES ('366', '231', 'YX', '西藏片区', '20', '0', '366', '1');
+INSERT INTO `fmp_code` VALUES ('367', '231001', 'YX', '西藏大学', '231', '1', '367', '1');
+INSERT INTO `fmp_code` VALUES ('368', '231002', 'YX', '其他', '231', '1', '368', '1');
+INSERT INTO `fmp_code` VALUES ('369', '232', 'YX', '军事系统片区', '20', '0', '369', '1');
+INSERT INTO `fmp_code` VALUES ('370', '232001', 'YX', '第二军医大学', '232', '1', '370', '1');
+INSERT INTO `fmp_code` VALUES ('371', '232002', 'YX', '第四军医大学', '232', '1', '371', '1');
+INSERT INTO `fmp_code` VALUES ('372', '232002', 'YX', '国防科学技术大学', '232', '1', '372', '1');
+INSERT INTO `fmp_code` VALUES ('373', '232003', 'YX', '其他', '232', '1', '373', '1');
+INSERT INTO `fmp_code` VALUES ('374', '2', 'YX', '国外', '0', '0', '374', '1');
+INSERT INTO `fmp_code` VALUES ('375', '233001', 'YX', '其他', '2', '1', '375', '1');
+INSERT INTO `fmp_code` VALUES ('376', '3', 'YX', '其他', '0', '1', '376', '1');
+INSERT INTO `fmp_code` VALUES ('377', '1', 'AB', '所有城市', '-1', '0', '377', '1');
+INSERT INTO `fmp_code` VALUES ('378', '11', 'AB', '北京市', '1', '0', '378', '1');
+INSERT INTO `fmp_code` VALUES ('379', '110100', 'AB', '北京市市辖区', '11', '1', '379', '1');
+INSERT INTO `fmp_code` VALUES ('380', '110101', 'AB', '北京市东城区', '11', '1', '380', '1');
+INSERT INTO `fmp_code` VALUES ('381', '110102', 'AB', '北京市西城区', '11', '1', '381', '1');
+INSERT INTO `fmp_code` VALUES ('382', '110103', 'AB', '北京市崇文区', '11', '1', '382', '1');
+INSERT INTO `fmp_code` VALUES ('383', '110104', 'AB', '北京市宣武区', '11', '1', '383', '1');
+INSERT INTO `fmp_code` VALUES ('384', '110105', 'AB', '北京市朝阳区', '11', '1', '384', '1');
+INSERT INTO `fmp_code` VALUES ('385', '110106', 'AB', '北京市丰台区', '11', '1', '385', '1');
+INSERT INTO `fmp_code` VALUES ('386', '110107', 'AB', '北京市石景山区', '11', '1', '386', '1');
+INSERT INTO `fmp_code` VALUES ('387', '110108', 'AB', '北京市海淀区', '11', '1', '387', '1');
+INSERT INTO `fmp_code` VALUES ('388', '110109', 'AB', '北京市门头沟区', '11', '1', '388', '1');
+INSERT INTO `fmp_code` VALUES ('389', '110111', 'AB', '北京市房山区', '11', '1', '389', '1');
+INSERT INTO `fmp_code` VALUES ('390', '110112', 'AB', '北京市通州区', '11', '1', '390', '1');
+INSERT INTO `fmp_code` VALUES ('391', '110113', 'AB', '北京市顺义区', '11', '1', '391', '1');
+INSERT INTO `fmp_code` VALUES ('392', '110114', 'AB', '北京市昌平区', '11', '1', '392', '1');
+INSERT INTO `fmp_code` VALUES ('393', '110115', 'AB', '北京市大兴区', '11', '1', '393', '1');
+INSERT INTO `fmp_code` VALUES ('394', '110116', 'AB', '北京市怀柔区', '11', '1', '394', '1');
+INSERT INTO `fmp_code` VALUES ('395', '110117', 'AB', '北京市平谷区', '11', '1', '395', '1');
+INSERT INTO `fmp_code` VALUES ('396', '12', 'AB', '天津市', '1', '0', '396', '1');
+INSERT INTO `fmp_code` VALUES ('397', '120100', 'AB', '天津市市辖区', '12', '1', '397', '1');
+INSERT INTO `fmp_code` VALUES ('398', '120101', 'AB', '天津市和平区', '12', '1', '398', '1');
+INSERT INTO `fmp_code` VALUES ('399', '120102', 'AB', '天津市河东区', '12', '1', '399', '1');
+INSERT INTO `fmp_code` VALUES ('400', '120103', 'AB', '天津市河西区', '12', '1', '400', '1');
+INSERT INTO `fmp_code` VALUES ('401', '120104', 'AB', '天津市南开区', '12', '1', '401', '1');
+INSERT INTO `fmp_code` VALUES ('402', '120105', 'AB', '天津市河北区', '12', '1', '402', '1');
+INSERT INTO `fmp_code` VALUES ('403', '120106', 'AB', '天津市红桥区', '12', '1', '403', '1');
+INSERT INTO `fmp_code` VALUES ('404', '120107', 'AB', '天津市塘沽区', '12', '1', '404', '1');
+INSERT INTO `fmp_code` VALUES ('405', '120108', 'AB', '天津市汉沽区', '12', '1', '405', '1');
+INSERT INTO `fmp_code` VALUES ('406', '120109', 'AB', '天津市大港区', '12', '1', '406', '1');
+INSERT INTO `fmp_code` VALUES ('407', '120110', 'AB', '天津市东丽区', '12', '1', '407', '1');
+INSERT INTO `fmp_code` VALUES ('408', '120111', 'AB', '天津市西青区', '12', '1', '408', '1');
+INSERT INTO `fmp_code` VALUES ('409', '120112', 'AB', '天津市津南区', '12', '1', '409', '1');
+INSERT INTO `fmp_code` VALUES ('410', '120113', 'AB', '天津市北辰区', '12', '1', '410', '1');
+INSERT INTO `fmp_code` VALUES ('411', '120114', 'AB', '天津市武清区', '12', '1', '411', '1');
+INSERT INTO `fmp_code` VALUES ('412', '120115', 'AB', '天津市宝坻区', '12', '1', '412', '1');
+INSERT INTO `fmp_code` VALUES ('413', '13', 'AB', '河北省', '1', '0', '413', '1');
+INSERT INTO `fmp_code` VALUES ('414', '130100', 'AB', '河北省石家庄市', '13', '1', '414', '1');
+INSERT INTO `fmp_code` VALUES ('415', '130200', 'AB', '河北省唐山市', '13', '1', '415', '1');
+INSERT INTO `fmp_code` VALUES ('416', '130300', 'AB', '河北省秦皇岛市', '13', '1', '416', '1');
+INSERT INTO `fmp_code` VALUES ('417', '130400', 'AB', '河北省邯郸市', '13', '1', '417', '1');
+INSERT INTO `fmp_code` VALUES ('418', '130500', 'AB', '河北省邢台市', '13', '1', '418', '1');
+INSERT INTO `fmp_code` VALUES ('419', '130600', 'AB', '河北省保定市', '13', '1', '419', '1');
+INSERT INTO `fmp_code` VALUES ('420', '130700', 'AB', '河北省张家口市', '13', '1', '420', '1');
+INSERT INTO `fmp_code` VALUES ('421', '130800', 'AB', '河北省承德市', '13', '1', '421', '1');
+INSERT INTO `fmp_code` VALUES ('422', '130900', 'AB', '河北省沧洲市', '13', '1', '422', '1');
+INSERT INTO `fmp_code` VALUES ('423', '131000', 'AB', '河北省廊坊市', '13', '1', '423', '1');
+INSERT INTO `fmp_code` VALUES ('424', '131100', 'AB', '河北省衡水市', '13', '1', '424', '1');
+INSERT INTO `fmp_code` VALUES ('425', '14', 'AB', '山西省', '1', '0', '425', '1');
+INSERT INTO `fmp_code` VALUES ('426', '140100', 'AB', '山西省太原市', '14', '1', '426', '1');
+INSERT INTO `fmp_code` VALUES ('427', '140200', 'AB', '山西省大同市', '14', '1', '427', '1');
+INSERT INTO `fmp_code` VALUES ('428', '140300', 'AB', '山西省阳泉市', '14', '1', '428', '1');
+INSERT INTO `fmp_code` VALUES ('429', '140400', 'AB', '山西省长治市', '14', '1', '429', '1');
+INSERT INTO `fmp_code` VALUES ('430', '140500', 'AB', '山西省晋城市', '14', '1', '430', '1');
+INSERT INTO `fmp_code` VALUES ('431', '140600', 'AB', '山西省朔州市', '14', '1', '431', '1');
+INSERT INTO `fmp_code` VALUES ('432', '140700', 'AB', '山西省晋中市', '14', '1', '432', '1');
+INSERT INTO `fmp_code` VALUES ('433', '140800', 'AB', '山西省运城市', '14', '1', '433', '1');
+INSERT INTO `fmp_code` VALUES ('434', '140900', 'AB', '山西省忻州市', '14', '1', '434', '1');
+INSERT INTO `fmp_code` VALUES ('435', '141000', 'AB', '山西省临汾市', '14', '1', '435', '1');
+INSERT INTO `fmp_code` VALUES ('436', '141100', 'AB', '山西省吕梁市', '14', '1', '436', '1');
+INSERT INTO `fmp_code` VALUES ('437', '15', 'AB', '内蒙古', '1', '0', '437', '1');
+INSERT INTO `fmp_code` VALUES ('438', '150100', 'AB', '内蒙古自治区呼和浩特市', '15', '1', '438', '1');
+INSERT INTO `fmp_code` VALUES ('439', '150200', 'AB', '内蒙古自治区包头市', '15', '1', '439', '1');
+INSERT INTO `fmp_code` VALUES ('440', '150300', 'AB', '内蒙古自治区乌海市', '15', '1', '440', '1');
+INSERT INTO `fmp_code` VALUES ('441', '150400', 'AB', '内蒙古自治区赤峰市', '15', '1', '441', '1');
+INSERT INTO `fmp_code` VALUES ('442', '150500', 'AB', '内蒙古自治区通辽市', '15', '1', '442', '1');
+INSERT INTO `fmp_code` VALUES ('443', '150600', 'AB', '内蒙古自治区鄂尔多斯市', '15', '1', '443', '1');
+INSERT INTO `fmp_code` VALUES ('444', '150700', 'AB', '内蒙古自治区呼伦贝尔市', '15', '1', '444', '1');
+INSERT INTO `fmp_code` VALUES ('445', '150800', 'AB', '内蒙古自治区巴彦淖尔市', '15', '1', '445', '1');
+INSERT INTO `fmp_code` VALUES ('446', '150900', 'AB', '内蒙古自治区乌兰察布市', '15', '1', '446', '1');
+INSERT INTO `fmp_code` VALUES ('447', '152100', 'AB', '内蒙古自治区呼伦贝尔盟', '15', '1', '447', '1');
+INSERT INTO `fmp_code` VALUES ('448', '152200', 'AB', '内蒙古自治区兴安盟', '15', '1', '448', '1');
+INSERT INTO `fmp_code` VALUES ('449', '152300', 'AB', '内蒙古自治区哲里木盟', '15', '1', '449', '1');
+INSERT INTO `fmp_code` VALUES ('450', '152500', 'AB', '内蒙古自治区锡林郭勒盟', '15', '1', '450', '1');
+INSERT INTO `fmp_code` VALUES ('451', '152600', 'AB', '内蒙古自治区乌兰察布盟', '15', '1', '451', '1');
+INSERT INTO `fmp_code` VALUES ('452', '152700', 'AB', '内蒙古自治区伊克昭盟', '15', '1', '452', '1');
+INSERT INTO `fmp_code` VALUES ('453', '152800', 'AB', '内蒙古自治区巴彦淖尔盟', '15', '1', '453', '1');
+INSERT INTO `fmp_code` VALUES ('454', '152900', 'AB', '内蒙古自治区阿拉善盟', '15', '1', '454', '1');
+INSERT INTO `fmp_code` VALUES ('455', '21', 'AB', '辽宁省', '1', '0', '455', '1');
+INSERT INTO `fmp_code` VALUES ('456', '210100', 'AB', '辽宁省沈阳市', '21', '1', '456', '1');
+INSERT INTO `fmp_code` VALUES ('457', '210200', 'AB', '辽宁省大连市', '21', '1', '457', '1');
+INSERT INTO `fmp_code` VALUES ('458', '210300', 'AB', '辽宁省鞍山市', '21', '1', '458', '1');
+INSERT INTO `fmp_code` VALUES ('459', '210400', 'AB', '辽宁省抚顺市', '21', '1', '459', '1');
+INSERT INTO `fmp_code` VALUES ('460', '210500', 'AB', '辽宁省本溪市', '21', '1', '460', '1');
+INSERT INTO `fmp_code` VALUES ('461', '210600', 'AB', '辽宁省丹东市', '21', '1', '461', '1');
+INSERT INTO `fmp_code` VALUES ('462', '210700', 'AB', '辽宁省锦洲市', '21', '1', '462', '1');
+INSERT INTO `fmp_code` VALUES ('463', '210800', 'AB', '辽宁省营口市', '21', '1', '463', '1');
+INSERT INTO `fmp_code` VALUES ('464', '210900', 'AB', '辽宁省阜新市', '21', '1', '464', '1');
+INSERT INTO `fmp_code` VALUES ('465', '211000', 'AB', '辽宁省辽阳市', '21', '1', '465', '1');
+INSERT INTO `fmp_code` VALUES ('466', '211100', 'AB', '辽宁省盘锦市', '21', '1', '466', '1');
+INSERT INTO `fmp_code` VALUES ('467', '211200', 'AB', '辽宁省铁岭市', '21', '1', '467', '1');
+INSERT INTO `fmp_code` VALUES ('468', '211300', 'AB', '辽宁省朝阳市', '21', '1', '468', '1');
+INSERT INTO `fmp_code` VALUES ('469', '211400', 'AB', '辽宁省锦西市', '21', '1', '469', '1');
+INSERT INTO `fmp_code` VALUES ('470', '22', 'AB', '吉林省', '1', '0', '470', '1');
+INSERT INTO `fmp_code` VALUES ('471', '220100', 'AB', '吉林省长春市', '22', '1', '471', '1');
+INSERT INTO `fmp_code` VALUES ('472', '220200', 'AB', '吉林省吉林市', '22', '1', '472', '1');
+INSERT INTO `fmp_code` VALUES ('473', '220300', 'AB', '吉林省四平市', '22', '1', '473', '1');
+INSERT INTO `fmp_code` VALUES ('474', '220400', 'AB', '吉林省辽源市', '22', '1', '474', '1');
+INSERT INTO `fmp_code` VALUES ('475', '220500', 'AB', '吉林省通化市', '22', '1', '475', '1');
+INSERT INTO `fmp_code` VALUES ('476', '220600', 'AB', '吉林省白山市', '22', '1', '476', '1');
+INSERT INTO `fmp_code` VALUES ('477', '220700', 'AB', '吉林省松原市', '22', '1', '477', '1');
+INSERT INTO `fmp_code` VALUES ('478', '220800', 'AB', '吉林省白城市', '22', '1', '478', '1');
+INSERT INTO `fmp_code` VALUES ('479', '222400', 'AB', '吉林省延边朝鲜族自治州', '22', '1', '479', '1');
+INSERT INTO `fmp_code` VALUES ('480', '23', 'AB', '黑龙江', '1', '0', '480', '1');
+INSERT INTO `fmp_code` VALUES ('481', '230100', 'AB', '黑龙江省哈尔滨市', '23', '1', '481', '1');
+INSERT INTO `fmp_code` VALUES ('482', '230200', 'AB', '黑龙江省齐齐哈尔市', '23', '1', '482', '1');
+INSERT INTO `fmp_code` VALUES ('483', '230300', 'AB', '黑龙江省鸡西市', '23', '1', '483', '1');
+INSERT INTO `fmp_code` VALUES ('484', '230400', 'AB', '黑龙江省鹤岗市', '23', '1', '484', '1');
+INSERT INTO `fmp_code` VALUES ('485', '230500', 'AB', '黑龙江省双鸭山市', '23', '1', '485', '1');
+INSERT INTO `fmp_code` VALUES ('486', '230600', 'AB', '黑龙江省大庆市', '23', '1', '486', '1');
+INSERT INTO `fmp_code` VALUES ('487', '230700', 'AB', '黑龙江省伊春市', '23', '1', '487', '1');
+INSERT INTO `fmp_code` VALUES ('488', '230800', 'AB', '黑龙江省佳木斯市', '23', '1', '488', '1');
+INSERT INTO `fmp_code` VALUES ('489', '230900', 'AB', '黑龙江省七台河市', '23', '1', '489', '1');
+INSERT INTO `fmp_code` VALUES ('490', '231000', 'AB', '黑龙江省牡丹江市', '23', '1', '490', '1');
+INSERT INTO `fmp_code` VALUES ('491', '231100', 'AB', '黑龙江省黑河市', '23', '1', '491', '1');
+INSERT INTO `fmp_code` VALUES ('492', '231200', 'AB', '黑龙江省绥化市', '23', '1', '492', '1');
+INSERT INTO `fmp_code` VALUES ('493', '232100', 'AB', '黑龙江省松花江地区', '23', '1', '493', '1');
+INSERT INTO `fmp_code` VALUES ('494', '232300', 'AB', '黑龙江省绥化地区', '23', '1', '494', '1');
+INSERT INTO `fmp_code` VALUES ('495', '232700', 'AB', '黑龙江省大兴安岭地区', '23', '1', '495', '1');
+INSERT INTO `fmp_code` VALUES ('496', '31', 'AB', '上海市', '1', '0', '496', '1');
+INSERT INTO `fmp_code` VALUES ('497', '310101', 'AB', '上海市黄浦区', '31', '1', '497', '1');
+INSERT INTO `fmp_code` VALUES ('498', '310103', 'AB', '上海市卢湾区', '31', '1', '498', '1');
+INSERT INTO `fmp_code` VALUES ('499', '310104', 'AB', '上海市徐汇区', '31', '1', '499', '1');
+INSERT INTO `fmp_code` VALUES ('500', '310105', 'AB', '上海市长宁区', '31', '1', '500', '1');
+INSERT INTO `fmp_code` VALUES ('501', '310106', 'AB', '上海市静安区', '31', '1', '501', '1');
+INSERT INTO `fmp_code` VALUES ('502', '310107', 'AB', '上海市普陀区', '31', '1', '502', '1');
+INSERT INTO `fmp_code` VALUES ('503', '310109', 'AB', '上海市虹口区', '31', '1', '503', '1');
+INSERT INTO `fmp_code` VALUES ('504', '310110', 'AB', '上海市杨浦区', '31', '1', '504', '1');
+INSERT INTO `fmp_code` VALUES ('505', '310112', 'AB', '上海市闵行区', '31', '1', '505', '1');
+INSERT INTO `fmp_code` VALUES ('506', '310113', 'AB', '上海市宝山区', '31', '1', '506', '1');
+INSERT INTO `fmp_code` VALUES ('507', '310114', 'AB', '上海市嘉定区', '31', '1', '507', '1');
+INSERT INTO `fmp_code` VALUES ('508', '310115', 'AB', '上海市浦东新区', '31', '1', '508', '1');
+INSERT INTO `fmp_code` VALUES ('509', '310116', 'AB', '上海市金山区', '31', '1', '509', '1');
+INSERT INTO `fmp_code` VALUES ('510', '310117', 'AB', '上海市松江区', '31', '1', '510', '1');
+INSERT INTO `fmp_code` VALUES ('511', '310118', 'AB', '上海市青浦区', '31', '1', '511', '1');
+INSERT INTO `fmp_code` VALUES ('512', '310120', 'AB', '上海市奉贤区', '31', '1', '512', '1');
+INSERT INTO `fmp_code` VALUES ('513', '310121', 'AB', '上海市崇明县', '31', '1', '513', '1');
+INSERT INTO `fmp_code` VALUES ('514', '32', 'AB', '江苏省', '1', '0', '514', '1');
+INSERT INTO `fmp_code` VALUES ('515', '320100', 'AB', '江苏省南京市', '32', '1', '515', '1');
+INSERT INTO `fmp_code` VALUES ('516', '320200', 'AB', '江苏省无锡市', '32', '1', '516', '1');
+INSERT INTO `fmp_code` VALUES ('517', '320300', 'AB', '江苏省徐州市', '32', '1', '517', '1');
+INSERT INTO `fmp_code` VALUES ('518', '320400', 'AB', '江苏省常州市', '32', '1', '518', '1');
+INSERT INTO `fmp_code` VALUES ('519', '320500', 'AB', '江苏省苏州市', '32', '1', '519', '1');
+INSERT INTO `fmp_code` VALUES ('520', '320600', 'AB', '江苏省南通市', '32', '1', '520', '1');
+INSERT INTO `fmp_code` VALUES ('521', '320700', 'AB', '江苏省连云港市', '32', '1', '521', '1');
+INSERT INTO `fmp_code` VALUES ('522', '320800', 'AB', '江苏省淮安市', '32', '1', '522', '1');
+INSERT INTO `fmp_code` VALUES ('523', '320900', 'AB', '江苏省盐城市', '32', '1', '523', '1');
+INSERT INTO `fmp_code` VALUES ('524', '321000', 'AB', '江苏省扬州市', '32', '1', '524', '1');
+INSERT INTO `fmp_code` VALUES ('525', '321100', 'AB', '江苏省镇江市', '32', '1', '525', '1');
+INSERT INTO `fmp_code` VALUES ('526', '321200', 'AB', '江苏省泰州市', '32', '1', '526', '1');
+INSERT INTO `fmp_code` VALUES ('527', '321300', 'AB', '江苏省宿迁市', '32', '1', '527', '1');
+INSERT INTO `fmp_code` VALUES ('528', '33', 'AB', '浙江省', '1', '0', '528', '1');
+INSERT INTO `fmp_code` VALUES ('529', '330100', 'AB', '浙江省杭州市', '33', '1', '529', '1');
+INSERT INTO `fmp_code` VALUES ('530', '330200', 'AB', '浙江省宁波市', '33', '1', '530', '1');
+INSERT INTO `fmp_code` VALUES ('531', '330300', 'AB', '浙江省温州市', '33', '1', '531', '1');
+INSERT INTO `fmp_code` VALUES ('532', '330400', 'AB', '浙江省嘉兴市', '33', '1', '532', '1');
+INSERT INTO `fmp_code` VALUES ('533', '330500', 'AB', '浙江省湖洲市', '33', '1', '533', '1');
+INSERT INTO `fmp_code` VALUES ('534', '330600', 'AB', '浙江省绍兴市', '33', '1', '534', '1');
+INSERT INTO `fmp_code` VALUES ('535', '330700', 'AB', '浙江省金华市', '33', '1', '535', '1');
+INSERT INTO `fmp_code` VALUES ('536', '330800', 'AB', '浙江省衢州市', '33', '1', '536', '1');
+INSERT INTO `fmp_code` VALUES ('537', '330900', 'AB', '浙江省舟山市', '33', '1', '537', '1');
+INSERT INTO `fmp_code` VALUES ('538', '331000', 'AB', '浙江省台州市', '33', '1', '538', '1');
+INSERT INTO `fmp_code` VALUES ('539', '331100', 'AB', '浙江省丽水市', '33', '1', '539', '1');
+INSERT INTO `fmp_code` VALUES ('540', '332500', 'AB', '浙江省丽水地区', '33', '1', '540', '1');
+INSERT INTO `fmp_code` VALUES ('541', '332600', 'AB', '浙江省台州地区', '33', '1', '541', '1');
+INSERT INTO `fmp_code` VALUES ('542', '34', 'AB', '安徽省', '1', '0', '542', '1');
+INSERT INTO `fmp_code` VALUES ('543', '340100', 'AB', '安徽省合肥市', '34', '1', '543', '1');
+INSERT INTO `fmp_code` VALUES ('544', '340200', 'AB', '安徽省芜湖市', '34', '1', '544', '1');
+INSERT INTO `fmp_code` VALUES ('545', '340300', 'AB', '安徽省蚌埠市', '34', '1', '545', '1');
+INSERT INTO `fmp_code` VALUES ('546', '340400', 'AB', '安徽省淮南市', '34', '1', '546', '1');
+INSERT INTO `fmp_code` VALUES ('547', '340500', 'AB', '安徽省马鞍山市', '34', '1', '547', '1');
+INSERT INTO `fmp_code` VALUES ('548', '340600', 'AB', '安徽省淮北市', '34', '1', '548', '1');
+INSERT INTO `fmp_code` VALUES ('549', '340700', 'AB', '安徽省铜陵市', '34', '1', '549', '1');
+INSERT INTO `fmp_code` VALUES ('550', '340800', 'AB', '安徽省安庆市', '34', '1', '550', '1');
+INSERT INTO `fmp_code` VALUES ('551', '341000', 'AB', '安徽省黄山市', '34', '1', '551', '1');
+INSERT INTO `fmp_code` VALUES ('552', '341100', 'AB', '安徽省滁州市', '34', '1', '552', '1');
+INSERT INTO `fmp_code` VALUES ('553', '341200', 'AB', '安徽省阜阳市', '34', '1', '553', '1');
+INSERT INTO `fmp_code` VALUES ('554', '341300', 'AB', '安徽省宿州市', '34', '1', '554', '1');
+INSERT INTO `fmp_code` VALUES ('555', '341400', 'AB', '安徽省巢湖市', '34', '1', '555', '1');
+INSERT INTO `fmp_code` VALUES ('556', '341500', 'AB', '安徽省六安市', '34', '1', '556', '1');
+INSERT INTO `fmp_code` VALUES ('557', '341600', 'AB', '安徽省亳州市', '34', '1', '557', '1');
+INSERT INTO `fmp_code` VALUES ('558', '341700', 'AB', '安徽省池州市', '34', '1', '558', '1');
+INSERT INTO `fmp_code` VALUES ('559', '341800', 'AB', '安徽省宣城市', '34', '1', '559', '1');
+INSERT INTO `fmp_code` VALUES ('560', '35', 'AB', '福建省', '1', '0', '560', '1');
+INSERT INTO `fmp_code` VALUES ('561', '350100', 'AB', '福建省福州市', '35', '1', '561', '1');
+INSERT INTO `fmp_code` VALUES ('562', '350200', 'AB', '福建省厦门市', '35', '1', '562', '1');
+INSERT INTO `fmp_code` VALUES ('563', '350300', 'AB', '福建省莆田市', '35', '1', '563', '1');
+INSERT INTO `fmp_code` VALUES ('564', '350400', 'AB', '福建省三明市', '35', '1', '564', '1');
+INSERT INTO `fmp_code` VALUES ('565', '350500', 'AB', '福建省泉州市', '35', '1', '565', '1');
+INSERT INTO `fmp_code` VALUES ('566', '350600', 'AB', '福建省漳州市', '35', '1', '566', '1');
+INSERT INTO `fmp_code` VALUES ('567', '350700', 'AB', '福建省南平市', '35', '1', '567', '1');
+INSERT INTO `fmp_code` VALUES ('568', '350800', 'AB', '福建省龙岩市', '35', '1', '568', '1');
+INSERT INTO `fmp_code` VALUES ('569', '350900', 'AB', '福建省宁德市', '35', '1', '569', '1');
+INSERT INTO `fmp_code` VALUES ('570', '36', 'AB', '江西省', '1', '0', '570', '1');
+INSERT INTO `fmp_code` VALUES ('571', '360100', 'AB', '江西省南昌市', '36', '1', '571', '1');
+INSERT INTO `fmp_code` VALUES ('572', '360200', 'AB', '江西省景德镇市', '36', '1', '572', '1');
+INSERT INTO `fmp_code` VALUES ('573', '360300', 'AB', '江西省萍乡市', '36', '1', '573', '1');
+INSERT INTO `fmp_code` VALUES ('574', '360400', 'AB', '江西省九江市', '36', '1', '574', '1');
+INSERT INTO `fmp_code` VALUES ('575', '360500', 'AB', '江西省新余市', '36', '1', '575', '1');
+INSERT INTO `fmp_code` VALUES ('576', '360600', 'AB', '江西省鹰潭市', '36', '1', '576', '1');
+INSERT INTO `fmp_code` VALUES ('577', '360700', 'AB', '江西省赣州市', '36', '1', '577', '1');
+INSERT INTO `fmp_code` VALUES ('578', '360800', 'AB', '江西省吉安市', '36', '1', '578', '1');
+INSERT INTO `fmp_code` VALUES ('579', '360900', 'AB', '江西省宜春市', '36', '1', '579', '1');
+INSERT INTO `fmp_code` VALUES ('580', '361000', 'AB', '江西省抚州市', '36', '1', '580', '1');
+INSERT INTO `fmp_code` VALUES ('581', '361100', 'AB', '江西省上饶市', '36', '1', '581', '1');
+INSERT INTO `fmp_code` VALUES ('582', '37', 'AB', '山东省', '1', '0', '582', '1');
+INSERT INTO `fmp_code` VALUES ('583', '370100', 'AB', '山东省济南市', '37', '1', '583', '1');
+INSERT INTO `fmp_code` VALUES ('584', '370200', 'AB', '山东省青岛市', '37', '1', '584', '1');
+INSERT INTO `fmp_code` VALUES ('585', '370300', 'AB', '山东省淄博市', '37', '1', '585', '1');
+INSERT INTO `fmp_code` VALUES ('586', '370400', 'AB', '山东省枣庄市', '37', '1', '586', '1');
+INSERT INTO `fmp_code` VALUES ('587', '370500', 'AB', '山东省东营市', '37', '1', '587', '1');
+INSERT INTO `fmp_code` VALUES ('588', '370600', 'AB', '山东省烟台市', '37', '1', '588', '1');
+INSERT INTO `fmp_code` VALUES ('589', '370700', 'AB', '山东省潍坊市', '37', '1', '589', '1');
+INSERT INTO `fmp_code` VALUES ('590', '370800', 'AB', '山东省济宁市', '37', '1', '590', '1');
+INSERT INTO `fmp_code` VALUES ('591', '370900', 'AB', '山东省泰安市', '37', '1', '591', '1');
+INSERT INTO `fmp_code` VALUES ('592', '371000', 'AB', '山东省威海市', '37', '1', '592', '1');
+INSERT INTO `fmp_code` VALUES ('593', '371100', 'AB', '山东省日照市', '37', '1', '593', '1');
+INSERT INTO `fmp_code` VALUES ('594', '371200', 'AB', '山东省莱芜市', '37', '1', '594', '1');
+INSERT INTO `fmp_code` VALUES ('595', '371300', 'AB', '山东省临沂市', '37', '1', '595', '1');
+INSERT INTO `fmp_code` VALUES ('596', '371400', 'AB', '山东省德州市', '37', '1', '596', '1');
+INSERT INTO `fmp_code` VALUES ('597', '371500', 'AB', '山东省聊城市', '37', '1', '597', '1');
+INSERT INTO `fmp_code` VALUES ('598', '371600', 'AB', '山东省滨州市', '37', '1', '598', '1');
+INSERT INTO `fmp_code` VALUES ('599', '371700', 'AB', '山东省菏泽市', '37', '1', '599', '1');
+INSERT INTO `fmp_code` VALUES ('600', '41', 'AB', '河南省', '1', '0', '600', '1');
+INSERT INTO `fmp_code` VALUES ('601', '410100', 'AB', '河南省郑州市', '41', '1', '601', '1');
+INSERT INTO `fmp_code` VALUES ('602', '410200', 'AB', '河南省开封市', '41', '1', '602', '1');
+INSERT INTO `fmp_code` VALUES ('603', '410300', 'AB', '河南省洛阳市', '41', '1', '603', '1');
+INSERT INTO `fmp_code` VALUES ('604', '410400', 'AB', '河南省平顶山市', '41', '1', '604', '1');
+INSERT INTO `fmp_code` VALUES ('605', '410500', 'AB', '河南省安阳市', '41', '1', '605', '1');
+INSERT INTO `fmp_code` VALUES ('606', '410600', 'AB', '河南省鹤壁市', '41', '1', '606', '1');
+INSERT INTO `fmp_code` VALUES ('607', '410700', 'AB', '河南省新乡市', '41', '1', '607', '1');
+INSERT INTO `fmp_code` VALUES ('608', '410800', 'AB', '河南省焦作市', '41', '1', '608', '1');
+INSERT INTO `fmp_code` VALUES ('609', '410900', 'AB', '河南省濮阳市', '41', '1', '609', '1');
+INSERT INTO `fmp_code` VALUES ('610', '411000', 'AB', '河南省许昌市', '41', '1', '610', '1');
+INSERT INTO `fmp_code` VALUES ('611', '411100', 'AB', '河南省漯河市', '41', '1', '611', '1');
+INSERT INTO `fmp_code` VALUES ('612', '411200', 'AB', '河南省三门峡市', '41', '1', '612', '1');
+INSERT INTO `fmp_code` VALUES ('613', '411300', 'AB', '河南省南阳市', '41', '1', '613', '1');
+INSERT INTO `fmp_code` VALUES ('614', '411400', 'AB', '河南省商丘市', '41', '1', '614', '1');
+INSERT INTO `fmp_code` VALUES ('615', '411500', 'AB', '河南省信阳市', '41', '1', '615', '1');
+INSERT INTO `fmp_code` VALUES ('616', '411600', 'AB', '河南省周口市', '41', '1', '616', '1');
+INSERT INTO `fmp_code` VALUES ('617', '411700', 'AB', '河南省驻马店市', '41', '1', '617', '1');
+INSERT INTO `fmp_code` VALUES ('618', '419000', 'AB', '河南省省直辖县级行政区划', '41', '1', '618', '1');
+INSERT INTO `fmp_code` VALUES ('619', '42', 'AB', '湖北省', '1', '0', '619', '1');
+INSERT INTO `fmp_code` VALUES ('620', '420100', 'AB', '湖北省武汉市', '42', '1', '620', '1');
+INSERT INTO `fmp_code` VALUES ('621', '420200', 'AB', '湖北省黄石市', '42', '1', '621', '1');
+INSERT INTO `fmp_code` VALUES ('622', '420300', 'AB', '湖北省十堰市', '42', '1', '622', '1');
+INSERT INTO `fmp_code` VALUES ('623', '420400', 'AB', '湖北省沙市市', '42', '1', '623', '1');
+INSERT INTO `fmp_code` VALUES ('624', '420500', 'AB', '湖北省宜昌市', '42', '1', '624', '1');
+INSERT INTO `fmp_code` VALUES ('625', '420600', 'AB', '湖北省襄樊市', '42', '1', '625', '1');
+INSERT INTO `fmp_code` VALUES ('626', '420700', 'AB', '湖北省鄂州市', '42', '1', '626', '1');
+INSERT INTO `fmp_code` VALUES ('627', '420800', 'AB', '湖北省荆门市', '42', '1', '627', '1');
+INSERT INTO `fmp_code` VALUES ('628', '420900', 'AB', '湖北省孝感市', '42', '1', '628', '1');
+INSERT INTO `fmp_code` VALUES ('629', '421000', 'AB', '湖北省荆州市', '42', '1', '629', '1');
+INSERT INTO `fmp_code` VALUES ('630', '421100', 'AB', '湖北省黄冈市', '42', '1', '630', '1');
+INSERT INTO `fmp_code` VALUES ('631', '421200', 'AB', '湖北省咸宁市', '42', '1', '631', '1');
+INSERT INTO `fmp_code` VALUES ('632', '421300', 'AB', '湖北省随州市', '42', '1', '632', '1');
+INSERT INTO `fmp_code` VALUES ('633', '422600', 'AB', '湖北省郧阳地区', '42', '1', '633', '1');
+INSERT INTO `fmp_code` VALUES ('634', '422800', 'AB', '湖北省恩施土家族苗族自治州', '42', '1', '634', '1');
+INSERT INTO `fmp_code` VALUES ('635', '422900', 'AB', '湖北省省直辖行政单位', '42', '1', '635', '1');
+INSERT INTO `fmp_code` VALUES ('636', '43', 'AB', '湖南省', '1', '0', '636', '1');
+INSERT INTO `fmp_code` VALUES ('637', '430100', 'AB', '湖南省长沙市', '43', '1', '637', '1');
+INSERT INTO `fmp_code` VALUES ('638', '430200', 'AB', '湖南省株洲市', '43', '1', '638', '1');
+INSERT INTO `fmp_code` VALUES ('639', '430300', 'AB', '湖南省湘潭市', '43', '1', '639', '1');
+INSERT INTO `fmp_code` VALUES ('640', '430400', 'AB', '湖南省衡阳市', '43', '1', '640', '1');
+INSERT INTO `fmp_code` VALUES ('641', '430500', 'AB', '湖南省邵阳市', '43', '1', '641', '1');
+INSERT INTO `fmp_code` VALUES ('642', '430600', 'AB', '湖南省岳阳市', '43', '1', '642', '1');
+INSERT INTO `fmp_code` VALUES ('643', '430700', 'AB', '湖南省常德市', '43', '1', '643', '1');
+INSERT INTO `fmp_code` VALUES ('644', '430800', 'AB', '湖南省张家界市', '43', '1', '644', '1');
+INSERT INTO `fmp_code` VALUES ('645', '430900', 'AB', '湖南省益阳市', '43', '1', '645', '1');
+INSERT INTO `fmp_code` VALUES ('646', '431000', 'AB', '湖南省郴州市', '43', '1', '646', '1');
+INSERT INTO `fmp_code` VALUES ('647', '431100', 'AB', '湖南省永州市', '43', '1', '647', '1');
+INSERT INTO `fmp_code` VALUES ('648', '431200', 'AB', '湖南省怀化市', '43', '1', '648', '1');
+INSERT INTO `fmp_code` VALUES ('649', '431300', 'AB', '湖南省娄底市', '43', '1', '649', '1');
+INSERT INTO `fmp_code` VALUES ('650', '432900', 'AB', '湖南省零陵地区', '43', '1', '650', '1');
+INSERT INTO `fmp_code` VALUES ('651', '433100', 'AB', '湖南省湘西土家族苗族自治州', '43', '1', '651', '1');
+INSERT INTO `fmp_code` VALUES ('652', '44', 'AB', '广东省', '1', '0', '652', '1');
+INSERT INTO `fmp_code` VALUES ('653', '440100', 'AB', '广东省广州市', '44', '1', '653', '1');
+INSERT INTO `fmp_code` VALUES ('654', '440200', 'AB', '广东省韶关市', '44', '1', '654', '1');
+INSERT INTO `fmp_code` VALUES ('655', '440300', 'AB', '广东省深圳市', '44', '1', '655', '1');
+INSERT INTO `fmp_code` VALUES ('656', '440400', 'AB', '广东省珠海市', '44', '1', '656', '1');
+INSERT INTO `fmp_code` VALUES ('657', '440500', 'AB', '广东省汕头市', '44', '1', '657', '1');
+INSERT INTO `fmp_code` VALUES ('658', '440600', 'AB', '广东省佛山市', '44', '1', '658', '1');
+INSERT INTO `fmp_code` VALUES ('659', '440700', 'AB', '广东省江门市', '44', '1', '659', '1');
+INSERT INTO `fmp_code` VALUES ('660', '440800', 'AB', '广东省湛江市', '44', '1', '660', '1');
+INSERT INTO `fmp_code` VALUES ('661', '440900', 'AB', '广东省茂名市', '44', '1', '661', '1');
+INSERT INTO `fmp_code` VALUES ('662', '441200', 'AB', '广东省肇庆市', '44', '1', '662', '1');
+INSERT INTO `fmp_code` VALUES ('663', '441300', 'AB', '广东省惠州市', '44', '1', '663', '1');
+INSERT INTO `fmp_code` VALUES ('664', '441400', 'AB', '广东省梅州市', '44', '1', '664', '1');
+INSERT INTO `fmp_code` VALUES ('665', '441500', 'AB', '广东省汕尾市', '44', '1', '665', '1');
+INSERT INTO `fmp_code` VALUES ('666', '441600', 'AB', '广东省河源市', '44', '1', '666', '1');
+INSERT INTO `fmp_code` VALUES ('667', '441700', 'AB', '广东省阳江市', '44', '1', '667', '1');
+INSERT INTO `fmp_code` VALUES ('668', '441800', 'AB', '广东省清远市', '44', '1', '668', '1');
+INSERT INTO `fmp_code` VALUES ('669', '441900', 'AB', '广东省东莞市', '44', '1', '669', '1');
+INSERT INTO `fmp_code` VALUES ('670', '442000', 'AB', '广东省中山市', '44', '1', '670', '1');
+INSERT INTO `fmp_code` VALUES ('671', '445100', 'AB', '广东省潮州市', '44', '1', '671', '1');
+INSERT INTO `fmp_code` VALUES ('672', '445200', 'AB', '广东省揭阳市', '44', '1', '672', '1');
+INSERT INTO `fmp_code` VALUES ('673', '445300', 'AB', '广东省云浮市', '44', '1', '673', '1');
+INSERT INTO `fmp_code` VALUES ('674', '45', 'AB', '广西壮族自治区', '1', '0', '674', '1');
+INSERT INTO `fmp_code` VALUES ('675', '450100', 'AB', '广西壮族自治区南宁市', '45', '1', '675', '1');
+INSERT INTO `fmp_code` VALUES ('676', '450200', 'AB', '广西壮族自治区柳州市', '45', '1', '676', '1');
+INSERT INTO `fmp_code` VALUES ('677', '450300', 'AB', '广西壮族自治区桂林市', '45', '1', '677', '1');
+INSERT INTO `fmp_code` VALUES ('678', '450400', 'AB', '广西壮族自治区梧州市', '45', '1', '678', '1');
+INSERT INTO `fmp_code` VALUES ('679', '450500', 'AB', '广西壮族自治区北海市', '45', '1', '679', '1');
+INSERT INTO `fmp_code` VALUES ('680', '450600', 'AB', '广西壮族自治区防城港市', '45', '1', '680', '1');
+INSERT INTO `fmp_code` VALUES ('681', '450700', 'AB', '广西壮族自治区钦州市', '45', '1', '681', '1');
+INSERT INTO `fmp_code` VALUES ('682', '450800', 'AB', '广西壮族自治区贵港市', '45', '1', '682', '1');
+INSERT INTO `fmp_code` VALUES ('683', '450900', 'AB', '广西壮族自治区玉林市', '45', '1', '683', '1');
+INSERT INTO `fmp_code` VALUES ('684', '451000', 'AB', '广西壮族自治区百色市', '45', '1', '684', '1');
+INSERT INTO `fmp_code` VALUES ('685', '451100', 'AB', '广西壮族自治区贺州市', '45', '1', '685', '1');
+INSERT INTO `fmp_code` VALUES ('686', '451200', 'AB', '广西壮族自治区河池市', '45', '1', '686', '1');
+INSERT INTO `fmp_code` VALUES ('687', '451300', 'AB', '广西壮族自治区来宾市', '45', '1', '687', '1');
+INSERT INTO `fmp_code` VALUES ('688', '451400', 'AB', '广西壮族自治区崇左市', '45', '1', '688', '1');
+INSERT INTO `fmp_code` VALUES ('689', '46', 'AB', '海南省', '1', '0', '689', '1');
+INSERT INTO `fmp_code` VALUES ('690', '460000', 'AB', '海南省', '46', '1', '690', '1');
+INSERT INTO `fmp_code` VALUES ('691', '50', 'AB', '重庆市', '1', '0', '691', '1');
+INSERT INTO `fmp_code` VALUES ('692', '500100', 'AB', '重庆市市辖区', '50', '1', '692', '1');
+INSERT INTO `fmp_code` VALUES ('693', '500101', 'AB', '重庆市万州区', '50', '1', '693', '1');
+INSERT INTO `fmp_code` VALUES ('694', '500102', 'AB', '重庆市涪陵区', '50', '1', '694', '1');
+INSERT INTO `fmp_code` VALUES ('695', '500103', 'AB', '重庆市渝中区', '50', '1', '695', '1');
+INSERT INTO `fmp_code` VALUES ('696', '500104', 'AB', '重庆市大渡口区', '50', '1', '696', '1');
+INSERT INTO `fmp_code` VALUES ('697', '500105', 'AB', '重庆市江北区', '50', '1', '697', '1');
+INSERT INTO `fmp_code` VALUES ('698', '500106', 'AB', '重庆市沙坪坝区', '50', '1', '698', '1');
+INSERT INTO `fmp_code` VALUES ('699', '500107', 'AB', '重庆市九龙坡区', '50', '1', '699', '1');
+INSERT INTO `fmp_code` VALUES ('700', '500108', 'AB', '重庆市南岸区', '50', '1', '700', '1');
+INSERT INTO `fmp_code` VALUES ('701', '500109', 'AB', '重庆市北碚区', '50', '1', '701', '1');
+INSERT INTO `fmp_code` VALUES ('702', '500110', 'AB', '重庆市万盛区', '50', '1', '702', '1');
+INSERT INTO `fmp_code` VALUES ('703', '500111', 'AB', '重庆市双桥区', '50', '1', '703', '1');
+INSERT INTO `fmp_code` VALUES ('704', '500112', 'AB', '重庆市渝北区', '50', '1', '704', '1');
+INSERT INTO `fmp_code` VALUES ('705', '500113', 'AB', '重庆市巴南区', '50', '1', '705', '1');
+INSERT INTO `fmp_code` VALUES ('706', '500114', 'AB', '重庆市黔江区', '50', '1', '706', '1');
+INSERT INTO `fmp_code` VALUES ('707', '500115', 'AB', '重庆市长寿区', '50', '1', '707', '1');
+INSERT INTO `fmp_code` VALUES ('708', '500116', 'AB', '重庆市江津区', '50', '1', '708', '1');
+INSERT INTO `fmp_code` VALUES ('709', '500117', 'AB', '重庆市合川区', '50', '1', '709', '1');
+INSERT INTO `fmp_code` VALUES ('710', '500118', 'AB', '重庆市永川区', '50', '1', '710', '1');
+INSERT INTO `fmp_code` VALUES ('711', '500119', 'AB', '重庆市南川区', '50', '1', '711', '1');
+INSERT INTO `fmp_code` VALUES ('712', '51', 'AB', '四川省', '1', '0', '712', '1');
+INSERT INTO `fmp_code` VALUES ('713', '510100', 'AB', '四川省成都市', '51', '1', '713', '1');
+INSERT INTO `fmp_code` VALUES ('714', '510200', 'AB', '四川省重庆市', '51', '1', '714', '1');
+INSERT INTO `fmp_code` VALUES ('715', '510300', 'AB', '四川省自贡市', '51', '1', '715', '1');
+INSERT INTO `fmp_code` VALUES ('716', '510400', 'AB', '四川省攀枝花市', '51', '1', '716', '1');
+INSERT INTO `fmp_code` VALUES ('717', '510500', 'AB', '四川省泸州市', '51', '1', '717', '1');
+INSERT INTO `fmp_code` VALUES ('718', '510600', 'AB', '四川省德阳市', '51', '1', '718', '1');
+INSERT INTO `fmp_code` VALUES ('719', '510700', 'AB', '四川省绵阳市', '51', '1', '719', '1');
+INSERT INTO `fmp_code` VALUES ('720', '510800', 'AB', '四川省广元市', '51', '1', '720', '1');
+INSERT INTO `fmp_code` VALUES ('721', '510900', 'AB', '四川省遂宁市', '51', '1', '721', '1');
+INSERT INTO `fmp_code` VALUES ('722', '511000', 'AB', '四川省内江市', '51', '1', '722', '1');
+INSERT INTO `fmp_code` VALUES ('723', '511100', 'AB', '四川省乐山市', '51', '1', '723', '1');
+INSERT INTO `fmp_code` VALUES ('724', '511200', 'AB', '四川省万县市', '51', '1', '724', '1');
+INSERT INTO `fmp_code` VALUES ('725', '511300', 'AB', '四川省南充市', '51', '1', '725', '1');
+INSERT INTO `fmp_code` VALUES ('726', '511400', 'AB', '四川省眉山市', '51', '1', '726', '1');
+INSERT INTO `fmp_code` VALUES ('727', '511500', 'AB', '四川省宜宾市', '51', '1', '727', '1');
+INSERT INTO `fmp_code` VALUES ('728', '511600', 'AB', '四川省广安市', '51', '1', '728', '1');
+INSERT INTO `fmp_code` VALUES ('729', '511700', 'AB', '四川省达州市', '51', '1', '729', '1');
+INSERT INTO `fmp_code` VALUES ('730', '511800', 'AB', '四川省雅安市', '51', '1', '730', '1');
+INSERT INTO `fmp_code` VALUES ('731', '511900', 'AB', '四川省巴中市', '51', '1', '731', '1');
+INSERT INTO `fmp_code` VALUES ('732', '512000', 'AB', '四川省资阳市', '51', '1', '732', '1');
+INSERT INTO `fmp_code` VALUES ('733', '512300', 'AB', '四川省培陵地区', '51', '1', '733', '1');
+INSERT INTO `fmp_code` VALUES ('734', '512500', 'AB', '四川省宜宾地区', '51', '1', '734', '1');
+INSERT INTO `fmp_code` VALUES ('735', '513000', 'AB', '四川省达川地区', '51', '1', '735', '1');
+INSERT INTO `fmp_code` VALUES ('736', '513100', 'AB', '四川省雅安地区', '51', '1', '736', '1');
+INSERT INTO `fmp_code` VALUES ('737', '513200', 'AB', '四川省阿坝藏族羌族自治州', '51', '1', '737', '1');
+INSERT INTO `fmp_code` VALUES ('738', '513300', 'AB', '四川省甘孜藏族自治州', '51', '1', '738', '1');
+INSERT INTO `fmp_code` VALUES ('739', '513400', 'AB', '四川省凉山彝族自治州', '51', '1', '739', '1');
+INSERT INTO `fmp_code` VALUES ('740', '513500', 'AB', '四川省黔江地区', '51', '1', '740', '1');
+INSERT INTO `fmp_code` VALUES ('741', '513600', 'AB', '四川省广安地区', '51', '1', '741', '1');
+INSERT INTO `fmp_code` VALUES ('742', '513700', 'AB', '四川省巴中地区', '51', '1', '742', '1');
+INSERT INTO `fmp_code` VALUES ('743', '52', 'AB', '贵州省', '1', '0', '743', '1');
+INSERT INTO `fmp_code` VALUES ('744', '520100', 'AB', '贵州省贵阳市', '52', '1', '744', '1');
+INSERT INTO `fmp_code` VALUES ('745', '520200', 'AB', '贵州省六盘水市', '52', '1', '745', '1');
+INSERT INTO `fmp_code` VALUES ('746', '520300', 'AB', '贵州省遵义市', '52', '1', '746', '1');
+INSERT INTO `fmp_code` VALUES ('747', '520400', 'AB', '贵州省安顺市', '52', '1', '747', '1');
+INSERT INTO `fmp_code` VALUES ('748', '522100', 'AB', '贵州省遵义地区', '52', '1', '748', '1');
+INSERT INTO `fmp_code` VALUES ('749', '522200', 'AB', '贵州省铜仁地区', '52', '1', '749', '1');
+INSERT INTO `fmp_code` VALUES ('750', '522300', 'AB', '贵州省黔西南布依族苗族自治州', '52', '1', '750', '1');
+INSERT INTO `fmp_code` VALUES ('751', '522400', 'AB', '贵州省毕节地区', '52', '1', '751', '1');
+INSERT INTO `fmp_code` VALUES ('752', '522500', 'AB', '贵州省安顺地区', '52', '1', '752', '1');
+INSERT INTO `fmp_code` VALUES ('753', '522600', 'AB', '贵州省黔东南苗族侗族自治县', '52', '1', '753', '1');
+INSERT INTO `fmp_code` VALUES ('754', '522700', 'AB', '贵州省黔南布依族苗族自治州', '52', '1', '754', '1');
+INSERT INTO `fmp_code` VALUES ('755', '53', 'AB', '云南省', '1', '0', '755', '1');
+INSERT INTO `fmp_code` VALUES ('756', '530100', 'AB', '云南省昆明市', '53', '1', '756', '1');
+INSERT INTO `fmp_code` VALUES ('757', '530200', 'AB', '云南省东川市', '53', '1', '757', '1');
+INSERT INTO `fmp_code` VALUES ('758', '530300', 'AB', '云南省曲靖市', '53', '1', '758', '1');
+INSERT INTO `fmp_code` VALUES ('759', '530400', 'AB', '云南省玉溪市', '53', '1', '759', '1');
+INSERT INTO `fmp_code` VALUES ('760', '530500', 'AB', '云南省保山市', '53', '1', '760', '1');
+INSERT INTO `fmp_code` VALUES ('761', '530600', 'AB', '云南省昭通市', '53', '1', '761', '1');
+INSERT INTO `fmp_code` VALUES ('762', '530700', 'AB', '云南省丽江市', '53', '1', '762', '1');
+INSERT INTO `fmp_code` VALUES ('763', '530800', 'AB', '云南省普洱市', '53', '1', '763', '1');
+INSERT INTO `fmp_code` VALUES ('764', '530900', 'AB', '云南省临沧市', '53', '1', '764', '1');
+INSERT INTO `fmp_code` VALUES ('765', '532100', 'AB', '云南省昭通地区', '53', '1', '765', '1');
+INSERT INTO `fmp_code` VALUES ('766', '532200', 'AB', '云南省曲靖地区', '53', '1', '766', '1');
+INSERT INTO `fmp_code` VALUES ('767', '532300', 'AB', '云南省楚雄彝族自治州', '53', '1', '767', '1');
+INSERT INTO `fmp_code` VALUES ('768', '532400', 'AB', '云南省玉溪地区', '53', '1', '768', '1');
+INSERT INTO `fmp_code` VALUES ('769', '532500', 'AB', '云南省红河哈尼族彝族自治州', '53', '1', '769', '1');
+INSERT INTO `fmp_code` VALUES ('770', '532600', 'AB', '云南省文山壮族苗族自治州', '53', '1', '770', '1');
+INSERT INTO `fmp_code` VALUES ('771', '532700', 'AB', '云南省思茅地区', '53', '1', '771', '1');
+INSERT INTO `fmp_code` VALUES ('772', '532800', 'AB', '云南省西双版纳傣族自治州', '53', '1', '772', '1');
+INSERT INTO `fmp_code` VALUES ('773', '532900', 'AB', '云南省大理白族自治州', '53', '1', '773', '1');
+INSERT INTO `fmp_code` VALUES ('774', '533000', 'AB', '云南省保山地区', '53', '1', '774', '1');
+INSERT INTO `fmp_code` VALUES ('775', '533100', 'AB', '云南省德宏傣族景颇族自治州', '53', '1', '775', '1');
+INSERT INTO `fmp_code` VALUES ('776', '533200', 'AB', '云南省丽江地区', '53', '1', '776', '1');
+INSERT INTO `fmp_code` VALUES ('777', '533300', 'AB', '云南省怒江傈傈族自治州', '53', '1', '777', '1');
+INSERT INTO `fmp_code` VALUES ('778', '533400', 'AB', '云南省迪庆藏族自治州', '53', '1', '778', '1');
+INSERT INTO `fmp_code` VALUES ('779', '533500', 'AB', '云南省临沧地区', '53', '1', '779', '1');
+INSERT INTO `fmp_code` VALUES ('780', '54', 'AB', '西藏自治区', '1', '0', '780', '1');
+INSERT INTO `fmp_code` VALUES ('781', '540100', 'AB', '西藏自治区拉萨市', '54', '1', '781', '1');
+INSERT INTO `fmp_code` VALUES ('782', '542100', 'AB', '西藏自治区昌都地区', '54', '1', '782', '1');
+INSERT INTO `fmp_code` VALUES ('783', '542200', 'AB', '西藏自治区山南地区', '54', '1', '783', '1');
+INSERT INTO `fmp_code` VALUES ('784', '542300', 'AB', '西藏自治区日喀则地区', '54', '1', '784', '1');
+INSERT INTO `fmp_code` VALUES ('785', '542400', 'AB', '西藏自治区那曲地区', '54', '1', '785', '1');
+INSERT INTO `fmp_code` VALUES ('786', '542500', 'AB', '西藏自治区阿里地区', '54', '1', '786', '1');
+INSERT INTO `fmp_code` VALUES ('787', '542600', 'AB', '西藏自治区林芝地区', '54', '1', '787', '1');
+INSERT INTO `fmp_code` VALUES ('788', '61', 'AB', '陕西省', '1', '0', '788', '1');
+INSERT INTO `fmp_code` VALUES ('789', '610100', 'AB', '陕西省西安市', '61', '1', '789', '1');
+INSERT INTO `fmp_code` VALUES ('790', '610200', 'AB', '陕西省铜川市', '61', '1', '790', '1');
+INSERT INTO `fmp_code` VALUES ('791', '610300', 'AB', '陕西省宝鸡市', '61', '1', '791', '1');
+INSERT INTO `fmp_code` VALUES ('792', '610400', 'AB', '陕西省咸阳市', '61', '1', '792', '1');
+INSERT INTO `fmp_code` VALUES ('793', '610500', 'AB', '陕西省渭南市', '61', '1', '793', '1');
+INSERT INTO `fmp_code` VALUES ('794', '610600', 'AB', '陕西省延安市', '61', '1', '794', '1');
+INSERT INTO `fmp_code` VALUES ('795', '610700', 'AB', '陕西省汉中市', '61', '1', '795', '1');
+INSERT INTO `fmp_code` VALUES ('796', '610800', 'AB', '陕西省榆林市', '61', '1', '796', '1');
+INSERT INTO `fmp_code` VALUES ('797', '610900', 'AB', '陕西省安康市', '61', '1', '797', '1');
+INSERT INTO `fmp_code` VALUES ('798', '611000', 'AB', '陕西省商洛市', '61', '1', '798', '1');
+INSERT INTO `fmp_code` VALUES ('799', '62', 'AB', '甘肃省', '1', '0', '799', '1');
+INSERT INTO `fmp_code` VALUES ('800', '620100', 'AB', '甘肃省兰州市', '62', '1', '800', '1');
+INSERT INTO `fmp_code` VALUES ('801', '620200', 'AB', '甘肃省嘉峪关市', '62', '1', '801', '1');
+INSERT INTO `fmp_code` VALUES ('802', '620300', 'AB', '甘肃省金昌市', '62', '1', '802', '1');
+INSERT INTO `fmp_code` VALUES ('803', '620400', 'AB', '甘肃省白银市', '62', '1', '803', '1');
+INSERT INTO `fmp_code` VALUES ('804', '620500', 'AB', '甘肃省天水市', '62', '1', '804', '1');
+INSERT INTO `fmp_code` VALUES ('805', '620600', 'AB', '甘肃省武威市', '62', '1', '805', '1');
+INSERT INTO `fmp_code` VALUES ('806', '620700', 'AB', '甘肃省张掖市', '62', '1', '806', '1');
+INSERT INTO `fmp_code` VALUES ('807', '620800', 'AB', '甘肃省平凉市', '62', '1', '807', '1');
+INSERT INTO `fmp_code` VALUES ('808', '620900', 'AB', '甘肃省酒泉市', '62', '1', '808', '1');
+INSERT INTO `fmp_code` VALUES ('809', '621000', 'AB', '甘肃省庆阳市', '62', '1', '809', '1');
+INSERT INTO `fmp_code` VALUES ('810', '621100', 'AB', '甘肃省定西市', '62', '1', '810', '1');
+INSERT INTO `fmp_code` VALUES ('811', '621200', 'AB', '甘肃省陇南市', '62', '1', '811', '1');
+INSERT INTO `fmp_code` VALUES ('812', '622900', 'AB', '甘肃省临夏回族自治州', '62', '1', '812', '1');
+INSERT INTO `fmp_code` VALUES ('813', '623000', 'AB', '甘肃省甘南藏族自治州', '62', '1', '813', '1');
+INSERT INTO `fmp_code` VALUES ('814', '63', 'AB', '青海省', '1', '0', '814', '1');
+INSERT INTO `fmp_code` VALUES ('815', '630100', 'AB', '青海省西宁市', '63', '1', '815', '1');
+INSERT INTO `fmp_code` VALUES ('816', '632100', 'AB', '青海省海东地区', '63', '1', '816', '1');
+INSERT INTO `fmp_code` VALUES ('817', '632200', 'AB', '青海省海北藏族自治州', '63', '1', '817', '1');
+INSERT INTO `fmp_code` VALUES ('818', '632300', 'AB', '青海省黄南藏族自治州', '63', '1', '818', '1');
+INSERT INTO `fmp_code` VALUES ('819', '632500', 'AB', '青海省海南藏族自治州', '63', '1', '819', '1');
+INSERT INTO `fmp_code` VALUES ('820', '632600', 'AB', '青海省果洛藏族自治州', '63', '1', '820', '1');
+INSERT INTO `fmp_code` VALUES ('821', '632700', 'AB', '青海省玉树藏族自治州', '63', '1', '821', '1');
+INSERT INTO `fmp_code` VALUES ('822', '632800', 'AB', '青海省海西蒙古族藏族自治州', '63', '1', '822', '1');
+INSERT INTO `fmp_code` VALUES ('823', '64', 'AB', '宁夏回族自治区', '1', '0', '823', '1');
+INSERT INTO `fmp_code` VALUES ('824', '640100', 'AB', '宁夏回族自治区银川市', '64', '1', '824', '1');
+INSERT INTO `fmp_code` VALUES ('825', '640200', 'AB', '宁夏回族自治区石嘴山市', '64', '1', '825', '1');
+INSERT INTO `fmp_code` VALUES ('826', '640300', 'AB', '宁夏回族自治区吴忠市', '64', '1', '826', '1');
+INSERT INTO `fmp_code` VALUES ('827', '640400', 'AB', '宁夏回族自治区固原市', '64', '1', '827', '1');
+INSERT INTO `fmp_code` VALUES ('828', '640500', 'AB', '宁夏回族自治区固中卫市', '64', '1', '828', '1');
+INSERT INTO `fmp_code` VALUES ('829', '642100', 'AB', '宁夏回族自治区银南地区', '64', '1', '829', '1');
+INSERT INTO `fmp_code` VALUES ('830', '642200', 'AB', '宁夏回族自治区固原地区', '64', '1', '830', '1');
+INSERT INTO `fmp_code` VALUES ('831', '65', 'AB', '新疆维吾尔自治区', '1', '0', '831', '1');
+INSERT INTO `fmp_code` VALUES ('832', '650100', 'AB', '新疆维吾尔自治区乌鲁木齐市', '65', '1', '832', '1');
+INSERT INTO `fmp_code` VALUES ('833', '650200', 'AB', '新疆维吾尔自治区克拉玛依市', '65', '1', '833', '1');
+INSERT INTO `fmp_code` VALUES ('834', '652100', 'AB', '新疆维吾尔自治区吐鲁番地区', '65', '1', '834', '1');
+INSERT INTO `fmp_code` VALUES ('835', '652200', 'AB', '新疆维吾尔自治区哈密地区', '65', '1', '835', '1');
+INSERT INTO `fmp_code` VALUES ('836', '652300', 'AB', '新疆维吾尔自治区昌吉回族自治州', '65', '1', '836', '1');
+INSERT INTO `fmp_code` VALUES ('837', '652700', 'AB', '新疆维吾尔自治区博尔塔拉蒙古自治州', '65', '1', '837', '1');
+INSERT INTO `fmp_code` VALUES ('838', '652800', 'AB', '新疆维吾尔自治区巴音郭楞蒙古自治州', '65', '1', '838', '1');
+INSERT INTO `fmp_code` VALUES ('839', '652900', 'AB', '新疆维吾尔自治区阿克苏地区', '65', '1', '839', '1');
+INSERT INTO `fmp_code` VALUES ('840', '653000', 'AB', '新疆维吾尔自治区克孜勒苏柯尔克孜自治州', '65', '1', '840', '1');
+INSERT INTO `fmp_code` VALUES ('841', '653100', 'AB', '新疆维吾尔自治区喀什地区', '65', '1', '841', '1');
+INSERT INTO `fmp_code` VALUES ('842', '653200', 'AB', '新疆维吾尔自治区和田地区', '65', '1', '842', '1');
+INSERT INTO `fmp_code` VALUES ('843', '654000', 'AB', '新疆维吾尔自治区伊犁哈萨克自治州', '65', '1', '843', '1');
+INSERT INTO `fmp_code` VALUES ('844', '654100', 'AB', '新疆维吾尔自治区伊犁地区', '65', '1', '844', '1');
+INSERT INTO `fmp_code` VALUES ('845', '654200', 'AB', '新疆维吾尔自治区塔城地区', '65', '1', '845', '1');
+INSERT INTO `fmp_code` VALUES ('846', '654300', 'AB', '新疆维吾尔自治区阿勒泰地区', '65', '1', '846', '1');
+INSERT INTO `fmp_code` VALUES ('847', '659000', 'AB', '新疆维吾尔自治区直辖县级行政区划', '65', '1', '847', '1');
+INSERT INTO `fmp_code` VALUES ('848', '71', 'AB', '台湾省', '1', '0', '848', '1');
+INSERT INTO `fmp_code` VALUES ('849', '710000', 'AB', '台湾省', '71', '1', '849', '1');
+INSERT INTO `fmp_code` VALUES ('850', '81', 'AB', '香港特别行政区', '1', '0', '850', '1');
+INSERT INTO `fmp_code` VALUES ('851', '810000', 'AB', '香港特别行政区', '81', '1', '851', '1');
+INSERT INTO `fmp_code` VALUES ('852', '82', 'AB', '澳门特别行政区', '1', '0', '852', '1');
+INSERT INTO `fmp_code` VALUES ('853', '820000', 'AB', '澳门特别行政区', '82', '1', '853', '1');
+INSERT INTO `fmp_code` VALUES ('854', '1', 'MT', '优秀', '-1', '1', '854', '1');
+INSERT INTO `fmp_code` VALUES ('855', '2', 'MT', '良好', '-1', '1', '855', '1');
+INSERT INTO `fmp_code` VALUES ('856', '3', 'MT', '其他', '-1', '1', '856', '1');
+INSERT INTO `fmp_code` VALUES ('857', '1', 'XL', '全日制本科及以上', '-1', '1', '857', '1');
+INSERT INTO `fmp_code` VALUES ('858', '2', 'XL', '全日制硕士研究生及以上', '-1', '1', '858', '1');
+INSERT INTO `fmp_code` VALUES ('859', '0', 'AJ', '所有专业代码', '-1', '0', '859', '1');
+INSERT INTO `fmp_code` VALUES ('860', '10', 'AJ', '哲学', '0', '0', '860', '1');
+INSERT INTO `fmp_code` VALUES ('861', '101', 'AJ', '哲学类', '10', '0', '861', '1');
+INSERT INTO `fmp_code` VALUES ('862', '1010100', 'AJ', '哲学', '101', '1', '862', '1');
+INSERT INTO `fmp_code` VALUES ('863', '1010200', 'AJ', '逻辑学', '101', '1', '863', '1');
+INSERT INTO `fmp_code` VALUES ('864', '1010300', 'AJ', '宗教学', '101', '1', '864', '1');
+INSERT INTO `fmp_code` VALUES ('865', '1010400', 'AJ', '伦理学', '101', '1', '865', '1');
+INSERT INTO `fmp_code` VALUES ('866', '1014100', 'AJ', '应用美学', '101', '1', '866', '1');
+INSERT INTO `fmp_code` VALUES ('867', '1014200', 'AJ', '宗教事务管理', '101', '1', '867', '1');
+INSERT INTO `fmp_code` VALUES ('868', '1014300', 'AJ', '哲学类其他相关专业', '101', '1', '868', '1');
+INSERT INTO `fmp_code` VALUES ('869', '20', 'AJ', '经济学', '0', '0', '869', '1');
+INSERT INTO `fmp_code` VALUES ('870', '201', 'AJ', '经济学类', '20', '0', '870', '1');
+INSERT INTO `fmp_code` VALUES ('871', '2010100', 'AJ', '经济学', '201', '1', '871', '1');
+INSERT INTO `fmp_code` VALUES ('872', '2010200', 'AJ', '国际经济与贸易', '201', '1', '872', '1');
+INSERT INTO `fmp_code` VALUES ('873', '2010300', 'AJ', '财政学', '201', '1', '873', '1');
+INSERT INTO `fmp_code` VALUES ('874', '2010400', 'AJ', '金融学', '201', '1', '874', '1');
+INSERT INTO `fmp_code` VALUES ('875', '2010500', 'AJ', '国民经济管理', '201', '1', '875', '1');
+INSERT INTO `fmp_code` VALUES ('876', '2010600', 'AJ', '贸易经济', '201', '1', '876', '1');
+INSERT INTO `fmp_code` VALUES ('877', '2010700', 'AJ', '保险', '201', '1', '877', '1');
+INSERT INTO `fmp_code` VALUES ('878', '2010800', 'AJ', '环境经济', '201', '1', '878', '1');
+INSERT INTO `fmp_code` VALUES ('879', '2010900', 'AJ', '金融工程', '201', '1', '879', '1');
+INSERT INTO `fmp_code` VALUES ('880', '2011000', 'AJ', '税务', '201', '1', '880', '1');
+INSERT INTO `fmp_code` VALUES ('881', '2011100', 'AJ', '信用管理', '201', '1', '881', '1');
+INSERT INTO `fmp_code` VALUES ('882', '2011200', 'AJ', '网络经济学', '201', '1', '882', '1');
+INSERT INTO `fmp_code` VALUES ('883', '2011300', 'AJ', '体育经济', '201', '1', '883', '1');
+INSERT INTO `fmp_code` VALUES ('884', '2014100', 'AJ', '货币银行学', '201', '1', '884', '1');
+INSERT INTO `fmp_code` VALUES ('885', '2014200', 'AJ', '农业经济', '201', '1', '885', '1');
+INSERT INTO `fmp_code` VALUES ('886', '2014400', 'AJ', '劳动经济', '201', '1', '886', '1');
+INSERT INTO `fmp_code` VALUES ('887', '2014500', 'AJ', '投资经济', '201', '1', '887', '1');
+INSERT INTO `fmp_code` VALUES ('888', '2014600', 'AJ', '金融经济', '201', '1', '888', '1');
+INSERT INTO `fmp_code` VALUES ('889', '2014700', 'AJ', '国际金融', '201', '1', '889', '1');
+INSERT INTO `fmp_code` VALUES ('890', '2014800', 'AJ', '国际贸易', '201', '1', '890', '1');
+INSERT INTO `fmp_code` VALUES ('891', '2015100', 'AJ', '民航计划财务', '201', '1', '891', '1');
+INSERT INTO `fmp_code` VALUES ('892', '2015200', 'AJ', '物资经济', '201', '1', '892', '1');
+INSERT INTO `fmp_code` VALUES ('893', '2015300', 'AJ', '工程造价', '201', '1', '893', '1');
+INSERT INTO `fmp_code` VALUES ('894', '2015400', 'AJ', '计划统计', '201', '1', '894', '1');
+INSERT INTO `fmp_code` VALUES ('895', '2015500', 'AJ', '旅游经济', '201', '1', '895', '1');
+INSERT INTO `fmp_code` VALUES ('896', '2015600', 'AJ', '金融与保险', '201', '1', '896', '1');
+INSERT INTO `fmp_code` VALUES ('897', '2015700', 'AJ', '社会保险', '201', '1', '897', '1');
+INSERT INTO `fmp_code` VALUES ('898', '2015800', 'AJ', '报关与国际货运', '201', '1', '898', '1');
+INSERT INTO `fmp_code` VALUES ('899', '2015900', 'AJ', '国际文化经贸交流', '201', '1', '899', '1');
+INSERT INTO `fmp_code` VALUES ('900', '2016100', 'AJ', '国际商务', '201', '1', '900', '1');
+INSERT INTO `fmp_code` VALUES ('901', '2016200', 'AJ', '资源开发', '201', '1', '901', '1');
+INSERT INTO `fmp_code` VALUES ('902', '2016300', 'AJ', '涉外税收', '201', '1', '902', '1');
+INSERT INTO `fmp_code` VALUES ('903', '2016400', 'AJ', '企业商务', '201', '1', '903', '1');
+INSERT INTO `fmp_code` VALUES ('904', '2016500', 'AJ', '促销与广告', '201', '1', '904', '1');
+INSERT INTO `fmp_code` VALUES ('905', '2016600', 'AJ', '财政税收', '201', '1', '905', '1');
+INSERT INTO `fmp_code` VALUES ('906', '2016700', 'AJ', '人文旅游资源开发', '201', '1', '906', '1');
+INSERT INTO `fmp_code` VALUES ('907', '2016800', 'AJ', '国际贸易与金融', '201', '1', '907', '1');
+INSERT INTO `fmp_code` VALUES ('908', '2016900', 'AJ', '人口与计划生育统计学', '201', '1', '908', '1');
+INSERT INTO `fmp_code` VALUES ('909', '2017000', 'AJ', '人口与经济学', '201', '1', '909', '1');
+INSERT INTO `fmp_code` VALUES ('910', '2017100', 'AJ', '旅游资源开发与利用', '201', '1', '910', '1');
+INSERT INTO `fmp_code` VALUES ('911', '2017200', 'AJ', '邮政金融', '201', '1', '911', '1');
+INSERT INTO `fmp_code` VALUES ('912', '2017300', 'AJ', '国际工程项目开发', '201', '1', '912', '1');
+INSERT INTO `fmp_code` VALUES ('913', '2017400', 'AJ', '工业外贸', '201', '1', '913', '1');
+INSERT INTO `fmp_code` VALUES ('914', '2017500', 'AJ', '航材管理与外贸', '201', '1', '914', '1');
+INSERT INTO `fmp_code` VALUES ('915', '2017600', 'AJ', '合作经济', '201', '1', '915', '1');
+INSERT INTO `fmp_code` VALUES ('916', '2017700', 'AJ', '金融与证券', '201', '1', '916', '1');
+INSERT INTO `fmp_code` VALUES ('917', '2017800', 'AJ', '投资预算', '201', '1', '917', '1');
+INSERT INTO `fmp_code` VALUES ('918', '2017900', 'AJ', '拍卖与典当', '201', '1', '918', '1');
+INSERT INTO `fmp_code` VALUES ('919', '2018000', 'AJ', '商务谈判与报关', '201', '1', '919', '1');
+INSERT INTO `fmp_code` VALUES ('920', '2018100', 'AJ', '证券与期货', '201', '1', '920', '1');
+INSERT INTO `fmp_code` VALUES ('921', '2018200', 'AJ', '证券实务', '201', '1', '921', '1');
+INSERT INTO `fmp_code` VALUES ('922', '2018300', 'AJ', '财政金融', '201', '1', '922', '1');
+INSERT INTO `fmp_code` VALUES ('923', '2018400', 'AJ', '机电产品营销与外贸', '201', '1', '923', '1');
+INSERT INTO `fmp_code` VALUES ('924', '2018500', 'AJ', '证券与保险', '201', '1', '924', '1');
+INSERT INTO `fmp_code` VALUES ('925', '2018600', 'AJ', '医疗保险', '201', '1', '925', '1');
+INSERT INTO `fmp_code` VALUES ('926', '2018700', 'AJ', '技术贸易', '201', '1', '926', '1');
+INSERT INTO `fmp_code` VALUES ('927', '2018800', 'AJ', '汽车贸易', '201', '1', '927', '1');
+INSERT INTO `fmp_code` VALUES ('928', '2018900', 'AJ', '国际货运代理', '201', '1', '928', '1');
+INSERT INTO `fmp_code` VALUES ('929', '2019000', 'AJ', '经济类其他专业', '201', '1', '929', '1');
+INSERT INTO `fmp_code` VALUES ('930', '30', 'AJ', '法学', '0', '0', '930', '1');
+INSERT INTO `fmp_code` VALUES ('931', '301', 'AJ', '法学类', '30', '0', '931', '1');
+INSERT INTO `fmp_code` VALUES ('932', '3010100', 'AJ', '法学', '301', '1', '932', '1');
+INSERT INTO `fmp_code` VALUES ('933', '3010200', 'AJ', '知识产权法', '301', '1', '933', '1');
+INSERT INTO `fmp_code` VALUES ('934', '3012000', 'AJ', '监狱学', '301', '1', '934', '1');
+INSERT INTO `fmp_code` VALUES ('935', '3012100', 'AJ', '军事法学', '301', '1', '935', '1');
+INSERT INTO `fmp_code` VALUES ('936', '3014100', 'AJ', '经济法', '301', '1', '936', '1');
+INSERT INTO `fmp_code` VALUES ('937', '3014200', 'AJ', '国际经济法', '301', '1', '937', '1');
+INSERT INTO `fmp_code` VALUES ('938', '3014300', 'AJ', '法律', '301', '1', '938', '1');
+INSERT INTO `fmp_code` VALUES ('939', '3014400', 'AJ', '涉外经济与法律', '301', '1', '939', '1');
+INSERT INTO `fmp_code` VALUES ('940', '3014500', 'AJ', '经济法律事务', '301', '1', '940', '1');
+INSERT INTO `fmp_code` VALUES ('941', '3014600', 'AJ', '律师与法律服务', '301', '1', '941', '1');
+INSERT INTO `fmp_code` VALUES ('942', '3014700', 'AJ', '律师事务', '301', '1', '942', '1');
+INSERT INTO `fmp_code` VALUES ('943', '3014800', 'AJ', '行政法律事务', '301', '1', '943', '1');
+INSERT INTO `fmp_code` VALUES ('944', '3014900', 'AJ', '农业经济法', '301', '1', '944', '1');
+INSERT INTO `fmp_code` VALUES ('945', '3015000', 'AJ', '法学类其他专业', '301', '1', '945', '1');
+INSERT INTO `fmp_code` VALUES ('946', '302', 'AJ', '马克思主义理论类', '30', '0', '946', '1');
+INSERT INTO `fmp_code` VALUES ('947', '3020100', 'AJ', '科学社会主义与国际共产主义运动', '302', '1', '947', '1');
+INSERT INTO `fmp_code` VALUES ('948', '3020200', 'AJ', '中国革命史与中国共产党党史', '302', '1', '948', '1');
+INSERT INTO `fmp_code` VALUES ('949', '3020300', 'AJ', '马克思主义理论类其他专业', '302', '1', '949', '1');
+INSERT INTO `fmp_code` VALUES ('950', '303', 'AJ', '社会学类', '30', '0', '950', '1');
+INSERT INTO `fmp_code` VALUES ('951', '3030100', 'AJ', '社会学', '303', '1', '951', '1');
+INSERT INTO `fmp_code` VALUES ('952', '3030200', 'AJ', '社会工作', '303', '1', '952', '1');
+INSERT INTO `fmp_code` VALUES ('953', '3034200', 'AJ', '人口社会学与人口工作', '303', '1', '953', '1');
+INSERT INTO `fmp_code` VALUES ('954', '3034300', 'AJ', '行政管理办公自动化', '303', '1', '954', '1');
+INSERT INTO `fmp_code` VALUES ('955', '3034400', 'AJ', '信息应用', '303', '1', '955', '1');
+INSERT INTO `fmp_code` VALUES ('956', '3034500', 'AJ', '社区服务', '303', '1', '956', '1');
+INSERT INTO `fmp_code` VALUES ('957', '3034600', 'AJ', '空中乘务', '303', '1', '957', '1');
+INSERT INTO `fmp_code` VALUES ('958', '3034700', 'AJ', '老年人服务', '303', '1', '958', '1');
+INSERT INTO `fmp_code` VALUES ('959', '3034800', 'AJ', '儿童青少年服务', '303', '1', '959', '1');
+INSERT INTO `fmp_code` VALUES ('960', '3034900', 'AJ', '社会救助', '303', '1', '960', '1');
+INSERT INTO `fmp_code` VALUES ('961', '3035000', 'AJ', '社区管理', '303', '1', '961', '1');
+INSERT INTO `fmp_code` VALUES ('962', '3035100', 'AJ', '导游服务', '303', '1', '962', '1');
+INSERT INTO `fmp_code` VALUES ('963', '3035200', 'AJ', '饭店服务', '303', '1', '963', '1');
+INSERT INTO `fmp_code` VALUES ('964', '3035300', 'AJ', '成果转让及中介服务', '303', '1', '964', '1');
+INSERT INTO `fmp_code` VALUES ('965', '3035400', 'AJ', '家政', '303', '1', '965', '1');
+INSERT INTO `fmp_code` VALUES ('966', '3035500', 'AJ', '英语导游', '303', '1', '966', '1');
+INSERT INTO `fmp_code` VALUES ('967', '3035600', 'AJ', '群众文化管理', '303', '1', '967', '1');
+INSERT INTO `fmp_code` VALUES ('968', '3035700', 'AJ', '安全保卫', '303', '1', '968', '1');
+INSERT INTO `fmp_code` VALUES ('969', '3035800', 'AJ', '政治保卫', '303', '1', '969', '1');
+INSERT INTO `fmp_code` VALUES ('970', '3035900', 'AJ', '群众文化艺术', '303', '1', '970', '1');
+INSERT INTO `fmp_code` VALUES ('971', '3036000', 'AJ', '卫生监督与管理', '303', '1', '971', '1');
+INSERT INTO `fmp_code` VALUES ('972', '3036100', 'AJ', '秘书与交通法规', '303', '1', '972', '1');
+INSERT INTO `fmp_code` VALUES ('973', '3036200', 'AJ', '礼宾礼仪', '303', '1', '973', '1');
+INSERT INTO `fmp_code` VALUES ('974', '3036300', 'AJ', '国际导游', '303', '1', '974', '1');
+INSERT INTO `fmp_code` VALUES ('975', '3036400', 'AJ', '旅游及航空服务', '303', '1', '975', '1');
+INSERT INTO `fmp_code` VALUES ('976', '3036500', 'AJ', '彝族文化资源管理', '303', '1', '976', '1');
+INSERT INTO `fmp_code` VALUES ('977', '3036600', 'AJ', '社会学类其他转呀', '303', '1', '977', '1');
+INSERT INTO `fmp_code` VALUES ('978', '304', 'AJ', '政治学类', '30', '0', '978', '1');
+INSERT INTO `fmp_code` VALUES ('979', '3040100', 'AJ', '政治学与行政学', '304', '1', '979', '1');
+INSERT INTO `fmp_code` VALUES ('980', '3040200', 'AJ', '国际政治', '304', '1', '980', '1');
+INSERT INTO `fmp_code` VALUES ('981', '3040300', 'AJ', '外交学', '304', '1', '981', '1');
+INSERT INTO `fmp_code` VALUES ('982', '3040400', 'AJ', '思想政治教育', '304', '1', '982', '1');
+INSERT INTO `fmp_code` VALUES ('983', '3040500', 'AJ', '国际文化交流', '304', '1', '983', '1');
+INSERT INTO `fmp_code` VALUES ('984', '3044100', 'AJ', '国际关系', '304', '1', '984', '1');
+INSERT INTO `fmp_code` VALUES ('985', '3044200', 'AJ', '政治学类其他专业', '304', '1', '985', '1');
+INSERT INTO `fmp_code` VALUES ('986', '305', 'AJ', '公安学类', '30', '0', '986', '1');
+INSERT INTO `fmp_code` VALUES ('987', '3050100', 'AJ', '治安学', '305', '1', '987', '1');
+INSERT INTO `fmp_code` VALUES ('988', '3050200', 'AJ', '侦查学', '305', '1', '988', '1');
+INSERT INTO `fmp_code` VALUES ('989', '3050300', 'AJ', '边防管理', '305', '1', '989', '1');
+INSERT INTO `fmp_code` VALUES ('990', '3050400', 'AJ', '火灾勘查', '305', '1', '990', '1');
+INSERT INTO `fmp_code` VALUES ('991', '3050500', 'AJ', '禁毒学', '305', '1', '991', '1');
+INSERT INTO `fmp_code` VALUES ('992', '3054100', 'AJ', '船艇指挥', '305', '1', '992', '1');
+INSERT INTO `fmp_code` VALUES ('993', '3054200', 'AJ', '刑事侦察', '305', '1', '993', '1');
+INSERT INTO `fmp_code` VALUES ('994', '3054300', 'AJ', '经济犯罪侦察', '305', '1', '994', '1');
+INSERT INTO `fmp_code` VALUES ('995', '3054400', 'AJ', '警察指挥与战术', '305', '1', '995', '1');
+INSERT INTO `fmp_code` VALUES ('996', '3054500', 'AJ', '公安文秘', '305', '1', '996', '1');
+INSERT INTO `fmp_code` VALUES ('997', '3054600', 'AJ', '司法警务', '305', '1', '997', '1');
+INSERT INTO `fmp_code` VALUES ('998', '3054700', 'AJ', '公安学类其他专业', '305', '1', '998', '1');
+INSERT INTO `fmp_code` VALUES ('999', '40', 'AJ', '教育学', '0', '0', '999', '1');
+INSERT INTO `fmp_code` VALUES ('1000', '401', 'AJ', '教育学类', '40', '0', '1000', '1');
+INSERT INTO `fmp_code` VALUES ('1001', '4010100', 'AJ', '教育学', '401', '1', '1001', '1');
+INSERT INTO `fmp_code` VALUES ('1002', '4010200', 'AJ', '学前教育', '401', '1', '1002', '1');
+INSERT INTO `fmp_code` VALUES ('1003', '4010300', 'AJ', '特殊教育', '401', '1', '1003', '1');
+INSERT INTO `fmp_code` VALUES ('1004', '4010400', 'AJ', '教育技术学', '401', '1', '1004', '1');
+INSERT INTO `fmp_code` VALUES ('1005', '4010500', 'AJ', '小学教育', '401', '1', '1005', '1');
+INSERT INTO `fmp_code` VALUES ('1006', '4010600', 'AJ', '艺术教育', '401', '1', '1006', '1');
+INSERT INTO `fmp_code` VALUES ('1007', '4010700', 'AJ', '人文教育', '401', '1', '1007', '1');
+INSERT INTO `fmp_code` VALUES ('1008', '4010800', 'AJ', '科学教育', '401', '1', '1008', '1');
+INSERT INTO `fmp_code` VALUES ('1009', '4014100', 'AJ', '学前辅导与保育', '401', '1', '1009', '1');
+INSERT INTO `fmp_code` VALUES ('1010', '4014200', 'AJ', '幼儿艺体教育', '401', '1', '1010', '1');
+INSERT INTO `fmp_code` VALUES ('1011', '4014300', 'AJ', '综合理科教育', '401', '1', '1011', '1');
+INSERT INTO `fmp_code` VALUES ('1012', '4014400', 'AJ', '实验管理与教学', '401', '1', '1012', '1');
+INSERT INTO `fmp_code` VALUES ('1013', '4014500', 'AJ', '电化教育', '401', '1', '1013', '1');
+INSERT INTO `fmp_code` VALUES ('1014', '4014600', 'AJ', '体育卫生教育', '401', '1', '1014', '1');
+INSERT INTO `fmp_code` VALUES ('1015', '4014700', 'AJ', '政史教育', '401', '1', '1015', '1');
+INSERT INTO `fmp_code` VALUES ('1016', '4014800', 'AJ', '政治与法律教育', '401', '1', '1016', '1');
+INSERT INTO `fmp_code` VALUES ('1017', '4014900', 'AJ', '舞蹈表演与教育', '401', '1', '1017', '1');
+INSERT INTO `fmp_code` VALUES ('1018', '4015000', 'AJ', '现代教育与实验技术', '401', '1', '1018', '1');
+INSERT INTO `fmp_code` VALUES ('1019', '4015100', 'AJ', '儿童教育', '401', '1', '1019', '1');
+INSERT INTO `fmp_code` VALUES ('1020', '4015200', 'AJ', '少儿思想教育', '401', '1', '1020', '1');
+INSERT INTO `fmp_code` VALUES ('1021', '4015300', 'AJ', '初等教育', '401', '1', '1021', '1');
+INSERT INTO `fmp_code` VALUES ('1022', '4015400', 'AJ', '综合文科教育', '401', '1', '1022', '1');
+INSERT INTO `fmp_code` VALUES ('1023', '4015500', 'AJ', '体育现代教育技术', '401', '1', '1023', '1');
+INSERT INTO `fmp_code` VALUES ('1024', '4015600', 'AJ', '青年教育', '401', '1', '1024', '1');
+INSERT INTO `fmp_code` VALUES ('1025', '4015700', 'AJ', '教育信息技术', '401', '1', '1025', '1');
+INSERT INTO `fmp_code` VALUES ('1026', '4015800', 'AJ', '教育学类其他专业', '401', '1', '1026', '1');
+INSERT INTO `fmp_code` VALUES ('1027', '402', 'AJ', '体育学类', '40', '0', '1027', '1');
+INSERT INTO `fmp_code` VALUES ('1028', '4020100', 'AJ', '体育教育', '402', '1', '1028', '1');
+INSERT INTO `fmp_code` VALUES ('1029', '4020200', 'AJ', '运动训练', '402', '1', '1029', '1');
+INSERT INTO `fmp_code` VALUES ('1030', '4020300', 'AJ', '社会体育', '402', '1', '1030', '1');
+INSERT INTO `fmp_code` VALUES ('1031', '4020400', 'AJ', '运动人体科学', '402', '1', '1031', '1');
+INSERT INTO `fmp_code` VALUES ('1032', '4020500', 'AJ', '民族传统体育', '402', '1', '1032', '1');
+INSERT INTO `fmp_code` VALUES ('1033', '4020600', 'AJ', '旅游体育', '402', '1', '1033', '1');
+INSERT INTO `fmp_code` VALUES ('1034', '4024100', 'AJ', '体育保健康复', '402', '1', '1034', '1');
+INSERT INTO `fmp_code` VALUES ('1035', '4024200', 'AJ', '武术', '402', '1', '1035', '1');
+INSERT INTO `fmp_code` VALUES ('1036', '4024300', 'AJ', '竞技体育', '402', '1', '1036', '1');
+INSERT INTO `fmp_code` VALUES ('1037', '4024400', 'AJ', '武术与搏击', '402', '1', '1037', '1');
+INSERT INTO `fmp_code` VALUES ('1038', '4024500', 'AJ', '体育健身与保安', '402', '1', '1038', '1');
+INSERT INTO `fmp_code` VALUES ('1039', '4024600', 'AJ', '足球运动技术', '402', '1', '1039', '1');
+INSERT INTO `fmp_code` VALUES ('1040', '4024700', 'AJ', '舞蹈与健身技术', '402', '1', '1040', '1');
+INSERT INTO `fmp_code` VALUES ('1041', '4024800', 'AJ', '体育学类其他专业', '402', '1', '1041', '1');
+INSERT INTO `fmp_code` VALUES ('1042', '403', 'AJ', '职业技术教育类', '40', '0', '1042', '1');
+INSERT INTO `fmp_code` VALUES ('1043', '4030100', 'AJ', '农艺教育', '403', '1', '1043', '1');
+INSERT INTO `fmp_code` VALUES ('1044', '4030200', 'AJ', '园艺教育', '403', '1', '1044', '1');
+INSERT INTO `fmp_code` VALUES ('1045', '4030300', 'AJ', '特用作物教育', '403', '1', '1045', '1');
+INSERT INTO `fmp_code` VALUES ('1046', '4030400', 'AJ', '林木生产教育', '403', '1', '1046', '1');
+INSERT INTO `fmp_code` VALUES ('1047', '4030600', 'AJ', '畜禽生产教育', '403', '1', '1047', '1');
+INSERT INTO `fmp_code` VALUES ('1048', '4030700', 'AJ', '水产养殖教育', '403', '1', '1048', '1');
+INSERT INTO `fmp_code` VALUES ('1049', '4030800', 'AJ', '应用生物教育', '403', '1', '1049', '1');
+INSERT INTO `fmp_code` VALUES ('1050', '4030900', 'AJ', '农业机械教育', '403', '1', '1050', '1');
+INSERT INTO `fmp_code` VALUES ('1051', '4031000', 'AJ', '农业建筑与环境控制教育', '403', '1', '1051', '1');
+INSERT INTO `fmp_code` VALUES ('1052', '4031100', 'AJ', '农产品储运与加工教育', '403', '1', '1052', '1');
+INSERT INTO `fmp_code` VALUES ('1053', '4031200', 'AJ', '农业经营管理教育', '403', '1', '1053', '1');
+INSERT INTO `fmp_code` VALUES ('1054', '4031300', 'AJ', '机械制造工艺教育', '403', '1', '1054', '1');
+INSERT INTO `fmp_code` VALUES ('1055', '4031400', 'AJ', '机械维修及检测技术教育', '403', '1', '1055', '1');
+INSERT INTO `fmp_code` VALUES ('1056', '4031500', 'AJ', '机电技术教育', '403', '1', '1056', '1');
+INSERT INTO `fmp_code` VALUES ('1057', '4031600', 'AJ', '电气技术教育', '403', '1', '1057', '1');
+INSERT INTO `fmp_code` VALUES ('1058', '4031700', 'AJ', '汽车维修工程教育', '403', '1', '1058', '1');
+INSERT INTO `fmp_code` VALUES ('1059', '4031800', 'AJ', '应用电子技术教育', '403', '1', '1059', '1');
+INSERT INTO `fmp_code` VALUES ('1060', '4031900', 'AJ', '制浆造纸工艺教育', '403', '1', '1060', '1');
+INSERT INTO `fmp_code` VALUES ('1061', '4032000', 'AJ', '印刷工艺教育', '403', '1', '1061', '1');
+INSERT INTO `fmp_code` VALUES ('1062', '4032100', 'AJ', '橡塑制品成型工艺教育', '403', '1', '1062', '1');
+INSERT INTO `fmp_code` VALUES ('1063', '4032200', 'AJ', '食品工艺教育', '403', '1', '1063', '1');
+INSERT INTO `fmp_code` VALUES ('1064', '4032300', 'AJ', '纺织工艺教育', '403', '1', '1064', '1');
+INSERT INTO `fmp_code` VALUES ('1065', '4032400', 'AJ', '染整工艺教育', '403', '1', '1065', '1');
+INSERT INTO `fmp_code` VALUES ('1066', '4032500', 'AJ', '化工工艺教育', '403', '1', '1066', '1');
+INSERT INTO `fmp_code` VALUES ('1067', '4032600', 'AJ', '化工分析与检测技术教育', '403', '1', '1067', '1');
+INSERT INTO `fmp_code` VALUES ('1068', '4032700', 'AJ', '建筑材料工程教育', '403', '1', '1068', '1');
+INSERT INTO `fmp_code` VALUES ('1069', '4032800', 'AJ', '建筑工程教育', '403', '1', '1069', '1');
+INSERT INTO `fmp_code` VALUES ('1070', '4032900', 'AJ', '服装设计与工艺教育', '403', '1', '1070', '1');
+INSERT INTO `fmp_code` VALUES ('1071', '4033000', 'AJ', '装潢设计与工艺教育', '403', '1', '1071', '1');
+INSERT INTO `fmp_code` VALUES ('1072', '4033100', 'AJ', '旅游管理与服务教育', '403', '1', '1072', '1');
+INSERT INTO `fmp_code` VALUES ('1073', '4033200', 'AJ', '食品营养与检验教育', '403', '1', '1073', '1');
+INSERT INTO `fmp_code` VALUES ('1074', '4033300', 'AJ', '烹饪与营养教育', '403', '1', '1074', '1');
+INSERT INTO `fmp_code` VALUES ('1075', '4033400', 'AJ', '财务会计教育', '403', '1', '1075', '1');
+INSERT INTO `fmp_code` VALUES ('1076', '4033500', 'AJ', '文秘教育', '403', '1', '1076', '1');
+INSERT INTO `fmp_code` VALUES ('1077', '4033600', 'AJ', '市场营销教育', '403', '1', '1077', '1');
+INSERT INTO `fmp_code` VALUES ('1078', '4033700', 'AJ', '职业技术教育管理', '403', '1', '1078', '1');
+INSERT INTO `fmp_code` VALUES ('1079', '4034100', 'AJ', '劳动技术教育', '403', '1', '1079', '1');
+INSERT INTO `fmp_code` VALUES ('1080', '4034200', 'AJ', '现代信息技术教育', '403', '1', '1080', '1');
+INSERT INTO `fmp_code` VALUES ('1081', '4034300', 'AJ', '职业技术教育类其他专业', '403', '1', '1081', '1');
+INSERT INTO `fmp_code` VALUES ('1082', '50', 'AJ', '文学', '0', '0', '1082', '1');
+INSERT INTO `fmp_code` VALUES ('1083', '501', 'AJ', '中国语言文学类', '50', '0', '1083', '1');
+INSERT INTO `fmp_code` VALUES ('1084', '5010100', 'AJ', '汉语言文学', '501', '1', '1084', '1');
+INSERT INTO `fmp_code` VALUES ('1085', '5010200', 'AJ', '汉语言', '501', '1', '1085', '1');
+INSERT INTO `fmp_code` VALUES ('1086', '5010300', 'AJ', '对外汉语', '501', '1', '1086', '1');
+INSERT INTO `fmp_code` VALUES ('1087', '5010400', 'AJ', '中国少数民族语言文学', '501', '1', '1087', '1');
+INSERT INTO `fmp_code` VALUES ('1088', '5010500', 'AJ', '古典文献', '501', '1', '1088', '1');
+INSERT INTO `fmp_code` VALUES ('1089', '5010600', 'AJ', '中国语言文化', '501', '1', '1089', '1');
+INSERT INTO `fmp_code` VALUES ('1090', '5010700', 'AJ', '应用语言学', '501', '1', '1090', '1');
+INSERT INTO `fmp_code` VALUES ('1091', '5014100', 'AJ', '中国文学', '501', '1', '1091', '1');
+INSERT INTO `fmp_code` VALUES ('1092', '5014200', 'AJ', '维吾尔语言文学', '501', '1', '1092', '1');
+INSERT INTO `fmp_code` VALUES ('1093', '5014300', 'AJ', '朝鲜语言文学', '501', '1', '1093', '1');
+INSERT INTO `fmp_code` VALUES ('1094', '5014400', 'AJ', '汉语言文学教育', '501', '1', '1094', '1');
+INSERT INTO `fmp_code` VALUES ('1095', '5014500', 'AJ', '秘书', '501', '1', '1095', '1');
+INSERT INTO `fmp_code` VALUES ('1096', '5014600', 'AJ', '涉外秘书', '501', '1', '1096', '1');
+INSERT INTO `fmp_code` VALUES ('1097', '5014700', 'AJ', '秘书学', '501', '1', '1097', '1');
+INSERT INTO `fmp_code` VALUES ('1098', '5014800', 'AJ', '公共关系与文秘', '501', '1', '1098', '1');
+INSERT INTO `fmp_code` VALUES ('1099', '5014900', 'AJ', '涉外文秘与公共关系', '501', '1', '1099', '1');
+INSERT INTO `fmp_code` VALUES ('1100', '5015000', 'AJ', '文秘与办公自动化', '501', '1', '1100', '1');
+INSERT INTO `fmp_code` VALUES ('1101', '5015100', 'AJ', '科技文秘', '501', '1', '1101', '1');
+INSERT INTO `fmp_code` VALUES ('1102', '5015200', 'AJ', '汉语言文学与文化传播', '501', '1', '1102', '1');
+INSERT INTO `fmp_code` VALUES ('1103', '5015300', 'AJ', '中文应用', '501', '1', '1103', '1');
+INSERT INTO `fmp_code` VALUES ('1104', '5015400', 'AJ', '经济秘书', '501', '1', '1104', '1');
+INSERT INTO `fmp_code` VALUES ('1105', '5015500', 'AJ', '文秘', '501', '1', '1105', '1');
+INSERT INTO `fmp_code` VALUES ('1106', '5015600', 'AJ', '茶文化', '501', '1', '1106', '1');
+INSERT INTO `fmp_code` VALUES ('1107', '5015700', 'AJ', '旅游文化', '501', '1', '1107', '1');
+INSERT INTO `fmp_code` VALUES ('1108', '5015800', 'AJ', '保卫与文秘', '501', '1', '1108', '1');
+INSERT INTO `fmp_code` VALUES ('1109', '5015900', 'AJ', '司法文秘', '501', '1', '1109', '1');
+INSERT INTO `fmp_code` VALUES ('1110', '5016000', 'AJ', '商务文秘', '501', '1', '1110', '1');
+INSERT INTO `fmp_code` VALUES ('1111', '5016100', 'AJ', '高级文员职业技术', '501', '1', '1111', '1');
+INSERT INTO `fmp_code` VALUES ('1112', '5016200', 'AJ', '民族语言', '501', '1', '1112', '1');
+INSERT INTO `fmp_code` VALUES ('1113', '5016300', 'AJ', '藏汉翻译', '501', '1', '1113', '1');
+INSERT INTO `fmp_code` VALUES ('1114', '5016400', 'AJ', '藏汉英翻译', '501', '1', '1114', '1');
+INSERT INTO `fmp_code` VALUES ('1115', '5016500', 'AJ', '公关礼仪', '501', '1', '1115', '1');
+INSERT INTO `fmp_code` VALUES ('1116', '5016600', 'AJ', '中国语言文学类其他专业', '501', '1', '1116', '1');
+INSERT INTO `fmp_code` VALUES ('1117', '502', 'AJ', '外国语言文学类', '50', '0', '1117', '1');
+INSERT INTO `fmp_code` VALUES ('1118', '5020100', 'AJ', '英语', '502', '1', '1118', '1');
+INSERT INTO `fmp_code` VALUES ('1119', '5020200', 'AJ', '俄语', '502', '1', '1119', '1');
+INSERT INTO `fmp_code` VALUES ('1120', '5020300', 'AJ', '德语', '502', '1', '1120', '1');
+INSERT INTO `fmp_code` VALUES ('1121', '5020400', 'AJ', '法语', '502', '1', '1121', '1');
+INSERT INTO `fmp_code` VALUES ('1122', '5020500', 'AJ', '西班牙语', '502', '1', '1122', '1');
+INSERT INTO `fmp_code` VALUES ('1123', '5020600', 'AJ', '阿拉伯语', '502', '1', '1123', '1');
+INSERT INTO `fmp_code` VALUES ('1124', '5020700', 'AJ', '日语', '502', '1', '1124', '1');
+INSERT INTO `fmp_code` VALUES ('1125', '5020800', 'AJ', '波斯语', '502', '1', '1125', '1');
+INSERT INTO `fmp_code` VALUES ('1126', '5020900', 'AJ', '朝鲜语', '502', '1', '1126', '1');
+INSERT INTO `fmp_code` VALUES ('1127', '5021000', 'AJ', '菲律宾语', '502', '1', '1127', '1');
+INSERT INTO `fmp_code` VALUES ('1128', '5021100', 'AJ', '梵语巴利语', '502', '1', '1128', '1');
+INSERT INTO `fmp_code` VALUES ('1129', '5021200', 'AJ', '印度尼西亚语', '502', '1', '1129', '1');
+INSERT INTO `fmp_code` VALUES ('1130', '5021300', 'AJ', '印地语', '502', '1', '1130', '1');
+INSERT INTO `fmp_code` VALUES ('1131', '5021400', 'AJ', '柬埔寨语', '502', '1', '1131', '1');
+INSERT INTO `fmp_code` VALUES ('1132', '5021500', 'AJ', '老挝语', '502', '1', '1132', '1');
+INSERT INTO `fmp_code` VALUES ('1133', '5021600', 'AJ', '缅甸语', '502', '1', '1133', '1');
+INSERT INTO `fmp_code` VALUES ('1134', '5021700', 'AJ', '马来语', '502', '1', '1134', '1');
+INSERT INTO `fmp_code` VALUES ('1135', '5021800', 'AJ', '蒙古语', '502', '1', '1135', '1');
+INSERT INTO `fmp_code` VALUES ('1136', '5021900', 'AJ', '僧加罗语', '502', '1', '1136', '1');
+INSERT INTO `fmp_code` VALUES ('1137', '5022000', 'AJ', '泰语', '502', '1', '1137', '1');
+INSERT INTO `fmp_code` VALUES ('1138', '5022100', 'AJ', '乌尔都语', '502', '1', '1138', '1');
+INSERT INTO `fmp_code` VALUES ('1139', '5022200', 'AJ', '希伯莱语', '502', '1', '1139', '1');
+INSERT INTO `fmp_code` VALUES ('1140', '5022300', 'AJ', '越南语', '502', '1', '1140', '1');
+INSERT INTO `fmp_code` VALUES ('1141', '5022400', 'AJ', '豪萨语', '502', '1', '1141', '1');
+INSERT INTO `fmp_code` VALUES ('1142', '5022500', 'AJ', '斯瓦希里语', '502', '1', '1142', '1');
+INSERT INTO `fmp_code` VALUES ('1143', '5022600', 'AJ', '阿尔巴尼亚语', '502', '1', '1143', '1');
+INSERT INTO `fmp_code` VALUES ('1144', '5022700', 'AJ', '保加利亚语', '502', '1', '1144', '1');
+INSERT INTO `fmp_code` VALUES ('1145', '5022800', 'AJ', '波兰语', '502', '1', '1145', '1');
+INSERT INTO `fmp_code` VALUES ('1146', '5022900', 'AJ', '捷克语', '502', '1', '1146', '1');
+INSERT INTO `fmp_code` VALUES ('1147', '5023000', 'AJ', '罗马尼亚语', '502', '1', '1147', '1');
+INSERT INTO `fmp_code` VALUES ('1148', '5023100', 'AJ', '葡萄牙语', '502', '1', '1148', '1');
+INSERT INTO `fmp_code` VALUES ('1149', '5023200', 'AJ', '瑞典语', '502', '1', '1149', '1');
+INSERT INTO `fmp_code` VALUES ('1150', '5023300', 'AJ', '塞尔维亚—克罗地亚语', '502', '1', '1150', '1');
+INSERT INTO `fmp_code` VALUES ('1151', '5023400', 'AJ', '土耳其语', '502', '1', '1151', '1');
+INSERT INTO `fmp_code` VALUES ('1152', '5023500', 'AJ', '希腊语', '502', '1', '1152', '1');
+INSERT INTO `fmp_code` VALUES ('1153', '5023600', 'AJ', '匈牙利语', '502', '1', '1153', '1');
+INSERT INTO `fmp_code` VALUES ('1154', '5023700', 'AJ', '意大利语', '502', '1', '1154', '1');
+INSERT INTO `fmp_code` VALUES ('1155', '5023800', 'AJ', '捷克语--斯洛伐克语', '502', '1', '1155', '1');
+INSERT INTO `fmp_code` VALUES ('1156', '5023900', 'AJ', '泰米尔语', '502', '1', '1156', '1');
+INSERT INTO `fmp_code` VALUES ('1157', '5024000', 'AJ', '普什图语', '502', '1', '1157', '1');
+INSERT INTO `fmp_code` VALUES ('1158', '5024100', 'AJ', '世界语', '502', '1', '1158', '1');
+INSERT INTO `fmp_code` VALUES ('1159', '5024200', 'AJ', '孟加拉语', '502', '1', '1159', '1');
+INSERT INTO `fmp_code` VALUES ('1160', '5024300', 'AJ', '尼泊尔语', '502', '1', '1160', '1');
+INSERT INTO `fmp_code` VALUES ('1161', '5024400', 'AJ', '塞尔维亚语－克罗地亚语', '502', '1', '1161', '1');
+INSERT INTO `fmp_code` VALUES ('1162', '5024500', 'AJ', '荷兰语', '502', '1', '1162', '1');
+INSERT INTO `fmp_code` VALUES ('1163', '5024600', 'AJ', '芬兰语', '502', '1', '1163', '1');
+INSERT INTO `fmp_code` VALUES ('1164', '5028100', 'AJ', '英语教育', '502', '1', '1164', '1');
+INSERT INTO `fmp_code` VALUES ('1165', '5028200', 'AJ', '日语教育', '502', '1', '1165', '1');
+INSERT INTO `fmp_code` VALUES ('1166', '5028300', 'AJ', '外贸英语(经贸英语)', '502', '1', '1166', '1');
+INSERT INTO `fmp_code` VALUES ('1167', '5028400', 'AJ', '外贸日语(经贸日语)', '502', '1', '1167', '1');
+INSERT INTO `fmp_code` VALUES ('1168', '5028500', 'AJ', '应用英语', '502', '1', '1168', '1');
+INSERT INTO `fmp_code` VALUES ('1169', '5028600', 'AJ', '实用英语', '502', '1', '1169', '1');
+INSERT INTO `fmp_code` VALUES ('1170', '5028700', 'AJ', '专门用途英语', '502', '1', '1170', '1');
+INSERT INTO `fmp_code` VALUES ('1171', '5028800', 'AJ', '旅游英语', '502', '1', '1171', '1');
+INSERT INTO `fmp_code` VALUES ('1172', '5028900', 'AJ', '应用日语', '502', '1', '1172', '1');
+INSERT INTO `fmp_code` VALUES ('1173', '5029000', 'AJ', '商务日语', '502', '1', '1173', '1');
+INSERT INTO `fmp_code` VALUES ('1174', '5029100', 'AJ', '旅游日语', '502', '1', '1174', '1');
+INSERT INTO `fmp_code` VALUES ('1175', '5029200', 'AJ', '商务英语', '502', '1', '1175', '1');
+INSERT INTO `fmp_code` VALUES ('1176', '5029300', 'AJ', '应用德语', '502', '1', '1176', '1');
+INSERT INTO `fmp_code` VALUES ('1177', '5029400', 'AJ', '应用西班牙语', '502', '1', '1177', '1');
+INSERT INTO `fmp_code` VALUES ('1178', '5029500', 'AJ', '应用法语', '502', '1', '1178', '1');
+INSERT INTO `fmp_code` VALUES ('1179', '5029600', 'AJ', '韩语', '502', '1', '1179', '1');
+INSERT INTO `fmp_code` VALUES ('1180', '5029700', 'AJ', '外国语言文学类其他专业', '502', '1', '1180', '1');
+INSERT INTO `fmp_code` VALUES ('1181', '503', 'AJ', '新闻传播学类', '50', '0', '1181', '1');
+INSERT INTO `fmp_code` VALUES ('1182', '5030100', 'AJ', '新闻学', '503', '1', '1182', '1');
+INSERT INTO `fmp_code` VALUES ('1183', '5030200', 'AJ', '广播电视新闻学', '503', '1', '1183', '1');
+INSERT INTO `fmp_code` VALUES ('1184', '5030300', 'AJ', '广告学', '503', '1', '1184', '1');
+INSERT INTO `fmp_code` VALUES ('1185', '5030400', 'AJ', '编辑出版学', '503', '1', '1185', '1');
+INSERT INTO `fmp_code` VALUES ('1186', '5030500', 'AJ', '传播学', '503', '1', '1186', '1');
+INSERT INTO `fmp_code` VALUES ('1187', '5034100', 'AJ', '播音', '503', '1', '1187', '1');
+INSERT INTO `fmp_code` VALUES ('1188', '5034200', 'AJ', '广告与广告管理', '503', '1', '1188', '1');
+INSERT INTO `fmp_code` VALUES ('1189', '5034300', 'AJ', '出版与电脑编辑技术', '503', '1', '1189', '1');
+INSERT INTO `fmp_code` VALUES ('1190', '5034400', 'AJ', '新闻学与大众传播', '503', '1', '1190', '1');
+INSERT INTO `fmp_code` VALUES ('1191', '5034500', 'AJ', '广告策划与现代文秘', '503', '1', '1191', '1');
+INSERT INTO `fmp_code` VALUES ('1192', '5034600', 'AJ', '广告策划与制作', '503', '1', '1192', '1');
+INSERT INTO `fmp_code` VALUES ('1193', '5034700', 'AJ', '新闻与广告', '503', '1', '1193', '1');
+INSERT INTO `fmp_code` VALUES ('1194', '5034800', 'AJ', '信息传播与策划', '503', '1', '1194', '1');
+INSERT INTO `fmp_code` VALUES ('1195', '5034900', 'AJ', '军事新闻', '503', '1', '1195', '1');
+INSERT INTO `fmp_code` VALUES ('1196', '5035000', 'AJ', '藏语新闻', '503', '1', '1196', '1');
+INSERT INTO `fmp_code` VALUES ('1197', '5035100', 'AJ', '电子编辑', '503', '1', '1197', '1');
+INSERT INTO `fmp_code` VALUES ('1198', '5035200', 'AJ', '广播电视工程', '503', '1', '1198', '1');
+INSERT INTO `fmp_code` VALUES ('1199', '5035300', 'AJ', '新闻传播学类其他专业', '503', '1', '1199', '1');
+INSERT INTO `fmp_code` VALUES ('1200', '504', 'AJ', '艺术类', '50', '0', '1200', '1');
+INSERT INTO `fmp_code` VALUES ('1201', '5040100', 'AJ', '音乐学', '504', '1', '1201', '1');
+INSERT INTO `fmp_code` VALUES ('1202', '5040200', 'AJ', '作曲与作曲技术理论', '504', '1', '1202', '1');
+INSERT INTO `fmp_code` VALUES ('1203', '5040300', 'AJ', '音乐表演', '504', '1', '1203', '1');
+INSERT INTO `fmp_code` VALUES ('1204', '5040400', 'AJ', '绘画', '504', '1', '1204', '1');
+INSERT INTO `fmp_code` VALUES ('1205', '5040500', 'AJ', '雕塑', '504', '1', '1205', '1');
+INSERT INTO `fmp_code` VALUES ('1206', '5040600', 'AJ', '美术学', '504', '1', '1206', '1');
+INSERT INTO `fmp_code` VALUES ('1207', '5040700', 'AJ', '艺术设计学', '504', '1', '1207', '1');
+INSERT INTO `fmp_code` VALUES ('1208', '5040800', 'AJ', '艺术设计', '504', '1', '1208', '1');
+INSERT INTO `fmp_code` VALUES ('1209', '5040900', 'AJ', '舞蹈学', '504', '1', '1209', '1');
+INSERT INTO `fmp_code` VALUES ('1210', '5041000', 'AJ', '舞蹈编导', '504', '1', '1210', '1');
+INSERT INTO `fmp_code` VALUES ('1211', '5041100', 'AJ', '戏剧学', '504', '1', '1211', '1');
+INSERT INTO `fmp_code` VALUES ('1212', '5041200', 'AJ', '表演', '504', '1', '1212', '1');
+INSERT INTO `fmp_code` VALUES ('1213', '5041300', 'AJ', '导演', '504', '1', '1213', '1');
+INSERT INTO `fmp_code` VALUES ('1214', '5041400', 'AJ', '戏剧影视文学', '504', '1', '1214', '1');
+INSERT INTO `fmp_code` VALUES ('1215', '5041500', 'AJ', '戏剧影视美术设计', '504', '1', '1215', '1');
+INSERT INTO `fmp_code` VALUES ('1216', '5041600', 'AJ', '摄影', '504', '1', '1216', '1');
+INSERT INTO `fmp_code` VALUES ('1217', '5041700', 'AJ', '录音艺术', '504', '1', '1217', '1');
+INSERT INTO `fmp_code` VALUES ('1218', '5041800', 'AJ', '动画', '504', '1', '1218', '1');
+INSERT INTO `fmp_code` VALUES ('1219', '5041900', 'AJ', '播音与主持艺术', '504', '1', '1219', '1');
+INSERT INTO `fmp_code` VALUES ('1220', '5042000', 'AJ', '广播电视编导', '504', '1', '1220', '1');
+INSERT INTO `fmp_code` VALUES ('1221', '5042100', 'AJ', '影视教育', '504', '1', '1221', '1');
+INSERT INTO `fmp_code` VALUES ('1222', '5042200', 'AJ', '艺术学', '504', '1', '1222', '1');
+INSERT INTO `fmp_code` VALUES ('1223', '5044100', 'AJ', '演唱', '504', '1', '1223', '1');
+INSERT INTO `fmp_code` VALUES ('1224', '5044200', 'AJ', '管弦（打击）乐器演奏', '504', '1', '1224', '1');
+INSERT INTO `fmp_code` VALUES ('1225', '5044300', 'AJ', '中国乐器演奏', '504', '1', '1225', '1');
+INSERT INTO `fmp_code` VALUES ('1226', '5044400', 'AJ', '乐器修造艺术', '504', '1', '1226', '1');
+INSERT INTO `fmp_code` VALUES ('1227', '5044500', 'AJ', '油画', '504', '1', '1227', '1');
+INSERT INTO `fmp_code` VALUES ('1228', '5044600', 'AJ', '环境艺术设计', '504', '1', '1228', '1');
+INSERT INTO `fmp_code` VALUES ('1229', '5044700', 'AJ', '工艺美术学', '504', '1', '1229', '1');
+INSERT INTO `fmp_code` VALUES ('1230', '5044800', 'AJ', '染织艺术设计', '504', '1', '1230', '1');
+INSERT INTO `fmp_code` VALUES ('1231', '5044900', 'AJ', '服装艺术设计', '504', '1', '1231', '1');
+INSERT INTO `fmp_code` VALUES ('1232', '5045000', 'AJ', '装潢艺术设计', '504', '1', '1232', '1');
+INSERT INTO `fmp_code` VALUES ('1233', '5045100', 'AJ', '装饰艺术设计', '504', '1', '1233', '1');
+INSERT INTO `fmp_code` VALUES ('1234', '5045200', 'AJ', '文艺编导', '504', '1', '1234', '1');
+INSERT INTO `fmp_code` VALUES ('1235', '5045300', 'AJ', '影像工程', '504', '1', '1235', '1');
+INSERT INTO `fmp_code` VALUES ('1236', '5045400', 'AJ', '音乐教育', '504', '1', '1236', '1');
+INSERT INTO `fmp_code` VALUES ('1237', '5045500', 'AJ', '美术教育', '504', '1', '1237', '1');
+INSERT INTO `fmp_code` VALUES ('1238', '5045600', 'AJ', '广告艺术设计', '504', '1', '1238', '1');
+INSERT INTO `fmp_code` VALUES ('1239', '5045700', 'AJ', '产品造型设计', '504', '1', '1239', '1');
+INSERT INTO `fmp_code` VALUES ('1240', '5045800', 'AJ', '节目主持人', '504', '1', '1240', '1');
+INSERT INTO `fmp_code` VALUES ('1241', '5045900', 'AJ', '影视广告', '504', '1', '1241', '1');
+INSERT INTO `fmp_code` VALUES ('1242', '5046000', 'AJ', '电视摄像', '504', '1', '1242', '1');
+INSERT INTO `fmp_code` VALUES ('1243', '5046100', 'AJ', '电视节目制作', '504', '1', '1243', '1');
+INSERT INTO `fmp_code` VALUES ('1244', '5046200', 'AJ', '电视照明设计', '504', '1', '1244', '1');
+INSERT INTO `fmp_code` VALUES ('1245', '5046300', 'AJ', '电影表演', '504', '1', '1245', '1');
+INSERT INTO `fmp_code` VALUES ('1246', '5046400', 'AJ', '广告与装潢', '504', '1', '1246', '1');
+INSERT INTO `fmp_code` VALUES ('1247', '5046500', 'AJ', '美术装潢设计', '504', '1', '1247', '1');
+INSERT INTO `fmp_code` VALUES ('1248', '5046600', 'AJ', '服装与表演', '504', '1', '1248', '1');
+INSERT INTO `fmp_code` VALUES ('1249', '5046700', 'AJ', '社会音乐', '504', '1', '1249', '1');
+INSERT INTO `fmp_code` VALUES ('1250', '5046800', 'AJ', '音乐', '504', '1', '1250', '1');
+INSERT INTO `fmp_code` VALUES ('1251', '5046900', 'AJ', '首饰设计', '504', '1', '1251', '1');
+INSERT INTO `fmp_code` VALUES ('1252', '5047000', 'AJ', '室内与家具设计', '504', '1', '1252', '1');
+INSERT INTO `fmp_code` VALUES ('1253', '5047100', 'AJ', '室内装饰', '504', '1', '1253', '1');
+INSERT INTO `fmp_code` VALUES ('1254', '5047200', 'AJ', '室内设计', '504', '1', '1254', '1');
+INSERT INTO `fmp_code` VALUES ('1255', '5047300', 'AJ', '广播电视文学', '504', '1', '1255', '1');
+INSERT INTO `fmp_code` VALUES ('1256', '5047400', 'AJ', '家具与室内装饰技术', '504', '1', '1256', '1');
+INSERT INTO `fmp_code` VALUES ('1257', '5047500', 'AJ', '工艺美术设计', '504', '1', '1257', '1');
+INSERT INTO `fmp_code` VALUES ('1258', '5047600', 'AJ', '形象设计', '504', '1', '1258', '1');
+INSERT INTO `fmp_code` VALUES ('1259', '5047700', 'AJ', '花卉设计', '504', '1', '1259', '1');
+INSERT INTO `fmp_code` VALUES ('1260', '5047800', 'AJ', '影视艺术', '504', '1', '1260', '1');
+INSERT INTO `fmp_code` VALUES ('1261', '5047900', 'AJ', '电脑艺术设计', '504', '1', '1261', '1');
+INSERT INTO `fmp_code` VALUES ('1262', '5048000', 'AJ', '室内装潢设计及施工管理', '504', '1', '1262', '1');
+INSERT INTO `fmp_code` VALUES ('1263', '5048100', 'AJ', '音响工程', '504', '1', '1263', '1');
+INSERT INTO `fmp_code` VALUES ('1264', '5048200', 'AJ', '美容美发设计', '504', '1', '1264', '1');
+INSERT INTO `fmp_code` VALUES ('1265', '5048300', 'AJ', '广播与电视技术', '504', '1', '1265', '1');
+INSERT INTO `fmp_code` VALUES ('1266', '5048400', 'AJ', '影视戏剧', '504', '1', '1266', '1');
+INSERT INTO `fmp_code` VALUES ('1267', '5048500', 'AJ', '钢琴调律', '504', '1', '1267', '1');
+INSERT INTO `fmp_code` VALUES ('1268', '5048600', 'AJ', '影视表演', '504', '1', '1268', '1');
+INSERT INTO `fmp_code` VALUES ('1269', '5048700', 'AJ', '摄影摄像技术', '504', '1', '1269', '1');
+INSERT INTO `fmp_code` VALUES ('1270', '5048800', 'AJ', '陶瓷美术', '504', '1', '1270', '1');
+INSERT INTO `fmp_code` VALUES ('1271', '5048900', 'AJ', '军乐', '504', '1', '1271', '1');
+INSERT INTO `fmp_code` VALUES ('1272', '5049000', 'AJ', '舞蹈', '504', '1', '1272', '1');
+INSERT INTO `fmp_code` VALUES ('1273', '5049100', 'AJ', '平面设计', '504', '1', '1273', '1');
+INSERT INTO `fmp_code` VALUES ('1274', '5049200', 'AJ', '广告艺术', '504', '1', '1274', '1');
+INSERT INTO `fmp_code` VALUES ('1275', '5049300', 'AJ', '互联网广告设计', '504', '1', '1275', '1');
+INSERT INTO `fmp_code` VALUES ('1276', '5049400', 'AJ', '影视美术', '504', '1', '1276', '1');
+INSERT INTO `fmp_code` VALUES ('1277', '5049500', 'AJ', '影视武打设计', '504', '1', '1277', '1');
+INSERT INTO `fmp_code` VALUES ('1278', '5049600', 'AJ', '图形艺术与设计', '504', '1', '1278', '1');
+INSERT INTO `fmp_code` VALUES ('1279', '5049700', 'AJ', '多媒体艺术设计', '504', '1', '1279', '1');
+INSERT INTO `fmp_code` VALUES ('1280', '5049800', 'AJ', '现代传媒设计', '504', '1', '1280', '1');
+INSERT INTO `fmp_code` VALUES ('1281', '5049900', 'AJ', '艺术类其他专业', '504', '1', '1281', '1');
+INSERT INTO `fmp_code` VALUES ('1282', '505', 'AJ', '文学类其他专业', '50', '1', '1282', '1');
+INSERT INTO `fmp_code` VALUES ('1283', '60', 'AJ', '历史学', '0', '0', '1283', '1');
+INSERT INTO `fmp_code` VALUES ('1284', '601', 'AJ', '历史学类', '60', '0', '1284', '1');
+INSERT INTO `fmp_code` VALUES ('1285', '6010100', 'AJ', '历史学', '601', '1', '1285', '1');
+INSERT INTO `fmp_code` VALUES ('1286', '6010200', 'AJ', '世界历史', '601', '1', '1286', '1');
+INSERT INTO `fmp_code` VALUES ('1287', '6010300', 'AJ', '考古学', '601', '1', '1287', '1');
+INSERT INTO `fmp_code` VALUES ('1288', '6010400', 'AJ', '博物馆学', '601', '1', '1288', '1');
+INSERT INTO `fmp_code` VALUES ('1289', '6010500', 'AJ', '民族学', '601', '1', '1289', '1');
+INSERT INTO `fmp_code` VALUES ('1290', '6010600', 'AJ', '文物保护技术', '601', '1', '1290', '1');
+INSERT INTO `fmp_code` VALUES ('1291', '6014100', 'AJ', '历史学教育', '601', '1', '1291', '1');
+INSERT INTO `fmp_code` VALUES ('1292', '6014200', 'AJ', '历史与文化旅游', '601', '1', '1292', '1');
+INSERT INTO `fmp_code` VALUES ('1293', '6014300', 'AJ', '文物鉴赏与文化旅游', '601', '1', '1293', '1');
+INSERT INTO `fmp_code` VALUES ('1294', '6014400', 'AJ', '文物鉴赏与保护', '601', '1', '1294', '1');
+INSERT INTO `fmp_code` VALUES ('1295', '6014500', 'AJ', '文物鉴定与修复', '601', '1', '1295', '1');
+INSERT INTO `fmp_code` VALUES ('1296', '6014600', 'AJ', '仿古建筑与旅游', '601', '1', '1296', '1');
+INSERT INTO `fmp_code` VALUES ('1297', '6014700', 'AJ', '历史学类其他专业', '601', '1', '1297', '1');
+INSERT INTO `fmp_code` VALUES ('1298', '70', 'AJ', '理学', '0', '0', '1298', '1');
+INSERT INTO `fmp_code` VALUES ('1299', '701', 'AJ', '数学类', '70', '0', '1299', '1');
+INSERT INTO `fmp_code` VALUES ('1300', '7010100', 'AJ', '数学与应用数学', '701', '1', '1300', '1');
+INSERT INTO `fmp_code` VALUES ('1301', '7010200', 'AJ', '信息与计算科学', '701', '1', '1301', '1');
+INSERT INTO `fmp_code` VALUES ('1302', '7014100', 'AJ', '计算数学及其应用软件', '701', '1', '1302', '1');
+INSERT INTO `fmp_code` VALUES ('1303', '7014200', 'AJ', '信息科学', '701', '1', '1303', '1');
+INSERT INTO `fmp_code` VALUES ('1304', '7014300', 'AJ', '数学教育', '701', '1', '1304', '1');
+INSERT INTO `fmp_code` VALUES ('1305', '7014400', 'AJ', '医学信息学', '701', '1', '1305', '1');
+INSERT INTO `fmp_code` VALUES ('1306', '7014500', 'AJ', '数学类其他专业', '701', '1', '1306', '1');
+INSERT INTO `fmp_code` VALUES ('1307', '702', 'AJ', '物理学类', '70', '0', '1307', '1');
+INSERT INTO `fmp_code` VALUES ('1308', '7020100', 'AJ', '物理学', '702', '1', '1308', '1');
+INSERT INTO `fmp_code` VALUES ('1309', '7020200', 'AJ', '应用物理学', '702', '1', '1309', '1');
+INSERT INTO `fmp_code` VALUES ('1310', '7020300', 'AJ', '声学', '702', '1', '1310', '1');
+INSERT INTO `fmp_code` VALUES ('1311', '7024100', 'AJ', '物理学教育', '702', '1', '1311', '1');
+INSERT INTO `fmp_code` VALUES ('1312', '7024200', 'AJ', '物理学类其他专业', '702', '1', '1312', '1');
+INSERT INTO `fmp_code` VALUES ('1313', '703', 'AJ', '化学类', '70', '0', '1313', '1');
+INSERT INTO `fmp_code` VALUES ('1314', '7030100', 'AJ', '化学', '703', '1', '1314', '1');
+INSERT INTO `fmp_code` VALUES ('1315', '7030200', 'AJ', '应用化学', '703', '1', '1315', '1');
+INSERT INTO `fmp_code` VALUES ('1316', '7034100', 'AJ', '化学教育', '703', '1', '1316', '1');
+INSERT INTO `fmp_code` VALUES ('1317', '7034200', 'AJ', '化学类其他专业', '703', '1', '1317', '1');
+INSERT INTO `fmp_code` VALUES ('1318', '704', 'AJ', '生物科学类', '70', '0', '1318', '1');
+INSERT INTO `fmp_code` VALUES ('1319', '7040100', 'AJ', '生物科学', '704', '1', '1319', '1');
+INSERT INTO `fmp_code` VALUES ('1320', '7040200', 'AJ', '生物技术', '704', '1', '1320', '1');
+INSERT INTO `fmp_code` VALUES ('1321', '7040300', 'AJ', '生物信息学', '704', '1', '1321', '1');
+INSERT INTO `fmp_code` VALUES ('1322', '7040400', 'AJ', '生物信息技术', '704', '1', '1322', '1');
+INSERT INTO `fmp_code` VALUES ('1323', '7040500', 'AJ', '生物科学与生物技术', '704', '1', '1323', '1');
+INSERT INTO `fmp_code` VALUES ('1324', '7044100', 'AJ', '微生物学', '704', '1', '1324', '1');
+INSERT INTO `fmp_code` VALUES ('1325', '7044200', 'AJ', '生物学教育', '704', '1', '1325', '1');
+INSERT INTO `fmp_code` VALUES ('1326', '7044300', 'AJ', '微生物应用技术', '704', '1', '1326', '1');
+INSERT INTO `fmp_code` VALUES ('1327', '7044400', 'AJ', '生物技术应用', '704', '1', '1327', '1');
+INSERT INTO `fmp_code` VALUES ('1328', '7044500', 'AJ', '生物科学类其他专业', '704', '1', '1328', '1');
+INSERT INTO `fmp_code` VALUES ('1329', '705', 'AJ', '天文学类', '70', '0', '1329', '1');
+INSERT INTO `fmp_code` VALUES ('1330', '7050100', 'AJ', '天文学', '705', '1', '1330', '1');
+INSERT INTO `fmp_code` VALUES ('1331', '7050200', 'AJ', '天文学类其他专业', '705', '1', '1331', '1');
+INSERT INTO `fmp_code` VALUES ('1332', '706', 'AJ', '地质学类', '70', '0', '1332', '1');
+INSERT INTO `fmp_code` VALUES ('1333', '7060100', 'AJ', '地质学', '706', '1', '1333', '1');
+INSERT INTO `fmp_code` VALUES ('1334', '7060200', 'AJ', '地球化学', '706', '1', '1334', '1');
+INSERT INTO `fmp_code` VALUES ('1335', '7060300', 'AJ', '地质学类其他专业', '706', '1', '1335', '1');
+INSERT INTO `fmp_code` VALUES ('1336', '707', 'AJ', '地理科学类', '70', '0', '1336', '1');
+INSERT INTO `fmp_code` VALUES ('1337', '7070100', 'AJ', '地理科学', '707', '1', '1337', '1');
+INSERT INTO `fmp_code` VALUES ('1338', '7070200', 'AJ', '资源环境与城乡规划管理', '707', '1', '1338', '1');
+INSERT INTO `fmp_code` VALUES ('1339', '7070300', 'AJ', '地理信息系统', '707', '1', '1339', '1');
+INSERT INTO `fmp_code` VALUES ('1340', '7074100', 'AJ', '地理学', '707', '1', '1340', '1');
+INSERT INTO `fmp_code` VALUES ('1341', '7074200', 'AJ', '地理学教育', '707', '1', '1341', '1');
+INSERT INTO `fmp_code` VALUES ('1342', '7074200', 'AJ', '地理科学类其他专业', '707', '1', '1342', '1');
+INSERT INTO `fmp_code` VALUES ('1343', '708', 'AJ', '地球物理学类', '70', '0', '1343', '1');
+INSERT INTO `fmp_code` VALUES ('1344', '7080100', 'AJ', '地球物理学', '708', '1', '1344', '1');
+INSERT INTO `fmp_code` VALUES ('1345', '7084100', 'AJ', '信息技术与地球物理', '708', '1', '1345', '1');
+INSERT INTO `fmp_code` VALUES ('1346', '7084200', 'AJ', '地球物理学类其他专业', '708', '1', '1346', '1');
+INSERT INTO `fmp_code` VALUES ('1347', '709', 'AJ', '大气科学类', '70', '0', '1347', '1');
+INSERT INTO `fmp_code` VALUES ('1348', '7090100', 'AJ', '大气科学', '709', '1', '1348', '1');
+INSERT INTO `fmp_code` VALUES ('1349', '7090200', 'AJ', '应用气象学', '709', '1', '1349', '1');
+INSERT INTO `fmp_code` VALUES ('1350', '7091800', 'AJ', '大气探测', '709', '1', '1350', '1');
+INSERT INTO `fmp_code` VALUES ('1351', '7094100', 'AJ', '应用气象技术', '709', '1', '1351', '1');
+INSERT INTO `fmp_code` VALUES ('1352', '7094200', 'AJ', '气象预报', '709', '1', '1352', '1');
+INSERT INTO `fmp_code` VALUES ('1353', '7094300', 'AJ', '大气科学类其他专业', '709', '1', '1353', '1');
+INSERT INTO `fmp_code` VALUES ('1354', '710', 'AJ', '海洋科学类', '70', '0', '1354', '1');
+INSERT INTO `fmp_code` VALUES ('1355', '7100100', 'AJ', '海洋科学', '710', '1', '1355', '1');
+INSERT INTO `fmp_code` VALUES ('1356', '7100200', 'AJ', '海洋技术', '710', '1', '1356', '1');
+INSERT INTO `fmp_code` VALUES ('1357', '7100300', 'AJ', '海洋管理', '710', '1', '1357', '1');
+INSERT INTO `fmp_code` VALUES ('1358', '7100400', 'AJ', '军事海洋学', '710', '1', '1358', '1');
+INSERT INTO `fmp_code` VALUES ('1359', '7101800', 'AJ', '海洋学', '710', '1', '1359', '1');
+INSERT INTO `fmp_code` VALUES ('1360', '7101900', 'AJ', '海洋科学类其他专业', '710', '1', '1360', '1');
+INSERT INTO `fmp_code` VALUES ('1361', '711', 'AJ', '力学类', '70', '0', '1361', '1');
+INSERT INTO `fmp_code` VALUES ('1362', '7110100', 'AJ', '理论与应用力学', '711', '1', '1362', '1');
+INSERT INTO `fmp_code` VALUES ('1363', '7110200', 'AJ', '力学类其他专业', '711', '1', '1363', '1');
+INSERT INTO `fmp_code` VALUES ('1364', '712', 'AJ', '电子信息科学类', '70', '0', '1364', '1');
+INSERT INTO `fmp_code` VALUES ('1365', '7120100', 'AJ', '电子信息科学与技术', '712', '1', '1365', '1');
+INSERT INTO `fmp_code` VALUES ('1366', '7120200', 'AJ', '微电子学', '712', '1', '1366', '1');
+INSERT INTO `fmp_code` VALUES ('1367', '7120300', 'AJ', '光信息科学与技术', '712', '1', '1367', '1');
+INSERT INTO `fmp_code` VALUES ('1368', '7120500', 'AJ', '信息安全', '712', '1', '1368', '1');
+INSERT INTO `fmp_code` VALUES ('1369', '7124100', 'AJ', '光电技术应用', '712', '1', '1369', '1');
+INSERT INTO `fmp_code` VALUES ('1370', '7124200', 'AJ', '网络与信息安全', '712', '1', '1370', '1');
+INSERT INTO `fmp_code` VALUES ('1371', '7124300', 'AJ', '计算机应用及安全管理', '712', '1', '1371', '1');
+INSERT INTO `fmp_code` VALUES ('1372', '7124400', 'AJ', '电子信息科学类其他专业', '712', '1', '1372', '1');
+INSERT INTO `fmp_code` VALUES ('1373', '713', 'AJ', '材料科学类', '70', '0', '1373', '1');
+INSERT INTO `fmp_code` VALUES ('1374', '7130100', 'AJ', '材料物理', '713', '1', '1374', '1');
+INSERT INTO `fmp_code` VALUES ('1375', '7130200', 'AJ', '材料化学', '713', '1', '1375', '1');
+INSERT INTO `fmp_code` VALUES ('1376', '7130300', 'AJ', '材料科学类其他专业', '713', '1', '1376', '1');
+INSERT INTO `fmp_code` VALUES ('1377', '714', 'AJ', '环境科学类', '70', '0', '1377', '1');
+INSERT INTO `fmp_code` VALUES ('1378', '7140100', 'AJ', '环境科学', '714', '1', '1378', '1');
+INSERT INTO `fmp_code` VALUES ('1379', '7140200', 'AJ', '生态学', '714', '1', '1379', '1');
+INSERT INTO `fmp_code` VALUES ('1380', '7144100', 'AJ', '城市建设与环境工程', '714', '1', '1380', '1');
+INSERT INTO `fmp_code` VALUES ('1381', '7144200', 'AJ', '环境科学类其他专业', '714', '1', '1381', '1');
+INSERT INTO `fmp_code` VALUES ('1382', '715', 'AJ', '心理学类', '70', '0', '1382', '1');
+INSERT INTO `fmp_code` VALUES ('1383', '7150100', 'AJ', '心理学', '715', '1', '1383', '1');
+INSERT INTO `fmp_code` VALUES ('1384', '7150200', 'AJ', '应用心理学', '715', '1', '1384', '1');
+INSERT INTO `fmp_code` VALUES ('1385', '7152100', 'AJ', '军事心理学', '715', '1', '1385', '1');
+INSERT INTO `fmp_code` VALUES ('1386', '7154100', 'AJ', '心理咨询', '715', '1', '1386', '1');
+INSERT INTO `fmp_code` VALUES ('1387', '7154200', 'AJ', '心理学类其他专业', '715', '1', '1387', '1');
+INSERT INTO `fmp_code` VALUES ('1388', '716', 'AJ', '统计学类', '70', '0', '1388', '1');
+INSERT INTO `fmp_code` VALUES ('1389', '7160100', 'AJ', '统计学', '716', '1', '1389', '1');
+INSERT INTO `fmp_code` VALUES ('1390', '7164100', 'AJ', '统计科学', '716', '1', '1390', '1');
+INSERT INTO `fmp_code` VALUES ('1391', '7164200', 'AJ', '电算化会计与统计', '716', '1', '1391', '1');
+INSERT INTO `fmp_code` VALUES ('1392', '7164300', 'AJ', '统计与会计', '716', '1', '1392', '1');
+INSERT INTO `fmp_code` VALUES ('1393', '7164400', 'AJ', '统计学类其他类专业', '716', '1', '1393', '1');
+INSERT INTO `fmp_code` VALUES ('1394', '717', 'AJ', '系统科学类', '70', '0', '1394', '1');
+INSERT INTO `fmp_code` VALUES ('1395', '7170100', 'AJ', '系统理论', '717', '1', '1395', '1');
+INSERT INTO `fmp_code` VALUES ('1396', '7173100', 'AJ', '系统工程', '717', '1', '1396', '1');
+INSERT INTO `fmp_code` VALUES ('1397', '7173200', 'AJ', '系统科学类其他专业', '717', '1', '1397', '1');
+INSERT INTO `fmp_code` VALUES ('1398', '718', 'AJ', '理学类其他专业', '70', '1', '1398', '1');
+INSERT INTO `fmp_code` VALUES ('1399', '80', 'AJ', '工学', '0', '0', '1399', '1');
+INSERT INTO `fmp_code` VALUES ('1400', '801', 'AJ', '地矿类', '80', '0', '1400', '1');
+INSERT INTO `fmp_code` VALUES ('1401', '8010100', 'AJ', '采矿工程', '801', '1', '1401', '1');
+INSERT INTO `fmp_code` VALUES ('1402', '8010200', 'AJ', '石油工程', '801', '1', '1402', '1');
+INSERT INTO `fmp_code` VALUES ('1403', '8010300', 'AJ', '矿物加工工程', '801', '1', '1403', '1');
+INSERT INTO `fmp_code` VALUES ('1404', '8010400', 'AJ', '勘查技术与工程', '801', '1', '1404', '1');
+INSERT INTO `fmp_code` VALUES ('1405', '8010500', 'AJ', '资源勘查工程', '801', '1', '1405', '1');
+INSERT INTO `fmp_code` VALUES ('1406', '8010600', 'AJ', '地质工程', '801', '1', '1406', '1');
+INSERT INTO `fmp_code` VALUES ('1407', '8010700', 'AJ', '矿物资源工程', '801', '1', '1407', '1');
+INSERT INTO `fmp_code` VALUES ('1408', '8014100', 'AJ', '石油与天然气地质勘查技术', '801', '1', '1408', '1');
+INSERT INTO `fmp_code` VALUES ('1409', '8014200', 'AJ', '矿山地质', '801', '1', '1409', '1');
+INSERT INTO `fmp_code` VALUES ('1410', '8014300', 'AJ', '采矿技术', '801', '1', '1410', '1');
+INSERT INTO `fmp_code` VALUES ('1411', '8014400', 'AJ', '石油与天然气开采', '801', '1', '1411', '1');
+INSERT INTO `fmp_code` VALUES ('1412', '8014500', 'AJ', '钻井技术', '801', '1', '1412', '1');
+INSERT INTO `fmp_code` VALUES ('1413', '8014600', 'AJ', '矿井通风与安全技术', '801', '1', '1413', '1');
+INSERT INTO `fmp_code` VALUES ('1414', '8014700', 'AJ', '选矿技术', '801', '1', '1414', '1');
+INSERT INTO `fmp_code` VALUES ('1415', '8014800', 'AJ', '岩土与基础工程设计', '801', '1', '1415', '1');
+INSERT INTO `fmp_code` VALUES ('1416', '8014900', 'AJ', '矿山工程技术', '801', '1', '1416', '1');
+INSERT INTO `fmp_code` VALUES ('1417', '8015000', 'AJ', '岩土与基础工程技术', '801', '1', '1417', '1');
+INSERT INTO `fmp_code` VALUES ('1418', '8015100', 'AJ', '黄金地质勘查与管理', '801', '1', '1418', '1');
+INSERT INTO `fmp_code` VALUES ('1419', '8015200', 'AJ', '黄金选冶工艺与技术', '801', '1', '1419', '1');
+INSERT INTO `fmp_code` VALUES ('1420', '8015300', 'AJ', '洁净煤技术', '801', '1', '1420', '1');
+INSERT INTO `fmp_code` VALUES ('1421', '8015400', 'AJ', '工程地震与工程勘查', '801', '1', '1421', '1');
+INSERT INTO `fmp_code` VALUES ('1422', '8015500', 'AJ', '煤化工', '801', '1', '1422', '1');
+INSERT INTO `fmp_code` VALUES ('1423', '8015600', 'AJ', '综合机械化采煤技术', '801', '1', '1423', '1');
+INSERT INTO `fmp_code` VALUES ('1424', '8015700', 'AJ', '地矿类其他专业', '801', '1', '1424', '1');
+INSERT INTO `fmp_code` VALUES ('1425', '802', 'AJ', '材料类', '80', '0', '1425', '1');
+INSERT INTO `fmp_code` VALUES ('1426', '8020100', 'AJ', '冶金工程', '802', '1', '1426', '1');
+INSERT INTO `fmp_code` VALUES ('1427', '8020200', 'AJ', '金属材料工程', '802', '1', '1427', '1');
+INSERT INTO `fmp_code` VALUES ('1428', '8020300', 'AJ', '无机非金属材料工程', '802', '1', '1428', '1');
+INSERT INTO `fmp_code` VALUES ('1429', '8020400', 'AJ', '高分子材料与工程', '802', '1', '1429', '1');
+INSERT INTO `fmp_code` VALUES ('1430', '8020500', 'AJ', '材料科学与工程', '802', '1', '1430', '1');
+INSERT INTO `fmp_code` VALUES ('1431', '8020600', 'AJ', '复合材料与工程', '802', '1', '1431', '1');
+INSERT INTO `fmp_code` VALUES ('1432', '8020700', 'AJ', '焊接技术与工程', '802', '1', '1432', '1');
+INSERT INTO `fmp_code` VALUES ('1433', '8020800', 'AJ', '宝石与材料工艺学', '802', '1', '1433', '1');
+INSERT INTO `fmp_code` VALUES ('1434', '8020900', 'AJ', '粉体材料科学与工程', '802', '1', '1434', '1');
+INSERT INTO `fmp_code` VALUES ('1435', '8021000', 'AJ', '再生资源科学与技术', '802', '1', '1435', '1');
+INSERT INTO `fmp_code` VALUES ('1436', '8021100', 'AJ', '稀土工程', '802', '1', '1436', '1');
+INSERT INTO `fmp_code` VALUES ('1437', '8022200', 'AJ', '军用材料工程', '802', '1', '1437', '1');
+INSERT INTO `fmp_code` VALUES ('1438', '8024100', 'AJ', '钢铁冶金', '802', '1', '1438', '1');
+INSERT INTO `fmp_code` VALUES ('1439', '8024200', 'AJ', '有色金属冶金', '802', '1', '1439', '1');
+INSERT INTO `fmp_code` VALUES ('1440', '8024300', 'AJ', '金属材料与热处理', '802', '1', '1440', '1');
+INSERT INTO `fmp_code` VALUES ('1441', '8024400', 'AJ', '金属压力加工', '802', '1', '1441', '1');
+INSERT INTO `fmp_code` VALUES ('1442', '8024500', 'AJ', '硅酸盐工程', '802', '1', '1442', '1');
+INSERT INTO `fmp_code` VALUES ('1443', '8024600', 'AJ', '腐蚀与防护', '802', '1', '1443', '1');
+INSERT INTO `fmp_code` VALUES ('1444', '8024700', 'AJ', '炼铁', '802', '1', '1444', '1');
+INSERT INTO `fmp_code` VALUES ('1445', '8024800', 'AJ', '炼钢', '802', '1', '1445', '1');
+INSERT INTO `fmp_code` VALUES ('1446', '8024900', 'AJ', '硅酸盐工艺', '802', '1', '1446', '1');
+INSERT INTO `fmp_code` VALUES ('1447', '8025000', 'AJ', '高分子材料加工', '802', '1', '1447', '1');
+INSERT INTO `fmp_code` VALUES ('1448', '8025100', 'AJ', '涂装防护工艺', '802', '1', '1448', '1');
+INSERT INTO `fmp_code` VALUES ('1449', '8025200', 'AJ', '炼钢及铁合金', '802', '1', '1449', '1');
+INSERT INTO `fmp_code` VALUES ('1450', '8025300', 'AJ', '化学装潢材料及应用', '802', '1', '1450', '1');
+INSERT INTO `fmp_code` VALUES ('1451', '8025400', 'AJ', '金属结构与焊接', '802', '1', '1451', '1');
+INSERT INTO `fmp_code` VALUES ('1452', '8025500', 'AJ', '建筑装饰材料与工程', '802', '1', '1452', '1');
+INSERT INTO `fmp_code` VALUES ('1453', '8025600', 'AJ', '宝石学', '802', '1', '1453', '1');
+INSERT INTO `fmp_code` VALUES ('1454', '8025700', 'AJ', '宝石加工及鉴定', '802', '1', '1454', '1');
+INSERT INTO `fmp_code` VALUES ('1455', '8025800', 'AJ', '宝石与贸易', '802', '1', '1455', '1');
+INSERT INTO `fmp_code` VALUES ('1456', '8025900', 'AJ', '建筑材料与塑胶加工', '802', '1', '1456', '1');
+INSERT INTO `fmp_code` VALUES ('1457', '8026000', 'AJ', '珠宝首饰设计与制作', '802', '1', '1457', '1');
+INSERT INTO `fmp_code` VALUES ('1458', '8026100', 'AJ', '产品涂饰与装璜', '802', '1', '1458', '1');
+INSERT INTO `fmp_code` VALUES ('1459', '8026200', 'AJ', '金银珠宝工艺及制品', '802', '1', '1459', '1');
+INSERT INTO `fmp_code` VALUES ('1460', '8026300', 'AJ', '磨料磨具制造', '802', '1', '1460', '1');
+INSERT INTO `fmp_code` VALUES ('1461', '8026400', 'AJ', '超硬材料及制品', '802', '1', '1461', '1');
+INSERT INTO `fmp_code` VALUES ('1462', '8026500', 'AJ', '装饰与装潢材料', '802', '1', '1462', '1');
+INSERT INTO `fmp_code` VALUES ('1463', '8026600', 'AJ', '珠宝鉴赏与工艺', '802', '1', '1463', '1');
+INSERT INTO `fmp_code` VALUES ('1464', '8026700', 'AJ', '新型材料应用', '802', '1', '1464', '1');
+INSERT INTO `fmp_code` VALUES ('1465', '8026800', 'AJ', '贵金属材料成型及控制', '802', '1', '1465', '1');
+INSERT INTO `fmp_code` VALUES ('1466', '8026900', 'AJ', '电线电缆制造技术', '802', '1', '1466', '1');
+INSERT INTO `fmp_code` VALUES ('1467', '8027000', 'AJ', '珠宝技术与工艺', '802', '1', '1467', '1');
+INSERT INTO `fmp_code` VALUES ('1468', '8027100', 'AJ', '珠宝加工与鉴定', '802', '1', '1468', '1');
+INSERT INTO `fmp_code` VALUES ('1469', '8027200', 'AJ', '宝石鉴定与营销', '802', '1', '1469', '1');
+INSERT INTO `fmp_code` VALUES ('1470', '8027300', 'AJ', '高分子材料应用', '802', '1', '1470', '1');
+INSERT INTO `fmp_code` VALUES ('1471', '8027400', 'AJ', '焊接工程及自动化', '802', '1', '1471', '1');
+INSERT INTO `fmp_code` VALUES ('1472', '8027500', 'AJ', '材料类其他专业', '802', '1', '1472', '1');
+INSERT INTO `fmp_code` VALUES ('1473', '803', 'AJ', '机械类', '80', '0', '1473', '1');
+INSERT INTO `fmp_code` VALUES ('1474', '8030100', 'AJ', '机械设计制造及其自动化', '803', '1', '1474', '1');
+INSERT INTO `fmp_code` VALUES ('1475', '8030200', 'AJ', '材料成型及控制工程', '803', '1', '1475', '1');
+INSERT INTO `fmp_code` VALUES ('1476', '8030300', 'AJ', '工业设计', '803', '1', '1476', '1');
+INSERT INTO `fmp_code` VALUES ('1477', '8030400', 'AJ', '过程装备与控制工程', '803', '1', '1477', '1');
+INSERT INTO `fmp_code` VALUES ('1478', '8030500', 'AJ', '机械工程及自动化', '803', '1', '1478', '1');
+INSERT INTO `fmp_code` VALUES ('1479', '8030600', 'AJ', '车辆工程', '803', '1', '1479', '1');
+INSERT INTO `fmp_code` VALUES ('1480', '8030700', 'AJ', '机械电子工程', '803', '1', '1480', '1');
+INSERT INTO `fmp_code` VALUES ('1481', '8034100', 'AJ', '机械制造工艺与设备', '803', '1', '1481', '1');
+INSERT INTO `fmp_code` VALUES ('1482', '8034200', 'AJ', '热加工工艺及设备', '803', '1', '1482', '1');
+INSERT INTO `fmp_code` VALUES ('1483', '8034300', 'AJ', '铸造', '803', '1', '1483', '1');
+INSERT INTO `fmp_code` VALUES ('1484', '8034400', 'AJ', '焊接工艺及设备', '803', '1', '1484', '1');
+INSERT INTO `fmp_code` VALUES ('1485', '8034500', 'AJ', '机械设计及制造', '803', '1', '1485', '1');
+INSERT INTO `fmp_code` VALUES ('1486', '8034600', 'AJ', '化工设备与机械', '803', '1', '1486', '1');
+INSERT INTO `fmp_code` VALUES ('1487', '8034700', 'AJ', '汽车与拖拉机', '803', '1', '1487', '1');
+INSERT INTO `fmp_code` VALUES ('1488', '8034900', 'AJ', '设备工程与管理', '803', '1', '1488', '1');
+INSERT INTO `fmp_code` VALUES ('1489', '8035000', 'AJ', '模具设计与制造', '803', '1', '1489', '1');
+INSERT INTO `fmp_code` VALUES ('1490', '8035100', 'AJ', '内燃机制造与维修', '803', '1', '1490', '1');
+INSERT INTO `fmp_code` VALUES ('1491', '8035200', 'AJ', '汽车、拖拉机制造与维修', '803', '1', '1491', '1');
+INSERT INTO `fmp_code` VALUES ('1492', '8035300', 'AJ', '船舶制造与维修', '803', '1', '1492', '1');
+INSERT INTO `fmp_code` VALUES ('1493', '8035400', 'AJ', '船舶机械制造与维修', '803', '1', '1493', '1');
+INSERT INTO `fmp_code` VALUES ('1494', '8035500', 'AJ', '农业机械制造与维修', '803', '1', '1494', '1');
+INSERT INTO `fmp_code` VALUES ('1495', '8035600', 'AJ', '化工机械制造与维修', '803', '1', '1495', '1');
+INSERT INTO `fmp_code` VALUES ('1496', '8035700', 'AJ', '精密医疗机械制造与维修', '803', '1', '1496', '1');
+INSERT INTO `fmp_code` VALUES ('1497', '8035800', 'AJ', '工程机械制造与维修', '803', '1', '1497', '1');
+INSERT INTO `fmp_code` VALUES ('1498', '8035900', 'AJ', '建材机械制造与维修', '803', '1', '1498', '1');
+INSERT INTO `fmp_code` VALUES ('1499', '8036000', 'AJ', '机械设备及自动化', '803', '1', '1499', '1');
+INSERT INTO `fmp_code` VALUES ('1500', '8036100', 'AJ', '飞机及发动机维修', '803', '1', '1500', '1');
+INSERT INTO `fmp_code` VALUES ('1501', '8036200', 'AJ', '制药机械制造与维修', '803', '1', '1501', '1');
+INSERT INTO `fmp_code` VALUES ('1502', '8036300', 'AJ', '液压技术应用', '803', '1', '1502', '1');
+INSERT INTO `fmp_code` VALUES ('1503', '8036400', 'AJ', '焊接', '803', '1', '1503', '1');
+INSERT INTO `fmp_code` VALUES ('1504', '8036500', 'AJ', '机电一体化', '803', '1', '1504', '1');
+INSERT INTO `fmp_code` VALUES ('1505', '8036600', 'AJ', '汽车技术', '803', '1', '1505', '1');
+INSERT INTO `fmp_code` VALUES ('1506', '8036700', 'AJ', '汽车检测与维修', '803', '1', '1506', '1');
+INSERT INTO `fmp_code` VALUES ('1507', '8036800', 'AJ', '工程机械', '803', '1', '1507', '1');
+INSERT INTO `fmp_code` VALUES ('1508', '8036900', 'AJ', '电子机械制造与维修', '803', '1', '1508', '1');
+INSERT INTO `fmp_code` VALUES ('1509', '8037000', 'AJ', '汽车工艺与维修', '803', '1', '1509', '1');
+INSERT INTO `fmp_code` VALUES ('1510', '8037100', 'AJ', '飞机维修工程', '803', '1', '1510', '1');
+INSERT INTO `fmp_code` VALUES ('1511', '8037200', 'AJ', '机电技术应用', '803', '1', '1511', '1');
+INSERT INTO `fmp_code` VALUES ('1512', '8037300', 'AJ', '机械及自动化技术', '803', '1', '1512', '1');
+INSERT INTO `fmp_code` VALUES ('1513', '8037400', 'AJ', '冶金机械', '803', '1', '1513', '1');
+INSERT INTO `fmp_code` VALUES ('1514', '8037500', 'AJ', '数控机床加工技术', '803', '1', '1514', '1');
+INSERT INTO `fmp_code` VALUES ('1515', '8037600', 'AJ', '舰船动力机械与装置', '803', '1', '1515', '1');
+INSERT INTO `fmp_code` VALUES ('1516', '8037700', 'AJ', '飞机控制设备与仪表', '803', '1', '1516', '1');
+INSERT INTO `fmp_code` VALUES ('1517', '8037800', 'AJ', '假肢矫形', '803', '1', '1517', '1');
+INSERT INTO `fmp_code` VALUES ('1518', '8037900', 'AJ', '药剂设备', '803', '1', '1518', '1');
+INSERT INTO `fmp_code` VALUES ('1519', '8038000', 'AJ', '玩具', '803', '1', '1519', '1');
+INSERT INTO `fmp_code` VALUES ('1520', '8038100', 'AJ', '船舶技术', '803', '1', '1520', '1');
+INSERT INTO `fmp_code` VALUES ('1521', '8038200', 'AJ', '印刷机械操作与维修', '803', '1', '1521', '1');
+INSERT INTO `fmp_code` VALUES ('1522', '8038300', 'AJ', '机械电子技术', '803', '1', '1522', '1');
+INSERT INTO `fmp_code` VALUES ('1523', '8038400', 'AJ', '汽车维修与营销', '803', '1', '1523', '1');
+INSERT INTO `fmp_code` VALUES ('1524', '8038500', 'AJ', '工程机械控制技术', '803', '1', '1524', '1');
+INSERT INTO `fmp_code` VALUES ('1525', '8038600', 'AJ', '热能机械', '803', '1', '1525', '1');
+INSERT INTO `fmp_code` VALUES ('1526', '8038700', 'AJ', '飞机机电设备维修', '803', '1', '1526', '1');
+INSERT INTO `fmp_code` VALUES ('1527', '8038800', 'AJ', '汽车工程', '803', '1', '1527', '1');
+INSERT INTO `fmp_code` VALUES ('1528', '8038900', 'AJ', '智能建筑控制工程', '803', '1', '1528', '1');
+INSERT INTO `fmp_code` VALUES ('1529', '8039000', 'AJ', '机电设备维修', '803', '1', '1529', '1');
+INSERT INTO `fmp_code` VALUES ('1530', '8039100', 'AJ', '机械运用与维修', '803', '1', '1530', '1');
+INSERT INTO `fmp_code` VALUES ('1531', '8039200', 'AJ', '机械设备维修与管理', '803', '1', '1531', '1');
+INSERT INTO `fmp_code` VALUES ('1532', '8039300', 'AJ', '机械类其他专业', '803', '1', '1532', '1');
+INSERT INTO `fmp_code` VALUES ('1533', '804', 'AJ', '仪器仪表类', '80', '0', '1533', '1');
+INSERT INTO `fmp_code` VALUES ('1534', '8040100', 'AJ', '测控技术与仪器', '804', '1', '1534', '1');
+INSERT INTO `fmp_code` VALUES ('1535', '8044100', 'AJ', '自动化仪表及应用', '804', '1', '1535', '1');
+INSERT INTO `fmp_code` VALUES ('1536', '8044200', 'AJ', '计量测试技术', '804', '1', '1536', '1');
+INSERT INTO `fmp_code` VALUES ('1537', '8044300', 'AJ', '检测技术与应用', '804', '1', '1537', '1');
+INSERT INTO `fmp_code` VALUES ('1538', '8044400', 'AJ', '热工检测与控制技术', '804', '1', '1538', '1');
+INSERT INTO `fmp_code` VALUES ('1539', '8044500', 'AJ', '医用电子仪器', '804', '1', '1539', '1');
+INSERT INTO `fmp_code` VALUES ('1540', '8044600', 'AJ', '医用放射线设备', '804', '1', '1540', '1');
+INSERT INTO `fmp_code` VALUES ('1541', '8044700', 'AJ', '理化检验及分离技术', '804', '1', '1541', '1');
+INSERT INTO `fmp_code` VALUES ('1542', '8044800', 'AJ', '计量技术及管理', '804', '1', '1542', '1');
+INSERT INTO `fmp_code` VALUES ('1543', '8044900', 'AJ', '工业仪表及自动化', '804', '1', '1543', '1');
+INSERT INTO `fmp_code` VALUES ('1544', '8045000', 'AJ', '眼镜技术', '804', '1', '1544', '1');
+INSERT INTO `fmp_code` VALUES ('1545', '8045100', 'AJ', '验光制镜', '804', '1', '1545', '1');
+INSERT INTO `fmp_code` VALUES ('1546', '8045200', 'AJ', '机电产品质量检验', '804', '1', '1546', '1');
+INSERT INTO `fmp_code` VALUES ('1547', '8045300', 'AJ', '电子仪器及电气维修', '804', '1', '1547', '1');
+INSERT INTO `fmp_code` VALUES ('1548', '8045400', 'AJ', '电气及仪表应用技术', '804', '1', '1548', '1');
+INSERT INTO `fmp_code` VALUES ('1549', '8045500', 'AJ', '分析测试技术与仪器维修', '804', '1', '1549', '1');
+INSERT INTO `fmp_code` VALUES ('1550', '8045600', 'AJ', '分析与检测技术', '804', '1', '1550', '1');
+INSERT INTO `fmp_code` VALUES ('1551', '8045700', 'AJ', '视光技术', '804', '1', '1551', '1');
+INSERT INTO `fmp_code` VALUES ('1552', '8045800', 'AJ', '计算机与自动检测', '804', '1', '1552', '1');
+INSERT INTO `fmp_code` VALUES ('1553', '8045900', 'AJ', '电子测量与仪器', '804', '1', '1553', '1');
+INSERT INTO `fmp_code` VALUES ('1554', '8046000', 'AJ', '测绘仪器', '804', '1', '1554', '1');
+INSERT INTO `fmp_code` VALUES ('1555', '8046100', 'AJ', '航空仪电维修工程', '804', '1', '1555', '1');
+INSERT INTO `fmp_code` VALUES ('1556', '8046200', 'AJ', '光学仪器维修', '804', '1', '1556', '1');
+INSERT INTO `fmp_code` VALUES ('1557', '8046300', 'AJ', '声像设备维修工程', '804', '1', '1557', '1');
+INSERT INTO `fmp_code` VALUES ('1558', '8046400', 'AJ', '医疗仪器维修', '804', '1', '1558', '1');
+INSERT INTO `fmp_code` VALUES ('1559', '8046500', 'AJ', '油料质量与计量', '804', '1', '1559', '1');
+INSERT INTO `fmp_code` VALUES ('1560', '8046600', 'AJ', '质量检测技术与控制', '804', '1', '1560', '1');
+INSERT INTO `fmp_code` VALUES ('1561', '8046700', 'AJ', '产品质量检验', '804', '1', '1561', '1');
+INSERT INTO `fmp_code` VALUES ('1562', '8046800', 'AJ', '无损检测', '804', '1', '1562', '1');
+INSERT INTO `fmp_code` VALUES ('1563', '8046900', 'AJ', '视光与配镜技术', '804', '1', '1563', '1');
+INSERT INTO `fmp_code` VALUES ('1564', '8047000', 'AJ', '仪器仪表类其他专业', '804', '1', '1564', '1');
+INSERT INTO `fmp_code` VALUES ('1565', '805', 'AJ', '能源动力类', '80', '0', '1565', '1');
+INSERT INTO `fmp_code` VALUES ('1566', '8050100', 'AJ', '热能与动力工程', '805', '1', '1566', '1');
+INSERT INTO `fmp_code` VALUES ('1567', '8050200', 'AJ', '核工程与核技术', '805', '1', '1567', '1');
+INSERT INTO `fmp_code` VALUES ('1568', '8050300', 'AJ', '工程物理', '805', '1', '1568', '1');
+INSERT INTO `fmp_code` VALUES ('1569', '8054100', 'AJ', '热能工程', '805', '1', '1569', '1');
+INSERT INTO `fmp_code` VALUES ('1570', '8054200', 'AJ', '制冷与低温技术', '805', '1', '1570', '1');
+INSERT INTO `fmp_code` VALUES ('1571', '8054300', 'AJ', '工业炉与热能利用', '805', '1', '1571', '1');
+INSERT INTO `fmp_code` VALUES ('1572', '8054400', 'AJ', '电厂热能动力', '805', '1', '1572', '1');
+INSERT INTO `fmp_code` VALUES ('1573', '8054500', 'AJ', '火电厂集控运行', '805', '1', '1573', '1');
+INSERT INTO `fmp_code` VALUES ('1574', '8054600', 'AJ', '燃料输送系统自动化', '805', '1', '1574', '1');
+INSERT INTO `fmp_code` VALUES ('1575', '8054700', 'AJ', '采暖与通风', '805', '1', '1575', '1');
+INSERT INTO `fmp_code` VALUES ('1576', '8054800', 'AJ', '制冷与空调', '805', '1', '1576', '1');
+INSERT INTO `fmp_code` VALUES ('1577', '8054900', 'AJ', '制冷与供暖', '805', '1', '1577', '1');
+INSERT INTO `fmp_code` VALUES ('1578', '8055000', 'AJ', '城市热能应用技术', '805', '1', '1578', '1');
+INSERT INTO `fmp_code` VALUES ('1579', '8055100', 'AJ', '热工自动化', '805', '1', '1579', '1');
+INSERT INTO `fmp_code` VALUES ('1580', '8055200', 'AJ', '城市能源管理', '805', '1', '1580', '1');
+INSERT INTO `fmp_code` VALUES ('1581', '8055300', 'AJ', '能源动力类其他专业', '805', '1', '1581', '1');
+INSERT INTO `fmp_code` VALUES ('1582', '806', 'AJ', '电气信息类', '80', '0', '1582', '1');
+INSERT INTO `fmp_code` VALUES ('1583', '8060100', 'AJ', '电气工程及其自动化', '806', '1', '1583', '1');
+INSERT INTO `fmp_code` VALUES ('1584', '8060200', 'AJ', '自动化', '806', '1', '1584', '1');
+INSERT INTO `fmp_code` VALUES ('1585', '8060300', 'AJ', '电子信息工程', '806', '1', '1585', '1');
+INSERT INTO `fmp_code` VALUES ('1586', '8060400', 'AJ', '通信工程', '806', '1', '1586', '1');
+INSERT INTO `fmp_code` VALUES ('1587', '8060500', 'AJ', '计算机科学与技术', '806', '1', '1587', '1');
+INSERT INTO `fmp_code` VALUES ('1588', '8060600', 'AJ', '电子科学与技术', '806', '1', '1588', '1');
+INSERT INTO `fmp_code` VALUES ('1589', '8060700', 'AJ', '生物医学工程', '806', '1', '1589', '1');
+INSERT INTO `fmp_code` VALUES ('1590', '8060800', 'AJ', '电气工程与自动化', '806', '1', '1590', '1');
+INSERT INTO `fmp_code` VALUES ('1591', '8060900', 'AJ', '信息工程', '806', '1', '1591', '1');
+INSERT INTO `fmp_code` VALUES ('1592', '8061000', 'AJ', '光源与照明', '806', '1', '1592', '1');
+INSERT INTO `fmp_code` VALUES ('1593', '8061100', 'AJ', '软件工程', '806', '1', '1593', '1');
+INSERT INTO `fmp_code` VALUES ('1594', '8061200', 'AJ', '影视艺术技术', '806', '1', '1594', '1');
+INSERT INTO `fmp_code` VALUES ('1595', '8061300', 'AJ', '网络工程', '806', '1', '1595', '1');
+INSERT INTO `fmp_code` VALUES ('1596', '8061400', 'AJ', '信息显示与光电技术', '806', '1', '1596', '1');
+INSERT INTO `fmp_code` VALUES ('1597', '8061500', 'AJ', '集成电路设计与集成系统', '806', '1', '1597', '1');
+INSERT INTO `fmp_code` VALUES ('1598', '8061600', 'AJ', '光电信息工程', '806', '1', '1598', '1');
+INSERT INTO `fmp_code` VALUES ('1599', '8061700', 'AJ', '广播电视工程', '806', '1', '1599', '1');
+INSERT INTO `fmp_code` VALUES ('1600', '8061800', 'AJ', '电气信息工程', '806', '1', '1600', '1');
+INSERT INTO `fmp_code` VALUES ('1601', '8064100', 'AJ', '电机电器及其控制', '806', '1', '1601', '1');
+INSERT INTO `fmp_code` VALUES ('1602', '8064200', 'AJ', '工业自动化', '806', '1', '1602', '1');
+INSERT INTO `fmp_code` VALUES ('1603', '8064300', 'AJ', '电气技术', '806', '1', '1603', '1');
+INSERT INTO `fmp_code` VALUES ('1604', '8064400', 'AJ', '电机制造与运行', '806', '1', '1604', '1');
+INSERT INTO `fmp_code` VALUES ('1605', '8064500', 'AJ', '电器制造', '806', '1', '1605', '1');
+INSERT INTO `fmp_code` VALUES ('1606', '8064600', 'AJ', '电机与电器', '806', '1', '1606', '1');
+INSERT INTO `fmp_code` VALUES ('1607', '8064700', 'AJ', '发电厂及电力系统', '806', '1', '1607', '1');
+INSERT INTO `fmp_code` VALUES ('1608', '8064800', 'AJ', '电力系统继电保护', '806', '1', '1608', '1');
+INSERT INTO `fmp_code` VALUES ('1609', '8064900', 'AJ', '电网监控技术', '806', '1', '1609', '1');
+INSERT INTO `fmp_code` VALUES ('1610', '8065000', 'AJ', '输电线路工程', '806', '1', '1610', '1');
+INSERT INTO `fmp_code` VALUES ('1611', '8065100', 'AJ', '供用电技术', '806', '1', '1611', '1');
+INSERT INTO `fmp_code` VALUES ('1612', '8065200', 'AJ', '工业电气自动化技术', '806', '1', '1612', '1');
+INSERT INTO `fmp_code` VALUES ('1613', '8065300', 'AJ', '生产过程自动化技术', '806', '1', '1613', '1');
+INSERT INTO `fmp_code` VALUES ('1614', '8065400', 'AJ', '工业自动化仪表', '806', '1', '1614', '1');
+INSERT INTO `fmp_code` VALUES ('1615', '8065500', 'AJ', '工业用电', '806', '1', '1615', '1');
+INSERT INTO `fmp_code` VALUES ('1616', '8065600', 'AJ', '用电管理与监察', '806', '1', '1616', '1');
+INSERT INTO `fmp_code` VALUES ('1617', '8065700', 'AJ', '建筑电气工程', '806', '1', '1617', '1');
+INSERT INTO `fmp_code` VALUES ('1618', '8065800', 'AJ', '微电子技术', '806', '1', '1618', '1');
+INSERT INTO `fmp_code` VALUES ('1619', '8065900', 'AJ', '应用电子技术', '806', '1', '1619', '1');
+INSERT INTO `fmp_code` VALUES ('1620', '8066000', 'AJ', '计算机及应用', '806', '1', '1620', '1');
+INSERT INTO `fmp_code` VALUES ('1621', '8066100', 'AJ', '计算机软件', '806', '1', '1621', '1');
+INSERT INTO `fmp_code` VALUES ('1622', '8066200', 'AJ', '自动控制', '806', '1', '1622', '1');
+INSERT INTO `fmp_code` VALUES ('1623', '8066300', 'AJ', '计算机科学教育', '806', '1', '1623', '1');
+INSERT INTO `fmp_code` VALUES ('1624', '8066500', 'AJ', '电子与信息技术', '806', '1', '1624', '1');
+INSERT INTO `fmp_code` VALUES ('1625', '8066600', 'AJ', '计算机通信', '806', '1', '1625', '1');
+INSERT INTO `fmp_code` VALUES ('1626', '8066700', 'AJ', '计算机应用技术', '806', '1', '1626', '1');
+INSERT INTO `fmp_code` VALUES ('1627', '8066800', 'AJ', '无线电技术', '806', '1', '1627', '1');
+INSERT INTO `fmp_code` VALUES ('1628', '8066900', 'AJ', '电子设备结构设计与工艺', '806', '1', '1628', '1');
+INSERT INTO `fmp_code` VALUES ('1629', '8067000', 'AJ', '电子设备维修', '806', '1', '1629', '1');
+INSERT INTO `fmp_code` VALUES ('1630', '8067100', 'AJ', '计算机应用与维护及相关专业', '806', '1', '1630', '1');
+INSERT INTO `fmp_code` VALUES ('1631', '8067200', 'AJ', '办公自动化设备运行与维修', '806', '1', '1631', '1');
+INSERT INTO `fmp_code` VALUES ('1632', '8067300', 'AJ', '机床数控技术', '806', '1', '1632', '1');
+INSERT INTO `fmp_code` VALUES ('1633', '8067400', 'AJ', '通信线路', '806', '1', '1633', '1');
+INSERT INTO `fmp_code` VALUES ('1634', '8067500', 'AJ', '光纤通信', '806', '1', '1634', '1');
+INSERT INTO `fmp_code` VALUES ('1635', '8067600', 'AJ', '程控交换技术', '806', '1', '1635', '1');
+INSERT INTO `fmp_code` VALUES ('1636', '8067700', 'AJ', '通信技术', '806', '1', '1636', '1');
+INSERT INTO `fmp_code` VALUES ('1637', '8067800', 'AJ', '移动通信', '806', '1', '1637', '1');
+INSERT INTO `fmp_code` VALUES ('1638', '8067900', 'AJ', '卫星通信', '806', '1', '1638', '1');
+INSERT INTO `fmp_code` VALUES ('1639', '8068000', 'AJ', '电子技术及微机应用', '806', '1', '1639', '1');
+INSERT INTO `fmp_code` VALUES ('1640', '8068100', 'AJ', '微型计算机及应用', '806', '1', '1640', '1');
+INSERT INTO `fmp_code` VALUES ('1641', '8068200', 'AJ', '办公自动化技术', '806', '1', '1641', '1');
+INSERT INTO `fmp_code` VALUES ('1642', '8068300', 'AJ', '计算机与信息管理', '806', '1', '1642', '1');
+INSERT INTO `fmp_code` VALUES ('1643', '8068400', 'AJ', '工业电子技术', '806', '1', '1643', '1');
+INSERT INTO `fmp_code` VALUES ('1644', '8068500', 'AJ', '计算机辅助机械设计', '806', '1', '1644', '1');
+INSERT INTO `fmp_code` VALUES ('1645', '8068600', 'AJ', '计算机与邮政通信', '806', '1', '1645', '1');
+INSERT INTO `fmp_code` VALUES ('1646', '8068700', 'AJ', '数据与图文通信', '806', '1', '1646', '1');
+INSERT INTO `fmp_code` VALUES ('1647', '8068800', 'AJ', '国际邮政通信', '806', '1', '1647', '1');
+INSERT INTO `fmp_code` VALUES ('1648', '8068900', 'AJ', '邮政自动化', '806', '1', '1648', '1');
+INSERT INTO `fmp_code` VALUES ('1649', '8069000', 'AJ', '信息处理与自动化', '806', '1', '1649', '1');
+INSERT INTO `fmp_code` VALUES ('1650', '8069100', 'AJ', '电器与电脑', '806', '1', '1650', '1');
+INSERT INTO `fmp_code` VALUES ('1651', '8069200', 'AJ', '金融网技术', '806', '1', '1651', '1');
+INSERT INTO `fmp_code` VALUES ('1652', '8069300', 'AJ', '数控技术及应用', '806', '1', '1652', '1');
+INSERT INTO `fmp_code` VALUES ('1653', '8069400', 'AJ', '电子设备应用技术', '806', '1', '1653', '1');
+INSERT INTO `fmp_code` VALUES ('1654', '8069500', 'AJ', '网络技术与信息处理', '806', '1', '1654', '1');
+INSERT INTO `fmp_code` VALUES ('1655', '8069600', 'AJ', '声像技术', '806', '1', '1655', '1');
+INSERT INTO `fmp_code` VALUES ('1656', '8069700', 'AJ', '计算机网络与软件应用', '806', '1', '1656', '1');
+INSERT INTO `fmp_code` VALUES ('1657', '8069800', 'AJ', '电子工程', '806', '1', '1657', '1');
+INSERT INTO `fmp_code` VALUES ('1658', '8069900', 'AJ', '通信与可视技术', '806', '1', '1658', '1');
+INSERT INTO `fmp_code` VALUES ('1659', '8061900', 'AJ', '电气信息类其他专业', '806', '1', '1659', '1');
+INSERT INTO `fmp_code` VALUES ('1660', '807', 'AJ', '土建类', '80', '0', '1660', '1');
+INSERT INTO `fmp_code` VALUES ('1661', '8070100', 'AJ', '建筑学', '807', '1', '1661', '1');
+INSERT INTO `fmp_code` VALUES ('1662', '8070200', 'AJ', '城市规划', '807', '1', '1662', '1');
+INSERT INTO `fmp_code` VALUES ('1663', '8070300', 'AJ', '土木工程', '807', '1', '1663', '1');
+INSERT INTO `fmp_code` VALUES ('1664', '8070400', 'AJ', '建筑环境与设备工程', '807', '1', '1664', '1');
+INSERT INTO `fmp_code` VALUES ('1665', '8070500', 'AJ', '给水排水工程', '807', '1', '1665', '1');
+INSERT INTO `fmp_code` VALUES ('1666', '8070600', 'AJ', '城市地下空间工程', '807', '1', '1666', '1');
+INSERT INTO `fmp_code` VALUES ('1667', '8072100', 'AJ', '军港建筑工程', '807', '1', '1667', '1');
+INSERT INTO `fmp_code` VALUES ('1668', '8072200', 'AJ', '野战给水工程', '807', '1', '1668', '1');
+INSERT INTO `fmp_code` VALUES ('1669', '8072300', 'AJ', '给排水与采暖通风工程', '807', '1', '1669', '1');
+INSERT INTO `fmp_code` VALUES ('1670', '8072400', 'AJ', '道路桥梁与渡河工程', '807', '1', '1670', '1');
+INSERT INTO `fmp_code` VALUES ('1671', '8072500', 'AJ', '野战工程', '807', '1', '1671', '1');
+INSERT INTO `fmp_code` VALUES ('1672', '8074100', 'AJ', '建筑工程', '807', '1', '1672', '1');
+INSERT INTO `fmp_code` VALUES ('1673', '8074200', 'AJ', '城镇建设', '807', '1', '1673', '1');
+INSERT INTO `fmp_code` VALUES ('1674', '8074300', 'AJ', '交通土建工程', '807', '1', '1674', '1');
+INSERT INTO `fmp_code` VALUES ('1675', '8074400', 'AJ', '供热通风与空调工程', '807', '1', '1675', '1');
+INSERT INTO `fmp_code` VALUES ('1676', '8074500', 'AJ', '工业设备安装工程', '807', '1', '1676', '1');
+INSERT INTO `fmp_code` VALUES ('1677', '8074600', 'AJ', '供热空调与燃气工程', '807', '1', '1677', '1');
+INSERT INTO `fmp_code` VALUES ('1678', '8074700', 'AJ', '建筑设计', '807', '1', '1678', '1');
+INSERT INTO `fmp_code` VALUES ('1679', '8074800', 'AJ', '建筑装饰技术', '807', '1', '1679', '1');
+INSERT INTO `fmp_code` VALUES ('1680', '8074900', 'AJ', '房屋建筑工程', '807', '1', '1680', '1');
+INSERT INTO `fmp_code` VALUES ('1681', '8075000', 'AJ', '公路与城市道路工程', '807', '1', '1681', '1');
+INSERT INTO `fmp_code` VALUES ('1682', '8075100', 'AJ', '铁道与桥梁工程', '807', '1', '1682', '1');
+INSERT INTO `fmp_code` VALUES ('1683', '8075200', 'AJ', '建筑材料检验与制品工艺', '807', '1', '1683', '1');
+INSERT INTO `fmp_code` VALUES ('1684', '8075300', 'AJ', '房屋设备安装', '807', '1', '1684', '1');
+INSERT INTO `fmp_code` VALUES ('1685', '8075400', 'AJ', '工业与民用建筑工程', '807', '1', '1685', '1');
+INSERT INTO `fmp_code` VALUES ('1686', '8075500', 'AJ', '公路与桥梁', '807', '1', '1686', '1');
+INSERT INTO `fmp_code` VALUES ('1687', '8075600', 'AJ', '建筑电器技术', '807', '1', '1687', '1');
+INSERT INTO `fmp_code` VALUES ('1688', '8075700', 'AJ', '铁道工程', '807', '1', '1688', '1');
+INSERT INTO `fmp_code` VALUES ('1689', '8075800', 'AJ', '房屋建筑与装饰', '807', '1', '1689', '1');
+INSERT INTO `fmp_code` VALUES ('1690', '8075900', 'AJ', '水利水电建筑工程', '807', '1', '1690', '1');
+INSERT INTO `fmp_code` VALUES ('1691', '8076000', 'AJ', '建筑电气技术', '807', '1', '1691', '1');
+INSERT INTO `fmp_code` VALUES ('1692', '8076100', 'AJ', '供水供热与空调', '807', '1', '1692', '1');
+INSERT INTO `fmp_code` VALUES ('1693', '8076200', 'AJ', '岩土工程', '807', '1', '1693', '1');
+INSERT INTO `fmp_code` VALUES ('1694', '8076300', 'AJ', '公路养护机械化', '807', '1', '1694', '1');
+INSERT INTO `fmp_code` VALUES ('1695', '8076400', 'AJ', '建筑施工管理技术', '807', '1', '1695', '1');
+INSERT INTO `fmp_code` VALUES ('1696', '8076500', 'AJ', '交通土建工程实验与测试技术', '807', '1', '1696', '1');
+INSERT INTO `fmp_code` VALUES ('1697', '8076600', 'AJ', '城市燃气与热力工程', '807', '1', '1697', '1');
+INSERT INTO `fmp_code` VALUES ('1698', '8076700', 'AJ', '土木工程施工技术及管理', '807', '1', '1698', '1');
+INSERT INTO `fmp_code` VALUES ('1699', '8076800', 'AJ', '城市供用电技术', '807', '1', '1699', '1');
+INSERT INTO `fmp_code` VALUES ('1700', '8076900', 'AJ', '城市水净化技术', '807', '1', '1700', '1');
+INSERT INTO `fmp_code` VALUES ('1701', '8077000', 'AJ', '建筑设备安装与运行', '807', '1', '1701', '1');
+INSERT INTO `fmp_code` VALUES ('1702', '8077100', 'AJ', '建筑水电设备工程', '807', '1', '1702', '1');
+INSERT INTO `fmp_code` VALUES ('1703', '8077200', 'AJ', '市政工程', '807', '1', '1703', '1');
+INSERT INTO `fmp_code` VALUES ('1704', '8077300', 'AJ', '建筑施工技术', '807', '1', '1704', '1');
+INSERT INTO `fmp_code` VALUES ('1705', '8077400', 'AJ', '营房结构工程', '807', '1', '1705', '1');
+INSERT INTO `fmp_code` VALUES ('1706', '8077500', 'AJ', '机场营房建筑与管理', '807', '1', '1706', '1');
+INSERT INTO `fmp_code` VALUES ('1707', '8077600', 'AJ', '通风空调与给排水', '807', '1', '1707', '1');
+INSERT INTO `fmp_code` VALUES ('1708', '8077700', 'AJ', '土木工程技术', '807', '1', '1708', '1');
+INSERT INTO `fmp_code` VALUES ('1709', '8077800', 'AJ', '道路与桥梁工程', '807', '1', '1709', '1');
+INSERT INTO `fmp_code` VALUES ('1710', '8077900', 'AJ', '建筑工程质量控制技术', '807', '1', '1710', '1');
+INSERT INTO `fmp_code` VALUES ('1711', '8078000', 'AJ', '岩土工程施工与管理', '807', '1', '1711', '1');
+INSERT INTO `fmp_code` VALUES ('1712', '8078100', 'AJ', '土木工程质量检测', '807', '1', '1712', '1');
+INSERT INTO `fmp_code` VALUES ('1713', '8078200', 'AJ', '暖通空调设备及自动化', '807', '1', '1713', '1');
+INSERT INTO `fmp_code` VALUES ('1714', '8078300', 'AJ', '土建类其他专业', '807', '1', '1714', '1');
+INSERT INTO `fmp_code` VALUES ('1715', '808', 'AJ', '水利类', '80', '0', '1715', '1');
+INSERT INTO `fmp_code` VALUES ('1716', '8080100', 'AJ', '水利水电工程', '808', '1', '1716', '1');
+INSERT INTO `fmp_code` VALUES ('1717', '8080200', 'AJ', '水文与水资源工程', '808', '1', '1717', '1');
+INSERT INTO `fmp_code` VALUES ('1718', '8080300', 'AJ', '港口航道与海岸工程', '808', '1', '1718', '1');
+INSERT INTO `fmp_code` VALUES ('1719', '8080400', 'AJ', '港口海岸及治河工程', '808', '1', '1719', '1');
+INSERT INTO `fmp_code` VALUES ('1720', '8084100', 'AJ', '水利工程', '808', '1', '1720', '1');
+INSERT INTO `fmp_code` VALUES ('1721', '8084200', 'AJ', '水电站动力设备', '808', '1', '1721', '1');
+INSERT INTO `fmp_code` VALUES ('1722', '8084300', 'AJ', '水电站设备及自动化', '808', '1', '1722', '1');
+INSERT INTO `fmp_code` VALUES ('1723', '8084400', 'AJ', '水电站与水电网', '808', '1', '1723', '1');
+INSERT INTO `fmp_code` VALUES ('1724', '8084500', 'AJ', '水利类其他专业', '808', '1', '1724', '1');
+INSERT INTO `fmp_code` VALUES ('1725', '809', 'AJ', '测绘类', '80', '0', '1725', '1');
+INSERT INTO `fmp_code` VALUES ('1726', '8090100', 'AJ', '测绘工程', '809', '1', '1726', '1');
+INSERT INTO `fmp_code` VALUES ('1727', '8090200', 'AJ', '遥感科学与技术', '809', '1', '1727', '1');
+INSERT INTO `fmp_code` VALUES ('1728', '8091700', 'AJ', '摄影测量与遥感', '809', '1', '1728', '1');
+INSERT INTO `fmp_code` VALUES ('1729', '8091800', 'AJ', '地图与地理信息系统', '809', '1', '1729', '1');
+INSERT INTO `fmp_code` VALUES ('1730', '8094100', 'AJ', '测量工程', '809', '1', '1730', '1');
+INSERT INTO `fmp_code` VALUES ('1731', '8094200', 'AJ', '航空摄影测量', '809', '1', '1731', '1');
+INSERT INTO `fmp_code` VALUES ('1732', '8094300', 'AJ', '地籍测量与土地管理', '809', '1', '1732', '1');
+INSERT INTO `fmp_code` VALUES ('1733', '8094400', 'AJ', '环境监测', '809', '1', '1733', '1');
+INSERT INTO `fmp_code` VALUES ('1734', '8094500', 'AJ', '环境治理工程', '809', '1', '1734', '1');
+INSERT INTO `fmp_code` VALUES ('1735', '8094600', 'AJ', '港口及航道工程', '809', '1', '1735', '1');
+INSERT INTO `fmp_code` VALUES ('1736', '8094700', 'AJ', '工程测量', '809', '1', '1736', '1');
+INSERT INTO `fmp_code` VALUES ('1737', '8094800', 'AJ', '环境监测与治理', '809', '1', '1737', '1');
+INSERT INTO `fmp_code` VALUES ('1738', '8094900', 'AJ', '光电测量', '809', '1', '1738', '1');
+INSERT INTO `fmp_code` VALUES ('1739', '8095000', 'AJ', '大地测量', '809', '1', '1739', '1');
+INSERT INTO `fmp_code` VALUES ('1740', '8095100', 'AJ', '军事工程测量', '809', '1', '1740', '1');
+INSERT INTO `fmp_code` VALUES ('1741', '8095200', 'AJ', '地籍测量与管理', '809', '1', '1741', '1');
+INSERT INTO `fmp_code` VALUES ('1742', '8095300', 'AJ', '海道测量', '809', '1', '1742', '1');
+INSERT INTO `fmp_code` VALUES ('1743', '8095400', 'AJ', '地图印刷', '809', '1', '1743', '1');
+INSERT INTO `fmp_code` VALUES ('1744', '8095500', 'AJ', '海图制图', '809', '1', '1744', '1');
+INSERT INTO `fmp_code` VALUES ('1745', '8095600', 'AJ', '地图制图', '809', '1', '1745', '1');
+INSERT INTO `fmp_code` VALUES ('1746', '8095700', 'AJ', '计算机制图', '809', '1', '1746', '1');
+INSERT INTO `fmp_code` VALUES ('1747', '8095800', 'AJ', '环境监控技术', '809', '1', '1747', '1');
+INSERT INTO `fmp_code` VALUES ('1748', '8095900', 'AJ', '现代测绘技术', '809', '1', '1748', '1');
+INSERT INTO `fmp_code` VALUES ('1749', '8096000', 'AJ', '测绘类其他专业', '809', '1', '1749', '1');
+INSERT INTO `fmp_code` VALUES ('1750', '810', 'AJ', '环境与安全类', '80', '0', '1750', '1');
+INSERT INTO `fmp_code` VALUES ('1751', '8100100', 'AJ', '环境工程', '810', '1', '1751', '1');
+INSERT INTO `fmp_code` VALUES ('1752', '8100200', 'AJ', '安全工程', '810', '1', '1752', '1');
+INSERT INTO `fmp_code` VALUES ('1753', '8101800', 'AJ', '核技术与核安全（工程物理）', '810', '1', '1753', '1');
+INSERT INTO `fmp_code` VALUES ('1754', '8101900', 'AJ', '化学防护工程', '810', '1', '1754', '1');
+INSERT INTO `fmp_code` VALUES ('1755', '8102000', 'AJ', '伪装工程', '810', '1', '1755', '1');
+INSERT INTO `fmp_code` VALUES ('1756', '8104100', 'AJ', '室内环境控制工程', '810', '1', '1756', '1');
+INSERT INTO `fmp_code` VALUES ('1757', '8104200', 'AJ', '环境保护与监测', '810', '1', '1757', '1');
+INSERT INTO `fmp_code` VALUES ('1758', '8104300', 'AJ', '室内环境工程与设计', '810', '1', '1758', '1');
+INSERT INTO `fmp_code` VALUES ('1759', '8104400', 'AJ', '安全技术', '810', '1', '1759', '1');
+INSERT INTO `fmp_code` VALUES ('1760', '8104500', 'AJ', '核潜艇环境工程', '810', '1', '1760', '1');
+INSERT INTO `fmp_code` VALUES ('1761', '8104600', 'AJ', '环境净化与监测技术', '810', '1', '1761', '1');
+INSERT INTO `fmp_code` VALUES ('1762', '8104700', 'AJ', '公路环境检测与保护', '810', '1', '1762', '1');
+INSERT INTO `fmp_code` VALUES ('1763', '8104800', 'AJ', '环境与安全类其他专业', '810', '1', '1763', '1');
+INSERT INTO `fmp_code` VALUES ('1764', '811', 'AJ', '化工与制药类', '80', '0', '1764', '1');
+INSERT INTO `fmp_code` VALUES ('1765', '8110100', 'AJ', '化学工程与工艺', '811', '1', '1765', '1');
+INSERT INTO `fmp_code` VALUES ('1766', '8110200', 'AJ', '制药工程', '811', '1', '1766', '1');
+INSERT INTO `fmp_code` VALUES ('1767', '8110300', 'AJ', '化工与制药', '811', '1', '1767', '1');
+INSERT INTO `fmp_code` VALUES ('1768', '8114100', 'AJ', '化工分析与监测', '811', '1', '1768', '1');
+INSERT INTO `fmp_code` VALUES ('1769', '8114200', 'AJ', '化学工程', '811', '1', '1769', '1');
+INSERT INTO `fmp_code` VALUES ('1770', '8114300', 'AJ', '化工工艺', '811', '1', '1770', '1');
+INSERT INTO `fmp_code` VALUES ('1771', '8114400', 'AJ', '高分子化工', '811', '1', '1771', '1');
+INSERT INTO `fmp_code` VALUES ('1772', '8114500', 'AJ', '精细化工', '811', '1', '1772', '1');
+INSERT INTO `fmp_code` VALUES ('1773', '8114600', 'AJ', '工业分析', '811', '1', '1773', '1');
+INSERT INTO `fmp_code` VALUES ('1774', '8114700', 'AJ', '化学制药', '811', '1', '1774', '1');
+INSERT INTO `fmp_code` VALUES ('1775', '8114800', 'AJ', '中药制药', '811', '1', '1775', '1');
+INSERT INTO `fmp_code` VALUES ('1776', '8114900', 'AJ', '生物化学工程', '811', '1', '1776', '1');
+INSERT INTO `fmp_code` VALUES ('1777', '8115000', 'AJ', '石油化工工艺', '811', '1', '1777', '1');
+INSERT INTO `fmp_code` VALUES ('1778', '8115100', 'AJ', '精细化工工艺', '811', '1', '1778', '1');
+INSERT INTO `fmp_code` VALUES ('1779', '8115200', 'AJ', '电厂燃料及工质分析', '811', '1', '1779', '1');
+INSERT INTO `fmp_code` VALUES ('1780', '8115300', 'AJ', '电镀工艺', '811', '1', '1780', '1');
+INSERT INTO `fmp_code` VALUES ('1781', '8115400', 'AJ', '工业分析及仪器维修', '811', '1', '1781', '1');
+INSERT INTO `fmp_code` VALUES ('1782', '8115500', 'AJ', '理化测试与质量管理', '811', '1', '1782', '1');
+INSERT INTO `fmp_code` VALUES ('1783', '8115600', 'AJ', '生物制药', '811', '1', '1783', '1');
+INSERT INTO `fmp_code` VALUES ('1784', '8115700', 'AJ', '工业分析与环境监测', '811', '1', '1784', '1');
+INSERT INTO `fmp_code` VALUES ('1785', '8115800', 'AJ', '生物化工技术', '811', '1', '1785', '1');
+INSERT INTO `fmp_code` VALUES ('1786', '8115900', 'AJ', '化工与制药类其他专业', '811', '1', '1786', '1');
+INSERT INTO `fmp_code` VALUES ('1787', '812', 'AJ', '交通运输类', '80', '0', '1787', '1');
+INSERT INTO `fmp_code` VALUES ('1788', '8120100', 'AJ', '交通运输', '812', '1', '1788', '1');
+INSERT INTO `fmp_code` VALUES ('1789', '8120200', 'AJ', '交通工程', '812', '1', '1789', '1');
+INSERT INTO `fmp_code` VALUES ('1790', '8120300', 'AJ', '油气储运工程', '812', '1', '1790', '1');
+INSERT INTO `fmp_code` VALUES ('1791', '8120400', 'AJ', '飞行技术', '812', '1', '1791', '1');
+INSERT INTO `fmp_code` VALUES ('1792', '8120500', 'AJ', '航海技术', '812', '1', '1792', '1');
+INSERT INTO `fmp_code` VALUES ('1793', '8120600', 'AJ', '轮机工程', '812', '1', '1793', '1');
+INSERT INTO `fmp_code` VALUES ('1794', '8120700', 'AJ', '物流工程', '812', '1', '1794', '1');
+INSERT INTO `fmp_code` VALUES ('1795', '8120800', 'AJ', '海事管理', '812', '1', '1795', '1');
+INSERT INTO `fmp_code` VALUES ('1796', '8124100', 'AJ', '海洋船舶驾驶', '812', '1', '1796', '1');
+INSERT INTO `fmp_code` VALUES ('1797', '8124200', 'AJ', '轮机管理', '812', '1', '1797', '1');
+INSERT INTO `fmp_code` VALUES ('1798', '8124300', 'AJ', '铁道运输', '812', '1', '1798', '1');
+INSERT INTO `fmp_code` VALUES ('1799', '8124400', 'AJ', '汽车运用技术', '812', '1', '1799', '1');
+INSERT INTO `fmp_code` VALUES ('1800', '8124500', 'AJ', '直升机驾驶', '812', '1', '1800', '1');
+INSERT INTO `fmp_code` VALUES ('1801', '8124600', 'AJ', '民航运输', '812', '1', '1801', '1');
+INSERT INTO `fmp_code` VALUES ('1802', '8124700', 'AJ', '油气集输技术', '812', '1', '1802', '1');
+INSERT INTO `fmp_code` VALUES ('1803', '8124800', 'AJ', '城市轨道交通', '812', '1', '1803', '1');
+INSERT INTO `fmp_code` VALUES ('1804', '8124900', 'AJ', '邮政运输', '812', '1', '1804', '1');
+INSERT INTO `fmp_code` VALUES ('1805', '8125000', 'AJ', '城市燃气配输', '812', '1', '1805', '1');
+INSERT INTO `fmp_code` VALUES ('1806', '8125100', 'AJ', '航空港安全检查', '812', '1', '1806', '1');
+INSERT INTO `fmp_code` VALUES ('1807', '8125200', 'AJ', '航空油料储运与应用', '812', '1', '1807', '1');
+INSERT INTO `fmp_code` VALUES ('1808', '8125300', 'AJ', '民航特种车辆维修', '812', '1', '1808', '1');
+INSERT INTO `fmp_code` VALUES ('1809', '8125400', 'AJ', '运输动力机械管理', '812', '1', '1809', '1');
+INSERT INTO `fmp_code` VALUES ('1810', '8125500', 'AJ', '国际航运业务管理', '812', '1', '1810', '1');
+INSERT INTO `fmp_code` VALUES ('1811', '8125600', 'AJ', '外轮理货与港口业务', '812', '1', '1811', '1');
+INSERT INTO `fmp_code` VALUES ('1812', '8125700', 'AJ', '机场设备运营管理', '812', '1', '1812', '1');
+INSERT INTO `fmp_code` VALUES ('1813', '8125800', 'AJ', '港口物流设备与自动控制', '812', '1', '1813', '1');
+INSERT INTO `fmp_code` VALUES ('1814', '8125900', 'AJ', '储运管理', '812', '1', '1814', '1');
+INSERT INTO `fmp_code` VALUES ('1815', '8126000', 'AJ', '汽车运用与维修', '812', '1', '1815', '1');
+INSERT INTO `fmp_code` VALUES ('1816', '8126100', 'AJ', '交通智能控制技术', '812', '1', '1816', '1');
+INSERT INTO `fmp_code` VALUES ('1817', '8126200', 'AJ', '交通运输类其他专业', '812', '1', '1817', '1');
+INSERT INTO `fmp_code` VALUES ('1818', '813', 'AJ', '海洋工程类', '80', '0', '1818', '1');
+INSERT INTO `fmp_code` VALUES ('1819', '8130100', 'AJ', '船舶与海洋工程', '813', '1', '1819', '1');
+INSERT INTO `fmp_code` VALUES ('1820', '8130200', 'AJ', '海洋工程类其他专业', '813', '1', '1820', '1');
+INSERT INTO `fmp_code` VALUES ('1821', '814', 'AJ', '轻工纺织食品类', '80', '0', '1821', '1');
+INSERT INTO `fmp_code` VALUES ('1822', '8140100', 'AJ', '食品科学与工程', '814', '1', '1822', '1');
+INSERT INTO `fmp_code` VALUES ('1823', '8140200', 'AJ', '轻化工程', '814', '1', '1823', '1');
+INSERT INTO `fmp_code` VALUES ('1824', '8140300', 'AJ', '包装工程', '814', '1', '1824', '1');
+INSERT INTO `fmp_code` VALUES ('1825', '8140400', 'AJ', '印刷工程', '814', '1', '1825', '1');
+INSERT INTO `fmp_code` VALUES ('1826', '8140500', 'AJ', '纺织工程', '814', '1', '1826', '1');
+INSERT INTO `fmp_code` VALUES ('1827', '8140600', 'AJ', '服装设计与工程', '814', '1', '1827', '1');
+INSERT INTO `fmp_code` VALUES ('1828', '8140700', 'AJ', '食品质量与安全', '814', '1', '1828', '1');
+INSERT INTO `fmp_code` VALUES ('1829', '8140800', 'AJ', '酿酒工程', '814', '1', '1829', '1');
+INSERT INTO `fmp_code` VALUES ('1830', '8142200', 'AJ', '军需工程', '814', '1', '1830', '1');
+INSERT INTO `fmp_code` VALUES ('1831', '8144100', 'AJ', '农业机械化', '814', '1', '1831', '1');
+INSERT INTO `fmp_code` VALUES ('1832', '8144200', 'AJ', '农产品贮运与加工', '814', '1', '1832', '1');
+INSERT INTO `fmp_code` VALUES ('1833', '8144300', 'AJ', '冷冻冷藏工程', '814', '1', '1833', '1');
+INSERT INTO `fmp_code` VALUES ('1834', '8144400', 'AJ', '印刷技术', '814', '1', '1834', '1');
+INSERT INTO `fmp_code` VALUES ('1835', '8144500', 'AJ', '烟草工程', '814', '1', '1835', '1');
+INSERT INTO `fmp_code` VALUES ('1836', '8144600', 'AJ', '香料香精工艺', '814', '1', '1836', '1');
+INSERT INTO `fmp_code` VALUES ('1837', '8144700', 'AJ', '食品工艺', '814', '1', '1837', '1');
+INSERT INTO `fmp_code` VALUES ('1838', '8144800', 'AJ', '乳品工艺', '814', '1', '1838', '1');
+INSERT INTO `fmp_code` VALUES ('1839', '8144900', 'AJ', '包装技术', '814', '1', '1839', '1');
+INSERT INTO `fmp_code` VALUES ('1840', '8145000', 'AJ', '彩色印刷设备及工艺', '814', '1', '1840', '1');
+INSERT INTO `fmp_code` VALUES ('1841', '8145100', 'AJ', '彩色电子制版', '814', '1', '1841', '1');
+INSERT INTO `fmp_code` VALUES ('1842', '8145200', 'AJ', '印刷设备工程', '814', '1', '1842', '1');
+INSERT INTO `fmp_code` VALUES ('1843', '8145300', 'AJ', '印刷图文信息处理', '814', '1', '1843', '1');
+INSERT INTO `fmp_code` VALUES ('1844', '8145400', 'AJ', '化妆品与美容', '814', '1', '1844', '1');
+INSERT INTO `fmp_code` VALUES ('1845', '8145500', 'AJ', '丝绸工程', '814', '1', '1845', '1');
+INSERT INTO `fmp_code` VALUES ('1846', '8145600', 'AJ', '染整工程', '814', '1', '1846', '1');
+INSERT INTO `fmp_code` VALUES ('1847', '8145700', 'AJ', '纺织材料及纺织品设计', '814', '1', '1847', '1');
+INSERT INTO `fmp_code` VALUES ('1848', '8145800', 'AJ', '服装', '814', '1', '1848', '1');
+INSERT INTO `fmp_code` VALUES ('1849', '8145900', 'AJ', '纺织工艺', '814', '1', '1849', '1');
+INSERT INTO `fmp_code` VALUES ('1850', '8146000', 'AJ', '纺织品设计', '814', '1', '1850', '1');
+INSERT INTO `fmp_code` VALUES ('1851', '8146100', 'AJ', '服装工艺', '814', '1', '1851', '1');
+INSERT INTO `fmp_code` VALUES ('1852', '8146200', 'AJ', '化学纤维', '814', '1', '1852', '1');
+INSERT INTO `fmp_code` VALUES ('1853', '8146300', 'AJ', '鞋类设计与工艺', '814', '1', '1853', '1');
+INSERT INTO `fmp_code` VALUES ('1854', '8146400', 'AJ', '电子出版', '814', '1', '1854', '1');
+INSERT INTO `fmp_code` VALUES ('1855', '8146500', 'AJ', '电脑图文处理与制版', '814', '1', '1855', '1');
+INSERT INTO `fmp_code` VALUES ('1856', '8146600', 'AJ', '食品加工', '814', '1', '1856', '1');
+INSERT INTO `fmp_code` VALUES ('1857', '8146700', 'AJ', '发酵工艺', '814', '1', '1857', '1');
+INSERT INTO `fmp_code` VALUES ('1858', '8146800', 'AJ', '发酵工程', '814', '1', '1858', '1');
+INSERT INTO `fmp_code` VALUES ('1859', '8146900', 'AJ', '包装设计与印刷技术', '814', '1', '1859', '1');
+INSERT INTO `fmp_code` VALUES ('1860', '8147000', 'AJ', '服装设计与营销', '814', '1', '1860', '1');
+INSERT INTO `fmp_code` VALUES ('1861', '8147100', 'AJ', '食品营养及检测', '814', '1', '1861', '1');
+INSERT INTO `fmp_code` VALUES ('1862', '8147200', 'AJ', '食品工艺与检测', '814', '1', '1862', '1');
+INSERT INTO `fmp_code` VALUES ('1863', '8147300', 'AJ', '食品开发技术', '814', '1', '1863', '1');
+INSERT INTO `fmp_code` VALUES ('1864', '8147400', 'AJ', '彩色电子印刷技术', '814', '1', '1864', '1');
+INSERT INTO `fmp_code` VALUES ('1865', '8147500', 'AJ', '橡胶制品加工工艺', '814', '1', '1865', '1');
+INSERT INTO `fmp_code` VALUES ('1866', '8147600', 'AJ', '营养与食品科学', '814', '1', '1866', '1');
+INSERT INTO `fmp_code` VALUES ('1867', '8147700', 'AJ', '布艺设计与营销', '814', '1', '1867', '1');
+INSERT INTO `fmp_code` VALUES ('1868', '8147800', 'AJ', '染整工艺', '814', '1', '1868', '1');
+INSERT INTO `fmp_code` VALUES ('1869', '8147900', 'AJ', '轻纺产品设计与工艺', '814', '1', '1869', '1');
+INSERT INTO `fmp_code` VALUES ('1870', '8148000', 'AJ', '运动营养与膳食技术', '814', '1', '1870', '1');
+INSERT INTO `fmp_code` VALUES ('1871', '8148100', 'AJ', '皮革制品设计与工艺', '814', '1', '1871', '1');
+INSERT INTO `fmp_code` VALUES ('1872', '8148200', 'AJ', '林果产品加工与检验', '814', '1', '1872', '1');
+INSERT INTO `fmp_code` VALUES ('1873', '8148300', 'AJ', '食品卫生安全与检测', '814', '1', '1873', '1');
+INSERT INTO `fmp_code` VALUES ('1874', '8148400', 'AJ', '绿色产品开发', '814', '1', '1874', '1');
+INSERT INTO `fmp_code` VALUES ('1875', '8148500', 'AJ', '食品加工与管理', '814', '1', '1875', '1');
+INSERT INTO `fmp_code` VALUES ('1876', '8148600', 'AJ', '食品检验与质量管理', '814', '1', '1876', '1');
+INSERT INTO `fmp_code` VALUES ('1877', '8148700', 'AJ', '服装制作与工艺', '814', '1', '1877', '1');
+INSERT INTO `fmp_code` VALUES ('1878', '8148800', 'AJ', '轻工纺织食品类其他专业', '814', '1', '1878', '1');
+INSERT INTO `fmp_code` VALUES ('1879', '815', 'AJ', '航空航天类', '80', '0', '1879', '1');
+INSERT INTO `fmp_code` VALUES ('1880', '8150100', 'AJ', '飞行器设计与工程', '815', '1', '1880', '1');
+INSERT INTO `fmp_code` VALUES ('1881', '8150200', 'AJ', '飞行器动力工程', '815', '1', '1881', '1');
+INSERT INTO `fmp_code` VALUES ('1882', '8150300', 'AJ', '飞行器制造工程', '815', '1', '1882', '1');
+INSERT INTO `fmp_code` VALUES ('1883', '8150400', 'AJ', '飞行器环境与生命保障工程', '815', '1', '1883', '1');
+INSERT INTO `fmp_code` VALUES ('1884', '8152000', 'AJ', '航天测控工程', '815', '1', '1884', '1');
+INSERT INTO `fmp_code` VALUES ('1885', '8152100', 'AJ', '飞行器系统与工程', '815', '1', '1885', '1');
+INSERT INTO `fmp_code` VALUES ('1886', '8152200', 'AJ', '空间工程', '815', '1', '1886', '1');
+INSERT INTO `fmp_code` VALUES ('1887', '8152300', 'AJ', '航空航天类其他专业', '815', '1', '1887', '1');
+INSERT INTO `fmp_code` VALUES ('1888', '816', 'AJ', '武器类', '80', '0', '1888', '1');
+INSERT INTO `fmp_code` VALUES ('1889', '8160100', 'AJ', '武器系统与发射工程', '816', '1', '1889', '1');
+INSERT INTO `fmp_code` VALUES ('1890', '8160200', 'AJ', '探测制导与控制技术', '816', '1', '1890', '1');
+INSERT INTO `fmp_code` VALUES ('1891', '8160300', 'AJ', '弹药工程与爆炸技术', '816', '1', '1891', '1');
+INSERT INTO `fmp_code` VALUES ('1892', '8160400', 'AJ', '特种能源工程与烟火技术', '816', '1', '1892', '1');
+INSERT INTO `fmp_code` VALUES ('1893', '8160500', 'AJ', '地面武器机动工程', '816', '1', '1893', '1');
+INSERT INTO `fmp_code` VALUES ('1894', '8160600', 'AJ', '信息对抗技术', '816', '1', '1894', '1');
+INSERT INTO `fmp_code` VALUES ('1895', '8160700', 'AJ', '武器系统与工程', '816', '1', '1895', '1');
+INSERT INTO `fmp_code` VALUES ('1896', '8162300', 'AJ', '火炮与自动武器', '816', '1', '1896', '1');
+INSERT INTO `fmp_code` VALUES ('1897', '8162400', 'AJ', '地雷与爆破工程', '816', '1', '1897', '1');
+INSERT INTO `fmp_code` VALUES ('1898', '8162500', 'AJ', '水中兵器工程', '816', '1', '1898', '1');
+INSERT INTO `fmp_code` VALUES ('1899', '8162600', 'AJ', '航空兵器工程', '816', '1', '1899', '1');
+INSERT INTO `fmp_code` VALUES ('1900', '8162700', 'AJ', '弹药工程', '816', '1', '1900', '1');
+INSERT INTO `fmp_code` VALUES ('1901', '8164100', 'AJ', '航空军械维修工程', '816', '1', '1901', '1');
+INSERT INTO `fmp_code` VALUES ('1902', '8164200', 'AJ', '高炮维修工程', '816', '1', '1902', '1');
+INSERT INTO `fmp_code` VALUES ('1903', '8164300', 'AJ', '舰炮维修工程', '816', '1', '1903', '1');
+INSERT INTO `fmp_code` VALUES ('1904', '8164400', 'AJ', '航空导弹维修工程', '816', '1', '1904', '1');
+INSERT INTO `fmp_code` VALUES ('1905', '8164500', 'AJ', '轻武器维修工程', '816', '1', '1905', '1');
+INSERT INTO `fmp_code` VALUES ('1906', '8164600', 'AJ', '地炮维修工程', '816', '1', '1906', '1');
+INSERT INTO `fmp_code` VALUES ('1907', '8164700', 'AJ', '坦克武器维修工程', '816', '1', '1907', '1');
+INSERT INTO `fmp_code` VALUES ('1908', '8164800', 'AJ', '导弹引信战斗部', '816', '1', '1908', '1');
+INSERT INTO `fmp_code` VALUES ('1909', '8164900', 'AJ', '鱼雷与反潜维修工程', '816', '1', '1909', '1');
+INSERT INTO `fmp_code` VALUES ('1910', '8165000', 'AJ', '军械储存与管理', '816', '1', '1910', '1');
+INSERT INTO `fmp_code` VALUES ('1911', '8165100', 'AJ', '航空水中兵器维修工程', '816', '1', '1911', '1');
+INSERT INTO `fmp_code` VALUES ('1912', '8165200', 'AJ', '民用爆破器材', '816', '1', '1912', '1');
+INSERT INTO `fmp_code` VALUES ('1913', '8165300', 'AJ', '武器类其他专业', '816', '1', '1913', '1');
+INSERT INTO `fmp_code` VALUES ('1914', '817', 'AJ', '工程力学类', '80', '0', '1914', '1');
+INSERT INTO `fmp_code` VALUES ('1915', '8170100', 'AJ', '工程力学', '817', '1', '1915', '1');
+INSERT INTO `fmp_code` VALUES ('1916', '8170200', 'AJ', '工程结构分析', '817', '1', '1916', '1');
+INSERT INTO `fmp_code` VALUES ('1917', '8170300', 'AJ', '工程力学类其他专业', '817', '1', '1917', '1');
+INSERT INTO `fmp_code` VALUES ('1918', '818', 'AJ', '生物工程类', '80', '0', '1918', '1');
+INSERT INTO `fmp_code` VALUES ('1919', '8180100', 'AJ', '生物工程', '818', '1', '1919', '1');
+INSERT INTO `fmp_code` VALUES ('1920', '8184100', 'AJ', '现代免疫技术与生物制品', '818', '1', '1920', '1');
+INSERT INTO `fmp_code` VALUES ('1921', '8184200', 'AJ', '生化技术', '818', '1', '1921', '1');
+INSERT INTO `fmp_code` VALUES ('1922', '8184300', 'AJ', '食品生物工程', '818', '1', '1922', '1');
+INSERT INTO `fmp_code` VALUES ('1923', '8184400', 'AJ', '生物工程类其他类专业', '818', '1', '1923', '1');
+INSERT INTO `fmp_code` VALUES ('1924', '819', 'AJ', '农业工程类', '80', '0', '1924', '1');
+INSERT INTO `fmp_code` VALUES ('1925', '8190100', 'AJ', '农业机械化及其自动化', '819', '1', '1925', '1');
+INSERT INTO `fmp_code` VALUES ('1926', '8190200', 'AJ', '农业电气化与自动化', '819', '1', '1926', '1');
+INSERT INTO `fmp_code` VALUES ('1927', '8190300', 'AJ', '农业建筑环境与能源工程', '819', '1', '1927', '1');
+INSERT INTO `fmp_code` VALUES ('1928', '8190400', 'AJ', '农业水利工程', '819', '1', '1928', '1');
+INSERT INTO `fmp_code` VALUES ('1929', '8190500', 'AJ', '农业工程', '819', '1', '1929', '1');
+INSERT INTO `fmp_code` VALUES ('1930', '8190600', 'AJ', '生物系统工程', '819', '1', '1930', '1');
+INSERT INTO `fmp_code` VALUES ('1931', '8194100', 'AJ', '工厂化农业设施', '819', '1', '1931', '1');
+INSERT INTO `fmp_code` VALUES ('1932', '8194200', 'AJ', '农业工程类其他专业', '819', '1', '1932', '1');
+INSERT INTO `fmp_code` VALUES ('1933', '820', 'AJ', '林业工程类', '80', '0', '1933', '1');
+INSERT INTO `fmp_code` VALUES ('1934', '8200100', 'AJ', '森林工程', '820', '1', '1934', '1');
+INSERT INTO `fmp_code` VALUES ('1935', '8200200', 'AJ', '木材科学与工程', '820', '1', '1935', '1');
+INSERT INTO `fmp_code` VALUES ('1936', '8200300', 'AJ', '林产化工', '820', '1', '1936', '1');
+INSERT INTO `fmp_code` VALUES ('1937', '8204100', 'AJ', '木材加工', '820', '1', '1937', '1');
+INSERT INTO `fmp_code` VALUES ('1938', '8204200', 'AJ', '森林防火', '820', '1', '1938', '1');
+INSERT INTO `fmp_code` VALUES ('1939', '8204300', 'AJ', '林业工程类其他专业', '820', '1', '1939', '1');
+INSERT INTO `fmp_code` VALUES ('1940', '821', 'AJ', '公安技术类', '80', '0', '1940', '1');
+INSERT INTO `fmp_code` VALUES ('1941', '8210100', 'AJ', '刑事科学技术', '821', '1', '1941', '1');
+INSERT INTO `fmp_code` VALUES ('1942', '8210200', 'AJ', '消防工程', '821', '1', '1942', '1');
+INSERT INTO `fmp_code` VALUES ('1943', '8210300', 'AJ', '安全防范工程', '821', '1', '1943', '1');
+INSERT INTO `fmp_code` VALUES ('1944', '8210400', 'AJ', '交通管理工程', '821', '1', '1944', '1');
+INSERT INTO `fmp_code` VALUES ('1945', '8210500', 'AJ', '核生化消防', '821', '1', '1945', '1');
+INSERT INTO `fmp_code` VALUES ('1946', '8214100', 'AJ', '警犬技术', '821', '1', '1946', '1');
+INSERT INTO `fmp_code` VALUES ('1947', '8214200', 'AJ', '刑侦技术', '821', '1', '1947', '1');
+INSERT INTO `fmp_code` VALUES ('1948', '8214300', 'AJ', '消防管理', '821', '1', '1948', '1');
+INSERT INTO `fmp_code` VALUES ('1949', '8214400', 'AJ', '公安技术类其他专业', '821', '1', '1949', '1');
+INSERT INTO `fmp_code` VALUES ('1950', '830', 'AJ', '实用技术类', '80', '0', '1950', '1');
+INSERT INTO `fmp_code` VALUES ('1951', '8304100', 'AJ', '应用技术教育', '830', '1', '1951', '1');
+INSERT INTO `fmp_code` VALUES ('1952', '8304200', 'AJ', '面点工艺', '830', '1', '1952', '1');
+INSERT INTO `fmp_code` VALUES ('1953', '8304300', 'AJ', '西餐工艺', '830', '1', '1953', '1');
+INSERT INTO `fmp_code` VALUES ('1954', '8304400', 'AJ', '烹饪与营养', '830', '1', '1954', '1');
+INSERT INTO `fmp_code` VALUES ('1955', '8304500', 'AJ', '烹饪工艺', '830', '1', '1955', '1');
+INSERT INTO `fmp_code` VALUES ('1956', '8304600', 'AJ', '多媒体应用', '830', '1', '1956', '1');
+INSERT INTO `fmp_code` VALUES ('1957', '8304700', 'AJ', '录音技术', '830', '1', '1957', '1');
+INSERT INTO `fmp_code` VALUES ('1958', '8304800', 'AJ', '现代应用电器与电子', '830', '1', '1958', '1');
+INSERT INTO `fmp_code` VALUES ('1959', '8304900', 'AJ', '化妆', '830', '1', '1959', '1');
+INSERT INTO `fmp_code` VALUES ('1960', '8305000', 'AJ', '广告电脑制作', '830', '1', '1960', '1');
+INSERT INTO `fmp_code` VALUES ('1961', '8305100', 'AJ', '智能化楼宇及设施管理', '830', '1', '1961', '1');
+INSERT INTO `fmp_code` VALUES ('1962', '8305200', 'AJ', '广告制作与传播', '830', '1', '1962', '1');
+INSERT INTO `fmp_code` VALUES ('1963', '8305300', 'AJ', '生物制药技术与营销', '830', '1', '1963', '1');
+INSERT INTO `fmp_code` VALUES ('1964', '8305400', 'AJ', '计算机网络技术', '830', '1', '1964', '1');
+INSERT INTO `fmp_code` VALUES ('1965', '8305500', 'AJ', '液晶显示技术', '830', '1', '1965', '1');
+INSERT INTO `fmp_code` VALUES ('1966', '8305600', 'AJ', '多媒体与网络技术', '830', '1', '1966', '1');
+INSERT INTO `fmp_code` VALUES ('1967', '8305700', 'AJ', '信息与多媒体技术', '830', '1', '1967', '1');
+INSERT INTO `fmp_code` VALUES ('1968', '8305800', 'AJ', '信息及通信网络应用技术', '830', '1', '1968', '1');
+INSERT INTO `fmp_code` VALUES ('1969', '8305900', 'AJ', '汽车电子技术', '830', '1', '1969', '1');
+INSERT INTO `fmp_code` VALUES ('1970', '8306000', 'AJ', '计算机网络工程与管理', '830', '1', '1970', '1');
+INSERT INTO `fmp_code` VALUES ('1971', '8306100', 'AJ', '建筑装饰设计与工程', '830', '1', '1971', '1');
+INSERT INTO `fmp_code` VALUES ('1972', '8306200', 'AJ', '房屋营造与管理', '830', '1', '1972', '1');
+INSERT INTO `fmp_code` VALUES ('1973', '8306300', 'AJ', '楼宇自动化', '830', '1', '1973', '1');
+INSERT INTO `fmp_code` VALUES ('1974', '8306400', 'AJ', '计算机美术设计', '830', '1', '1974', '1');
+INSERT INTO `fmp_code` VALUES ('1975', '8306500', 'AJ', '计算机图形图像处理', '830', '1', '1975', '1');
+INSERT INTO `fmp_code` VALUES ('1976', '8306600', 'AJ', '计算机组装与维修', '830', '1', '1976', '1');
+INSERT INTO `fmp_code` VALUES ('1977', '8306700', 'AJ', '涉外家政管理', '830', '1', '1977', '1');
+INSERT INTO `fmp_code` VALUES ('1978', '8306800', 'AJ', '商品质量检测技术', '830', '1', '1978', '1');
+INSERT INTO `fmp_code` VALUES ('1979', '8306900', 'AJ', '电子排版与广告制作', '830', '1', '1979', '1');
+INSERT INTO `fmp_code` VALUES ('1980', '8307000', 'AJ', '机电工程', '830', '1', '1980', '1');
+INSERT INTO `fmp_code` VALUES ('1981', '8307100', 'AJ', '饮食营养与卫生', '830', '1', '1981', '1');
+INSERT INTO `fmp_code` VALUES ('1982', '8307200', 'AJ', '交通安全与监控技术', '830', '1', '1982', '1');
+INSERT INTO `fmp_code` VALUES ('1983', '8307300', 'AJ', '工程监理', '830', '1', '1983', '1');
+INSERT INTO `fmp_code` VALUES ('1984', '8307400', 'AJ', '工厂计算机集中控制', '830', '1', '1984', '1');
+INSERT INTO `fmp_code` VALUES ('1985', '8307500', 'AJ', '通信设备运用与维修', '830', '1', '1985', '1');
+INSERT INTO `fmp_code` VALUES ('1986', '8307600', 'AJ', '技术监督与商检', '830', '1', '1986', '1');
+INSERT INTO `fmp_code` VALUES ('1987', '8307700', 'AJ', '计算机辅助设计', '830', '1', '1987', '1');
+INSERT INTO `fmp_code` VALUES ('1988', '8307800', 'AJ', '计算机控制技术', '830', '1', '1988', '1');
+INSERT INTO `fmp_code` VALUES ('1989', '8307900', 'AJ', '家电维修技术', '830', '1', '1989', '1');
+INSERT INTO `fmp_code` VALUES ('1990', '8308000', 'AJ', '质量经营与认证', '830', '1', '1990', '1');
+INSERT INTO `fmp_code` VALUES ('1991', '8308100', 'AJ', '机电设备及微机应用', '830', '1', '1991', '1');
+INSERT INTO `fmp_code` VALUES ('1992', '8308200', 'AJ', '应用电器维修', '830', '1', '1992', '1');
+INSERT INTO `fmp_code` VALUES ('1993', '8308300', 'AJ', '质量工程', '830', '1', '1993', '1');
+INSERT INTO `fmp_code` VALUES ('1994', '8308400', 'AJ', '计算机系统维护技术', '830', '1', '1994', '1');
+INSERT INTO `fmp_code` VALUES ('1995', '8308500', 'AJ', '智能化产品开发', '830', '1', '1995', '1');
+INSERT INTO `fmp_code` VALUES ('1996', '8308600', 'AJ', '展示设计与经营', '830', '1', '1996', '1');
+INSERT INTO `fmp_code` VALUES ('1997', '8308700', 'AJ', '园林信息化工程', '830', '1', '1997', '1');
+INSERT INTO `fmp_code` VALUES ('1998', '8308800', 'AJ', '计算机辅助制造工艺', '830', '1', '1998', '1');
+INSERT INTO `fmp_code` VALUES ('1999', '8308900', 'AJ', '音像数字技术应用', '830', '1', '1999', '1');
+INSERT INTO `fmp_code` VALUES ('2000', '8309000', 'AJ', '楼宇自动化技术', '830', '1', '2000', '1');
+INSERT INTO `fmp_code` VALUES ('2001', '8309100', 'AJ', '微电子控制技术', '830', '1', '2001', '1');
+INSERT INTO `fmp_code` VALUES ('2002', '8309200', 'AJ', '图文信息处理', '830', '1', '2002', '1');
+INSERT INTO `fmp_code` VALUES ('2003', '8309300', 'AJ', '金融投资理财', '830', '1', '2003', '1');
+INSERT INTO `fmp_code` VALUES ('2004', '8309400', 'AJ', '家用电器与制冷技术', '830', '1', '2004', '1');
+INSERT INTO `fmp_code` VALUES ('2005', '8309500', 'AJ', '自控技术与模具', '830', '1', '2005', '1');
+INSERT INTO `fmp_code` VALUES ('2006', '8309600', 'AJ', '影视化妆与造型', '830', '1', '2006', '1');
+INSERT INTO `fmp_code` VALUES ('2007', '8309700', 'AJ', '税务代理', '830', '1', '2007', '1');
+INSERT INTO `fmp_code` VALUES ('2008', '8309800', 'AJ', '证券投资', '830', '1', '2008', '1');
+INSERT INTO `fmp_code` VALUES ('2009', '8309900', 'AJ', '电子材料与元器件', '830', '1', '2009', '1');
+INSERT INTO `fmp_code` VALUES ('2010', '8303000', 'AJ', '实用技术类其他专业', '830', '1', '2010', '1');
+INSERT INTO `fmp_code` VALUES ('2011', '831', 'AJ', '实用技术A类', '80', '0', '2011', '1');
+INSERT INTO `fmp_code` VALUES ('2012', '8314100', 'AJ', '电视新闻采编与制作', '831', '1', '2012', '1');
+INSERT INTO `fmp_code` VALUES ('2013', '8314200', 'AJ', '酒店管理', '831', '1', '2013', '1');
+INSERT INTO `fmp_code` VALUES ('2014', '8314300', 'AJ', '保安管理', '831', '1', '2014', '1');
+INSERT INTO `fmp_code` VALUES ('2015', '8314400', 'AJ', '煤气发电', '831', '1', '2015', '1');
+INSERT INTO `fmp_code` VALUES ('2016', '8314500', 'AJ', '美术设计与制作', '831', '1', '2016', '1');
+INSERT INTO `fmp_code` VALUES ('2017', '8314600', 'AJ', '交通工程经济管理', '831', '1', '2017', '1');
+INSERT INTO `fmp_code` VALUES ('2018', '8314700', 'AJ', '项目管理', '831', '1', '2018', '1');
+INSERT INTO `fmp_code` VALUES ('2019', '8314800', 'AJ', '视觉传达设计', '831', '1', '2019', '1');
+INSERT INTO `fmp_code` VALUES ('2020', '8314900', 'AJ', '宽带通信网络技术', '831', '1', '2020', '1');
+INSERT INTO `fmp_code` VALUES ('2021', '8315000', 'AJ', '电力牵引与传动控制', '831', '1', '2021', '1');
+INSERT INTO `fmp_code` VALUES ('2022', '8315100', 'AJ', '涉外商务公关', '831', '1', '2022', '1');
+INSERT INTO `fmp_code` VALUES ('2023', '8315200', 'AJ', '电力系统与自动化', '831', '1', '2023', '1');
+INSERT INTO `fmp_code` VALUES ('2024', '8315300', 'AJ', '汽车电气控制技术', '831', '1', '2024', '1');
+INSERT INTO `fmp_code` VALUES ('2025', '8315400', 'AJ', '数据库应用与信息管理', '831', '1', '2025', '1');
+INSERT INTO `fmp_code` VALUES ('2026', '8315500', 'AJ', '营销与信息技术', '831', '1', '2026', '1');
+INSERT INTO `fmp_code` VALUES ('2027', '8315600', 'AJ', '建筑会计与投资审计', '831', '1', '2027', '1');
+INSERT INTO `fmp_code` VALUES ('2028', '8315700', 'AJ', '商务代理', '831', '1', '2028', '1');
+INSERT INTO `fmp_code` VALUES ('2029', '8315800', 'AJ', '计算机辅助设计与制造', '831', '1', '2029', '1');
+INSERT INTO `fmp_code` VALUES ('2030', '8315900', 'AJ', '建筑智能化', '831', '1', '2030', '1');
+INSERT INTO `fmp_code` VALUES ('2031', '8316000', 'AJ', '实用技术A类其他专业', '831', '1', '2031', '1');
+INSERT INTO `fmp_code` VALUES ('2032', '842', 'AJ', '军事装备类', '80', '0', '2032', '1');
+INSERT INTO `fmp_code` VALUES ('2033', '8420100', 'AJ', '机械工程及其自动化', '842', '1', '2033', '1');
+INSERT INTO `fmp_code` VALUES ('2034', '8420200', 'AJ', '车辆运用工程', '842', '1', '2034', '1');
+INSERT INTO `fmp_code` VALUES ('2035', '8420300', 'AJ', '飞机与发动机工程', '842', '1', '2035', '1');
+INSERT INTO `fmp_code` VALUES ('2036', '8420400', 'AJ', '舰船工程', '842', '1', '2036', '1');
+INSERT INTO `fmp_code` VALUES ('2037', '8420500', 'AJ', '舰（船）艇动力工程', '842', '1', '2037', '1');
+INSERT INTO `fmp_code` VALUES ('2038', '8420600', 'AJ', '潜艇核动力工程', '842', '1', '2038', '1');
+INSERT INTO `fmp_code` VALUES ('2039', '8420700', 'AJ', '导弹与发动机工程', '842', '1', '2039', '1');
+INSERT INTO `fmp_code` VALUES ('2040', '8420800', 'AJ', '油料储运工程', '842', '1', '2040', '1');
+INSERT INTO `fmp_code` VALUES ('2041', '8424200', 'AJ', '装甲车辆机械维修工程', '842', '1', '2041', '1');
+INSERT INTO `fmp_code` VALUES ('2042', '8424300', 'AJ', '自行火炮机械维修工程', '842', '1', '2042', '1');
+INSERT INTO `fmp_code` VALUES ('2043', '8424400', 'AJ', '舰（船）艇维修工程', '842', '1', '2043', '1');
+INSERT INTO `fmp_code` VALUES ('2044', '8424500', 'AJ', '舰载机与舰面设备', '842', '1', '2044', '1');
+INSERT INTO `fmp_code` VALUES ('2045', '8424600', 'AJ', '航空反潜设备维修工程', '842', '1', '2045', '1');
+INSERT INTO `fmp_code` VALUES ('2046', '8424700', 'AJ', '救捞设备维修工程', '842', '1', '2046', '1');
+INSERT INTO `fmp_code` VALUES ('2047', '8424800', 'AJ', '飞（直升）机与发动机维修工程', '842', '1', '2047', '1');
+INSERT INTO `fmp_code` VALUES ('2048', '8424900', 'AJ', '飞（直升）机修理工程', '842', '1', '2048', '1');
+INSERT INTO `fmp_code` VALUES ('2049', '8425000', 'AJ', '飞机维修表面工程', '842', '1', '2049', '1');
+INSERT INTO `fmp_code` VALUES ('2050', '8425100', 'AJ', '飞机损伤检测工程', '842', '1', '2050', '1');
+INSERT INTO `fmp_code` VALUES ('2051', '8425200', 'AJ', '航空侦察设备', '842', '1', '2051', '1');
+INSERT INTO `fmp_code` VALUES ('2052', '8425300', 'AJ', '导弹发动机维修工程', '842', '1', '2052', '1');
+INSERT INTO `fmp_code` VALUES ('2053', '8425400', 'AJ', '导弹装配与加注', '842', '1', '2053', '1');
+INSERT INTO `fmp_code` VALUES ('2054', '8425500', 'AJ', '核战斗部装配检测', '842', '1', '2054', '1');
+INSERT INTO `fmp_code` VALUES ('2055', '8425600', 'AJ', '装甲车辆运用', '842', '1', '2055', '1');
+INSERT INTO `fmp_code` VALUES ('2056', '8425700', 'AJ', '工程机械修理', '842', '1', '2056', '1');
+INSERT INTO `fmp_code` VALUES ('2057', '8425800', 'AJ', '装卸搬运机械工程', '842', '1', '2057', '1');
+INSERT INTO `fmp_code` VALUES ('2058', '8425900', 'AJ', '防化装备维修工程', '842', '1', '2058', '1');
+INSERT INTO `fmp_code` VALUES ('2059', '8426000', 'AJ', '汽车维修工程', '842', '1', '2059', '1');
+INSERT INTO `fmp_code` VALUES ('2060', '8426100', 'AJ', '特种车辆运用', '842', '1', '2060', '1');
+INSERT INTO `fmp_code` VALUES ('2061', '8426300', 'AJ', '油料机械与装备', '842', '1', '2061', '1');
+INSERT INTO `fmp_code` VALUES ('2062', '8426400', 'AJ', '油料管线技术', '842', '1', '2062', '1');
+INSERT INTO `fmp_code` VALUES ('2063', '8426500', 'AJ', '航空制气与供电', '842', '1', '2063', '1');
+INSERT INTO `fmp_code` VALUES ('2064', '8426600', 'AJ', '军事装备类其他专业', '842', '1', '2064', '1');
+INSERT INTO `fmp_code` VALUES ('2065', '843', 'AJ', '武器控制类', '80', '0', '2065', '1');
+INSERT INTO `fmp_code` VALUES ('2066', '8430100', 'AJ', '火力控制工程', '843', '1', '2066', '1');
+INSERT INTO `fmp_code` VALUES ('2067', '8430200', 'AJ', '导弹控制与测试工程', '843', '1', '2067', '1');
+INSERT INTO `fmp_code` VALUES ('2068', '8430300', 'AJ', '发射工程', '843', '1', '2068', '1');
+INSERT INTO `fmp_code` VALUES ('2069', '8430400', 'AJ', '导弹弹道与火力运用', '843', '1', '2069', '1');
+INSERT INTO `fmp_code` VALUES ('2070', '8430500', 'AJ', '无人机运用工程', '843', '1', '2070', '1');
+INSERT INTO `fmp_code` VALUES ('2071', '8430600', 'AJ', '导弹工程', '843', '1', '2071', '1');
+INSERT INTO `fmp_code` VALUES ('2072', '8434100', 'AJ', '导弹控制与测试', '843', '1', '2072', '1');
+INSERT INTO `fmp_code` VALUES ('2073', '8434200', 'AJ', '航空火控系统维修工程', '843', '1', '2073', '1');
+INSERT INTO `fmp_code` VALUES ('2074', '8434400', 'AJ', '导弹发射控制', '843', '1', '2074', '1');
+INSERT INTO `fmp_code` VALUES ('2075', '8434500', 'AJ', '防空武器定标测量', '843', '1', '2075', '1');
+INSERT INTO `fmp_code` VALUES ('2076', '8434600', 'AJ', '武器控制类其他专业', '843', '1', '2076', '1');
+INSERT INTO `fmp_code` VALUES ('2077', '844', 'AJ', '军事工程类', '80', '0', '2077', '1');
+INSERT INTO `fmp_code` VALUES ('2078', '8440200', 'AJ', '电力工程及其自动化', '844', '1', '2078', '1');
+INSERT INTO `fmp_code` VALUES ('2079', '8440400', 'AJ', '雷达工程', '844', '1', '2079', '1');
+INSERT INTO `fmp_code` VALUES ('2080', '8440500', 'AJ', '导航工程', '844', '1', '2080', '1');
+INSERT INTO `fmp_code` VALUES ('2081', '8440600', 'AJ', '电子对抗工程', '844', '1', '2081', '1');
+INSERT INTO `fmp_code` VALUES ('2082', '8440800', 'AJ', '军用光电工程', '844', '1', '2082', '1');
+INSERT INTO `fmp_code` VALUES ('2083', '8440900', 'AJ', '航空反潜工程', '844', '1', '2083', '1');
+INSERT INTO `fmp_code` VALUES ('2084', '8441000', 'AJ', '侦测工程（无线电工程）', '844', '1', '2084', '1');
+INSERT INTO `fmp_code` VALUES ('2085', '8441100', 'AJ', '信息研究', '844', '1', '2085', '1');
+INSERT INTO `fmp_code` VALUES ('2086', '8441200', 'AJ', '雷达工程与指挥', '844', '1', '2086', '1');
+INSERT INTO `fmp_code` VALUES ('2087', '8444200', 'AJ', '电气维修工程', '844', '1', '2087', '1');
+INSERT INTO `fmp_code` VALUES ('2088', '8444300', 'AJ', '试验场机电测试', '844', '1', '2088', '1');
+INSERT INTO `fmp_code` VALUES ('2089', '8444400', 'AJ', '阵地机电设备与环境监测', '844', '1', '2089', '1');
+INSERT INTO `fmp_code` VALUES ('2090', '8444500', 'AJ', '机场电气设备', '844', '1', '2090', '1');
+INSERT INTO `fmp_code` VALUES ('2091', '8444600', 'AJ', '发电与供电', '844', '1', '2091', '1');
+INSERT INTO `fmp_code` VALUES ('2092', '8444700', 'AJ', '雷达应用工程', '844', '1', '2092', '1');
+INSERT INTO `fmp_code` VALUES ('2093', '8444800', 'AJ', '航空雷达维修工程', '844', '1', '2093', '1');
+INSERT INTO `fmp_code` VALUES ('2094', '8444900', 'AJ', '通信对抗工程', '844', '1', '2094', '1');
+INSERT INTO `fmp_code` VALUES ('2095', '8445000', 'AJ', '雷达对抗工程', '844', '1', '2095', '1');
+INSERT INTO `fmp_code` VALUES ('2096', '8445100', 'AJ', '航空电子对抗', '844', '1', '2096', '1');
+INSERT INTO `fmp_code` VALUES ('2097', '8445200', 'AJ', '无线电遥测遥控', '844', '1', '2097', '1');
+INSERT INTO `fmp_code` VALUES ('2098', '8445300', 'AJ', '水声电子工程', '844', '1', '2098', '1');
+INSERT INTO `fmp_code` VALUES ('2099', '8445400', 'AJ', '气象电子设备', '844', '1', '2099', '1');
+INSERT INTO `fmp_code` VALUES ('2100', '8445500', 'AJ', '无线电侦测', '844', '1', '2100', '1');
+INSERT INTO `fmp_code` VALUES ('2101', '8445600', 'AJ', '无线电导航', '844', '1', '2101', '1');
+INSERT INTO `fmp_code` VALUES ('2102', '8445700', 'AJ', '航空通信与导航', '844', '1', '2102', '1');
+INSERT INTO `fmp_code` VALUES ('2103', '8445800', 'AJ', '指挥控制维修工程', '844', '1', '2103', '1');
+INSERT INTO `fmp_code` VALUES ('2104', '8445900', 'AJ', '仓储自动化', '844', '1', '2104', '1');
+INSERT INTO `fmp_code` VALUES ('2105', '8446000', 'AJ', '制密技术', '844', '1', '2105', '1');
+INSERT INTO `fmp_code` VALUES ('2106', '8446100', 'AJ', '密码机维修工程', '844', '1', '2106', '1');
+INSERT INTO `fmp_code` VALUES ('2107', '8446200', 'AJ', '军事工程类其他专业', '844', '1', '2107', '1');
+INSERT INTO `fmp_code` VALUES ('2108', '845', 'AJ', '军事信息类', '80', '0', '2108', '1');
+INSERT INTO `fmp_code` VALUES ('2109', '8450500', 'AJ', '仿真工程', '845', '1', '2109', '1');
+INSERT INTO `fmp_code` VALUES ('2110', '8450600', 'AJ', '指挥自动化工程', '845', '1', '2110', '1');
+INSERT INTO `fmp_code` VALUES ('2111', '8450700', 'AJ', '通信工程与指挥', '845', '1', '2111', '1');
+INSERT INTO `fmp_code` VALUES ('2112', '8450800', 'AJ', '外国军事', '845', '1', '2112', '1');
+INSERT INTO `fmp_code` VALUES ('2113', '8454100', 'AJ', '指挥自动化', '845', '1', '2113', '1');
+INSERT INTO `fmp_code` VALUES ('2114', '8454200', 'AJ', '有线通信工程', '845', '1', '2114', '1');
+INSERT INTO `fmp_code` VALUES ('2115', '8454300', 'AJ', '无线通信工程', '845', '1', '2115', '1');
+INSERT INTO `fmp_code` VALUES ('2116', '8454400', 'AJ', '微波通信工程', '845', '1', '2116', '1');
+INSERT INTO `fmp_code` VALUES ('2117', '8454500', 'AJ', '电信交换工程', '845', '1', '2117', '1');
+INSERT INTO `fmp_code` VALUES ('2118', '8454600', 'AJ', '靶场时统与数传技术', '845', '1', '2118', '1');
+INSERT INTO `fmp_code` VALUES ('2119', '8454700', 'AJ', '数据通信终端', '845', '1', '2119', '1');
+INSERT INTO `fmp_code` VALUES ('2120', '8454800', 'AJ', '装甲车辆通信设备维修工程', '845', '1', '2120', '1');
+INSERT INTO `fmp_code` VALUES ('2121', '8454900', 'AJ', '军事信息类其他专业', '845', '1', '2121', '1');
+INSERT INTO `fmp_code` VALUES ('2122', '846', 'AJ', '工学类其他专业', '80', '1', '2122', '1');
+INSERT INTO `fmp_code` VALUES ('2123', '90', 'AJ', '农学', '0', '0', '2123', '1');
+INSERT INTO `fmp_code` VALUES ('2124', '901', 'AJ', '植物生产类', '90', '0', '2124', '1');
+INSERT INTO `fmp_code` VALUES ('2125', '9010100', 'AJ', '农学', '901', '1', '2125', '1');
+INSERT INTO `fmp_code` VALUES ('2126', '9010200', 'AJ', '园艺', '901', '1', '2126', '1');
+INSERT INTO `fmp_code` VALUES ('2127', '9010300', 'AJ', '植物保护（植物病理）', '901', '1', '2127', '1');
+INSERT INTO `fmp_code` VALUES ('2128', '9010400', 'AJ', '茶学', '901', '1', '2128', '1');
+INSERT INTO `fmp_code` VALUES ('2129', '9010500', 'AJ', '烟草', '901', '1', '2129', '1');
+INSERT INTO `fmp_code` VALUES ('2130', '9010600', 'AJ', '植物科学与技术', '901', '1', '2130', '1');
+INSERT INTO `fmp_code` VALUES ('2131', '9010700', 'AJ', '种子科学与工程', '901', '1', '2131', '1');
+INSERT INTO `fmp_code` VALUES ('2132', '9010800', 'AJ', '应用生物科学', '901', '1', '2132', '1');
+INSERT INTO `fmp_code` VALUES ('2133', '9014100', 'AJ', '热带作物', '901', '1', '2133', '1');
+INSERT INTO `fmp_code` VALUES ('2134', '9014200', 'AJ', '果树', '901', '1', '2134', '1');
+INSERT INTO `fmp_code` VALUES ('2135', '9014300', 'AJ', '药用植物', '901', '1', '2135', '1');
+INSERT INTO `fmp_code` VALUES ('2136', '9014400', 'AJ', '花卉', '901', '1', '2136', '1');
+INSERT INTO `fmp_code` VALUES ('2137', '9014500', 'AJ', '烟草种植', '901', '1', '2137', '1');
+INSERT INTO `fmp_code` VALUES ('2138', '9014600', 'AJ', '药用植物栽培与加工', '901', '1', '2138', '1');
+INSERT INTO `fmp_code` VALUES ('2139', '9014700', 'AJ', '食用菌与蔬菜', '901', '1', '2139', '1');
+INSERT INTO `fmp_code` VALUES ('2140', '9014800', 'AJ', '种植养殖', '901', '1', '2140', '1');
+INSERT INTO `fmp_code` VALUES ('2141', '9014900', 'AJ', '植物工厂化栽培', '901', '1', '2141', '1');
+INSERT INTO `fmp_code` VALUES ('2142', '9015000', 'AJ', '蔬菜生产与营销', '901', '1', '2142', '1');
+INSERT INTO `fmp_code` VALUES ('2143', '9015100', 'AJ', '现代园艺技术', '901', '1', '2143', '1');
+INSERT INTO `fmp_code` VALUES ('2144', '9015200', 'AJ', '植物化工', '901', '1', '2144', '1');
+INSERT INTO `fmp_code` VALUES ('2145', '9015300', 'AJ', '植物生产类其他专业', '901', '1', '2145', '1');
+INSERT INTO `fmp_code` VALUES ('2146', '902', 'AJ', '草业科学类', '90', '0', '2146', '1');
+INSERT INTO `fmp_code` VALUES ('2147', '9020100', 'AJ', '草业科学', '902', '1', '2147', '1');
+INSERT INTO `fmp_code` VALUES ('2148', '9024100', 'AJ', '商品花卉', '902', '1', '2148', '1');
+INSERT INTO `fmp_code` VALUES ('2149', '9024200', 'AJ', '种子生产检测与经营', '902', '1', '2149', '1');
+INSERT INTO `fmp_code` VALUES ('2150', '9024300', 'AJ', '园林花卉技术', '902', '1', '2150', '1');
+INSERT INTO `fmp_code` VALUES ('2151', '9024400', 'AJ', '草业技术', '902', '1', '2151', '1');
+INSERT INTO `fmp_code` VALUES ('2152', '9024500', 'AJ', '城市园林设计与花卉', '902', '1', '2152', '1');
+INSERT INTO `fmp_code` VALUES ('2153', '9024600', 'AJ', '种子种苗', '902', '1', '2153', '1');
+INSERT INTO `fmp_code` VALUES ('2154', '9024700', 'AJ', '草业科学类其他专业', '902', '1', '2154', '1');
+INSERT INTO `fmp_code` VALUES ('2155', '903', 'AJ', '森林资源类', '90', '0', '2155', '1');
+INSERT INTO `fmp_code` VALUES ('2156', '9030100', 'AJ', '林学', '903', '1', '2156', '1');
+INSERT INTO `fmp_code` VALUES ('2157', '9030200', 'AJ', '森林资源保护与游憩', '903', '1', '2157', '1');
+INSERT INTO `fmp_code` VALUES ('2158', '9030300', 'AJ', '野生动物与自然保护区管理', '903', '1', '2158', '1');
+INSERT INTO `fmp_code` VALUES ('2159', '9034100', 'AJ', '林区多种经营', '903', '1', '2159', '1');
+INSERT INTO `fmp_code` VALUES ('2160', '9034200', 'AJ', '森林生态旅游', '903', '1', '2160', '1');
+INSERT INTO `fmp_code` VALUES ('2161', '9034300', 'AJ', '生态旅游管理', '903', '1', '2161', '1');
+INSERT INTO `fmp_code` VALUES ('2162', '9034400', 'AJ', '林业森林资源管理', '903', '1', '2162', '1');
+INSERT INTO `fmp_code` VALUES ('2163', '9034500', 'AJ', '生物资源利用技术', '903', '1', '2163', '1');
+INSERT INTO `fmp_code` VALUES ('2164', '9034600', 'AJ', '现代林业技术', '903', '1', '2164', '1');
+INSERT INTO `fmp_code` VALUES ('2165', '9034700', 'AJ', '经济林', '903', '1', '2165', '1');
+INSERT INTO `fmp_code` VALUES ('2166', '9034800', 'AJ', '林业技术与管理', '903', '1', '2166', '1');
+INSERT INTO `fmp_code` VALUES ('2167', '9034900', 'AJ', '森林资源类其他专业', '903', '1', '2167', '1');
+INSERT INTO `fmp_code` VALUES ('2168', '904', 'AJ', '环境生态类', '90', '0', '2168', '1');
+INSERT INTO `fmp_code` VALUES ('2169', '9040100', 'AJ', '园林', '904', '1', '2169', '1');
+INSERT INTO `fmp_code` VALUES ('2170', '9040200', 'AJ', '水土保持与荒漠化防治', '904', '1', '2170', '1');
+INSERT INTO `fmp_code` VALUES ('2171', '9040300', 'AJ', '农业资源与环境', '904', '1', '2171', '1');
+INSERT INTO `fmp_code` VALUES ('2172', '9044100', 'AJ', '风景园林', '904', '1', '2172', '1');
+INSERT INTO `fmp_code` VALUES ('2173', '9044200', 'AJ', '水土保持', '904', '1', '2173', '1');
+INSERT INTO `fmp_code` VALUES ('2174', '9044300', 'AJ', '农业环境保护', '904', '1', '2174', '1');
+INSERT INTO `fmp_code` VALUES ('2175', '9044400', 'AJ', '渔业环境保护', '904', '1', '2175', '1');
+INSERT INTO `fmp_code` VALUES ('2176', '9044500', 'AJ', '城市园林设计与管理', '904', '1', '2176', '1');
+INSERT INTO `fmp_code` VALUES ('2177', '9044600', 'AJ', '环境保护', '904', '1', '2177', '1');
+INSERT INTO `fmp_code` VALUES ('2178', '9044700', 'AJ', '农业综合技术管理', '904', '1', '2178', '1');
+INSERT INTO `fmp_code` VALUES ('2179', '9044800', 'AJ', '风景区建设与管理', '904', '1', '2179', '1');
+INSERT INTO `fmp_code` VALUES ('2180', '9044900', 'AJ', '资源与环境', '904', '1', '2180', '1');
+INSERT INTO `fmp_code` VALUES ('2181', '9045000', 'AJ', '园林工程', '904', null, '2181', '1');
+INSERT INTO `fmp_code` VALUES ('2182', '9045100', 'AJ', '城市绿化与管理', '904', '1', '2182', '1');
+INSERT INTO `fmp_code` VALUES ('2183', '9045200', 'AJ', '城市园林规划', '904', '1', '2183', '1');
+INSERT INTO `fmp_code` VALUES ('2184', '9045300', 'AJ', '园林与环境保护', '904', '1', '2184', '1');
+INSERT INTO `fmp_code` VALUES ('2185', '9045400', 'AJ', '景观学', '904', '1', '2185', '1');
+INSERT INTO `fmp_code` VALUES ('2186', '9045500', 'AJ', '环境生态类其他专业', '904', '1', '2186', '1');
+INSERT INTO `fmp_code` VALUES ('2187', '905', 'AJ', '动物生产类', '90', '0', '2187', '1');
+INSERT INTO `fmp_code` VALUES ('2188', '9050100', 'AJ', '动物科学', '905', '1', '2188', '1');
+INSERT INTO `fmp_code` VALUES ('2189', '9050200', 'AJ', '蚕学', '905', '1', '2189', '1');
+INSERT INTO `fmp_code` VALUES ('2190', '9050300', 'AJ', '蜂学', '905', '1', '2190', '1');
+INSERT INTO `fmp_code` VALUES ('2191', '9054100', 'AJ', '动物营养与饲料加工', '905', '1', '2191', '1');
+INSERT INTO `fmp_code` VALUES ('2192', '9054200', 'AJ', '经济动物', '905', '1', '2192', '1');
+INSERT INTO `fmp_code` VALUES ('2193', '9054300', 'AJ', '农畜特产品加工', '905', '1', '2193', '1');
+INSERT INTO `fmp_code` VALUES ('2194', '9054400', 'AJ', '养殖技术', '905', '1', '2194', '1');
+INSERT INTO `fmp_code` VALUES ('2195', '9054500', 'AJ', '畜产品营销', '905', '1', '2195', '1');
+INSERT INTO `fmp_code` VALUES ('2196', '9054600', 'AJ', '动物饲养', '905', '1', '2196', '1');
+INSERT INTO `fmp_code` VALUES ('2197', '9054700', 'AJ', '畜牧', '905', '1', '2197', '1');
+INSERT INTO `fmp_code` VALUES ('2198', '9054800', 'AJ', '动物生产类其他专业', '905', '1', '2198', '1');
+INSERT INTO `fmp_code` VALUES ('2199', '906', 'AJ', '动物医学类', '90', '0', '2199', '1');
+INSERT INTO `fmp_code` VALUES ('2200', '9060100', 'AJ', '动物医学', '906', '1', '2200', '1');
+INSERT INTO `fmp_code` VALUES ('2201', '9064100', 'AJ', '畜牧兽医', '906', '1', '2201', '1');
+INSERT INTO `fmp_code` VALUES ('2202', '9064200', 'AJ', '动植物检疫', '906', '1', '2202', '1');
+INSERT INTO `fmp_code` VALUES ('2203', '9064300', 'AJ', '动物养殖与疾病防治', '906', '1', '2203', '1');
+INSERT INTO `fmp_code` VALUES ('2204', '9064400', 'AJ', '兽药工艺', '906', '1', '2204', '1');
+INSERT INTO `fmp_code` VALUES ('2205', '9064500', 'AJ', '动物卫生检验', '906', '1', '2205', '1');
+INSERT INTO `fmp_code` VALUES ('2206', '9064600', 'AJ', '动物集约化生产与疫病防治', '906', '1', '2206', '1');
+INSERT INTO `fmp_code` VALUES ('2207', '9064700', 'AJ', '动物医学类其他专业', '906', '1', '2207', '1');
+INSERT INTO `fmp_code` VALUES ('2208', '907', 'AJ', '水产类', '90', '0', '2208', '1');
+INSERT INTO `fmp_code` VALUES ('2209', '9070100', 'AJ', '水产养殖学', '907', '1', '2209', '1');
+INSERT INTO `fmp_code` VALUES ('2210', '9070200', 'AJ', '海洋渔业科学与技术', '907', '1', '2210', '1');
+INSERT INTO `fmp_code` VALUES ('2211', '9074100', 'AJ', '名特水产养殖', '907', '1', '2211', '1');
+INSERT INTO `fmp_code` VALUES ('2212', '9074200', 'AJ', '渔业技术管理', '907', '1', '2212', '1');
+INSERT INTO `fmp_code` VALUES ('2213', '9074300', 'AJ', '海水养殖技术', '907', '1', '2213', '1');
+INSERT INTO `fmp_code` VALUES ('2214', '9074400', 'AJ', '水产品贮藏与加工', '907', '1', '2214', '1');
+INSERT INTO `fmp_code` VALUES ('2215', '9074500', 'AJ', '资源与渔政管理', '907', '1', '2215', '1');
+INSERT INTO `fmp_code` VALUES ('2216', '9074600', 'AJ', '渔业综合技术', '907', '1', '2216', '1');
+INSERT INTO `fmp_code` VALUES ('2217', '9074700', 'AJ', '水产类其他专业', '907', '1', '2217', '1');
+INSERT INTO `fmp_code` VALUES ('2218', '908', 'AJ', '农学类其他专业', '90', '1', '2218', '1');
+INSERT INTO `fmp_code` VALUES ('2219', '100', 'AJ', '医学', '0', '0', '2219', '1');
+INSERT INTO `fmp_code` VALUES ('2220', '1001', 'AJ', '基础医学类', '100', '0', '2220', '1');
+INSERT INTO `fmp_code` VALUES ('2221', '10010100', 'AJ', '基础医学', '1001', '1', '2221', '1');
+INSERT INTO `fmp_code` VALUES ('2222', '10010200', 'AJ', '基础医学类其他专业', '1001', '1', '2222', '1');
+INSERT INTO `fmp_code` VALUES ('2223', '1002', 'AJ', '预防医学类', '100', '0', '2223', '1');
+INSERT INTO `fmp_code` VALUES ('2224', '10020100', 'AJ', '预防医学', '1002', '1', '2224', '1');
+INSERT INTO `fmp_code` VALUES ('2225', '10024100', 'AJ', '卫生检验', '1002', '1', '2225', '1');
+INSERT INTO `fmp_code` VALUES ('2226', '10024200', 'AJ', '妇幼卫生', '1002', '1', '2226', '1');
+INSERT INTO `fmp_code` VALUES ('2227', '10024300', 'AJ', '预防医学类其他专业', '1002', '1', '2227', '1');
+INSERT INTO `fmp_code` VALUES ('2228', '1003', 'AJ', '临床医学与医学技术类', '100', '0', '2228', '1');
+INSERT INTO `fmp_code` VALUES ('2229', '10030100', 'AJ', '临床医学', '1003', '1', '2229', '1');
+INSERT INTO `fmp_code` VALUES ('2230', '10030200', 'AJ', '麻醉学', '1003', '1', '2230', '1');
+INSERT INTO `fmp_code` VALUES ('2231', '10030300', 'AJ', '医学影像学', '1003', '1', '2231', '1');
+INSERT INTO `fmp_code` VALUES ('2232', '10030400', 'AJ', '医学检验', '1003', '1', '2232', '1');
+INSERT INTO `fmp_code` VALUES ('2233', '10030500', 'AJ', '放射医学', '1003', '1', '2233', '1');
+INSERT INTO `fmp_code` VALUES ('2234', '10030600', 'AJ', '眼视光学', '1003', '1', '2234', '1');
+INSERT INTO `fmp_code` VALUES ('2235', '10030700', 'AJ', '康复治疗学', '1003', '1', '2235', '1');
+INSERT INTO `fmp_code` VALUES ('2236', '10030800', 'AJ', '精神医学', '1003', '1', '2236', '1');
+INSERT INTO `fmp_code` VALUES ('2237', '10030900', 'AJ', '医学技术', '1003', '1', '2237', '1');
+INSERT INTO `fmp_code` VALUES ('2238', '10031000', 'AJ', '听力学', '1003', '1', '2238', '1');
+INSERT INTO `fmp_code` VALUES ('2239', '10034200', 'AJ', '计划生育医学', '1003', '1', '2239', '1');
+INSERT INTO `fmp_code` VALUES ('2240', '10034300', 'AJ', '医学实验技术', '1003', '1', '2240', '1');
+INSERT INTO `fmp_code` VALUES ('2241', '10034400', 'AJ', '医学工程技术', '1003', '1', '2241', '1');
+INSERT INTO `fmp_code` VALUES ('2242', '10034500', 'AJ', '美容医学', '1003', '1', '2242', '1');
+INSERT INTO `fmp_code` VALUES ('2243', '10034600', 'AJ', '全科医学', '1003', '1', '2243', '1');
+INSERT INTO `fmp_code` VALUES ('2244', '10034700', 'AJ', '应用医学技术', '1003', '1', '2244', '1');
+INSERT INTO `fmp_code` VALUES ('2245', '10034800', 'AJ', '社区医疗', '1003', '1', '2245', '1');
+INSERT INTO `fmp_code` VALUES ('2246', '10034900', 'AJ', '医学影像设备管理与维护', '1003', '1', '2246', '1');
+INSERT INTO `fmp_code` VALUES ('2247', '10035000', 'AJ', '高级助产', '1003', '1', '2247', '1');
+INSERT INTO `fmp_code` VALUES ('2248', '10035300', 'AJ', '临床康复医学', '1003', '1', '2248', '1');
+INSERT INTO `fmp_code` VALUES ('2249', '10035400', 'AJ', '放射技术', '1003', '1', '2249', '1');
+INSERT INTO `fmp_code` VALUES ('2250', '10035500', 'AJ', '临床诊疗技术', '1003', '1', '2250', '1');
+INSERT INTO `fmp_code` VALUES ('2251', '10035600', 'AJ', '医学影像技术', '1003', '1', '2251', '1');
+INSERT INTO `fmp_code` VALUES ('2252', '10035700', 'AJ', '临床病理学与检验技术', '1003', '1', '2252', '1');
+INSERT INTO `fmp_code` VALUES ('2253', '10035800', 'AJ', '临床医学与医学技术类其他专业', '1003', '1', '2253', '1');
+INSERT INTO `fmp_code` VALUES ('2254', '1004', 'AJ', '口腔医学类', '100', '0', '2254', '1');
+INSERT INTO `fmp_code` VALUES ('2255', '10040100', 'AJ', '口腔医学', '1004', '1', '2255', '1');
+INSERT INTO `fmp_code` VALUES ('2256', '10044100', 'AJ', '口腔工艺技术', '1004', '1', '2256', '1');
+INSERT INTO `fmp_code` VALUES ('2257', '10044200', 'AJ', '口腔修复工艺学', '1004', '1', '2257', '1');
+INSERT INTO `fmp_code` VALUES ('2258', '10044300', 'AJ', '口腔修复与正畸技术', '1004', '1', '2258', '1');
+INSERT INTO `fmp_code` VALUES ('2259', '10044400', 'AJ', '口腔医学类其他专业', '1004', '1', '2259', '1');
+INSERT INTO `fmp_code` VALUES ('2260', '1005', 'AJ', '中医学类', '100', '0', '2260', '1');
+INSERT INTO `fmp_code` VALUES ('2261', '10050100', 'AJ', '中医学', '1005', '1', '2261', '1');
+INSERT INTO `fmp_code` VALUES ('2262', '10050200', 'AJ', '针灸推拿学', '1005', '1', '2262', '1');
+INSERT INTO `fmp_code` VALUES ('2263', '10050300', 'AJ', '蒙医学', '1005', '1', '2263', '1');
+INSERT INTO `fmp_code` VALUES ('2264', '10050400', 'AJ', '藏医学', '1005', '1', '2264', '1');
+INSERT INTO `fmp_code` VALUES ('2265', '10050500', 'AJ', '中西医临床医学', '1005', '1', '2265', '1');
+INSERT INTO `fmp_code` VALUES ('2266', '10054100', 'AJ', '中医骨伤科学', '1005', '1', '2266', '1');
+INSERT INTO `fmp_code` VALUES ('2267', '10054200', 'AJ', '中西医结合', '1005', '1', '2267', '1');
+INSERT INTO `fmp_code` VALUES ('2268', '10054300', 'AJ', '推拿按摩技术', '1005', '1', '2268', '1');
+INSERT INTO `fmp_code` VALUES ('2269', '10054500', 'AJ', '中西医结合骨伤外科学', '1005', '1', '2269', '1');
+INSERT INTO `fmp_code` VALUES ('2270', '10054600', 'AJ', '体育保健与实用按摩', '1005', '1', '2270', '1');
+INSERT INTO `fmp_code` VALUES ('2271', '10054700', 'AJ', '中医康复保健', '1005', '1', '2271', '1');
+INSERT INTO `fmp_code` VALUES ('2272', '10054800', 'AJ', '中医外科学', '1005', '1', '2272', '1');
+INSERT INTO `fmp_code` VALUES ('2273', '10054900', 'AJ', '中医学类其他专业', '1005', '1', '2273', '1');
+INSERT INTO `fmp_code` VALUES ('2274', '1006', 'AJ', '法医学类', '100', '0', '2274', '1');
+INSERT INTO `fmp_code` VALUES ('2275', '10060100', 'AJ', '法医学', '1006', '1', '2275', '1');
+INSERT INTO `fmp_code` VALUES ('2276', '10060200', 'AJ', '法医学类其他专业', '1006', '1', '2276', '1');
+INSERT INTO `fmp_code` VALUES ('2277', '1007', 'AJ', '护理学类', '100', '0', '2277', '1');
+INSERT INTO `fmp_code` VALUES ('2278', '10070100', 'AJ', '护理学', '1007', '1', '2278', '1');
+INSERT INTO `fmp_code` VALUES ('2279', '10074100', 'AJ', '中医护理', '1007', '1', '2279', '1');
+INSERT INTO `fmp_code` VALUES ('2280', '10074200', 'AJ', '高级护理', '1007', '1', '2280', '1');
+INSERT INTO `fmp_code` VALUES ('2281', '10074300', 'AJ', '社区康复', '1007', '1', '2281', '1');
+INSERT INTO `fmp_code` VALUES ('2282', '10074400', 'AJ', '戒毒康复', '1007', '1', '2282', '1');
+INSERT INTO `fmp_code` VALUES ('2283', '10074500', 'AJ', '中西医结合护理', '1007', '1', '2283', '1');
+INSERT INTO `fmp_code` VALUES ('2284', '10074600', 'AJ', '麻醉护理', '1007', '1', '2284', '1');
+INSERT INTO `fmp_code` VALUES ('2285', '10074700', 'AJ', '听力语言康复', '1007', '1', '2285', '1');
+INSERT INTO `fmp_code` VALUES ('2286', '10074800', 'AJ', '护理学类其他专业', '1007', '1', '2286', '1');
+INSERT INTO `fmp_code` VALUES ('2287', '1008', 'AJ', '药学类', '100', '0', '2287', '1');
+INSERT INTO `fmp_code` VALUES ('2288', '10080100', 'AJ', '药学', '1008', '1', '2288', '1');
+INSERT INTO `fmp_code` VALUES ('2289', '10080200', 'AJ', '中药学', '1008', '1', '2289', '1');
+INSERT INTO `fmp_code` VALUES ('2290', '10080300', 'AJ', '药物制剂', '1008', '1', '2290', '1');
+INSERT INTO `fmp_code` VALUES ('2291', '10080400', 'AJ', '中草药栽培与鉴定', '1008', '1', '2291', '1');
+INSERT INTO `fmp_code` VALUES ('2292', '10080500', 'AJ', '藏药学', '1008', '1', '2292', '1');
+INSERT INTO `fmp_code` VALUES ('2293', '10080600', 'AJ', '中药资源与开发', '1008', '1', '2293', '1');
+INSERT INTO `fmp_code` VALUES ('2294', '10084100', 'AJ', '药品营销', '1008', '1', '2294', '1');
+INSERT INTO `fmp_code` VALUES ('2295', '10084200', 'AJ', '药材生产技术', '1008', '1', '2295', '1');
+INSERT INTO `fmp_code` VALUES ('2296', '10084300', 'AJ', '中药检测技术', '1008', '1', '2296', '1');
+INSERT INTO `fmp_code` VALUES ('2297', '10084400', 'AJ', '现代中药技术', '1008', '1', '2297', '1');
+INSERT INTO `fmp_code` VALUES ('2298', '10084500', 'AJ', '药品质量检测技术', '1008', '1', '2298', '1');
+INSERT INTO `fmp_code` VALUES ('2299', '10084600', 'AJ', '药学类其他专业', '1008', '1', '2299', '1');
+INSERT INTO `fmp_code` VALUES ('2300', '1009', 'AJ', '医学类其他专业', '100', null, '2300', '1');
+INSERT INTO `fmp_code` VALUES ('2301', '102', 'AJ', '军事医学类', '0', '0', '2301', '1');
+INSERT INTO `fmp_code` VALUES ('2302', '10204100', 'AJ', '海军临床医学', '102', '1', '2302', '1');
+INSERT INTO `fmp_code` VALUES ('2303', '10204200', 'AJ', '空军临床医学', '102', '1', '2303', '1');
+INSERT INTO `fmp_code` VALUES ('2304', '10204300', 'AJ', '军事医学类其他专业', '102', '1', '2304', '1');
+INSERT INTO `fmp_code` VALUES ('2305', '110', 'AJ', '管理学', '0', '0', '2305', '1');
+INSERT INTO `fmp_code` VALUES ('2306', '1101', 'AJ', '管理科学与工程类', '110', '0', '2306', '1');
+INSERT INTO `fmp_code` VALUES ('2307', '11010100', 'AJ', '管理科学', '1101', '1', '2307', '1');
+INSERT INTO `fmp_code` VALUES ('2308', '11010200', 'AJ', '信息管理与信息系统', '1101', '1', '2308', '1');
+INSERT INTO `fmp_code` VALUES ('2309', '11010300', 'AJ', '工业工程', '1101', '1', '2309', '1');
+INSERT INTO `fmp_code` VALUES ('2310', '11010400', 'AJ', '工程管理', '1101', '1', '2310', '1');
+INSERT INTO `fmp_code` VALUES ('2311', '11013100', 'AJ', '管理工程', '1101', '1', '2311', '1');
+INSERT INTO `fmp_code` VALUES ('2312', '11014100', 'AJ', '经济信息管理', '1101', '1', '2312', '1');
+INSERT INTO `fmp_code` VALUES ('2313', '11014200', 'AJ', '工程预算与管理', '1101', '1', '2313', '1');
+INSERT INTO `fmp_code` VALUES ('2314', '11014300', 'AJ', '管理信息系统', '1101', '1', '2314', '1');
+INSERT INTO `fmp_code` VALUES ('2315', '11014400', 'AJ', '机电管理', '1101', '1', '2315', '1');
+INSERT INTO `fmp_code` VALUES ('2316', '11014500', 'AJ', '经济信息管理与计算机应用', '1101', '1', '2316', '1');
+INSERT INTO `fmp_code` VALUES ('2317', '11014600', 'AJ', '包装与印刷管理', '1101', '1', '2317', '1');
+INSERT INTO `fmp_code` VALUES ('2318', '11014700', 'AJ', '电子商务与信息管理', '1101', '1', '2318', '1');
+INSERT INTO `fmp_code` VALUES ('2319', '11014800', 'AJ', '分析检测与质量管理', '1101', '1', '2319', '1');
+INSERT INTO `fmp_code` VALUES ('2320', '11014900', 'AJ', '环境评价与管理', '1101', '1', '2320', '1');
+INSERT INTO `fmp_code` VALUES ('2321', '11015000', 'AJ', '建设工程法律与管理', '1101', '1', '2321', '1');
+INSERT INTO `fmp_code` VALUES ('2322', '11015100', 'AJ', '电视制作管理', '1101', '1', '2322', '1');
+INSERT INTO `fmp_code` VALUES ('2323', '11015200', 'AJ', '工程概预算', '1101', '1', '2323', '1');
+INSERT INTO `fmp_code` VALUES ('2324', '11015300', 'AJ', '管理科学与工程类其他专业', '1101', '1', '2324', '1');
+INSERT INTO `fmp_code` VALUES ('2325', '1102', 'AJ', '工商管理类', '110', '0', '2325', '1');
+INSERT INTO `fmp_code` VALUES ('2326', '11020100', 'AJ', '工商管理', '1102', '1', '2326', '1');
+INSERT INTO `fmp_code` VALUES ('2327', '11020200', 'AJ', '市场营销', '1102', '1', '2327', '1');
+INSERT INTO `fmp_code` VALUES ('2328', '11020300', 'AJ', '会计学', '1102', '1', '2328', '1');
+INSERT INTO `fmp_code` VALUES ('2329', '11020400', 'AJ', '财务管理', '1102', '1', '2329', '1');
+INSERT INTO `fmp_code` VALUES ('2330', '11020500', 'AJ', '人力资源管理', '1102', '1', '2330', '1');
+INSERT INTO `fmp_code` VALUES ('2331', '11020600', 'AJ', '旅游管理', '1102', '1', '2331', '1');
+INSERT INTO `fmp_code` VALUES ('2332', '11020700', 'AJ', '商品学', '1102', '1', '2332', '1');
+INSERT INTO `fmp_code` VALUES ('2333', '11020800', 'AJ', '审计学', '1102', '1', '2333', '1');
+INSERT INTO `fmp_code` VALUES ('2334', '11020900', 'AJ', '电子商务', '1102', '1', '2334', '1');
+INSERT INTO `fmp_code` VALUES ('2335', '11021000', 'AJ', '物流管理', '1102', '1', '2335', '1');
+INSERT INTO `fmp_code` VALUES ('2336', '11023100', 'AJ', '军队财务管理', '1102', '1', '2336', '1');
+INSERT INTO `fmp_code` VALUES ('2337', '11024100', 'AJ', '出版商务', '1102', '1', '2337', '1');
+INSERT INTO `fmp_code` VALUES ('2338', '11024200', 'AJ', '工商行政管理', '1102', '1', '2338', '1');
+INSERT INTO `fmp_code` VALUES ('2339', '11024300', 'AJ', '投资经济管理', '1102', '1', '2339', '1');
+INSERT INTO `fmp_code` VALUES ('2340', '11024400', 'AJ', '证券投资与管理', '1102', '1', '2340', '1');
+INSERT INTO `fmp_code` VALUES ('2341', '11024500', 'AJ', '经济管理', '1102', '1', '2341', '1');
+INSERT INTO `fmp_code` VALUES ('2342', '11024600', 'AJ', '企业管理', '1102', '1', '2342', '1');
+INSERT INTO `fmp_code` VALUES ('2343', '11024700', 'AJ', '国际企业管理', '1102', '1', '2343', '1');
+INSERT INTO `fmp_code` VALUES ('2344', '11024800', 'AJ', '理财学', '1102', '1', '2344', '1');
+INSERT INTO `fmp_code` VALUES ('2345', '11024900', 'AJ', '房地产经营管理', '1102', '1', '2345', '1');
+INSERT INTO `fmp_code` VALUES ('2346', '11025100', 'AJ', '资产评估', '1102', '1', '2346', '1');
+INSERT INTO `fmp_code` VALUES ('2347', '11025200', 'AJ', '国际市场营销', '1102', '1', '2347', '1');
+INSERT INTO `fmp_code` VALUES ('2348', '11025300', 'AJ', '企业理财', '1102', '1', '2348', '1');
+INSERT INTO `fmp_code` VALUES ('2349', '11025400', 'AJ', '乡镇企业管理', '1102', '1', '2349', '1');
+INSERT INTO `fmp_code` VALUES ('2350', '11025500', 'AJ', '物业管理', '1102', '1', '2350', '1');
+INSERT INTO `fmp_code` VALUES ('2351', '11025600', 'AJ', '财务会计', '1102', '1', '2351', '1');
+INSERT INTO `fmp_code` VALUES ('2352', '11025700', 'AJ', '工业会计', '1102', '1', '2352', '1');
+INSERT INTO `fmp_code` VALUES ('2353', '11025800', 'AJ', '会计电算化', '1102', '1', '2353', '1');
+INSERT INTO `fmp_code` VALUES ('2354', '11025900', 'AJ', '涉外会计', '1102', '1', '2354', '1');
+INSERT INTO `fmp_code` VALUES ('2355', '11026000', 'AJ', '会计与审计', '1102', '1', '2355', '1');
+INSERT INTO `fmp_code` VALUES ('2356', '11026100', 'AJ', '金融管理', '1102', '1', '2356', '1');
+INSERT INTO `fmp_code` VALUES ('2357', '11026200', 'AJ', '建筑企业物资管理', '1102', '1', '2357', '1');
+INSERT INTO `fmp_code` VALUES ('2358', '11026300', 'AJ', '注册会计师(专门化)', '1102', '1', '2358', '1');
+INSERT INTO `fmp_code` VALUES ('2359', '11026400', 'AJ', '财经管理', '1102', '1', '2359', '1');
+INSERT INTO `fmp_code` VALUES ('2360', '11026500', 'AJ', '工程造价管理', '1102', '1', '2360', '1');
+INSERT INTO `fmp_code` VALUES ('2361', '11026600', 'AJ', '经济管理与贸易', '1102', '1', '2361', '1');
+INSERT INTO `fmp_code` VALUES ('2362', '11026700', 'AJ', '建筑工程项目管理', '1102', '1', '2362', '1');
+INSERT INTO `fmp_code` VALUES ('2363', '11026800', 'AJ', '涉外企业经营管理', '1102', '1', '2363', '1');
+INSERT INTO `fmp_code` VALUES ('2364', '11026900', 'AJ', '国际会计', '1102', '1', '2364', '1');
+INSERT INTO `fmp_code` VALUES ('2365', '11027000', 'AJ', '涉外旅游管理', '1102', '1', '2365', '1');
+INSERT INTO `fmp_code` VALUES ('2366', '11027100', 'AJ', '建筑财务会计', '1102', '1', '2366', '1');
+INSERT INTO `fmp_code` VALUES ('2367', '11027200', 'AJ', '烹饪与餐饮管理', '1102', '1', '2367', '1');
+INSERT INTO `fmp_code` VALUES ('2368', '11027300', 'AJ', '餐旅管理', '1102', '1', '2368', '1');
+INSERT INTO `fmp_code` VALUES ('2369', '11027400', 'AJ', '宾馆管理', '1102', '1', '2369', '1');
+INSERT INTO `fmp_code` VALUES ('2370', '11027500', 'AJ', '邮政通信管理', '1102', '1', '2370', '1');
+INSERT INTO `fmp_code` VALUES ('2371', '11027600', 'AJ', '工业企业管理', '1102', '1', '2371', '1');
+INSERT INTO `fmp_code` VALUES ('2372', '11027700', 'AJ', '工业企业设备管理', '1102', '1', '2372', '1');
+INSERT INTO `fmp_code` VALUES ('2373', '11027800', 'AJ', '工业企业物资管理', '1102', '1', '2373', '1');
+INSERT INTO `fmp_code` VALUES ('2374', '11027900', 'AJ', '工业企业经营管理', '1102', '1', '2374', '1');
+INSERT INTO `fmp_code` VALUES ('2375', '11028000', 'AJ', '交通运输管理', '1102', '1', '2375', '1');
+INSERT INTO `fmp_code` VALUES ('2376', '11028100', 'AJ', '旅游与酒店管理', '1102', '1', '2376', '1');
+INSERT INTO `fmp_code` VALUES ('2377', '11028200', 'AJ', '邮电财务会计', '1102', '1', '2377', '1');
+INSERT INTO `fmp_code` VALUES ('2378', '11028300', 'AJ', '企业信息计算机管理', '1102', '1', '2378', '1');
+INSERT INTO `fmp_code` VALUES ('2379', '11028400', 'AJ', '邮电审计', '1102', '1', '2379', '1');
+INSERT INTO `fmp_code` VALUES ('2380', '11028500', 'AJ', '会计电算化', '1102', '1', '2380', '1');
+INSERT INTO `fmp_code` VALUES ('2381', '11028600', 'AJ', '交通投资与融资', '1102', '1', '2381', '1');
+INSERT INTO `fmp_code` VALUES ('2382', '11028700', 'AJ', '商务管理', '1102', '1', '2382', '1');
+INSERT INTO `fmp_code` VALUES ('2383', '11028800', 'AJ', '商品推销与策划', '1102', '1', '2383', '1');
+INSERT INTO `fmp_code` VALUES ('2384', '11028900', 'AJ', '保险营销', '1102', '1', '2384', '1');
+INSERT INTO `fmp_code` VALUES ('2385', '11029000', 'AJ', '建筑经济与管理', '1102', '1', '2385', '1');
+INSERT INTO `fmp_code` VALUES ('2386', '11029100', 'AJ', '公路项目管理', '1102', '1', '2386', '1');
+INSERT INTO `fmp_code` VALUES ('2387', '11029200', 'AJ', '商品经营', '1102', '1', '2387', '1');
+INSERT INTO `fmp_code` VALUES ('2388', '11029300', 'AJ', '营销管理', '1102', '1', '2388', '1');
+INSERT INTO `fmp_code` VALUES ('2389', '11029400', 'AJ', '营销策划与商务管理', '1102', '1', '2389', '1');
+INSERT INTO `fmp_code` VALUES ('2390', '11029500', 'AJ', '商业管理', '1102', '1', '2390', '1');
+INSERT INTO `fmp_code` VALUES ('2391', '11029600', 'AJ', '企业生产经营管理', '1102', '1', '2391', '1');
+INSERT INTO `fmp_code` VALUES ('2392', '11029700', 'AJ', '物资管理', '1102', '1', '2392', '1');
+INSERT INTO `fmp_code` VALUES ('2393', '11029800', 'AJ', '公司经营管理', '1102', '1', '2393', '1');
+INSERT INTO `fmp_code` VALUES ('2394', '11029900', 'AJ', '企业资源计划管理', '1102', '1', '2394', '1');
+INSERT INTO `fmp_code` VALUES ('2395', '11022100', 'AJ', '工商管理类其他专业', '1102', '1', '2395', '1');
+INSERT INTO `fmp_code` VALUES ('2396', '1103', 'AJ', '公共管理类', '110', '0', '2396', '1');
+INSERT INTO `fmp_code` VALUES ('2397', '11030100', 'AJ', '行政管理', '1103', '1', '2397', '1');
+INSERT INTO `fmp_code` VALUES ('2398', '11030200', 'AJ', '公共事业管理', '1103', '1', '2398', '1');
+INSERT INTO `fmp_code` VALUES ('2399', '11030300', 'AJ', '劳动与社会保障', '1103', '1', '2399', '1');
+INSERT INTO `fmp_code` VALUES ('2400', '11030400', 'AJ', '土地资源管理学', '1103', '1', '2400', '1');
+INSERT INTO `fmp_code` VALUES ('2401', '11030500', 'AJ', '公共关系学', '1103', '1', '2401', '1');
+INSERT INTO `fmp_code` VALUES ('2402', '11030600', 'AJ', '高等教育管理', '1103', '1', '2402', '1');
+INSERT INTO `fmp_code` VALUES ('2403', '11030700', 'AJ', '公共政策学', '1103', '1', '2403', '1');
+INSERT INTO `fmp_code` VALUES ('2404', '11030800', 'AJ', '城市管理', '1103', '1', '2404', '1');
+INSERT INTO `fmp_code` VALUES ('2405', '11030900', 'AJ', '公共管理', '1103', '1', '2405', '1');
+INSERT INTO `fmp_code` VALUES ('2406', '11034100', 'AJ', '海关管理', '1103', '1', '2406', '1');
+INSERT INTO `fmp_code` VALUES ('2407', '11034200', 'AJ', '狱政管理', '1103', '1', '2407', '1');
+INSERT INTO `fmp_code` VALUES ('2408', '11034300', 'AJ', '劳教管理', '1103', '1', '2408', '1');
+INSERT INTO `fmp_code` VALUES ('2409', '11034400', 'AJ', '治安管理', '1103', '1', '2409', '1');
+INSERT INTO `fmp_code` VALUES ('2410', '11034500', 'AJ', '公安管理', '1103', '1', '2410', '1');
+INSERT INTO `fmp_code` VALUES ('2411', '11034600', 'AJ', '体育管理', '1103', '1', '2411', '1');
+INSERT INTO `fmp_code` VALUES ('2412', '11034700', 'AJ', '安全技术管理', '1103', '1', '2412', '1');
+INSERT INTO `fmp_code` VALUES ('2413', '11034800', 'AJ', '卫生事业管理', '1103', '1', '2413', '1');
+INSERT INTO `fmp_code` VALUES ('2414', '11034900', 'AJ', '涉外事务管理', '1103', '1', '2414', '1');
+INSERT INTO `fmp_code` VALUES ('2415', '11035000', 'AJ', '城乡区域规划与管理', '1103', '1', '2415', '1');
+INSERT INTO `fmp_code` VALUES ('2416', '11035100', 'AJ', '民政行政管理', '1103', '1', '2416', '1');
+INSERT INTO `fmp_code` VALUES ('2417', '11035200', 'AJ', '现代殡仪技术与管理', '1103', '1', '2417', '1');
+INSERT INTO `fmp_code` VALUES ('2418', '11035300', 'AJ', '陵园设计与管理', '1103', '1', '2418', '1');
+INSERT INTO `fmp_code` VALUES ('2419', '11035400', 'AJ', '饭店与娱乐管理', '1103', '1', '2419', '1');
+INSERT INTO `fmp_code` VALUES ('2420', '11035500', 'AJ', '文化市场经营管理', '1103', '1', '2420', '1');
+INSERT INTO `fmp_code` VALUES ('2421', '11035600', 'AJ', '医院管理', '1103', '1', '2421', '1');
+INSERT INTO `fmp_code` VALUES ('2422', '11035700', 'AJ', '市场策划', '1103', '1', '2422', '1');
+INSERT INTO `fmp_code` VALUES ('2423', '11035800', 'AJ', '休闲体育经营管理', '1103', '1', '2423', '1');
+INSERT INTO `fmp_code` VALUES ('2424', '11035900', 'AJ', '高等级公路管理', '1103', '1', '2424', '1');
+INSERT INTO `fmp_code` VALUES ('2425', '11036000', 'AJ', '餐饮经营管理', '1103', '1', '2425', '1');
+INSERT INTO `fmp_code` VALUES ('2426', '11036100', 'AJ', '城市公共交通管理', '1103', '1', '2426', '1');
+INSERT INTO `fmp_code` VALUES ('2427', '11036200', 'AJ', '涉外饭店管理', '1103', '1', '2427', '1');
+INSERT INTO `fmp_code` VALUES ('2428', '11036300', 'AJ', '电子政务', '1103', '1', '2428', '1');
+INSERT INTO `fmp_code` VALUES ('2429', '11036400', 'AJ', '国有资产管理', '1103', '1', '2429', '1');
+INSERT INTO `fmp_code` VALUES ('2430', '11036500', 'AJ', '路政管理', '1103', '1', '2430', '1');
+INSERT INTO `fmp_code` VALUES ('2431', '11036600', 'AJ', '国土资源调查与管理', '1103', '1', '2431', '1');
+INSERT INTO `fmp_code` VALUES ('2432', '11036700', 'AJ', '公共管理类其他专业', '1103', '1', '2432', '1');
+INSERT INTO `fmp_code` VALUES ('2433', '1104', 'AJ', '农业经济管理类', '110', '0', '2433', '1');
+INSERT INTO `fmp_code` VALUES ('2434', '11040100', 'AJ', '农林经济管理', '1104', '1', '2434', '1');
+INSERT INTO `fmp_code` VALUES ('2435', '11040200', 'AJ', '农村区域发展', '1104', '1', '2435', '1');
+INSERT INTO `fmp_code` VALUES ('2436', '11044100', 'AJ', '农业经济管理', '1104', '1', '2436', '1');
+INSERT INTO `fmp_code` VALUES ('2437', '11044200', 'AJ', '林业经济管理', '1104', '1', '2437', '1');
+INSERT INTO `fmp_code` VALUES ('2438', '11044300', 'AJ', '乡镇建设与管理', '1104', '1', '2438', '1');
+INSERT INTO `fmp_code` VALUES ('2439', '11044400', 'AJ', '农业经济管理类其他类专业', '1104', '1', '2439', '1');
+INSERT INTO `fmp_code` VALUES ('2440', '1105', 'AJ', '图书档案学类', '110', '0', '2440', '1');
+INSERT INTO `fmp_code` VALUES ('2441', '11050100', 'AJ', '图书馆学', '1105', '1', '2441', '1');
+INSERT INTO `fmp_code` VALUES ('2442', '11050200', 'AJ', '档案学', '1105', '1', '2442', '1');
+INSERT INTO `fmp_code` VALUES ('2443', '11054100', 'AJ', '图书管理与发行', '1105', '1', '2443', '1');
+INSERT INTO `fmp_code` VALUES ('2444', '11054200', 'AJ', '军队文化管理', '1105', '1', '2444', '1');
+INSERT INTO `fmp_code` VALUES ('2445', '11054300', 'AJ', '档案管理与修复', '1105', '1', '2445', '1');
+INSERT INTO `fmp_code` VALUES ('2446', '11054400', 'AJ', '图书信息管理', '1105', '1', '2446', '1');
+INSERT INTO `fmp_code` VALUES ('2447', '11054500', 'AJ', '图书馆管理', '1105', '1', '2447', '1');
+INSERT INTO `fmp_code` VALUES ('2448', '11054600', 'AJ', '图书档案学类其他专业', '1105', '1', '2448', '1');
+INSERT INTO `fmp_code` VALUES ('2449', '1106', 'AJ', '管理学其他专业', '110', '1', '2449', '1');
+INSERT INTO `fmp_code` VALUES ('2450', '112', 'AJ', '军事装备管理类', '0', '0', '2450', '1');
+INSERT INTO `fmp_code` VALUES ('2451', '11204100', 'AJ', '航空器材管理', '112', '1', '2451', '1');
+INSERT INTO `fmp_code` VALUES ('2452', '11204200', 'AJ', '军港管理', '112', '1', '2452', '1');
+INSERT INTO `fmp_code` VALUES ('2453', '11204300', 'AJ', '帆缆涂料管理', '112', '1', '2453', '1');
+INSERT INTO `fmp_code` VALUES ('2454', '11204400', 'AJ', '油料管理', '112', '1', '2454', '1');
+INSERT INTO `fmp_code` VALUES ('2455', '11204500', 'AJ', '军需管理', '112', '1', '2455', '1');
+INSERT INTO `fmp_code` VALUES ('2456', '11204600', 'AJ', '营房管理', '112', '1', '2456', '1');
+INSERT INTO `fmp_code` VALUES ('2457', '11204700', 'AJ', '装备（器材）管理', '112', '1', '2457', '1');
+INSERT INTO `fmp_code` VALUES ('2458', '11204800', 'AJ', '装备经济管理', '112', '1', '2458', '1');
+INSERT INTO `fmp_code` VALUES ('2459', '11204900', 'AJ', '军事装备管理类其他专业', '112', '1', '2459', '1');
+INSERT INTO `fmp_code` VALUES ('2460', '120', 'AJ', '军事学', '0', '0', '2460', '1');
+INSERT INTO `fmp_code` VALUES ('2461', '1201', 'AJ', '军队指挥类', '120', '0', '2461', '1');
+INSERT INTO `fmp_code` VALUES ('2462', '12010100', 'AJ', '步兵指挥', '1201', '1', '2462', '1');
+INSERT INTO `fmp_code` VALUES ('2463', '12010200', 'AJ', '炮兵指挥', '1201', '1', '2463', '1');
+INSERT INTO `fmp_code` VALUES ('2464', '12010300', 'AJ', '装甲兵指挥', '1201', '1', '2464', '1');
+INSERT INTO `fmp_code` VALUES ('2465', '12010400', 'AJ', '防空兵高炮指挥', '1201', '1', '2465', '1');
+INSERT INTO `fmp_code` VALUES ('2466', '12010500', 'AJ', '侦察与特种兵指挥', '1201', '1', '2466', '1');
+INSERT INTO `fmp_code` VALUES ('2467', '12010600', 'AJ', '战术导弹指挥与工程', '1201', '1', '2467', '1');
+INSERT INTO `fmp_code` VALUES ('2468', '12010700', 'AJ', '工程兵指挥', '1201', '1', '2468', '1');
+INSERT INTO `fmp_code` VALUES ('2469', '12010800', 'AJ', '防化兵指挥', '1201', '1', '2469', '1');
+INSERT INTO `fmp_code` VALUES ('2470', '12014300', 'AJ', '轻便炮兵指挥', '1201', '1', '2470', '1');
+INSERT INTO `fmp_code` VALUES ('2471', '12014400', 'AJ', '侦察兵指挥', '1201', '1', '2471', '1');
+INSERT INTO `fmp_code` VALUES ('2472', '12014500', 'AJ', '特种兵指挥', '1201', '1', '2472', '1');
+INSERT INTO `fmp_code` VALUES ('2473', '12014600', 'AJ', '特种侦察技术指挥', '1201', '1', '2473', '1');
+INSERT INTO `fmp_code` VALUES ('2474', '12014700', 'AJ', '牵引火炮指挥', '1201', '1', '2474', '1');
+INSERT INTO `fmp_code` VALUES ('2475', '12014800', 'AJ', '自行火炮指挥', '1201', '1', '2475', '1');
+INSERT INTO `fmp_code` VALUES ('2476', '12014900', 'AJ', '火箭炮指挥', '1201', '1', '2476', '1');
+INSERT INTO `fmp_code` VALUES ('2477', '12015000', 'AJ', '炮兵侦测指挥', '1201', '1', '2477', '1');
+INSERT INTO `fmp_code` VALUES ('2478', '12015200', 'AJ', '防空兵高炮侦察指挥', '1201', '1', '2478', '1');
+INSERT INTO `fmp_code` VALUES ('2479', '12015300', 'AJ', '指挥仪指挥', '1201', '1', '2479', '1');
+INSERT INTO `fmp_code` VALUES ('2480', '12015400', 'AJ', '地空导弹指挥（小型）', '1201', '1', '2480', '1');
+INSERT INTO `fmp_code` VALUES ('2481', '12015500', 'AJ', '反坦克导弹指挥', '1201', '1', '2481', '1');
+INSERT INTO `fmp_code` VALUES ('2482', '12015600', 'AJ', '坦克兵指挥', '1201', '1', '2482', '1');
+INSERT INTO `fmp_code` VALUES ('2483', '12015700', 'AJ', '装甲步兵指挥', '1201', '1', '2483', '1');
+INSERT INTO `fmp_code` VALUES ('2484', '12015800', 'AJ', '道路桥梁指挥', '1201', '1', '2484', '1');
+INSERT INTO `fmp_code` VALUES ('2485', '12015900', 'AJ', '筑城指挥', '1201', '1', '2485', '1');
+INSERT INTO `fmp_code` VALUES ('2486', '12016000', 'AJ', '地雷爆破指挥', '1201', '1', '2486', '1');
+INSERT INTO `fmp_code` VALUES ('2487', '12016100', 'AJ', '舟桥指挥', '1201', '1', '2487', '1');
+INSERT INTO `fmp_code` VALUES ('2488', '12016300', 'AJ', '人武指挥', '1201', '1', '2488', '1');
+INSERT INTO `fmp_code` VALUES ('2489', '12016400', 'AJ', '军队指挥类其他专业', '1201', '1', '2489', '1');
+INSERT INTO `fmp_code` VALUES ('2490', '1202', 'AJ', '海军指挥类', '120', '0', '2490', '1');
+INSERT INTO `fmp_code` VALUES ('2491', '12020100', 'AJ', '舰（船）艇指挥', '1202', '1', '2491', '1');
+INSERT INTO `fmp_code` VALUES ('2492', '12020200', 'AJ', '潜艇指挥', '1202', '1', '2492', '1');
+INSERT INTO `fmp_code` VALUES ('2493', '12024300', 'AJ', '潜水指挥', '1202', '1', '2493', '1');
+INSERT INTO `fmp_code` VALUES ('2494', '12024400', 'AJ', '深潜救生指挥', '1202', '1', '2494', '1');
+INSERT INTO `fmp_code` VALUES ('2495', '12024500', 'AJ', '海军指挥类其他专业', '1202', '1', '2495', '1');
+INSERT INTO `fmp_code` VALUES ('2496', '1203', 'AJ', '空军指挥类', '120', '0', '2496', '1');
+INSERT INTO `fmp_code` VALUES ('2497', '12030100', 'AJ', '空降兵指挥', '1203', '1', '2497', '1');
+INSERT INTO `fmp_code` VALUES ('2498', '12030200', 'AJ', '航空飞行与指挥', '1203', '1', '2498', '1');
+INSERT INTO `fmp_code` VALUES ('2499', '12030300', 'AJ', '地面领航与航空管制', '1203', '1', '2499', '1');
+INSERT INTO `fmp_code` VALUES ('2500', '12030400', 'AJ', '航空兵场站指挥', '1203', '1', '2500', '1');
+INSERT INTO `fmp_code` VALUES ('2501', '12034200', 'AJ', '地面领航', '1203', '1', '2501', '1');
+INSERT INTO `fmp_code` VALUES ('2502', '12034300', 'AJ', '飞行管制', '1203', '1', '2502', '1');
+INSERT INTO `fmp_code` VALUES ('2503', '12034400', 'AJ', '空中通信射击', '1203', '1', '2503', '1');
+INSERT INTO `fmp_code` VALUES ('2504', '12034600', 'AJ', '航空救生', '1203', '1', '2504', '1');
+INSERT INTO `fmp_code` VALUES ('2505', '12034700', 'AJ', '空军指挥类其他专业', '1203', '1', '2505', '1');
+INSERT INTO `fmp_code` VALUES ('2506', '1204', 'AJ', '通信指挥类', '120', '0', '2506', '1');
+INSERT INTO `fmp_code` VALUES ('2507', '12040100', 'AJ', '通信指挥', '1204', '1', '2507', '1');
+INSERT INTO `fmp_code` VALUES ('2508', '12040200', 'AJ', '雷达指挥', '1204', '1', '2508', '1');
+INSERT INTO `fmp_code` VALUES ('2509', '12040300', 'AJ', '电子对抗指挥', '1204', '1', '2509', '1');
+INSERT INTO `fmp_code` VALUES ('2510', '12040400', 'AJ', '军事情报', '1204', '1', '2510', '1');
+INSERT INTO `fmp_code` VALUES ('2511', '12044200', 'AJ', '有线通信指挥', '1204', '1', '2511', '1');
+INSERT INTO `fmp_code` VALUES ('2512', '12044300', 'AJ', '无线通信指挥', '1204', '1', '2512', '1');
+INSERT INTO `fmp_code` VALUES ('2513', '12044400', 'AJ', '电信交换指挥', '1204', '1', '2513', '1');
+INSERT INTO `fmp_code` VALUES ('2514', '12044500', 'AJ', '卫星通信指挥', '1204', '1', '2514', '1');
+INSERT INTO `fmp_code` VALUES ('2515', '12044600', 'AJ', '无线接力通信指挥', '1204', '1', '2515', '1');
+INSERT INTO `fmp_code` VALUES ('2516', '12044700', 'AJ', '对潜通信指挥', '1204', '1', '2516', '1');
+INSERT INTO `fmp_code` VALUES ('2517', '12044800', 'AJ', '对海导航指挥', '1204', '1', '2517', '1');
+INSERT INTO `fmp_code` VALUES ('2518', '12044900', 'AJ', '炮兵通信指挥', '1204', '1', '2518', '1');
+INSERT INTO `fmp_code` VALUES ('2519', '12045000', 'AJ', '防空兵高炮通信指挥', '1204', '1', '2519', '1');
+INSERT INTO `fmp_code` VALUES ('2520', '12045100', 'AJ', '通信对抗指挥', '1204', '1', '2520', '1');
+INSERT INTO `fmp_code` VALUES ('2521', '12045200', 'AJ', '雷达对抗指挥', '1204', '1', '2521', '1');
+INSERT INTO `fmp_code` VALUES ('2522', '12045400', 'AJ', '机要指挥', '1204', '1', '2522', '1');
+INSERT INTO `fmp_code` VALUES ('2523', '12045500', 'AJ', '边防指挥', '1204', '1', '2523', '1');
+INSERT INTO `fmp_code` VALUES ('2524', '12045600', 'AJ', '通信指挥类其他专业', '1204', '1', '2524', '1');
+INSERT INTO `fmp_code` VALUES ('2525', '1205', 'AJ', '军事工程指挥类', '120', '0', '2525', '1');
+INSERT INTO `fmp_code` VALUES ('2526', '12050100', 'AJ', '军事交通', '1205', '1', '2526', '1');
+INSERT INTO `fmp_code` VALUES ('2527', '12050200', 'AJ', '汽车指挥', '1205', '1', '2527', '1');
+INSERT INTO `fmp_code` VALUES ('2528', '12050300', 'AJ', '实验指挥工程', '1205', '1', '2528', '1');
+INSERT INTO `fmp_code` VALUES ('2529', '12050400', 'AJ', '作战测绘保障', '1205', '1', '2529', '1');
+INSERT INTO `fmp_code` VALUES ('2530', '12050500', 'AJ', '国防工程指挥', '1205', '1', '2530', '1');
+INSERT INTO `fmp_code` VALUES ('2531', '12050600', 'AJ', '装备技术勤务指挥', '1205', '1', '2531', '1');
+INSERT INTO `fmp_code` VALUES ('2532', '12050700', 'AJ', '后勤指挥', '1205', '1', '2532', '1');
+INSERT INTO `fmp_code` VALUES ('2533', '12054200', 'AJ', '实验指挥', '1205', '1', '2533', '1');
+INSERT INTO `fmp_code` VALUES ('2534', '12054300', 'AJ', '炮兵气象指挥', '1205', '1', '2534', '1');
+INSERT INTO `fmp_code` VALUES ('2535', '12054700', 'AJ', '工程机械指挥', '1205', '1', '2535', '1');
+INSERT INTO `fmp_code` VALUES ('2536', '12054800', 'AJ', '伪装指挥', '1205', '1', '2536', '1');
+INSERT INTO `fmp_code` VALUES ('2537', '12054900', 'AJ', '野战给水指挥', '1205', '1', '2537', '1');
+INSERT INTO `fmp_code` VALUES ('2538', '12055000', 'AJ', '工程建筑管理', '1205', '1', '2538', '1');
+INSERT INTO `fmp_code` VALUES ('2539', '12055100', 'AJ', '工程设备安装', '1205', '1', '2539', '1');
+INSERT INTO `fmp_code` VALUES ('2540', '12055200', 'AJ', '工程维护与管理', '1205', '1', '2540', '1');
+INSERT INTO `fmp_code` VALUES ('2541', '12055300', 'AJ', '测绘勤务保障', '1205', '1', '2541', '1');
+INSERT INTO `fmp_code` VALUES ('2542', '12055400', 'AJ', '基层后勤管理', '1205', '1', '2542', '1');
+INSERT INTO `fmp_code` VALUES ('2543', '12055500', 'AJ', '军事工程指挥类其他专业', '1205', '1', '2543', '1');
+INSERT INTO `fmp_code` VALUES ('2544', '1206', 'AJ', '武警指挥类', '120', '0', '2544', '1');
+INSERT INTO `fmp_code` VALUES ('2545', '12060100', 'AJ', '武警指挥', '1206', '1', '2545', '1');
+INSERT INTO `fmp_code` VALUES ('2546', '12064300', 'AJ', '特种武警', '1206', '1', '2546', '1');
+INSERT INTO `fmp_code` VALUES ('2547', '12064400', 'AJ', '武警侦察指挥', '1206', '1', '2547', '1');
+INSERT INTO `fmp_code` VALUES ('2548', '12064500', 'AJ', '武警炮兵指挥', '1206', '1', '2548', '1');
+INSERT INTO `fmp_code` VALUES ('2549', '12064600', 'AJ', '武警指挥类其他专业', '1206', '1', '2549', '1');
+INSERT INTO `fmp_code` VALUES ('2550', '1207', 'AJ', '军事体育类', '120', '0', '2550', '1');
+INSERT INTO `fmp_code` VALUES ('2551', '12070100', 'AJ', '军事体育', '1207', '1', '2551', '1');
+INSERT INTO `fmp_code` VALUES ('2552', '12070200', 'AJ', '军事体育类其他专业', '1207', '1', '2552', '1');
+INSERT INTO `fmp_code` VALUES ('2553', '1208', 'AJ', '军事学类其他专业', '120', '1', '2553', '1');
+INSERT INTO `fmp_code` VALUES ('2554', '130', 'AJ', '其他专业', '0', '1', '2554', '1');
+INSERT INTO `fmp_code` VALUES ('2555', '1', 'TJ', '是', '-1', '1', '2555', '1');
+INSERT INTO `fmp_code` VALUES ('2556', '0', 'TJ', '否', '-1', '1', '2556', '1');
+INSERT INTO `fmp_code` VALUES ('2557', '1', 'MTGX', '北京高校', '-1', '1', '2557', '1');
+INSERT INTO `fmp_code` VALUES ('2558', '2', 'MTGX', '上海高校', '-1', '1', '2558', '1');
+INSERT INTO `fmp_code` VALUES ('2559', '3', 'MTGX', '南京高校', '-1', '1', '2559', '1');
+INSERT INTO `fmp_code` VALUES ('2560', '01', 'PC', '第一批', '0', '1', '1', '1');
+INSERT INTO `fmp_code` VALUES ('2561', '3', 'XL', '大专以上', '-1', '1', '859', '1');
+INSERT INTO `fmp_code` VALUES ('2562', '1', 'KSSF', '非应届毕业生', '-1', '1', '1', '1');
+INSERT INTO `fmp_code` VALUES ('2564', '02', 'PC', '第二批', '0', '1', '2', '1');
+INSERT INTO `fmp_code` VALUES ('2565', '03', 'PC', '第三批', '0', '1', '3', '1');
+INSERT INTO `fmp_code` VALUES ('2566', '04', 'PC', '第四批', '0', '1', '4', '1');
+INSERT INTO `fmp_code` VALUES ('2567', '05', 'PC', '第五批', '0', '1', '5', '1');
+INSERT INTO `fmp_code` VALUES ('2568', '06', 'PC', '第六批', '0', '1', '6', '1');
+INSERT INTO `fmp_code` VALUES ('2569', '07', 'PC', '第七批', '0', '1', '7', '1');
+INSERT INTO `fmp_code` VALUES ('2570', '08', 'PC', '第八批', '0', '1', '8', '1');
+INSERT INTO `fmp_code` VALUES ('2571', '09', 'PC', '第九批', '0', '1', '9', '1');
+INSERT INTO `fmp_code` VALUES ('2573', '01', 'ZPLB', '社区工作者', '0', '1', '1', '1');
+INSERT INTO `fmp_code` VALUES ('2574', '02', 'ZPLB', '辅助工作人员', '0', '1', '2', '1');
+INSERT INTO `fmp_code` VALUES ('2575', '2', 'KSSF', '应届毕业生', '-1', '1', '2', '1');
+INSERT INTO `fmp_code` VALUES ('2576', '01', 'FKJG', '确定参加', '0', '1', '1', '1');
+INSERT INTO `fmp_code` VALUES ('2577', '02', 'FKJG', '放弃', '0', '1', '2', '1');
+INSERT INTO `fmp_code` VALUES ('2578', '03', 'FKJG', '未反馈', '0', '1', '3', '1');
+INSERT INTO `fmp_code` VALUES ('2579', '01', 'JNSP', '优秀', '-1', '1', '1', '1');
+INSERT INTO `fmp_code` VALUES ('2580', '02', 'JNSP', '良好', '-1', '1', '2', '1');
+INSERT INTO `fmp_code` VALUES ('2581', '03', 'JNSP', '一般', '-1', '1', '3', '1');
+INSERT INTO `fmp_code` VALUES ('2582', '04', 'JNSP', '差', '-1', '1', '4', '1');
+INSERT INTO `fmp_code` VALUES ('2583', '01', 'JTGX', '父亲', '0', '1', '1', '1');
+INSERT INTO `fmp_code` VALUES ('2584', '02', 'JTGX', '母亲', '0', '1', '2', '1');
+INSERT INTO `fmp_code` VALUES ('2585', '03', 'JTGX', '儿子', '0', '1', '3', '1');
+INSERT INTO `fmp_code` VALUES ('2586', '04', 'JTGX', '女儿', '0', '1', '4', '1');
+INSERT INTO `fmp_code` VALUES ('2587', '05', 'JTGX', '兄弟', '0', '1', '5', '1');
+INSERT INTO `fmp_code` VALUES ('2588', '06', 'JTGX', '姐妹', '0', '1', '6', '1');
+INSERT INTO `fmp_code` VALUES ('2589', '07', 'JTGX', '其他', '0', '1', '7', '1');
+INSERT INTO `fmp_code` VALUES ('2590', '1', 'SPXX', '待报', '0', '1', '1', '1');
+INSERT INTO `fmp_code` VALUES ('2591', '2', 'SPXX', '待审', '0', '1', '2', '1');
+INSERT INTO `fmp_code` VALUES ('2592', '3', 'SPXX', '审核通过', '0', '1', '3', '1');
+INSERT INTO `fmp_code` VALUES ('2593', '4', 'SPXX', '审核不通过', '0', '1', '4', '1');
+INSERT INTO `fmp_code` VALUES ('2594', '1', 'ZBMC', '第一组', '0', '1', '1', '1');
+INSERT INTO `fmp_code` VALUES ('2595', '2', 'ZBMC', '第二组', '0', '1', '2', '1');
+INSERT INTO `fmp_code` VALUES ('2596', '3', 'ZBMC', '第三组', '0', '1', '3', '1');
+INSERT INTO `fmp_code` VALUES ('2597', '4', 'ZBMC', '第四组', '0', '1', '4', '1');
+INSERT INTO `fmp_code` VALUES ('2598', '5', 'ZBMC', '第五组', '0', '1', '5', '1');
+INSERT INTO `fmp_code` VALUES ('2599', '6', 'ZBMC', '第六组', '0', '1', '6', '1');
+INSERT INTO `fmp_code` VALUES ('2600', '7', 'ZBMC', '第七组', '0', '1', '7', '1');
+INSERT INTO `fmp_code` VALUES ('2601', '8', 'ZBMC', '第八组', '0', '1', '8', '1');
+INSERT INTO `fmp_code` VALUES ('2602', '9', 'ZBMC', '第九组', '0', '1', '9', '1');
+INSERT INTO `fmp_code` VALUES ('2603', '10', 'ZBMC', '第十组', '0', '1', '10', '1');
+INSERT INTO `fmp_code` VALUES ('2604', '1', 'XZ', '事业', '0', '1', '1', '1');
+INSERT INTO `fmp_code` VALUES ('2605', '2', 'XZ', '企业', '0', '1', '2', '1');
+INSERT INTO `fmp_code` VALUES ('2606', '1', 'KGLB', '主考官', '0', '1', '1', '1');
+INSERT INTO `fmp_code` VALUES ('2607', '2', 'KGLB', '固定考官', '0', '1', '2', '1');
+INSERT INTO `fmp_code` VALUES ('2608', '3', 'KGLB', '监督员', '0', '1', '3', '1');
+INSERT INTO `fmp_code` VALUES ('2609', '1', 'KGSX', '公务员局考官', '0', '1', '1', '1');
+INSERT INTO `fmp_code` VALUES ('2610', '2', 'KGSX', '其他考官', '0', '1', '2', '1');
+INSERT INTO `fmp_code` VALUES ('2611', '0', 'SFYD', '未读', '0', '1', '1', '1');
+INSERT INTO `fmp_code` VALUES ('2612', '1', 'SFYD', '已读', '0', '1', '2', '1');
+INSERT INTO `fmp_code` VALUES ('2613', '0', 'FKJG1', '未反馈', '0', '1', '3', '1');
+INSERT INTO `fmp_code` VALUES ('2614', '1', 'FKJG1', '确定参加', '0', '1', '1', '1');
+INSERT INTO `fmp_code` VALUES ('2615', '2', 'FKJG1', '放弃', '0', '1', '2', '1');
+INSERT INTO `fmp_code` VALUES ('2616', '1', 'SFTG', '通过', '0', '1', '1', '1');
+INSERT INTO `fmp_code` VALUES ('2617', '2', 'SFTG', '不通过', '0', '1', '2', '1');
+INSERT INTO `fmp_code` VALUES ('2618', '1', 'TJJG', '合格', '0', '1', '2', '1');
+INSERT INTO `fmp_code` VALUES ('2619', '2', 'TJJG', '不合格', '0', '1', '3', '1');
+INSERT INTO `fmp_code` VALUES ('2620', '1', 'ZSJG', '审核通过', '0', '1', '2', '1');
+INSERT INTO `fmp_code` VALUES ('2621', '2', 'ZSJG', '审核不通过', '0', '1', '2', '1');
+INSERT INTO `fmp_code` VALUES ('2622', '3', 'TJJG', ' 放弃', '0', '1', '3', '1');
+
+-- ----------------------------
+-- Table structure for fmp_field_node_order
+-- ----------------------------
+DROP TABLE IF EXISTS `fmp_field_node_order`;
+CREATE TABLE `fmp_field_node_order` (
+  `ORDER_ID` bigint(20) NOT NULL AUTO_INCREMENT,
+  `FLOW_ID` bigint(20) NOT NULL,
+  `NODE_ID` bigint(20) NOT NULL,
+  `ORDER_VAL` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`ORDER_ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of fmp_field_node_order
+-- ----------------------------
+INSERT INTO `fmp_field_node_order` VALUES ('1', '1', '1', '3,5,24,14');
+
+-- ----------------------------
+-- Table structure for fmp_flow
+-- ----------------------------
+DROP TABLE IF EXISTS `fmp_flow`;
+CREATE TABLE `fmp_flow` (
   `FLOW_ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `FLOW_DIRID` bigint(20) NOT NULL,
   `FLOW_NAME` varchar(64) DEFAULT NULL,
@@ -55,33 +2805,15 @@ CREATE TABLE `FMP_FLOW` (
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of FMP_FLOW
+-- Records of fmp_flow
 -- ----------------------------
-INSERT INTO `FMP_FLOW` VALUES ('1', '1', '新进公务员资格审查', '1212121', '1');
+INSERT INTO `fmp_flow` VALUES ('1', '1', '新进公务员资格审查', '1212121', '1');
 
 -- ----------------------------
--- Table structure for FMP_FLOW_TABLE
+-- Table structure for fmp_flowdir
 -- ----------------------------
-DROP TABLE IF EXISTS `FMP_FLOW_TABLE`;
-CREATE TABLE `FMP_FLOW_TABLE` (
-  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
-  `FLOW_ID` bigint(20) NOT NULL,
-  `FLOW_TABLE_NAME` varchar(255) NOT NULL,
-  `FLOW_TABLE_TYPE` tinyint(1) DEFAULT NULL COMMENT '1=主表，2=副表',
-  `FLOW_TABLE_DESC` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of FMP_FLOW_TABLE
--- ----------------------------
-INSERT INTO `FMP_FLOW_TABLE` VALUES ('5', '1', 'BZ_ZGJOB_1', '1', '新进公务员业务主表');
-
--- ----------------------------
--- Table structure for FMP_FLOWDIR
--- ----------------------------
-DROP TABLE IF EXISTS `FMP_FLOWDIR`;
-CREATE TABLE `FMP_FLOWDIR` (
+DROP TABLE IF EXISTS `fmp_flowdir`;
+CREATE TABLE `fmp_flowdir` (
   `FLOW_DIRID` bigint(20) NOT NULL AUTO_INCREMENT,
   `FLOW_DIRNAME` varchar(64) NOT NULL,
   `FLOW_DIRTIME` timestamp NULL DEFAULT NULL,
@@ -89,16 +2821,60 @@ CREATE TABLE `FMP_FLOWDIR` (
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of FMP_FLOWDIR
+-- Records of fmp_flowdir
 -- ----------------------------
-INSERT INTO `FMP_FLOWDIR` VALUES ('1', '公务员流程', '2017-12-24 14:47:59');
-INSERT INTO `FMP_FLOWDIR` VALUES ('2', '发的所发生的', '2017-12-24 15:05:16');
+INSERT INTO `fmp_flowdir` VALUES ('1', '公务员流程', '2017-12-24 14:47:59');
+INSERT INTO `fmp_flowdir` VALUES ('2', '发的所发生的', '2017-12-24 15:05:16');
 
 -- ----------------------------
--- Table structure for FMP_TABLE_FIELD
+-- Table structure for fmp_flow_node
 -- ----------------------------
-DROP TABLE IF EXISTS `FMP_TABLE_FIELD`;
-CREATE TABLE `FMP_TABLE_FIELD` (
+DROP TABLE IF EXISTS `fmp_flow_node`;
+CREATE TABLE `fmp_flow_node` (
+  `NODE_ID` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '环节ID',
+  `FLOW_ID` bigint(20) NOT NULL COMMENT '流程ID',
+  `NODE_NAME` varchar(100) NOT NULL COMMENT '环节名称',
+  `NODE_ORDER` int(8) DEFAULT NULL COMMENT '环节顺序',
+  PRIMARY KEY (`NODE_ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COMMENT='环节表';
+
+-- ----------------------------
+-- Records of fmp_flow_node
+-- ----------------------------
+INSERT INTO `fmp_flow_node` VALUES ('1', '1', '基层填写', '1');
+INSERT INTO `fmp_flow_node` VALUES ('2', '1', '直接领导初审', '2');
+INSERT INTO `fmp_flow_node` VALUES ('3', '1', '基层查看直接领导初审', '3');
+INSERT INTO `fmp_flow_node` VALUES ('4', '1', '人事复审', '4');
+INSERT INTO `fmp_flow_node` VALUES ('5', '1', '基层查看人事复审', '5');
+INSERT INTO `fmp_flow_node` VALUES ('6', '1', '直接领导查看人事复审', '6');
+
+-- ----------------------------
+-- Table structure for fmp_flow_table
+-- ----------------------------
+DROP TABLE IF EXISTS `fmp_flow_table`;
+CREATE TABLE `fmp_flow_table` (
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
+  `FLOW_ID` bigint(20) NOT NULL,
+  `FLOW_TABLE_NAME` varchar(255) NOT NULL,
+  `FLOW_TABLE_TYPE` tinyint(1) DEFAULT NULL COMMENT '1=主表，2=副表',
+  `FLOW_TABLE_DESC` varchar(100) DEFAULT NULL,
+  `FLOW_TABLE_SE_SUFFIX` varchar(64) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of fmp_flow_table
+-- ----------------------------
+INSERT INTO `fmp_flow_table` VALUES ('7', '1', 'BZ_ZGJOB_1', '1', '基本信息表', null);
+INSERT INTO `fmp_flow_table` VALUES ('9', '1', 'BZ_ZGJOB_1_SE_1', '2', '学历信息表', '1');
+INSERT INTO `fmp_flow_table` VALUES ('10', '1', 'BZ_ZGJOB_1_SE_2', '2', '附件表', '2');
+INSERT INTO `fmp_flow_table` VALUES ('11', '1', 'BZ_ZGJOB_1_SE_3', '2', '教育信息表', '3');
+
+-- ----------------------------
+-- Table structure for fmp_table_field
+-- ----------------------------
+DROP TABLE IF EXISTS `fmp_table_field`;
+CREATE TABLE `fmp_table_field` (
   `FIELD_ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `FIELD_NAME` varchar(64) NOT NULL,
   `FIELD_DESC` varchar(100) DEFAULT NULL,
@@ -106,21 +2882,66 @@ CREATE TABLE `FMP_TABLE_FIELD` (
   `FIELD_CODE` varchar(64) DEFAULT NULL,
   `FIELD_VERIFY` varchar(100) DEFAULT NULL,
   `FIELD_BELONG_NODE` varchar(100) DEFAULT NULL,
-  `FIELD_GLOBE_REQUIRE` tinyint(1) NOT NULL DEFAULT '0',
+  `FIELD_GLOBE_REQUIRE` tinyint(1) DEFAULT '2',
   `FLOW_ID` bigint(20) NOT NULL,
   `TABLE_NAME` varchar(64) NOT NULL,
+  `FIELD_NODE_ORDER` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`FIELD_ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of FMP_TABLE_FIELD
+-- Records of fmp_table_field
 -- ----------------------------
+INSERT INTO `fmp_table_field` VALUES ('3', 'ZF_JOB_0001', '姓名', '301', '', null, '1,2,3,4,5,6', '1', '1', 'BZ_ZGJOB_1', '1:3:1|2:3:1|3:3:1|5:3:1|6:3:1|4:3:1');
+INSERT INTO `fmp_table_field` VALUES ('5', 'ZF_JOB_0003', '身份证', '301', '', null, '1,2,3,4,5,6', '2', '1', 'BZ_ZGJOB_1', '1:5:2|2:5:3|3:5:2|5:5:2|6:5:2|4:5:2');
+INSERT INTO `fmp_table_field` VALUES ('6', 'ZF_JOB_0004', '民族', '6', 'AB', null, '', '2', '1', 'BZ_ZGJOB_1', null);
+INSERT INTO `fmp_table_field` VALUES ('14', 'ZF_JOB_0005', '性别', '4', 'XB', null, '1,2,3,4,5,6', null, '1', 'BZ_ZGJOB_1', '1:14:3|2:14:2|3:14:3|5:14:3|6:14:3|4:14:3');
+INSERT INTO `fmp_table_field` VALUES ('15', 'ZF_JOB_0006', '入党时间', '103', '', null, '', null, '1', 'BZ_ZGJOB_1', '1:15:4|2:15:6');
+INSERT INTO `fmp_table_field` VALUES ('16', 'ZF_JOB_0007', '政治面貌', '4', 'ZHMM', null, '', null, '1', 'BZ_ZGJOB_1', '1:16:5|2:16:5');
+INSERT INTO `fmp_table_field` VALUES ('17', 'ZF_JOB_0008', '最高学历', '4', 'XL', null, '2,1', null, '1', 'BZ_ZGJOB_1', '1:17:5|2:17:7');
+INSERT INTO `fmp_table_field` VALUES ('18', 'ZF_JOB_0009', '最高学位', '4', 'XW', null, '1,2', null, '1', 'BZ_ZGJOB_1', '1:18:4|2:18:8');
+INSERT INTO `fmp_table_field` VALUES ('19', 'ZF_JOB_0010', '毕业院校', '301', '', null, '', null, '1', 'BZ_ZGJOB_1', null);
+INSERT INTO `fmp_table_field` VALUES ('20', 'ZF_JOB_0011', '所学专业', '4', 'SXZY', null, '', null, '1', 'BZ_ZGJOB_1', null);
+INSERT INTO `fmp_table_field` VALUES ('21', 'ZF_JOB_0012', '婚姻状况', '4', 'CG', null, '', null, '1', 'BZ_ZGJOB_1', null);
+INSERT INTO `fmp_table_field` VALUES ('22', 'ZF_JOB_0013', '现住地址', '302', '', null, '', null, '1', 'BZ_ZGJOB_1', null);
+INSERT INTO `fmp_table_field` VALUES ('23', 'ZF_JOB_0014', '家庭住址', '301', '', null, '', null, '1', 'BZ_ZGJOB_1', null);
+INSERT INTO `fmp_table_field` VALUES ('24', 'ZF_JOB_0015', '联系电话', '301', '', null, '2,3,4,5,6', null, '1', 'BZ_ZGJOB_1', '2:24:4|3:24:4|5:24:4|6:24:4|4:24:4');
+INSERT INTO `fmp_table_field` VALUES ('25', 'ZF_JOB_0016', '其他联系方式', '301', '', null, '', null, '1', 'BZ_ZGJOB_1', null);
+INSERT INTO `fmp_table_field` VALUES ('26', 'ZF_JOB_0017', '备注', '302', '', null, '', null, '1', 'BZ_ZGJOB_1', null);
+INSERT INTO `fmp_table_field` VALUES ('27', 'ZF_JOB_0018', '【直接领导】审核不通过原因', '302', '', null, '2,3', null, '1', 'BZ_ZGJOB_1', '2:27:11|3:27:7');
+INSERT INTO `fmp_table_field` VALUES ('28', 'ZF_JOB_0019', '【直接领导】审核时间', '104', '', null, '2,3', null, '1', 'BZ_ZGJOB_1', '2:28:10|3:28:6');
+INSERT INTO `fmp_table_field` VALUES ('29', 'ZF_JOB_0020', '【直接领导】审核', '4', 'MJYC', null, '2,3', null, '1', 'BZ_ZGJOB_1', '2:29:9|3:29:5');
+INSERT INTO `fmp_table_field` VALUES ('30', 'ZF_JOB_0021', '【直接领导】操作人', '301', '', null, '3', null, '1', 'BZ_ZGJOB_1', '3:30:8');
+INSERT INTO `fmp_table_field` VALUES ('31', 'ZF_JOB_0022', '【人事】操作人', '301', '', null, '4,5,6', null, '1', 'BZ_ZGJOB_1', '5:31:8|6:31:8|4:31:8');
+INSERT INTO `fmp_table_field` VALUES ('32', 'ZF_JOB_0023', '【人事】审核不通过原因', '302', '', null, '6,5,4', null, '1', 'BZ_ZGJOB_1', '5:32:7|6:32:7|4:32:7');
+INSERT INTO `fmp_table_field` VALUES ('33', 'ZF_JOB_0024', '【人事】审核时间', '104', '', null, '6,5,4', null, '1', 'BZ_ZGJOB_1', '5:33:6|6:33:6|4:33:6');
+INSERT INTO `fmp_table_field` VALUES ('34', 'ZF_JOB_0025', '【人事】审核', '4', 'MJYC', null, '5,6,4', null, '1', 'BZ_ZGJOB_1', '5:34:5|6:34:5|4:34:5');
+INSERT INTO `fmp_table_field` VALUES ('35', 'ZF_JOB_0026', '出生年月', '102', '', null, '2,1,3,4,5,6', '2', '1', 'BZ_ZGJOB_1', null);
+INSERT INTO `fmp_table_field` VALUES ('36', 'ZF_JOB_0027', '照片', '5', '', null, '', null, '1', 'BZ_ZGJOB_1', null);
 
 -- ----------------------------
--- Table structure for FMP_USER
+-- Table structure for fmp_test
 -- ----------------------------
-DROP TABLE IF EXISTS `FMP_USER`;
-CREATE TABLE `FMP_USER` (
+DROP TABLE IF EXISTS `fmp_test`;
+CREATE TABLE `fmp_test` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `aa` varchar(255) DEFAULT NULL,
+  `bb` varchar(255) DEFAULT NULL,
+  `cc` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of fmp_test
+-- ----------------------------
+INSERT INTO `fmp_test` VALUES ('1', '424', '3242', '342342');
+INSERT INTO `fmp_test` VALUES ('2', '43', '34', '324');
+
+-- ----------------------------
+-- Table structure for fmp_user
+-- ----------------------------
+DROP TABLE IF EXISTS `fmp_user`;
+CREATE TABLE `fmp_user` (
   `USER_ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `USER_NAME` varchar(32) NOT NULL,
   `USER_PWD` char(32) NOT NULL,
@@ -129,9 +2950,9 @@ CREATE TABLE `FMP_USER` (
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of FMP_USER
+-- Records of fmp_user
 -- ----------------------------
-INSERT INTO `FMP_USER` VALUES ('1', 'admin', 'fcea920f7412b5da7be0cf42b8c93759', '1');
+INSERT INTO `fmp_user` VALUES ('1', 'admin', 'fcea920f7412b5da7be0cf42b8c93759', '1');
 
 -- ----------------------------
 -- Table structure for user
@@ -152,4 +2973,4 @@ CREATE TABLE `user` (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('1', 'admin', '管理员', 'fcea920f7412b5da7be0cf42b8c93759', '0', '10', '2017-12-23 18:14:21', '2017-12-24 14:20:15');
+INSERT INTO `user` VALUES ('1', 'admin', '管理员', 'fcea920f7412b5da7be0cf42b8c93759', '0', '19', '2017-12-23 18:14:21', '2018-01-22 08:40:27');
