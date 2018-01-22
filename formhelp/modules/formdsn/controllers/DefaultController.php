@@ -273,6 +273,11 @@ class DefaultController extends BaseController
 		return $this->renderPartial('page/set_bus_table');
 	}
 	
+	/*指向业务表设置界面2*/
+	public function actionSetbustable2(){
+		return $this->renderPartial('page/set_bus_table2');
+	}
+	
 	/*获取流程中的环节树带业务表节点*/
 	public function actionFlownodetreetable(){
 		$flowID = Yii::$app->request->get('flowID','');
@@ -427,6 +432,31 @@ class DefaultController extends BaseController
 		
 		return $this->jsonReturn(['code'=>0,'msg'=>'','data'=>['src'=>'../../'.$savePath]]);
 	}
+	
+	/*保存表单提交的html*/
+	public function actionSavehtml(){
+		$bus_id = Yii::$app->request->post('busID');
+		$flow_id = Yii::$app->request->post('flowID');
+		$content = Yii::$app->request->post('content');
+		
+		if(!$this->valNullParams($bus_id,$flow_id)){
+			return $this->jsonReturn(['result'=>0,'msg'=>Yii::$app->controller->module->params['4001']]);
+		}
+		
+		$createDir = '../web/uploadfile/file/textfile/'.$flow_id;
+		
+		$this->mkdirs($createDir);
+		
+		$savePath = $createDir.'/'.$bus_id.'.html';
+		
+		$bus_html = fopen($savePath, 'w');
+		fwrite($bus_html, "<meta charset='".Yii::$app->charset."'>");
+		fwrite($bus_html, $content);
+		fclose($bus_html);
+		
+		return $this->jsonReturn(['result'=>1,'filePath'=>'../../'.$savePath]);
+	}
+	
 	
 	private function getExcelHtml($flow_id,$bus_id){
 		$filePath = '../web/uploadfile/file/textfile/'.$flow_id.'/'.$bus_id.'.html';

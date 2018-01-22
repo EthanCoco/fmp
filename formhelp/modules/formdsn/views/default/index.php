@@ -690,7 +690,9 @@ function setBusTable(){
     		type:2,
     		title:'业务表设置',
     		area:[$(window).width()/5*4+"px","800px"],
-    		content:"<?= yii\helpers\Url::to(['default/setbustable']); ?>",
+    		/*不同方式*/
+    		//content:"<= yii\helpers\Url::to(['default/setbustable']); ?>",
+    		content:"<?= yii\helpers\Url::to(['default/setbustable2']); ?>",
     		btn:['关闭'],
     		yes: function(){
     			layer.closeAll(); 
