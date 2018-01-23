@@ -5,6 +5,7 @@ $db = require(__DIR__ . '/db.php');
 Yii::$classMap['PHPZip'] = '@app/libs/zip.php';
 Yii::$classMap['ValidateCode'] = '@app/libs/validateCode/ValidateCode.class.php';
 Yii::$classMap['TCPDF'] = '@app/libs/tcpdf/tcpdf.php';
+Yii::$classMap['Simple_html_dom'] = '@app/libs/simplehtmldom/simple_html_dom.php';
 
 $config = [
     'id' => 'formhelp',
