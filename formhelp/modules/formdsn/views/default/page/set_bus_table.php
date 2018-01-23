@@ -92,6 +92,7 @@ $this->title = '';
 	      	<div id="bus_designer_content" style="z-index:1000;height: 697px;position: relative;">
 	      		<div style="padding: 10px;background: #EEEEEE;border-bottom: 1px solid #93D1FF;">
 		      		<button type="button" class="layui-btn" id="file_btn"><i class="layui-icon"></i>选择文件</button>
+		      		<!--<button onclick="create_bus_html_table()" type="button" class="layui-btn" id="create_btn"><i class="layui-icon">&#xe857;</i>生成标准文件</button>-->
 					<span id="import_tr_sh" style="color: red;font-size: 16px;margin-left: 20px;"></span>
 				</div>
 				<div class="layui-btn-group" style="float: right;margin-right: 30px;margin-top: -48px;">
@@ -108,6 +109,7 @@ $this->title = '';
 	    </div>
 	</div>
 </div>
+
 <?php $this->endBody() ?>
 	
 <script>
@@ -155,7 +157,9 @@ function init_upload_file(){
 				return layer.alert(json.msg);
 			}
 			$("#file_contents").empty();
-			$("#file_contents").load(json.file);
+			if(json.file != ""){
+				$("#file_contents").load(json.file);
+			}
 			
 		 	upload.render({
 			    elem: '#file_btn',
