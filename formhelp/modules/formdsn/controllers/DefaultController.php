@@ -43,7 +43,7 @@ class DefaultController extends BaseController
 			return $this->jsonReturn(['result'=>0,'msg'=>Yii::$app->controller->module->params['4001']]);
 		}
 		
-		$jsonData = FMPFLOWTABLE::getTableTree($flowID);
+		$jsonData = FMPFLOWTABLE::getTableTree2($flowID);
 		$nodeData = FMPFLOWNODE::getNodeInfo($flowID);
 		return $this->jsonReturn(['result'=>1,'infos'=>$jsonData,'nodeInfos'=>$nodeData]);
 	}
@@ -426,19 +426,56 @@ class DefaultController extends BaseController
 		$fileContent = str_replace("<body>", '', $fileContent);
 		$fileContent = str_replace("</body>", '', $fileContent);
 		
-		$fileContent = preg_replace("/<meta.+>/mi", "", $fileContent);
-		$fileContent = preg_replace("/<!DOCTYPE.+>/mi", "", $fileContent);
+		$fileContent = preg_replace("/<meta.+>/Umi", "", $fileContent);
+		$fileContent = preg_replace("/<!DOCTYPE.+>/Umi", "", $fileContent);
 		
 		file_put_contents($temp_path, $fileContent); 
 		
+		
+		
 		/*处理文件节点*/
-//		$html = new \Simple_html_dom();
-//		$html->load_file($savePath);
-//		$table = $html->find("#sheet0",0);
-//		$table->setAttribute('name','ffff');
-//		$doc = $html;
-//		file_put_contents($savePath, $doc);
-//		$html->clear(); 
+		//获取字段列表信息
+		$infos = FMPTABLEFIELD::getListField(['FLOW_ID'=>$flow_id]);
+		
+		$html = new \Simple_html_dom();
+		$html->load_file($savePath);
+		$table = $html->find("#sheet0",0);
+		$table->setAttribute('name','containDiv');
+		foreach($html->find('table tr td') as $e){
+			if(is_numeric(trim($e->plaintext))){
+				$flag_id = trim($e->plaintext);
+				foreach($infos as $df){
+					if($df['FIELD_ID'] == $flag_id){
+						$e->setAttribute('name',$df['FIELD_NAME']);
+						$e->setAttribute('title',$df['FIELD_DESC']);
+						$e->setAttribute('id',$df['FIELD_NAME'].'_'.$df['FIELD_ID']);
+						$e->innertext  = '';
+						break;	
+					}
+				}
+			}
+			if(trim($e->plaintext) != ''){
+				$content = trim($e->plaintext);
+				$array_A = explode('=', $content);
+				$len_A  = count($array_A);
+				if($len_A > 1){
+					if($array_A[2] == '0'){
+						$e->innertext = $array_A[0]."<a href='javascript:;'  onclick='open_mul_record(this)' name='".$array_A[1]."' >[编辑]</a>";
+					}else{
+						$data = FMPTABLEFIELD::getByAKey(['FIELD_ID'=>$array_A[2]]);
+						$e->setAttribute('originname',$data['FIELD_NAME']);
+						$e->innertext = $array_A[0];
+						$e->setAttribute('title',$array_A[0]);
+						$e->setAttribute('origintable',$array_A[1]);
+						$e->setAttribute('originid',$data['FIELD_NAME'].'_'.$data['FIELD_ID']);
+					}
+				}
+			}
+		}
+		
+		$doc = $html;
+		file_put_contents($savePath, $doc);
+		$html->clear(); 
 		return $this->jsonReturn(['code'=>0,'msg'=>'','data'=>['src'=>'../../'.$temp_path]]);
 	}
 	
@@ -524,11 +561,30 @@ class DefaultController extends BaseController
 			return $this->jsonReturn(['result'=>0,'msg'=>Yii::$app->controller->module->params['4001']]);
 		}
 		
-		$file = $this->getExcelHtml($flow_id,$tableName);
+		$filePath = '../web/uploadfile/file2/textfile/'.$flow_id.'/'.$flow_id.'_'.$tableName.'.html';
+		if(!file_exists($filePath)){
+			return $this->jsonReturn(['result'=>0,'msg'=>Yii::$app->controller->module->params['4001']]);
+		}
+		
+		$fileContent = file_get_contents($filePath);
+		
+		$fileContent = str_replace("<html>", '', $fileContent);
+		$fileContent = str_replace("</html>", '', $fileContent);
+		$fileContent = str_replace("<head>", '', $fileContent);
+		$fileContent = str_replace("</head>", '', $fileContent);
+		$fileContent = str_replace("<body>", '', $fileContent);
+		$fileContent = str_replace("</body>", '', $fileContent);
+		$fileContent = preg_replace("/<meta.+>/Umi", "", $fileContent);
+		$fileContent = preg_replace("/<!DOCTYPE.+>/Umi", "", $fileContent);
+		
+		$temp_save_file = '../web/uploadfile/file2/textfile/'.$flow_id.'/temp_'.$flow_id.'_'.$tableName.'.html';
+		
+		file_put_contents($temp_save_file, $fileContent); 
+		
 		//获取字段列表信息
 		$infos = FMPTABLEFIELD::getListField(['FLOW_ID'=>$flow_id,'TABLE_NAME'=>$bus_table_name]);
 		
-		return $this->renderPartial('page/print_view',['type'=>$type,'file'=>$file,'infos'=>$infos]);
+		return $this->renderPartial('page/print_view',['type'=>$type,'file'=>'../../'.$temp_save_file,'infos'=>$infos]);
 	}
 	
 	

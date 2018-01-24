@@ -373,6 +373,9 @@ function load_table_tree_bus(){
 									enable : true,
 									idKey : "id",
 									pIdKey : "pId"
+								},
+								key:{
+									title:'title'
 								}
 							},
 							check:{

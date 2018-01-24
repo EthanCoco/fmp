@@ -71,6 +71,25 @@ class FMPFLOWTABLE extends \yii\db\ActiveRecord
 		return $jsonData;
 	}
 	
+	/*获取流程对应业务表树2*/
+	public static function getTableTree2($flowID){
+		$table_info = self::find()->where(['FLOW_ID'=>$flowID])->all();
+		foreach($table_info as $info){
+			$jsonData[] = [
+						'id'=>$info['FLOW_TABLE_NAME'],
+						'name'=>'[' . ($info['FLOW_TABLE_TYPE'] == 1 ? '主表' : '副表' ) . ']' . $info['FLOW_TABLE_NAME'],
+						'pId'=>'-1',
+						'isChild'=>1,
+						'title'=>$info['FLOW_TABLE_DESC'].'【'.$info['FLOW_TABLE_NAME'].'】',
+						'type'=>$info['FLOW_TABLE_TYPE'],
+						'isParent' => 'false'
+					];
+		}
+        $jsonData[] = ['id' => '-1', 'name' => '业务表', 'pId' => '-1', 'isParent' => 'true', 'isChild'=>0];
+		
+		return $jsonData;
+	}
+	
 	/*指定条件数组查询单条唯一记录*/
 	public static function findByAKey($condition = []){
 		return self::find()->where($condition)->one();
