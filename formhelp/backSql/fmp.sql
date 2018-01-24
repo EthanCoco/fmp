@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2018-01-22 19:22:29
+Date: 2018-01-24 18:04:21
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -61,6 +61,10 @@ DROP TABLE IF EXISTS `bz_zgjob_1_se_1`;
 CREATE TABLE `bz_zgjob_1_se_1` (
   `BZJOBIDS` bigint(20) NOT NULL AUTO_INCREMENT,
   `BZJOBIDM` bigint(20) NOT NULL,
+  `ZF_JOB_0001` varchar(100) DEFAULT NULL COMMENT '起始年月',
+  `ZF_JOB_0002` varchar(100) DEFAULT NULL COMMENT '毕业院校',
+  `ZF_JOB_0003` varchar(100) DEFAULT NULL COMMENT '所学专业',
+  `ZF_JOB_0004` varchar(100) DEFAULT NULL COMMENT '截止年月',
   PRIMARY KEY (`BZJOBIDS`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -2887,7 +2891,7 @@ CREATE TABLE `fmp_table_field` (
   `TABLE_NAME` varchar(64) NOT NULL,
   `FIELD_NODE_ORDER` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`FIELD_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of fmp_table_field
@@ -2918,6 +2922,10 @@ INSERT INTO `fmp_table_field` VALUES ('33', 'ZF_JOB_0024', '【人事】审核�
 INSERT INTO `fmp_table_field` VALUES ('34', 'ZF_JOB_0025', '【人事】审核', '4', 'MJYC', null, '5,6,4', null, '1', 'BZ_ZGJOB_1', '5:34:5|6:34:5|4:34:5');
 INSERT INTO `fmp_table_field` VALUES ('35', 'ZF_JOB_0026', '出生年月', '102', '', null, '2,1,3,4,5,6', '2', '1', 'BZ_ZGJOB_1', null);
 INSERT INTO `fmp_table_field` VALUES ('36', 'ZF_JOB_0027', '照片', '5', '', null, '', null, '1', 'BZ_ZGJOB_1', null);
+INSERT INTO `fmp_table_field` VALUES ('37', 'ZF_JOB_0001', '起始年月', '102', '', null, '', null, '1', 'BZ_ZGJOB_1_SE_1', null);
+INSERT INTO `fmp_table_field` VALUES ('38', 'ZF_JOB_0002', '毕业院校', '301', '', null, '', null, '1', 'BZ_ZGJOB_1_SE_1', null);
+INSERT INTO `fmp_table_field` VALUES ('39', 'ZF_JOB_0003', '所学专业', '4', 'ZY', null, '', null, '1', 'BZ_ZGJOB_1_SE_1', null);
+INSERT INTO `fmp_table_field` VALUES ('40', 'ZF_JOB_0004', '截止年月', '102', '', null, '', null, '1', 'BZ_ZGJOB_1_SE_1', null);
 
 -- ----------------------------
 -- Table structure for fmp_test
@@ -2973,4 +2981,4 @@ CREATE TABLE `user` (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('1', 'admin', '管理员', 'fcea920f7412b5da7be0cf42b8c93759', '0', '19', '2017-12-23 18:14:21', '2018-01-22 08:40:27');
+INSERT INTO `user` VALUES ('1', 'admin', '管理员', 'fcea920f7412b5da7be0cf42b8c93759', '0', '21', '2017-12-23 18:14:21', '2018-01-24 11:31:56');
