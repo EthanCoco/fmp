@@ -678,15 +678,15 @@ var leipiEditor = UE.getEditor('myFormDesign',{
 	        if(leipiEditor.hasContents()){
 	            leipiEditor.sync();/*同步内容*/
 	            
-//	            var formeditor = leipiEditor.getContent();
-//	            var fields = "";
-//				var parse_form = this.parse_form(formeditor,fields);
+	            var formeditor = leipiEditor.getContent();
+	            var fields = "";
+				var parse_form = this.parse_form(formeditor,fields);
 				
 				$.post("<?= yii\helpers\Url::to(['default/savehtml']); ?>",{
 					"content" : formeditor,
 					"busID" : bus_id,
 					"flowID" : parent.flow_node_id,
-//					"parse_form" : JSON.stringify(parse_form.data)
+					"parse_form" : JSON.stringify(parse_form.data)
 				},function(json){
 					if(json.result){
 						layer.msg(json.msg);
