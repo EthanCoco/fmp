@@ -443,50 +443,50 @@ class DefaultController extends BaseController
 	}
 	
 	/*保存表单提交的html*/
-//	public function actionSavehtml(){
-//		$bus_id = Yii::$app->request->post('busID');
-//		$flow_id = Yii::$app->request->post('flowID');
-//		$content = Yii::$app->request->post('content');
-//		$content = str_replace("<br/>", '', $content);
-//		$content = str_replace("<br>", '', $content);
-//		
-//		if(!$this->valNullParams($bus_id,$flow_id)){
-//			return $this->jsonReturn(['result'=>0,'msg'=>Yii::$app->controller->module->params['4001']]);
-//		}
-//		
-//		$createDir = '../web/uploadfile/file/textfile/'.$flow_id;
-//		
-//		$this->mkdirs($createDir);
-//		
-//		$savePath = $createDir.'/'.$bus_id.'.html';
-//		
-//		$bus_html = fopen($savePath, 'w');
-//		fwrite($bus_html, "<meta charset='".Yii::$app->charset."'>");
-//		fwrite($bus_html, $content);
-//		fclose($bus_html);
-//		
-//		return $this->jsonReturn(['result'=>1,'msg'=>Yii::$app->controller->module->params['4010'],'filePath'=>'../../'.$savePath]);
-//	}
+	public function actionSavehtml(){
+		$bus_id = Yii::$app->request->post('busID');
+		$flow_id = Yii::$app->request->post('flowID');
+		$content = Yii::$app->request->post('content');
+		$content = str_replace("<br/>", '', $content);
+		$content = str_replace("<br>", '', $content);
+		
+		if(!$this->valNullParams($bus_id,$flow_id)){
+			return $this->jsonReturn(['result'=>0,'msg'=>Yii::$app->controller->module->params['4001']]);
+		}
+		
+		$createDir = '../web/uploadfile/file/textfile/'.$flow_id;
+		
+		$this->mkdirs($createDir);
+		
+		$savePath = $createDir.'/'.$bus_id.'.html';
+		
+		$bus_html = fopen($savePath, 'w');
+		fwrite($bus_html, "<meta charset='".Yii::$app->charset."'>");
+		fwrite($bus_html, $content);
+		fclose($bus_html);
+		
+		return $this->jsonReturn(['result'=>1,'msg'=>Yii::$app->controller->module->params['4010'],'filePath'=>'../../'.$savePath]);
+	}
 	
-//	public function actionGetbushtml(){
-//		$request = Yii::$app->request;
-//		$bus_id = $request->get('bus_id','');
-//		$flow_id = $request->get('flow_id','');
-//		//请求参数校验
-//		if(!$this->valNullParams($bus_id,$flow_id)){
-//			return $this->jsonReturn(['result'=>0,'msg'=>Yii::$app->controller->module->params['4001']]);
-//		}
-//		
-//		$filePath = '../web/uploadfile/file/textfile/'.$flow_id.'/'.$bus_id.'.html';
-//		$file = '';
-//		if(file_exists($filePath)){
-//			$file = $filePath;
-//		}
-//		
-//		$content = file_get_contents($file);
-//		
-//		return $this->jsonReturn(['result'=>1,'msg'=>'','content'=>$content]);
-//	}
+	public function actionGetbushtml(){
+		$request = Yii::$app->request;
+		$bus_id = $request->get('bus_id','');
+		$flow_id = $request->get('flow_id','');
+		//请求参数校验
+		if(!$this->valNullParams($bus_id,$flow_id)){
+			return $this->jsonReturn(['result'=>0,'msg'=>Yii::$app->controller->module->params['4001']]);
+		}
+		
+		$filePath = '../web/uploadfile/file/textfile/'.$flow_id.'/'.$bus_id.'.html';
+		$file = '';
+		if(file_exists($filePath)){
+			$file = $filePath;
+		}
+		
+		$content = file_get_contents($file);
+		
+		return $this->jsonReturn(['result'=>1,'msg'=>'','content'=>$content]);
+	}
 	
 	
 	private function getExcelHtml($flow_id,$bus_id){
