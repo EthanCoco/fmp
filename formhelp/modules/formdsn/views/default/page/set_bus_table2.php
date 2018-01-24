@@ -451,7 +451,7 @@ function print_view(type){
 	parent.layer.open({
 		type:2,
 		area:["800px","800px"],
-		content:"<?= yii\helpers\Url::to(['default/printview']); ?>"+"?busName="+bus_id+"&flow_id="+parent.flow_node_id+"&bus_table_name="+bus_table_name+"&type="+type,
+		content:"<?= yii\helpers\Url::to(['default/printview2']); ?>"+"?busName="+bus_id+"&flow_id="+parent.flow_node_id+"&bus_table_name="+bus_table_name+"&type="+type,
 	});
 }
 
@@ -700,31 +700,31 @@ var leipiEditor = UE.getEditor('myFormDesign',{
 	        }
 	    } ,
 	    /*预览表单*/
-	    fnReview : function (){
-	        if(leipiEditor.queryCommandState( 'source' ))
-	            leipiEditor.execCommand('source');/*切换到编辑模式才提交，否则部分浏览器有bug*/
-	            
-	        if(leipiEditor.hasContents()){
-	            leipiEditor.sync();       /*同步内容*/
-	            
-	            var formeditor = leipiEditor.getContent();
-	//			var parse_form = this.parse_form(formeditor);
-				$.post("<?= yii\helpers\Url::to(['default/savehtml']); ?>",{
-					"content" : formeditor,
-					"busID" : bus_id,
-					"flowID" : parent.flow_node_id
-				},function(json){
-					if(json.result){
-						var filePath = json.filePath;
-	            		window.open(filePath,'mywin',"menubar=0,toolbar=0,status=0,resizable=1,left=0,top=0,scrollbars=1,width=" +(screen.availWidth-10) + ",height=" + (screen.availHeight-50) + "\"");
-					}else{
-						return layer.alert(json.msg);
-					}
-				});
-	        } else {
-	            return layer.alert('表单内容不能为空！');
-	        }
-	    }
+//	    fnReview : function (){
+//	        if(leipiEditor.queryCommandState( 'source' ))
+//	            leipiEditor.execCommand('source');/*切换到编辑模式才提交，否则部分浏览器有bug*/
+//	            
+//	        if(leipiEditor.hasContents()){
+//	            leipiEditor.sync();       /*同步内容*/
+//	            
+//	            var formeditor = leipiEditor.getContent();
+//				//var parse_form = this.parse_form(formeditor);
+//				$.post("<?= yii\helpers\Url::to(['default/savehtml']); ?>",{
+//					"content" : formeditor,
+//					"busID" : bus_id,
+//					"flowID" : parent.flow_node_id
+//				},function(json){
+//					if(json.result){
+//						var filePath = json.filePath;
+//	            		window.open(filePath,'mywin',"menubar=0,toolbar=0,status=0,resizable=1,left=0,top=0,scrollbars=1,width=" +(screen.availWidth-10) + ",height=" + (screen.availHeight-50) + "\"");
+//					}else{
+//						return layer.alert(json.msg);
+//					}
+//				});
+//	        } else {
+//	            return layer.alert('表单内容不能为空！');
+//	        }
+//	    }
 	};	
 </script>
 </body>

@@ -491,19 +491,116 @@ class DefaultController extends BaseController
 			return $this->jsonReturn(['result'=>0,'msg'=>Yii::$app->controller->module->params['4001']]);
 		}
 		
-		$createDir = '../web/uploadfile/file/textfile/'.$flow_id;
+		$createDir = '../web/uploadfile/file3/textfile/'.$flow_id;
 		
 		$this->mkdirs($createDir);
 		
 		$savePath = $createDir.'/'.$bus_id.'.html';
 		
 		$bus_html = fopen($savePath, 'w');
-		fwrite($bus_html, "<meta charset='".Yii::$app->charset."'>");
+		fwrite($bus_html, "<div>");
 		fwrite($bus_html, $content);
+		fwrite($bus_html, "</div>");
 		fclose($bus_html);
+		
+		
+		
+		/*处理文件节点*/
+		//获取字段列表信息
+		$infos = FMPTABLEFIELD::getListField(['FLOW_ID'=>$flow_id]);
+		
+		$html = new \Simple_html_dom();
+		$html->load_file($savePath);
+		foreach($html->find('table') as $table){
+			foreach($table->find('tr td') as $e){
+				if(is_numeric(trim($e->plaintext))){
+					$flag_id = trim($e->plaintext);
+					foreach($infos as $df){
+						if($df['FIELD_ID'] == $flag_id){
+							$e->setAttribute('name',$df['FIELD_NAME']);
+							$e->setAttribute('title',$df['FIELD_DESC']);
+							$e->setAttribute('id',$df['FIELD_NAME'].'_'.$df['FIELD_ID']);
+							$e->innertext  = '';
+							break;	
+						}
+					}
+				}
+//				if(trim($e->plaintext) != ''){
+//					$content = trim($e->plaintext);
+//					$array_A = explode('=', $content);
+//					$len_A  = count($array_A);
+//					if($len_A > 1){
+//						if($array_A[2] == '0'){
+//							$e->innertext = $array_A[0]."<a href='javascript:;'  onclick='open_mul_record(this)' name='".$array_A[1]."' >[编辑]</a>";
+//						}else{
+//							$data = FMPTABLEFIELD::getByAKey(['FIELD_ID'=>$array_A[2]]);
+//							$e->setAttribute('originname',$data['FIELD_NAME']);
+//							$e->innertext = $array_A[0];
+//							$e->setAttribute('title',$array_A[0]);
+//							$e->setAttribute('origintable',$array_A[1]);
+//							$e->setAttribute('originid',$data['FIELD_NAME'].'_'.$data['FIELD_ID']);
+//						}
+//					}
+//				}
+			}
+		}
+		
+		if(count($html->find("input[leipiplugins='listctrl']"))>0){
+			
+			foreach($html->find("input[leipiplugins='listctrl']") as $mul){
+				
+				$title = $mul->getAttribute('title');
+				$fields = $mul->getAttribute('orgtitle');
+				$fields = rtrim($fields,'`');
+				$array_B = explode('`', $fields);
+				
+				$field_ids = $mul->getAttribute('orgcolvalue');
+				$field_ids = rtrim($field_ids,'`');
+				$array_A = explode('`', $field_ids);
+				$len_A = count($array_A);
+				$temp_html = "<table id='$title'><tr><td style='word-break: break-all; border-width: 1px; border-style: solid;' colspan='$len_A'>BBBB</td></tr>";
+				for($i=0;$i<$len_A;$i++){
+					$data = FMPTABLEFIELD::getByAKey(['FIELD_ID'=>$array_A[$i]]);
+					$originid = $data['FIELD_NAME'].'_'.$data['FIELD_ID'];
+					$temp_html .="<td style='word-break: break-all; border-width: 1px; border-style: solid;' originname='".$data['FIELD_NAME']."'  title='".$array_B[$i]."' origintable='".$title."' originid='".$originid."' >".$array_B[$i]."</td>";
+				}
+				$temp_html .= "</table>";
+				$p = $mul->parent;
+				$p->innertext = '';
+				$p->innertext = $temp_html;
+			}
+		}
+		
+		$doc = $html;
+		$savePath2 = $createDir.'/'.$flow_id.'_'.$bus_id.'.html';
+		file_put_contents($savePath2, $doc);
+		$html->clear();
 		
 		return $this->jsonReturn(['result'=>1,'msg'=>Yii::$app->controller->module->params['4010'],'filePath'=>'../../'.$savePath]);
 	}
+	
+	/*指向预览页面2*/
+	public function actionPrintview2(){
+		$request = Yii::$app->request;
+		$type = $request->get('type',0);
+		$tableName = $request->get('busName','');
+		$bus_table_name = $request->get('bus_table_name','');
+		$flow_id = $request->get('flow_id','');
+		if(!$this->valNullParams($tableName,$flow_id,$bus_table_name)){
+			return $this->jsonReturn(['result'=>0,'msg'=>Yii::$app->controller->module->params['4001']]);
+		}
+		
+		$filePath = '../web/uploadfile/file3/textfile/'.$flow_id.'/'.$flow_id.'_'.$tableName.'.html';
+		if(!file_exists($filePath)){
+			return $this->jsonReturn(['result'=>0,'msg'=>Yii::$app->controller->module->params['4001']]);
+		}
+		
+		//获取字段列表信息
+		$infos = FMPTABLEFIELD::getListField(['FLOW_ID'=>$flow_id,'TABLE_NAME'=>$bus_table_name]);
+		
+		return $this->renderPartial('page/print_view',['type'=>$type,'file'=>'../../'.$filePath,'infos'=>$infos]);
+	}
+	
 	
 	public function actionGetbushtml(){
 		$request = Yii::$app->request;
@@ -514,13 +611,11 @@ class DefaultController extends BaseController
 			return $this->jsonReturn(['result'=>0,'msg'=>Yii::$app->controller->module->params['4001']]);
 		}
 		
-		$filePath = '../web/uploadfile/file/textfile/'.$flow_id.'/'.$bus_id.'.html';
-		$file = '';
+		$filePath = '../web/uploadfile/file3/textfile/'.$flow_id.'/'.$bus_id.'.html';
+		$content = '';
 		if(file_exists($filePath)){
-			$file = $filePath;
+			$content = file_get_contents($filePath);
 		}
-		
-		$content = file_get_contents($file);
 		
 		return $this->jsonReturn(['result'=>1,'msg'=>'','content'=>$content]);
 	}
