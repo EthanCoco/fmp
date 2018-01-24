@@ -46,33 +46,33 @@ function createElement(type, name)
                 <thead>
                     <tr>
                         <th> <span>序号</span> </th>
-                        <th> <span>表头</span> </th>
-                        <th> <span>类型</span> </th>
-                        <th> <span>单位</span> </th>
-                        <th> <span>合计</span> <a id="showCountTips" title="在该列的底部显示该列的合计数值，数据类型只允许数值类型" rel="popover"><i class="icon-info-sign"></i></a> </th>
-                        <th> <span>默认值</span> </th>
+                        <th> <span>表头</span> <span class="label label-important">*</span></th>
+                        <th style="display: none;"> <span>类型</span> </th>
+                        <th style="display: none;"> <span>单位</span> </th>
+                        <th style="display: none;"> <span>合计</span> <a id="showCountTips" title="在该列的底部显示该列的合计数值，数据类型只允许数值类型" rel="popover"><i class="icon-info-sign"></i></a> </th>
+                        <th> <span>字段值</span> <span class="label label-important">*</span></th>
                     </tr>
                 </thead>
                 <tbody id="tbl1">
                     <tr>
                         <td><span class="badge">1</span></td>
                         <td title="Tab键切换输入框"> <input id="item_1" type="text" class="input-medium"> </td>
-                        <td title="Tab键切换输入框">
+                        <td style="display: none;" title="Tab键切换输入框">
                             <select id="coltype_1" class="input-medium">
                                 <option value="text">单行输入框</option>
                                 <option value="textarea">多行输入框</option>
                                 <option value="int">数值</option>
                             </select>
                         </td>
-                        <td title="Tab键切换输入框"> <label><input type="text" class="input-mini" id="unit_1" value=""> </label> </td>
-                        <td title="Tab键切换输入框"> <label> <input type="checkbox" id="sum_1" class="csum" value="1"> </label> </td>
+                        <td style="display: none;" title="Tab键切换输入框"> <label><input type="text" class="input-mini" id="unit_1" value=""> </label> </td>
+                        <td style="display: none;" title="Tab键切换输入框"> <label> <input type="checkbox" id="sum_1" class="csum" value="1"> </label> </td>
                         <td title="Tab键切换输入框"><input id="colvalue_1"  type="text" class="input-medium"/></td>
                     </tr>
 
                     <tr>
                         <td><span class="badge">2</span></td>
                         <td title="Tab键切换输入框"> <input id="item_2" type="text" class="input-medium"> </td>
-                        <td title="Tab键切换输入框">
+                        <td style="display: none;" title="Tab键切换输入框">
                             <select id="coltype_2" class="input-medium">
                                 <option value="text">单行输入框</option>
                                 <option value="textarea">多行输入框</option>
@@ -80,96 +80,96 @@ function createElement(type, name)
                                 
                             </select>
                         </td>
-                        <td title="Tab键切换输入框"> <label><input type="text" class="input-mini" id="unit_2" value=""> </label> </td>
-                        <td title="Tab键切换输入框"> <label> <input type="checkbox" id="sum_2" class="csum" value="2"> </label> </td>
+                        <td style="display: none;" title="Tab键切换输入框"> <label><input type="text" class="input-mini" id="unit_2" value=""> </label> </td>
+                        <td style="display: none;" title="Tab键切换输入框"> <label> <input type="checkbox" id="sum_2" class="csum" value="2"> </label> </td>
                         <td title="Tab键切换输入框"><input id="colvalue_2"  type="text" class="input-medium"/></td>
                     </tr>
                     
                     <tr>
                         <td><span class="badge">3</span></td>
                         <td title="Tab键切换输入框"> <input id="item_3" type="text" class="input-medium"> </td>
-                        <td title="Tab键切换输入框">
+                        <td style="display: none;" title="Tab键切换输入框">
                             <select id="coltype_3" class="input-medium">
                                 <option value="text">单行输入框</option>
                                 <option value="textarea">多行输入框</option>
                                 <option value="int">数值</option>
                             </select>
                         </td>
-                        <td title="Tab键切换输入框"> <label><input type="text" class="input-mini" id="unit_3" value=""> </label> </td>
-                        <td title="Tab键切换输入框"> <label> <input type="checkbox" id="sum_3" class="csum" value="3"> </label> </td>
+                        <td style="display: none;" title="Tab键切换输入框"> <label><input type="text" class="input-mini" id="unit_3" value=""> </label> </td>
+                        <td style="display: none;" title="Tab键切换输入框"> <label> <input type="checkbox" id="sum_3" class="csum" value="3"> </label> </td>
                         <td title="Tab键切换输入框"><input id="colvalue_3"  type="text" class="input-medium"/></td>
                     </tr>
                     <tr>
                         <td><span class="badge">4</span></td>
                         <td title="Tab键切换输入框"> <input id="item_4" type="text" class="input-medium"> </td>
-                        <td title="Tab键切换输入框">
+                        <td style="display: none;" title="Tab键切换输入框">
                             <select id="coltype_4" class="input-medium">
                                 <option value="text">单行输入框</option>
                                 <option value="textarea">多行输入框</option>
                                 <option value="int">数值</option>
                             </select>
                         </td>
-                        <td title="Tab键切换输入框"> <label><input type="text" class="input-mini" id="unit_4" value=""> </label> </td>
-                        <td title="Tab键切换输入框"> <label> <input type="checkbox" id="sum_4" class="csum" value="4"> </label> </td>
+                        <td style="display: none;" title="Tab键切换输入框"> <label><input type="text" class="input-mini" id="unit_4" value=""> </label> </td>
+                        <td style="display: none;" title="Tab键切换输入框"> <label> <input type="checkbox" id="sum_4" class="csum" value="4"> </label> </td>
                         <td title="Tab键切换输入框"><input id="colvalue_4"  type="text" class="input-medium"/></td>
                     </tr>
                     <tr>
                         <td><span class="badge">5</span></td>
                         <td title="Tab键切换输入框"> <input id="item_5" type="text" class="input-medium"> </td>
-                        <td title="Tab键切换输入框">
+                        <td style="display: none;" title="Tab键切换输入框">
                             <select id="coltype_5" class="input-medium">
                                 <option value="text">单行输入框</option>
                                 <option value="textarea">多行输入框</option>
                                 <option value="int">数值</option>
                             </select>
                         </td>
-                        <td title="Tab键切换输入框"> <label><input type="text" class="input-mini" id="unit_5" value=""> </label> </td>
-                        <td title="Tab键切换输入框"> <label> <input type="checkbox" id="sum_5" class="csum" value="5"> </label> </td>
+                        <td style="display: none;" title="Tab键切换输入框"> <label><input type="text" class="input-mini" id="unit_5" value=""> </label> </td>
+                        <td style="display: none;" title="Tab键切换输入框"> <label> <input type="checkbox" id="sum_5" class="csum" value="5"> </label> </td>
                         <td title="Tab键切换输入框"><input id="colvalue_5"  type="text" class="input-medium"/></td>
                     </tr>
 
                     <tr>
                         <td><span class="badge">6</span></td>
                         <td title="Tab键切换输入框"> <input id="item_6" type="text" class="input-medium"> </td>
-                        <td title="Tab键切换输入框">
+                        <td style="display: none;" title="Tab键切换输入框">
                             <select id="coltype_6" class="input-medium">
                                 <option value="text">单行输入框</option>
                                 <option value="textarea">多行输入框</option>
                                 <option value="int">数值</option>
                             </select>
                         </td>
-                        <td title="Tab键切换输入框"> <label><input type="text" class="input-mini" id="unit_6" value=""> </label> </td>
-                        <td title="Tab键切换输入框"> <label> <input type="checkbox" id="sum_6" class="csum" value="6"> </label> </td>
+                        <td style="display: none;" title="Tab键切换输入框"> <label><input type="text" class="input-mini" id="unit_6" value=""> </label> </td>
+                        <td style="display: none;" title="Tab键切换输入框"> <label> <input type="checkbox" id="sum_6" class="csum" value="6"> </label> </td>
                         <td title="Tab键切换输入框"><input id="colvalue_6"  type="text" class="input-medium"/></td>
                     </tr>
 
                     <tr>
                         <td><span class="badge">7</span></td>
                         <td title="Tab键切换输入框"> <input id="item_7" type="text" class="input-medium"> </td>
-                        <td title="Tab键切换输入框">
+                        <td style="display: none;" title="Tab键切换输入框">
                             <select id="coltype_7" class="input-medium">
                                 <option value="text">单行输入框</option>
                                 <option value="textarea">多行输入框</option>
                                 <option value="int">数值</option>
                             </select>
                         </td>
-                        <td title="Tab键切换输入框"> <label><input type="text" class="input-mini" id="unit_7" value=""> </label> </td>
-                        <td title="Tab键切换输入框"> <label> <input type="checkbox" id="sum_7" class="csum" value="7"> </label> </td>
+                        <td style="display: none;" title="Tab键切换输入框"> <label><input type="text" class="input-mini" id="unit_7" value=""> </label> </td>
+                        <td style="display: none;" title="Tab键切换输入框"> <label> <input type="checkbox" id="sum_7" class="csum" value="7"> </label> </td>
                         <td title="Tab键切换输入框"><input id="colvalue_7"  type="text" class="input-medium"/></td>
                     </tr>
 
                     <tr>
                         <td><span class="badge">8</span></td>
                         <td title="Tab键切换输入框"> <input id="item_8" type="text" class="input-medium"> </td>
-                        <td title="Tab键切换输入框">
+                        <td style="display: none;" title="Tab键切换输入框">
                             <select id="coltype_8" class="input-medium">
                                 <option value="text">单行输入框</option>
                                 <option value="textarea">多行输入框</option>
                                 <option value="int">数值</option>
                             </select>
                         </td>
-                        <td title="Tab键切换输入框"> <label><input type="text" class="input-mini" id="unit_8" value=""> </label> </td>
-                        <td title="Tab键切换输入框"> <label> <input type="checkbox" id="sum_8" class="csum" value="8"> </label> </td>
+                        <td style="display: none;" title="Tab键切换输入框"> <label><input type="text" class="input-mini" id="unit_8" value=""> </label> </td>
+                        <td style="display: none;" title="Tab键切换输入框"> <label> <input type="checkbox" id="sum_8" class="csum" value="8"> </label> </td>
                         <td title="Tab键切换输入框"><input id="colvalue_8"  type="text" class="input-medium"/></td>
                     </tr>
                     

@@ -1009,39 +1009,39 @@ UE.registerUI('button_template',function(editor,uiName){
     //因为你是添加button,所以需要返回这个button
     return btn;
 });
-UE.registerUI('button_preview',function(editor,uiName){
-    if(!this.options.toolleipi)
-    {
-        return false;
-    }
-    //注册按钮执行时的command命令，使用命令默认就会带有回退操作
-    editor.registerCommand(uiName,{
-        execCommand:function(){
-            try {
-                leipiFormDesign.fnReview();
-            } catch ( e ) {
-                alert('leipiFormDesign.fnReview 预览异常');
-            }
-        }
-    });
-    //创建一个button
-    var btn = new UE.ui.Button({
-        //按钮的名字
-        name:uiName,
-        //提示
-        title:"预览",
-        //需要添加的额外样式，指定icon图标，这里默认使用一个重复的icon
-        cssRules :'background-position: -420px -19px;',
-        //点击时执行的命令
-        onclick:function () {
-            //这里可以不用执行命令,做你自己的操作也可
-           editor.execCommand(uiName);
-        }
-    });
-
-    //因为你是添加button,所以需要返回这个button
-    return btn;
-});
+//UE.registerUI('button_preview',function(editor,uiName){
+//  if(!this.options.toolleipi)
+//  {
+//      return false;
+//  }
+//  //注册按钮执行时的command命令，使用命令默认就会带有回退操作
+//  editor.registerCommand(uiName,{
+//      execCommand:function(){
+//          try {
+//              leipiFormDesign.fnReview();
+//          } catch ( e ) {
+//              alert('leipiFormDesign.fnReview 预览异常');
+//          }
+//      }
+//  });
+//  //创建一个button
+//  var btn = new UE.ui.Button({
+//      //按钮的名字
+//      name:uiName,
+//      //提示
+//      title:"预览",
+//      //需要添加的额外样式，指定icon图标，这里默认使用一个重复的icon
+//      cssRules :'background-position: -420px -19px;',
+//      //点击时执行的命令
+//      onclick:function () {
+//          //这里可以不用执行命令,做你自己的操作也可
+//         editor.execCommand(uiName);
+//      }
+//  });
+//
+//  //因为你是添加button,所以需要返回这个button
+//  return btn;
+//});
 
 UE.registerUI('button_save',function(editor,uiName){
     if(!this.options.toolleipi)
