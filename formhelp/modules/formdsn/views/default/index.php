@@ -389,9 +389,21 @@ function load_table_field(){
 			}
 		},'-','-','-',{
 			iconCls: 'icon-edit',
-			text:'业务表设置',
+			text:'业务表设置1',
 			handler: function(){
-				setBusTable();
+				setBusTable(1);
+			}
+		},{
+			iconCls: 'icon-edit',
+			text:'业务表设置2',
+			handler: function(){
+				setBusTable(2);
+			}
+		},{
+			iconCls: 'icon-edit',
+			text:'业务表设置3',
+			handler: function(){
+				setBusTable(3);
 			}
 		},'-','-','-',{
 			iconCls: 'icon-edit',
@@ -681,7 +693,20 @@ function setNodeOrder(){
 	});	
 }
 
-function setBusTable(){
+function setBusTable(type){
+	var url = '';
+	switch(type){
+		case 1 :
+			url =  "<?= yii\helpers\Url::to(['default/setbustable']); ?>";
+		break;
+		case 2 : 
+			url = "<?= yii\helpers\Url::to(['default/setbustable2']); ?>";
+		break;
+		case 3 :
+			url = "<?= yii\helpers\Url::to(['default/setbustable3']); ?>";
+		break;
+	}
+	
 	layui.use('layer',function(){
 		if(flow_table_id == ""){
 			return;
@@ -691,8 +716,7 @@ function setBusTable(){
     		title:'业务表设置',
     		area:[$(window).width()/5*4+"px","800px"],
     		/*不同方式*/
-//    		content:"<= yii\helpers\Url::to(['default/setbustable']); ?>",
-    		content:"<?= yii\helpers\Url::to(['default/setbustable2']); ?>",
+    		content:url,
     		btn:['关闭'],
     		yes: function(){
     			layer.closeAll(); 

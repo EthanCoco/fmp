@@ -278,6 +278,11 @@ class DefaultController extends BaseController
 		return $this->renderPartial('page/set_bus_table2');
 	}
 	
+	/*指向业务表设置界面3*/
+	public function actionSetbustable3(){
+		return $this->renderPartial('page/set_bus_table3');
+	}
+	
 	/*获取流程中的环节树带业务表节点*/
 	public function actionFlownodetreetable(){
 		$flowID = Yii::$app->request->get('flowID','');
@@ -743,6 +748,139 @@ class DefaultController extends BaseController
 		move_uploaded_file($_FILES['file']['tmp_name'], $createDir."/".$fileName);
 		$resultFile = $createDir."/".$fileName;
 		return ['code'=>'0','msg'=>'图片大小不能大于2M','data'=>['src'=>'../../'.$createDir."/".$fileName]];
+	}
+	
+	private function getExcelHtml3($flow_id,$bus_id){
+		$filePath = '../web/uploadfile/file4/textfile/'.$flow_id.'/'.$bus_id.'.html';
+		$file = '';
+		if(file_exists($filePath)){
+			$file = '../../'.$filePath;
+		}
+		return $file;
+	}
+	
+	/*获取excel生成的html*/
+	public function actionGetexcelhtml3(){
+		$request = Yii::$app->request;
+		$bus_id = $request->get('bus_id','');
+		$flow_id = $request->get('flow_id','');
+		//请求参数校验
+		if(!$this->valNullParams($bus_id,$flow_id)){
+			return $this->jsonReturn(['result'=>0,'msg'=>Yii::$app->controller->module->params['4001']]);
+		}
+		
+		$file = $this->getExcelHtml3($flow_id,$bus_id);
+		
+		return $this->jsonReturn(['result'=>1,'msg'=>'','file'=>$file]);
+	}
+
+	private function trimHtml($str){
+		$str = preg_replace( "@<script(.*?)</script>@is", "", $str ); 
+		$str = preg_replace( "@<iframe(.*?)</iframe>@is", "", $str ); 
+		$str = preg_replace( "@<style(.*?)</style>@is", "", $str ); 
+		$str = preg_replace( "@<(.*?)>@is", "", $str ); 
+		$str = str_replace('&nbsp;', '', $str);
+		$str = str_replace(' ', '', $str);
+		$str= htmlspecialchars_decode($str);
+		return $str; 
+	}
+	
+	/*上传文件3*/
+	public function actionUploadexcel3(){
+		$bus_id = Yii::$app->request->post('bus_id');
+		$flow_id = Yii::$app->request->post('flow_id');
+		
+		$file = $_FILES['file'];
+		$timeNow = date('Y-m-d H:i:s',time());
+		
+		$dir_flow = $flow_id;
+		
+		$fileName = $bus_id.'.xls';
+		
+		if($_FILES['file']['size'] > 2*1024*1024){
+			return ['code'=>'1','msg'=>'文件大小不能大于2M','data'=>['src'=>'']];
+		}
+		
+		$createDir = '../web/uploadfile/file4/textfile/'.$dir_flow;
+		
+		$this->mkdirs($createDir);
+		
+		move_uploaded_file($_FILES['file']['tmp_name'], $createDir."/".$fileName);
+		
+		$resultFile = $createDir."/".$fileName;
+		
+		$fileType = \PHPExcel_IOFactory::identify($resultFile);
+		
+		$objReader = \PHPExcel_IOFactory::createReader($fileType);
+		$objPHPExcel = $objReader->load($resultFile);
+		$savePath = $createDir.'/'.$dir_flow.'_'.$bus_id.'.html'; 
+		$temp_path = $createDir.'/'.$bus_id.'.html'; 
+		$objWriter = new \PHPExcel_Writer_HTML($objPHPExcel); 
+		$objWriter->setSheetIndex(0); //可以将括号中的0换成需要操作的sheet索引
+		$objWriter->save($temp_path); //保存为编辑直观显示html文件
+		$fileContent = file_get_contents($temp_path);
+		$fileContent = str_replace("<html>", '', $fileContent);
+		$fileContent = str_replace("</html>", '', $fileContent);
+		$fileContent = str_replace("<head>", '', $fileContent);
+		$fileContent = str_replace("</head>", '', $fileContent);
+		$fileContent = str_replace("<body>", '', $fileContent);
+		$fileContent = str_replace("</body>", '', $fileContent);
+		
+		$fileContent = preg_replace("/<meta.+>/Umi", "", $fileContent);
+		$fileContent = preg_replace("/<!DOCTYPE.+>/Umi", "", $fileContent);
+		
+		file_put_contents($temp_path, $fileContent); 
+		return $this->jsonReturn(['code'=>0,'msg'=>'','data'=>['src'=>'../../'.$temp_path]]);
+	}
+	
+	/*指向预览页面3*/
+	public function actionPrintview3(){
+		$request = Yii::$app->request;
+		$tableName = $request->get('busName','');
+		$flow_id = $request->get('flow_id','');
+		if(!$this->valNullParams($tableName,$flow_id)){
+			return $this->jsonReturn(['result'=>0,'msg'=>Yii::$app->controller->module->params['4001']]);
+		}
+		
+		$filePath = '../web/uploadfile/file4/textfile/'.$flow_id.'/'.$tableName.'.xls';
+		if(!file_exists($filePath)){
+			return $this->jsonReturn(['result'=>0,'msg'=>Yii::$app->controller->module->params['4001']]);
+		}
+		
+		$fileType = \PHPExcel_IOFactory::identify($filePath);
+		$objReader = \PHPExcel_IOFactory::createReader($fileType);
+		$objPHPExcel = $objReader->load($filePath);
+		$objWriter = new \PHPExcel_Writer_HTML($objPHPExcel);
+		$_html = $objWriter->generateSheetData();
+		
+		/*处理文件节点*/
+		$html = new \Simple_html_dom();
+		$html->load($_html);
+		
+		$table = $html->find('table',0);
+		
+		$index_tr = 0;
+		$temp_tr = [];
+		foreach($table->find('tr') as $tr){
+			$index_td = 0;
+			$temp_td = [];
+			foreach($tr->find('td') as $td){
+				$temp_td[$index_td] = [
+					'colspan' 	=> $td->hasAttribute('colspan') ? $td->getAttribute('colspan') : '',
+					'rowspan' 	=> $td->hasAttribute('rowspan') ? $td->getAttribute('rowspan') : '',
+					'plaintext'	=> $this->trimHtml(trim(Html::decode($td->plaintext))),
+					'attribute' => ['name'=>'','required'=>1,'disabled'=>1],
+				];
+				$index_td++;
+			}
+			$temp_tr[$index_tr] = $temp_td;
+			
+			$index_tr++;
+		}
+		
+		$infos['table'] = $temp_tr;
+		
+		return $this->renderPartial('page/print_view3',['infos'=>$infos]);
 	}
 	
 }
