@@ -558,11 +558,11 @@ class DefaultController extends BaseController
 				$field_ids = rtrim($field_ids,'`');
 				$array_A = explode('`', $field_ids);
 				$len_A = count($array_A);
-				$temp_html = "<table id='$title'><tr><td style='word-break: break-all; border-width: 1px; border-style: solid;' colspan='$len_A'>BBBB</td></tr>";
+				$temp_html = "<table id='$title'><tr><td style='word-break: break-all; border-width: 1px; border-style: solid;text-align: center;width:1022px;height:40px;' valign='middle' align='center' colspan='$len_A'>BBBB<a href='javascript:;'  onclick='open_mul_record(this)' name='$title' >[编辑]</a></td></tr>";
 				for($i=0;$i<$len_A;$i++){
 					$data = FMPTABLEFIELD::getByAKey(['FIELD_ID'=>$array_A[$i]]);
 					$originid = $data['FIELD_NAME'].'_'.$data['FIELD_ID'];
-					$temp_html .="<td style='word-break: break-all; border-width: 1px; border-style: solid;' originname='".$data['FIELD_NAME']."'  title='".$array_B[$i]."' origintable='".$title."' originid='".$originid."' >".$array_B[$i]."</td>";
+					$temp_html .="<td style='word-break: break-all; border-width: 1px; border-style: solid;width:25%;height:40px;' originname='".$data['FIELD_NAME']."' valign='middle' align='center'  title='".$array_B[$i]."' origintable='".$title."' originid='".$originid."' >".$array_B[$i]."</td>";
 				}
 				$temp_html .= "</table>";
 				$p = $mul->parent;
