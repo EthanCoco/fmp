@@ -122,7 +122,7 @@ function init_table_html(type,infos){
 									  	
 									break;
 									case "4" :
-									 	$_html += '<input id="a_'+infos[i]['FIELD_NAME']+'" name="'+infos[i]['FIELD_NAME']+'" title="'+infos[i]['FIELD_DESC']+'" code_index="'+infos[i]['FIELD_CODE']+'"  view_type="1" onclick="show_control_view(this)" readonly style="border:1px solid #93D1FF;font-family:宋体; font-size:11pt;" type="text"  class="layui-input">'	
+									 	$_html += '<input hasSearch=1 id="a_'+infos[i]['FIELD_NAME']+'" name="'+infos[i]['FIELD_NAME']+'" title="'+infos[i]['FIELD_DESC']+'" code_index="'+infos[i]['FIELD_CODE']+'"  view_type="1" onclick="show_control_view(this)" readonly style="border:1px solid #93D1FF;font-family:宋体; font-size:11pt;" type="text"  class="layui-input">'	
 									break;
 									case "5" :
 									 	$_html += '<img id="p_'+infos[i]['FIELD_NAME']+'" style="width:90px;" src="../../../web/images/user-default.jpg">'	
@@ -149,7 +149,7 @@ function init_table_html(type,infos){
 										//uploadA[index] = ["p_"+infos[i]['FIELD_NAME'],"a_"+infos[i]['FIELD_NAME']];
 									break;
 									case "6" :
-									 	$_html += '<input id="a_'+infos[i]['FIELD_NAME']+'" name="'+infos[i]['FIELD_NAME']+'" title="'+infos[i]['FIELD_DESC']+'" code_index="'+infos[i]['FIELD_CODE']+'"  view_type="2" onclick="show_control_view(this)" readonly style="border:1px solid #93D1FF;font-family:宋体; font-size:11pt;" type="text"  class="layui-input">'	
+									 	$_html += '<input id="a_'+infos[i]['FIELD_NAME']+'" name="'+infos[i]['FIELD_NAME']+'" title="'+infos[i]['FIELD_DESC']+'" code_index="'+infos[i]['FIELD_CODE']+'" singleOrMore=2  view_type="2" onclick="show_control_view(this)" readonly style="border:1px solid #93D1FF;font-family:宋体; font-size:11pt;" type="text"  class="layui-input">'	
 									break;
 									default:
 									  	

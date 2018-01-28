@@ -1,7 +1,7 @@
 <script type="text/javascript">
 $(function(){
 	var codeindex = '<?php echo $codeindex; ?>';
-	$.getJSON("index.php?r=widget/tree",{"codeindex":codeindex},function(json){
+	$.getJSON("tree.html",{"codeindex":codeindex},function(json){
 		buildCodeTree(json);
 	});
 });

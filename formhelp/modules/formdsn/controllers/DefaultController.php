@@ -7,8 +7,6 @@ use Yii;
 use yii\helpers\Html;
 use app\controllers\BaseController;
 
-use app\models\User;
-use app\models\Share;
 use app\models\Code;
 use app\modules\formdsn\models\FMPFLOWDIR;
 use app\modules\formdsn\models\FMPFLOW;
@@ -859,27 +857,94 @@ class DefaultController extends BaseController
 		
 		$table = $html->find('table',0);
 		
+		
+		$attr = ['field','required','disabled','position','type','multable','param'];
+		$attr_mul = ['field','required','disabled','position','type','multable','plaintext','param'];
 		$index_tr = 0;
 		$temp_tr = [];
 		foreach($table->find('tr') as $tr){
 			$index_td = 0;
 			$temp_td = [];
 			foreach($tr->find('td') as $td){
-				$temp_td[$index_td] = [
-					'colspan' 	=> $td->hasAttribute('colspan') ? $td->getAttribute('colspan') : '',
-					'rowspan' 	=> $td->hasAttribute('rowspan') ? $td->getAttribute('rowspan') : '',
-					'plaintext'	=> $this->trimHtml(trim(Html::decode($td->plaintext))),
-					'attribute' => ['name'=>'','required'=>1,'disabled'=>1],
-				];
+				$text_value = $this->trimHtml(trim(Html::decode($td->plaintext)));
+				$text_value = ltrim($text_value,'##');
+				$array_A = explode('##', $text_value);
+				
+				$array_A_len = count($array_A);
+				
+				if($array_A_len == 1){
+					$temp_td[$index_td] = [
+						'single'	=>	true,
+						'label' 	=> true,
+						'colspan' 	=> $td->hasAttribute('colspan') ? $td->getAttribute('colspan') : '',
+						'rowspan' 	=> $td->hasAttribute('rowspan') ? $td->getAttribute('rowspan') : '',
+						'plaintext'	=> $this->trimHtml(trim(Html::decode($td->plaintext))),
+					];
+				}else{
+					$for_temp = [];
+					
+					if(strpos($text_value,'multable') !== false){
+						$temp_td[$index_td] = [
+							'single'	=>	false,
+							'label' 	=> true,
+							'colspan' 	=> $td->hasAttribute('colspan') ? $td->getAttribute('colspan') : '',
+							'rowspan' 	=> $td->hasAttribute('rowspan') ? $td->getAttribute('rowspan') : '',
+						];
+						$for_temp  = $attr_mul;
+					}else{
+						$temp_td[$index_td] = [
+							'single'	=>	true,
+							'label' 	=> false,
+							'colspan' 	=> $td->hasAttribute('colspan') ? $td->getAttribute('colspan') : '',
+							'rowspan' 	=> $td->hasAttribute('rowspan') ? $td->getAttribute('rowspan') : '',
+							'plaintext'	=> '',
+						];
+						
+						$for_temp  = $attr;
+					}
+					
+					for($i = 0;$i < count($for_temp);$i++){
+						$index = 0;
+						$v = '' ;
+						for($j = 0;$j < $array_A_len;$j++){
+							$temp_attr = $array_A[$j];
+							$array_B = explode('=', $temp_attr);
+							if($array_B[0] == $for_temp[$i]){
+								$index = 1;
+								if($array_B[0] == 'param'){
+									$temp_v = isset($array_B[1]) ? $array_B[1] : '';
+									$array_C = explode('|',$temp_v);
+									$array_C_len = count($array_C);
+									$v = [];
+									for($m = 0;$m<$array_C_len;$m++){
+										$array_D = explode(':', $array_C[$m]);
+										$v[$array_D[0]] = isset($array_D[1]) ? $array_D[1] : '';
+									}
+								}else{
+									$v = isset($array_B[1]) ? $array_B[1] : '';
+								}
+								
+								break;
+							}
+						}
+						
+						if(!$index){
+							$temp_td[$index_td][$for_temp[$i]] = '';
+						}else{
+							$temp_td[$index_td][$for_temp[$i]] = $v;
+						}
+					}
+					
+				}
+				
 				$index_td++;
 			}
 			$temp_tr[$index_tr] = $temp_td;
 			
 			$index_tr++;
 		}
-		
 		$infos['table'] = $temp_tr;
-		
+		echo json_encode($infos);exit;
 		return $this->renderPartial('page/print_view3',['infos'=>$infos]);
 	}
 	
